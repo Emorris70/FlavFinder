@@ -7,19 +7,17 @@ body {
     justify-content: center;
     align-items: center;
 }
-.signup-container {
+.container {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
-    border-radius: 12px;
-    border: 1px solid #d9d9d9;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    justify-content: center;
     background: #fff;
 }
 .m-h {
     padding-top: 25px;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 23px;
     color: #333;
 }
@@ -27,15 +25,21 @@ form {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    gap: 0.9rem;
+    gap: 1.2rem;
     width: 20.938rem;
     padding: 3.125rem;
     transition: all 0.3s ease-in;
 }
 label {
-    font-size: 14px;
+    display: block;
+    font-size: 0.9rem;
     text-transform: capitalize;
     font-weight: 500;
+    margin-bottom: 5px;
+}
+.con-wrapper {
+    display: block;
+    width: 100%;
 }
 .input-wrapper {
     position: relative;
@@ -46,7 +50,7 @@ label {
     width: 100%;
     padding-left: 30px;
     box-sizing: border-box;
-    height: 35px;
+    height: 40px;
     border-radius: 5px;
     border: 1px solid #ccc;
 }
@@ -95,7 +99,7 @@ label {
         transform: translateY(0);
     }
 }
-.signup-container {
+.container {
     animation: fadeIn 0.8s ease-in;
 }
 .validation-sec {
@@ -120,6 +124,9 @@ label {
         gap: 0.45rem;
         padding: 2.5rem;
     }
+    label {
+        font-size: 0.875rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -133,9 +140,6 @@ label {
     }
     .m-h {
         font-size: 18px;
-    }
-    label {
-        font-size: 12px;
     }
     .btn-submit {
         padding: 0.275rem 2.08rem;
