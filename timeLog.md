@@ -1,10 +1,10 @@
 # Time Log
 
-| Date      | Task                                                                                                                                 | Hours |
-|-----------|--------------------------------------------------------------------------------------------------------------------------------------|-------|
-| 1/20/2026 | Refined Project Problem/Wire Frame                                                                                                   | 10hr  |
-| 1/28/2026 | Set up project repo                                                                                                                  | 5hrs  |
-| 2/6/2026  | Implemented the file structure I was working on. And in terms of the UI portion contunied the design and <br/>added to the wireframe | 5hrs  | 
+| Date      | Task                                                                                                                                                                   | Hours |
+|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------|
+| 1/20/2026 | Refined Project Problem/Wire Frame                                                                                                                                     | 10hr  |
+| 1/28/2026 | Set up project repo                                                                                                                                                    | 5hrs  |
+| 2/6/2026  | Implemented the file structure I was working on. Moreover ensured my maven enviroemnt was up to date. Lastly,<br/> did a bit of research on junit-vintage and jupiter. | 6hrs  | 
 
 ## Notes
 The difference between junit-vintage and junit-jupiter:
