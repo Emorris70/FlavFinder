@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>edu.matc.entjava.FlavFinder</groupId>
+  <groupId>com.FlavFinder</groupId>
   <artifactId>FlavFinder</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
@@ -9,42 +9,45 @@
   <url>http://maven.apache.org</url>
   <properties>
     <maven.compiler.release>11</maven.compiler.release>
-    <junit.version>4.12</junit.version>
-    <junit-vintage-version>4.12.0</junit-vintage-version>
+<!--    <junit.version>4.12</junit.version>-->
+<!--    <junit-vintage-version>4.12.0</junit-vintage-version>-->
     <javax.version>7.0</javax.version>
-    <mysql-version>8.0.16</mysql-version>
+    <mysql-version>8.4.0</mysql-version>
     <jstl-version>1.2</jstl-version>
-    <log4j-version>2.10.0</log4j-version>
-    <jupiter-version>5.0.0</jupiter-version>
-    <junit-platform-runner-version>1.0.0</junit-platform-runner-version>
-    <maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
-    <maven-surefire-plugin-version>2.19</maven-surefire-plugin-version>
+    <junit-jupiter-version>5.11.0</junit-jupiter-version>
+    <log4j-version>2.25.3</log4j-version>
+
+<!--    <junit-platform-runner-version>1.0.0</junit-platform-runner-version>-->
+    <maven-compiler-plugin-version>3.13.0</maven-compiler-plugin-version>
+    <maven-surefire-plugin-version>3.5.0</maven-surefire-plugin-version>
   </properties>
   <dependencies>
-    <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-runner</artifactId>
-      <version>${junit-platform-runner-version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.vintage</groupId>
-      <artifactId>junit-vintage-engine</artifactId>
-      <version>${junit-vintage-version}</version>
-      <scope>test</scope>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.junit.platform</groupId>-->
+<!--      <artifactId>junit-platform-runner</artifactId>-->
+<!--      <version>${junit-platform-runner-version}</version>-->
+<!--      <scope>test</scope>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>org.junit.vintage</groupId>-->
+<!--      <artifactId>junit-vintage-engine</artifactId>-->
+<!--      <version>${junit-vintage-version}</version>-->
+<!--      <scope>test</scope>-->
+<!--    </dependency>-->
+
     <dependency>
       <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <version>${jupiter-version}</version>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit-jupiter-version}</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
-    </dependency>
+
+<!--    <dependency>-->
+<!--      <groupId>junit</groupId>-->
+<!--      <artifactId>junit</artifactId>-->
+<!--      <version>${junit.version}</version>-->
+<!--      <scope>test</scope>-->
+<!--    </dependency>-->
     <dependency>
       <groupId>javax</groupId>
       <artifactId>javaee-web-api</artifactId>
@@ -52,10 +55,11 @@
     </dependency>
     <!--  https://mvnrepository.com/artifact/mysql/mysql-connector-java  -->
     <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
+      <groupId>com.mysql</groupId>
+      <artifactId>mysql-connector-j</artifactId>
       <version>${mysql-version}</version>
     </dependency>
+
     <dependency>
       <groupId>jstl</groupId>
       <artifactId>jstl</artifactId>
@@ -74,7 +78,7 @@
     </dependency>
   </dependencies>
   <build>
-    <finalName>YourIndieProject</finalName>
+    <finalName>FlavFinder</finalName>
     <pluginManagement>
       <plugins>
         <plugin>
@@ -83,17 +87,29 @@
           <version>${maven-compiler-plugin-version}</version>
         </plugin>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>${maven-surefire-plugin-version}</version>
-          <dependencies>
-            <dependency>
-              <groupId>org.junit.platform</groupId>
-              <artifactId>junit-platform-surefire-provider</artifactId>
-              <version>${junit-platform-runner-version}</version>
-            </dependency>
-          </dependencies>
+<!--          <dependencies>-->
+<!--            <dependency>-->
+<!--              <groupId>org.junit.platform</groupId>-->
+<!--              <artifactId>junit-platform-surefire-provider</artifactId>-->
+<!--              <version>${junit-platform-runner-version}</version>-->
+<!--            </dependency>-->
+<!--          </dependencies>-->
         </plugin>
       </plugins>
     </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
+    </plugins>
   </build>
 </project>
