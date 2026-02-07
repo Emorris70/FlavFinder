@@ -50,7 +50,6 @@
                 />
             </div>
         </div>
-        <%--  Forward user to index.jsp  --%>
         <p class="dir-deco">
             Already have an account?<a href="auth?action=login">Login</a>
         </p>

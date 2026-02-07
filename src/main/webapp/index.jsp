@@ -38,7 +38,6 @@
             <button type="submit" class="btn-submit">Sign in</button>
         </div>
         <p class="dir-deco">
-            <%-- Ensure this points to a servlet that forwards the user to the sign-up page--%>
             Don't have an account?<a href="auth?action=sign-up">Sign up</a>
         </p>
     </form>

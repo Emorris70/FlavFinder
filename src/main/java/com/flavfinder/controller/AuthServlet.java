@@ -25,7 +25,7 @@ import java.io.IOException;
 public class AuthServlet extends HttpServlet {
     private final Logger logger = LogManager.getLogger(this.getClass());
     /**
-     * Directs the end-user to either the signup or login page.
+     * Forwards the end-user to either the signup or login page.
      *
      * @param req Client's Request.
      * @param resp Server's Response.
@@ -36,14 +36,14 @@ public class AuthServlet extends HttpServlet {
             throws ServletException, IOException
     {
         String url = "";
-        // Note the forward URL will change so point to the
+
         if ("sign-up".equals(req.getParameter("action"))) {
             url = "/signup.jsp";
 
         } else if ("login".equals(req.getParameter("action"))) {
             url = "/index.jsp";
         }
-        logger.info("URL value: " + url);
+
         RequestDispatcher dispatcher = req.getRequestDispatcher(url);
         dispatcher.forward(req, resp);
     }
