@@ -7,6 +7,20 @@
     <link rel="stylesheet" href="css/auth.css" />
 </head>
 <body>
+<header>
+    <div class="a-lc" role="img" aria-label="FlavFinder Logo">
+        <h1 class="main-h1">
+            FL
+            <span class="img-c">
+            <img
+                    src="images/location.png"
+                    alt="location pin icon"
+                    class="img-t"
+            /> </span
+            >V
+        </h1>
+    </div>
+</header>
 <main class="container">
     <h1 class="m-h">Welcome to FlavFinder!</h1>
     <%--  Ensure the action point to a servlet to extract form data  --%>

@@ -4,6 +4,10 @@
     margin: 0;
     /*box-sizing: border-box;*/
 }
+:root {
+    --flav-fl-width: 1.55rem;
+    --flav-fl-height: 1.5rem;
+}
 body {
     font-family: "Poppins", sans-serif;
 }

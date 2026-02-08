@@ -23,7 +23,7 @@ import java.io.IOException;
         urlPatterns = {"/auth"}
 )
 public class AuthServlet extends HttpServlet {
-    private final Logger logger = LogManager.getLogger(this.getClass());
+//    private final Logger logger = LogManager.getLogger(this.getClass());
     /**
      * Forwards the end-user to either the signup or login page.
      *
