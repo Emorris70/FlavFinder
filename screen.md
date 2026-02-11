@@ -1,5 +1,5 @@
 ## Sign up page
-![Signup Page](mockup/signup-page.png)
+![Signup Page](mockup/Signup-page.png)
 </br>
 ## Login Page
 ![login page](mockup/Login%20Page.png)
