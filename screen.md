@@ -1,7 +1,7 @@
-## Sign up page
+## Sign up page (MVP)
 ![Signup Page](mockup/Signup-page.png)
 </br>
-## Login Page
+## Login Page (MVP)
 ![login page](mockup/Login%20Page.png)
 </br>
 ## MVP HomePage
@@ -10,5 +10,5 @@
 ## Additional features (non-mvp)
 ![non-mvp screen](mockup/Home-page.png)
 </br>
-## Clicked Restaurant display card
+## Clicked Restaurant display card (MVP)
 ![restaurant card](mockup/Clicked-resturant%20display%20card.png)
