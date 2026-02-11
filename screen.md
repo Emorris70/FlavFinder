@@ -8,7 +8,7 @@
 ![mvp homepage](mockup/MVP-Page.png)
 </br>
 ## Additional features (non-mvp)
-![non-mvp screen](mockup/home-page.png)
+![non-mvp screen](mockup/Home-page.png)
 </br>
 ## Clicked Restaurant display card
 ![restaurant card](mockup/Clicked-resturant%20display%20card.png)
