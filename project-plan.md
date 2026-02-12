@@ -16,7 +16,7 @@
 ### Week 4
 #### This week should be focused on the initial portion of the MVP
 
-- [ ] Finalize Database Schema - Create PostgreSQL(or MySQL if directed otherwise) tables for users, saved_restaurants, and search
+- [ ] Finalize Database Schema - Create MySQL tables for users, saved_restaurants, and search
 - [ ] API Deep Dive - Test Yelp Fusion endpoints in Postman to map out the JSON fields you need
 - [ ] User Authentication - Implement Sign-up/Login logic
   - Include Bootstraps form validation

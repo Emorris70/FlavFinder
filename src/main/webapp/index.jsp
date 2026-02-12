@@ -22,39 +22,39 @@
     </div>
 </header>
 <main class="container">
-    <h1 class="m-h">Welcome Back!</h1>
-    <div id="validation-sec">
-        <!-- Provide feedback whether info is invalid -->
-    </div>
-<%--  ensure action points to a servlet  --%>
-    <form action="#" id="auth-exists">
-        <div class="con-wrapper">
-            <label for="email">email</label>
-            <div class="input-wrapper">
-                <img src="images/email.png" alt="mail icon" />
-                <input type="email" name="email" id="email" placeholder="Email" />
-            </div>
+        <h1 class="m-h">Welcome Back!</h1>
+        <div id="validation-sec">
+            <!-- Provide feedback whether info is invalid -->
         </div>
-        <div class="con-wrapper">
-            <label for="password">password</label>
-            <div class="input-wrapper">
-                <img src="images/lock.png" alt="lock icon" />
-                <input
-                        type="password"
-                        name="password"
-                        id="password"
-                        placeholder="Password"
-                />
+    <%--  ensure action points to a servlet  --%>
+        <form action="#" id="auth-exists">
+            <div class="con-wrapper">
+                <label for="email">email</label>
+                <div class="input-wrapper">
+                    <img src="images/email.png" alt="mail icon" />
+                    <input type="email" name="email" id="email" placeholder="Email" />
+                </div>
             </div>
-        </div>
+            <div class="con-wrapper">
+                <label for="password">password</label>
+                <div class="input-wrapper">
+                    <img src="images/lock.png" alt="lock icon" />
+                    <input
+                            type="password"
+                            name="password"
+                            id="password"
+                            placeholder="Password"
+                    />
+                </div>
+            </div>
 
-        <div class="btn-container">
-            <button type="submit" class="btn-submit">Sign in</button>
-        </div>
-        <p class="dir-deco">
-            Don't have an account?<a href="auth?action=sign-up">Sign up</a>
-        </p>
-    </form>
+            <div class="btn-container">
+                <button type="submit" class="btn-submit">Sign in</button>
+            </div>
+            <p class="dir-deco">
+                Don't have an account?<a href="auth?action=sign-up" id="sign-s">Sign up</a>
+            </p>
+        </form>
 </main>
 </body>
 </html>
