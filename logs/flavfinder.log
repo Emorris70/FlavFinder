@@ -1,0 +1,2 @@
+[DEBUG] 2026-02-13 07:44:35 PM [main] UserDao - The list of users [User{id=1, firstName='test', email='test@gmail.com', role='user'}]
+[DEBUG] 2026-02-13 07:46:42 PM [main] UserDao - The list of users [User{id=1, firstName='test', email='test@gmail.com', role='user'}]

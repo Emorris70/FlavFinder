@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import javax.xml.crypto.Data;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserDaoTest {
@@ -21,15 +23,23 @@ class UserDaoTest {
 
     @Test
     void getById() {
+        User user = userDao.getById(1);
+        assertNotNull(user);
+        assertEquals("test", user.getFirstName());
     }
 
     @Test
     void update() {
+        User userToUpdate = userDao.getById(1);
+        userToUpdate.setFirstName("Test");
+        userDao.update(userToUpdate);
+        User user = userDao.getById(1);
+        assertEquals("Test", user.getFirstName());
     }
 
     @Test
     void insert() {
-        User newUser = new User("test", "test@gmail.com", "test123");
+        User newUser = new User("John", "John@gmail.com", "test123");
         // Inserts the new user
         int insertUserId = userDao.insert(newUser);
         // If returned value > 1 that mean the user was inserted
@@ -37,14 +47,18 @@ class UserDaoTest {
         // Gets the user inserted by the id
         User insertedUser = userDao.getById(insertUserId);
         // Gets the ensuring the user "test" was inserted
-        assertEquals("test", insertedUser.getFirstName());
+        assertEquals("John", insertedUser.getFirstName());
     }
 
     @Test
     void delete() {
+        userDao.delete(userDao.getById(1));
+        assertNull(userDao.getById(1));
     }
 
     @Test
     void getAll() {
+        List<User> userList = userDao.getAll();
+        assertEquals(1, userList.size());
     }
 }
