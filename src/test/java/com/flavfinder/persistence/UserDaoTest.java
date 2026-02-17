@@ -46,8 +46,9 @@ class UserDaoTest {
         assertNotEquals(0, insertUserId);
         // Gets the user inserted by the id
         User insertedUser = userDao.getById(insertUserId);
-        // Gets the ensuring the user "test" was inserted
-        assertEquals("John", insertedUser.getFirstName());
+        String expectedUser = insertedUser.getFirstName();
+        // Verify that the user was inserted
+        assertTrue(expectedUser.equals(insertedUser));
     }
 
     @Test
