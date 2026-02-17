@@ -11,9 +11,17 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Unit test for in association to the UserDao class versus methods.
+ *
+ * @author EmileM
+ */
 class UserDaoTest {
     UserDao userDao;
 
+    /**
+     * Initializes the application before performing a test.
+     */
     @BeforeEach
     void setUp() {
         Database database = Database.getInstance();
@@ -21,6 +29,9 @@ class UserDaoTest {
         userDao = new UserDao();
     }
 
+    /**
+     * Test case to get a user by there id
+     */
     @Test
     void getById() {
         User user = userDao.getById(1);
@@ -28,6 +39,9 @@ class UserDaoTest {
         assertEquals("test", user.getFirstName());
     }
 
+    /**
+     * Performs an update of a user
+     */
     @Test
     void update() {
         User userToUpdate = userDao.getById(1);
@@ -37,6 +51,9 @@ class UserDaoTest {
         assertEquals("Test", user.getFirstName());
     }
 
+    /**
+     * Performs an insert of a new user.
+     */
     @Test
     void insert() {
         User newUser = new User("John", "John@gmail.com", "test123");
@@ -48,15 +65,21 @@ class UserDaoTest {
         User insertedUser = userDao.getById(insertUserId);
         String expectedUser = insertedUser.getFirstName();
         // Verify that the user was inserted
-        assertTrue(expectedUser.equals(insertedUser));
+        assertEquals(expectedUser, insertedUser.getFirstName());
     }
 
+    /**
+     * Performs a deletion of a user
+     */
     @Test
     void delete() {
         userDao.delete(userDao.getById(1));
         assertNull(userDao.getById(1));
     }
 
+    /**
+     * Gets all the users.
+     */
     @Test
     void getAll() {
         List<User> userList = userDao.getAll();
