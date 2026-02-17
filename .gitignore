@@ -52,4 +52,6 @@ src/main/resources/database.properties
 src/main/resources/hibernate.cfg.xml
 src/main/resources/log4j2.properties
 src/test/resources/hibernate.cfg.xml
+# Logs fill
+logs
 
