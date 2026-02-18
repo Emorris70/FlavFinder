@@ -55,6 +55,10 @@ As a hungry user with specific tastes and a set budget,
 I want to filter my results by cuisine type and price point ($, $$, $$$),</br>
 So that I only see restaurants that I actually want to eat at and can afford.
 
+## Logout (M)
+
+As a user, I want to securely log out of my account so that my session is terminated and my personal data remains protected
+
 ---
 
 ## Non-MVP User Stories
