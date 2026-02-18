@@ -46,6 +46,7 @@
 - [ ] Render Results List  - Display the matching restaurants in a clean, filterable list view based on the search query
 - [ ] Handle Edge Cases - Add "No results found" states and error handling for when a user denies location permissions
 - [ ] Create JSP page for search results
+  - This page should also handle the case of "No results found"
 - [ ] Complete Weekly Log.
 
 ### Week 7
