@@ -45,6 +45,7 @@
 - [ ] Develop Location Toggle Logic - Build the state management to switch between "Current Location" and "Manual Input"
 - [ ] Render Results List  - Display the matching restaurants in a clean, filterable list view based on the search query
 - [ ] Handle Edge Cases - Add "No results found" states and error handling for when a user denies location permissions
+- [ ] Create JSP page for search results
 - [ ] Complete Weekly Log.
 
 ### Week 7
@@ -63,7 +64,8 @@
 - [ ] Create "Save to List" Functionality - Add a toggle (like a heart or bookmark icon) on restaurant cards that adds/removes items from the "To Go" list
 - [ ] Develop "To Go" View - Create a dedicated page where users can view and manage their curated list of future dining spots
 - [ ] Optimize Result Cards - Update the display to clearly show the price point and cuisine tags for each search result to improve scannability
-- [ ] Allow for Deletion of saved location - Users should be allowed to remove saved restaurants within the "To Go" view
+- [ ] Allow for Deletion of saved restaurants - Users should be allowed to remove saved restaurants within the "To Go" view
+- [ ] Create the JSP for "To-go" page
 - [ ] Complete Weekly Log
 
 ### Week 9
