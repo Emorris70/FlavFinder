@@ -60,7 +60,7 @@
 ### Week 8
 #### Focused on Saved restaurant discoveries 
 
-- [ ] Yelp Fusion Integration
+- [ ] tomtom API Integration
 - [ ] Build the "To Go" Data Structure - Define the schema or state logic needed to store a user's saved restaurants (ID, Name, and Image)
 - [ ] Create "Save to List" Functionality - Add a toggle (like a heart or bookmark icon) on restaurant cards that adds/removes items from the "To Go" list
 - [ ] Develop "To Go" View - Create a dedicated page where users can view and manage their curated list of future dining spots
