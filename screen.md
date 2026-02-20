@@ -5,7 +5,7 @@
 ![login page](mockup/Login%20Page.png)
 </br>
 ## MVP HomePage
-![mvp homepage](mockup/MVP-Page.png)
+![mvp homepage](mockup/mvp-homepage.png)
 </br>
 ## Clicked Restaurant display card (MVP)
 ![restaurant card](mockup/Clicked-resturant%20display%20card.png)
@@ -17,4 +17,4 @@
 ![saved restaurants screen](mockup/To-Go%20Screen.png)
 </br>
 ## Additional features (non-mvp)
-![non-mvp screen](mockup/Home-page.png)
+![non-mvp screen](mockup/non-mvp-page.png)

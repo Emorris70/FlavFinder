@@ -36,8 +36,13 @@ class UserDaoTest {
      */
     @Test
     void getById() {
-        User user = (User)genericDao.getById();
+        // Get the user
+        User user = (User)genericDao.getById(1);
+        String retrievedName = user.getFirstName();
 
+        // Verify
+        assertEquals(user.getFirstName(), retrievedName);
+        assertNotNull(user);
     }
 
     /**
