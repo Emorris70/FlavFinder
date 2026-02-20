@@ -17,11 +17,7 @@
 #### This week should be focused on the initial portion of the MVP
 
 - [ ] Finalize Database Schema - Create MySQL tables for users, saved_restaurants, and search
-- [ ] API Deep Dive - Test Yelp Fusion endpoints in Postman to map out the JSON fields you need
 - [ ] User Authentication - Implement Sign-up/Login logic
-  - Include Bootstraps form validation
-- [ ] Account Recovery: Basic logic for Password Reset.
-  - Create JSP page for password reset
 - [ ] Create JSP for initial home page
 - [ ] Navigation Wiring - Implement Servlet redirection/forwarding from Login/sign up to Home Page
   - Look into how to protect routes
@@ -47,12 +43,15 @@
 - [ ] Handle Edge Cases - Add "No results found" states and error handling for when a user denies location permissions
 - [ ] Create JSP page for search results
   - This page should also handle the case of "No results found"
+- [ ] AWS set up and deploy
 - [ ] Complete Weekly Log.
 
 ### Week 7
 #### Focused on filtering portion
 
 - [ ] Complete Checkpoint 2
+- [ ] AWS cognito User Authentication
+  -  with the help of AWS SDK for Java
 - [ ] Develop Filter UI Components - Build interactive buttons or a dropdown for price tiers ($ to $$$$) and a multi-select or pill-style interface for cuisine types
 - [ ] Implement Multi-Parameter Search Logic - Update the API service to handle combined queries (e.g., "Find 'Sushi' + '$$' + 'Current Location'")
 - [ ] Complete Weekly Log
@@ -60,7 +59,7 @@
 ### Week 8
 #### Focused on Saved restaurant discoveries 
 
-- [ ] tomtom API Integration
+- [ ] consumption of tomtom api
 - [ ] Build the "To Go" Data Structure - Define the schema or state logic needed to store a user's saved restaurants (ID, Name, and Image)
 - [ ] Create "Save to List" Functionality - Add a toggle (like a heart or bookmark icon) on restaurant cards that adds/removes items from the "To Go" list
 - [ ] Develop "To Go" View - Create a dedicated page where users can view and manage their curated list of future dining spots
@@ -76,3 +75,6 @@
 - [ ] Implement log out logic
 - []
 - [ ] Complete Weekly Log
+
+### Week 12
+#### Focus on polishing and refining indie project
