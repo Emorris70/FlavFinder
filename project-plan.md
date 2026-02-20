@@ -26,7 +26,7 @@
 ### Week 5
 #### Focused on solidifying location logic
 
-- [ ] Geolocation API Research
+- [X] Geolocation API Research
 - [ ] Map out the data flow from Java to JS
 - [ ] Implement a little pop-up screen asking user for permission to current location
 - [ ] Dynamic UI rendering of local restaurants based off location (Nearby Restaurants section)
@@ -78,3 +78,9 @@
 
 ### Week 12
 #### Focus on polishing and refining indie project
+
+- []
+- [ ] Complete Weekly Log
+
+### Week 13-16
+#### Should be focused on finalization
