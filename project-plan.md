@@ -79,7 +79,7 @@
 ### Week 12
 #### Focus on polishing and refining indie project
 
-- []
+- [ ]
 - [ ] Complete Weekly Log
 
 ### Week 13-16

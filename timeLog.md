@@ -6,6 +6,8 @@
 | 1/28/2026 | Set up project repo                                                                                                                                                                                | 2hrs  |
 | 2/6/2026  | Implemented the file structure I was working on. Moreover ensured my maven enviroemnt was up to date. Lastly,<br/> did a bit of research on junit-vintage and jupiter.                             | 6hrs  |
 | 2/7/2026  | Added the structure for both login/signup pages, implemented the css for those pages, created a servlet which handles forwarding and soon to be parsing of new users or validation existing users. | 6hrs  |
+| 2/18/2026 | Implemented Paula feedback on the project plan, created/added the mockup screens demonstrating location change and filter drop down screens.                                                       | 8hrs  |
+| 2/19/2026 | Completed the demo for week 5. Implemented the generic dao within the flavfinder application.                                                                                                      | 4hrs  |
 
 ## Notes
 The difference between junit-vintage and junit-jupiter:
