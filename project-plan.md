@@ -17,7 +17,6 @@
 #### This week should be focused on the initial portion of the MVP
 
 - [ ] Finalize Database Schema - Create MySQL tables for users, saved_restaurants, and search
-- [ ] User Authentication - Implement Sign-up/Login logic
 - [ ] Create JSP for initial home page
 - [ ] Navigation Wiring - Implement Servlet redirection/forwarding from Login/sign up to Home Page
   - Look into how to protect routes
