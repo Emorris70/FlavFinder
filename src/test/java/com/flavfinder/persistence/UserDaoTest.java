@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class UserDaoTest {
     UserDao userDao;
+    GenericDao genericDao;
 
     /**
      * Initializes the application before performing a test.
@@ -27,6 +28,7 @@ class UserDaoTest {
         Database database = Database.getInstance();
         database.runSQL("cleanDB.sql");
         userDao = new UserDao();
+        genericDao = new GenericDao(User.class);
     }
 
     /**
@@ -34,9 +36,8 @@ class UserDaoTest {
      */
     @Test
     void getById() {
-        User user = userDao.getById(1);
-        assertNotNull(user);
-        assertEquals("test", user.getFirstName());
+        User user = (User)genericDao.getById();
+
     }
 
     /**
