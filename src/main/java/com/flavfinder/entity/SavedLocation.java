@@ -9,7 +9,7 @@ import org.hibernate.annotations.GenericGenerator;
  *
  * @author EmileM
  */
-@Entity
+@Entity(name = "SavedLocation")
 @Table(name = "saved_locations")
 public class SavedLocation {
     @Id
