@@ -67,8 +67,23 @@ class LocationDaoTest {
      */
     @Test
     void insert() {
+        // Get a user
+        User user = (User)genericDao.getById(1);
+        // Add a new location
+        SavedLocation location = new SavedLocation("New York", "1234" ,
+                40.71, -74.01, false, user);
 
+        // Insert the location
+        // Retrieve the returned id
+        int insertedLocation = genericDao.insert(location);
+
+        // Retrieve the new city name
+        SavedLocation retrievedCityName = (SavedLocation)genericDao.getById(insertedLocation);
+        // verify
+        assertNotNull(retrievedCityName);
+        assertEquals(location.getCityName(), retrievedCityName.getCityName());
     }
+
 
     @Test
     void delete() {

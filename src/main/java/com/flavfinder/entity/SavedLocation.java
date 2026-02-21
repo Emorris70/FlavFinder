@@ -50,9 +50,10 @@ public class SavedLocation {
      * @param lat the latitude value to be stored
      * @param lon the longitude value to be stored
      * @param isDefault boolean case to be stored
+     * @param user the user corresponding to the new location
      */
-    public SavedLocation(User user, String cityName, String zipCode,
-                         double lat, double lon, boolean isDefault)
+    public SavedLocation(String cityName, String zipCode,
+                         double lat, double lon, boolean isDefault, User user)
     {
         this.cityName = cityName;
         this.zipCode = zipCode;

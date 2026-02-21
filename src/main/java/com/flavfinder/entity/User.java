@@ -51,6 +51,24 @@ public class User {
     }
 
     /**
+     * Get a list of saved locations
+     *
+     * @return the list of locations
+     */
+    public List<SavedLocation> getLocation() {
+        return location;
+    }
+
+    /**
+     * Sets the list of locations
+     *
+     * @param location the location to set
+     */
+    public void setLocation(List<SavedLocation> location) {
+        this.location = location;
+    }
+
+    /**
      * Gets the user id
      *
      * @return The user id
