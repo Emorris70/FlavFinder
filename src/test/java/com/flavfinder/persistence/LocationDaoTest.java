@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Basic CRUD operations test on the saved_locations table
+ * Basic CRUD operations test on the saved_locations table.
  */
 class LocationDaoTest {
     GenericDao genericDao;
@@ -26,7 +26,7 @@ class LocationDaoTest {
     }
 
     /**
-     * Get the users current saved location
+     * Get the users current saved location.
      */
     @Test
     void getById() {
@@ -42,7 +42,7 @@ class LocationDaoTest {
     }
 
     /**
-     * Update the current location (city name)
+     * Update the current location (city name).
      */
     @Test
     void update() {

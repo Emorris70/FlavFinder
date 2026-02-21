@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author EmileM
  */
 class UserDaoTest {
-    UserDao userDao;
     GenericDao genericDao;
 
     /**
@@ -27,12 +26,12 @@ class UserDaoTest {
     void setUp() {
         Database database = Database.getInstance();
         database.runSQL("cleanDB.sql");
-        userDao = new UserDao();
+
         genericDao = new GenericDao(User.class);
     }
 
     /**
-     * Test case to get a user by there id
+     * Test case to get a user by there id.
      */
     @Test
     void getById() {
@@ -46,7 +45,7 @@ class UserDaoTest {
     }
 
     /**
-     * Performs an update of a user
+     * Performs an update of a user.
      */
     @Test
     void update() {
@@ -64,23 +63,26 @@ class UserDaoTest {
     void insert() {
         User newUser = new User("John", "John@gmail.com", "test123");
         // Inserts the new user
-        int insertUserId = userDao.insert(newUser);
+        int insertUserId = genericDao.insert(newUser);
         // If returned value > 1 that mean the user was inserted
         assertNotEquals(0, insertUserId);
         // Gets the user inserted by the id
-        User insertedUser = userDao.getById(insertUserId);
+        User insertedUser = (User)genericDao.getById(insertUserId);
         String expectedUser = insertedUser.getFirstName();
         // Verify that the user was inserted
         assertEquals(expectedUser, insertedUser.getFirstName());
     }
 
     /**
-     * Performs a deletion of a user
+     * Performs a deletion of a user.
+     *
+     * Confirmed - if a user is removed, associated fields
+     * within the saved_location table is also removed.
      */
     @Test
     void delete() {
-        userDao.delete(userDao.getById(1));
-        assertNull(userDao.getById(1));
+        genericDao.delete(genericDao.getById(1));
+        assertNull(genericDao.getById(1));
     }
 
     /**
@@ -88,7 +90,7 @@ class UserDaoTest {
      */
     @Test
     void getAll() {
-        List<User> userList = userDao.getAll();
+        List<User> userList = genericDao.getAll();
         assertEquals(1, userList.size());
     }
 }
