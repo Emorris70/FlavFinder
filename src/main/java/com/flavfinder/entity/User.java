@@ -2,13 +2,16 @@ package com.flavfinder.entity;
 import org.hibernate.annotations.GenericGenerator;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class to represent a user
  *
  * @author EmileM
  */
 @Entity
-@Table(name="users")
+@Table(name="user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
@@ -23,6 +26,9 @@ public class User {
     // Ensure the default value is set to user.
     @Column(name = "role", columnDefinition = "VARCHAR(50) DEFAULT 'user'")
     private String role = "user";
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<SavedLocation> location = new ArrayList<>();
 
     /**
      * Instantiates a new user

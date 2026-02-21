@@ -50,10 +50,10 @@ class UserDaoTest {
      */
     @Test
     void update() {
-        User userToUpdate = userDao.getById(1);
+        User userToUpdate = (User)genericDao.getById(1);
         userToUpdate.setFirstName("Test");
-        userDao.update(userToUpdate);
-        User user = userDao.getById(1);
+        genericDao.update(userToUpdate);
+        User user = (User)genericDao.getById(1);
         assertEquals("Test", user.getFirstName());
     }
 
