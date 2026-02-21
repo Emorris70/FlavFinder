@@ -31,7 +31,7 @@ class UserDaoTest {
     }
 
     /**
-     * Test case to get a user by there id.
+     * Test case to get a user by their id.
      */
     @Test
     void getById() {
