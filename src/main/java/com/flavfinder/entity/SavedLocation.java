@@ -51,7 +51,7 @@ public class SavedLocation {
      * @param lon the longitude value to be stored
      * @param isDefault boolean case to be stored
      */
-    public SavedLocation(String cityName, String zipCode,
+    public SavedLocation(User user, String cityName, String zipCode,
                          double lat, double lon, boolean isDefault)
     {
         this.cityName = cityName;
@@ -59,6 +59,7 @@ public class SavedLocation {
         this.lat = lat;
         this.lon = lon;
         this.isDefault = isDefault;
+        this.user = user;
     }
 
     /**
