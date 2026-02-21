@@ -18,8 +18,8 @@
 --
 -- Table structure for table `saved_locations`
 --
-DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS `saved_locations`;
+DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `saved_locations` (
@@ -34,7 +34,7 @@ CREATE TABLE `saved_locations` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_user_location` (`user_id`,`zip_code`),
   CONSTRAINT `saved_locations_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `saved_locations` (
 
 LOCK TABLES `saved_locations` WRITE;
 /*!40000 ALTER TABLE `saved_locations` DISABLE KEYS */;
-INSERT INTO `saved_locations` VALUES (1,1,'madison','53718',43.07,-89.4,1,'2026-02-21 02:32:48');
+INSERT INTO `saved_locations` VALUES (2,1,'madison','53703',43.07,-89.4,1,'2026-02-21 17:25:46');
 /*!40000 ALTER TABLE `saved_locations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,4 +84,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-02-20 20:34:26
+-- Dump completed on 2026-02-21 12:07:17

@@ -1,6 +1,6 @@
 package com.flavfinder.persistence;
 
-import com.flavfinder.entity.SavedLocation;
+import com.flavfinder.entity.Location;
 import com.flavfinder.entity.User;
 import com.flavfinder.util.Database;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,11 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Unit testing for SavedLocation class
- *
- * @author EmileM
- */
 class LocationDaoTest {
     GenericDao genericDao;
 
@@ -24,7 +19,7 @@ class LocationDaoTest {
         Database database = Database.getInstance();
         database.runSQL("cleanDB.sql");
 
-        genericDao = new GenericDao(SavedLocation.class);
+        genericDao = new GenericDao(Location.class);
     }
 
     /**
@@ -32,8 +27,8 @@ class LocationDaoTest {
      */
     @Test
     void getById() {
-        // Get the user_id -> user(id)
-        SavedLocation user = (SavedLocation) genericDao.getById(1);
+        // Get the row id
+        Location user = (Location) genericDao.getById(2);
 
         // Check their current location(aka city)
         String ExpectedCity = user.getCityName();
@@ -48,15 +43,15 @@ class LocationDaoTest {
      */
     @Test
     void update() {
-        // Get the user
-        SavedLocation cityToUpdate = (SavedLocation) genericDao.getById(1);
+        // Get the row id
+        Location cityToUpdate = (Location) genericDao.getById(2);
 
         // change the city name
         cityToUpdate.setCityName("Milwaukee");
         genericDao.update(cityToUpdate);
 
         // Verify
-        SavedLocation user = (SavedLocation) genericDao.getById(1);
+        Location user = (Location) genericDao.getById(2);
         String expectedCity = user.getCityName();
         assertEquals(expectedCity, user.getCityName());
     }
@@ -67,10 +62,11 @@ class LocationDaoTest {
      */
     @Test
     void insert() {
+//        GenericDao<User> userDao = new GenericDao<>(User.class);
         // Get a user
         User user = (User)genericDao.getById(1);
         // Add a new location
-        SavedLocation location = new SavedLocation("New York", "1234" ,
+        Location location = new Location("New York", "1234" ,
                 40.71, -74.01, false, user);
 
         // Insert the location
@@ -78,14 +74,14 @@ class LocationDaoTest {
         int insertedLocation = genericDao.insert(location);
 
         // Retrieve the new city name
-        SavedLocation retrievedCityName = (SavedLocation)genericDao.getById(insertedLocation);
+        Location retrievedCityName = (Location) genericDao.getById(insertedLocation);
         // verify
         assertNotNull(retrievedCityName);
         assertEquals(location.getCityName(), retrievedCityName.getCityName());
     }
 
-
     @Test
     void delete() {
+
     }
 }

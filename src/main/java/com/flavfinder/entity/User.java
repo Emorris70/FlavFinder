@@ -16,7 +16,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name="native", strategy = "native")
-    private int Id;
+    private int id;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "email")
@@ -28,7 +28,7 @@ public class User {
     private String role = "user";
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<SavedLocation> location = new ArrayList<>();
+    private List<Location> location = new ArrayList<>();
 
     /**
      * Instantiates a new user
@@ -51,11 +51,31 @@ public class User {
     }
 
     /**
+     * Adds a new location
+     *
+     * @param location the location to add
+     */
+    public void addLocation(Location location) {
+        this.location.add(location);
+        location.setUser(this);
+    }
+
+    /**
+     * Removes a location
+     *
+     * @param location the location to remove
+     */
+    public void removeLocation(Location location) {
+        this.location.remove(location);
+        location.setUser(null);
+    }
+
+    /**
      * Get a list of saved locations
      *
      * @return the list of locations
      */
-    public List<SavedLocation> getLocation() {
+    public List<Location> getLocation() {
         return location;
     }
 
@@ -64,7 +84,7 @@ public class User {
      *
      * @param location the location to set
      */
-    public void setLocation(List<SavedLocation> location) {
+    public void setLocation(List<Location> location) {
         this.location = location;
     }
 
@@ -74,16 +94,16 @@ public class User {
      * @return The user id
      */
     public int getId() {
-        return Id;
+        return id;
     }
 
     /**
      * Sets the user id
      *
-     * @param Id The id to be set for user
+     * @param id The id to be set for user
      */
-    public void setId(int Id) {
-        this.Id = Id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**
@@ -165,7 +185,7 @@ public class User {
      */
     public String toString() {
         return "User{" +
-                "id=" + Id +
+                "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", email='" + email + '\'' +
                 ", role='" + role + '\'' +

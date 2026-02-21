@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourcePerFileMappings">
-    <file url="file://$PROJECT_DIR$/dba/dump.sql" value="b0e59084-677b-4485-9844-61d8608dcadc" />
+    <file url="file://$PROJECT_DIR$/src/test/resources/cleanDB.sql" value="bf2c6eb5-f579-4fc0-aef4-ddbd865e8f05" />
   </component>
 </project>

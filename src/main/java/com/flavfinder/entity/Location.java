@@ -1,6 +1,5 @@
 package com.flavfinder.entity;
 
-import com.flavfinder.entity.User;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -11,7 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity(name = "SavedLocation")
 @Table(name = "saved_locations")
-public class SavedLocation {
+public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name ="native", strategy = "native")
@@ -37,7 +36,7 @@ public class SavedLocation {
     /**
      * Instantiates a new saved location.
      */
-    public SavedLocation() {
+    public Location() {
 
     }
 
@@ -52,8 +51,8 @@ public class SavedLocation {
      * @param isDefault boolean case to be stored
      * @param user the user corresponding to the new location
      */
-    public SavedLocation(String cityName, String zipCode,
-                         double lat, double lon, boolean isDefault, User user)
+    public Location(String cityName, String zipCode,
+                    double lat, double lon, boolean isDefault, User user)
     {
         this.cityName = cityName;
         this.zipCode = zipCode;
@@ -176,7 +175,7 @@ public class SavedLocation {
      *
      * @return either true or false.
      */
-    public boolean getDefault() {
+    public boolean isDefault() {
         return isDefault;
     }
 
