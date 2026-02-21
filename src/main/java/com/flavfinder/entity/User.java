@@ -2,6 +2,7 @@ package com.flavfinder.entity;
 import org.hibernate.annotations.GenericGenerator;
 import jakarta.persistence.*;
 
+import com.flavfinder.entity.Location;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class User {
     private String role = "user";
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<Location> location = new ArrayList<>();
+    private List<Location> locations = new ArrayList<>();
 
     /**
      * Instantiates a new user
@@ -56,7 +57,7 @@ public class User {
      * @param location the location to add
      */
     public void addLocation(Location location) {
-        this.location.add(location);
+        this.locations.add(location);
         location.setUser(this);
     }
 
@@ -66,7 +67,7 @@ public class User {
      * @param location the location to remove
      */
     public void removeLocation(Location location) {
-        this.location.remove(location);
+        this.locations.remove(location);
         location.setUser(null);
     }
 
@@ -76,7 +77,7 @@ public class User {
      * @return the list of locations
      */
     public List<Location> getLocation() {
-        return location;
+        return locations;
     }
 
     /**
@@ -85,7 +86,7 @@ public class User {
      * @param location the location to set
      */
     public void setLocation(List<Location> location) {
-        this.location = location;
+        this.locations = location;
     }
 
     /**

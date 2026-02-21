@@ -62,9 +62,9 @@ class LocationDaoTest {
      */
     @Test
     void insert() {
-//        GenericDao<User> userDao = new GenericDao<>(User.class);
+        GenericDao<User> userDao = new GenericDao<>(User.class);
         // Get a user
-        User user = (User)genericDao.getById(1);
+        User user = userDao.getById(1);
         // Add a new location
         Location location = new Location("New York", "1234" ,
                 40.71, -74.01, false, user);

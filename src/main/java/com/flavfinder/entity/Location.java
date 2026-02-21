@@ -1,5 +1,6 @@
 package com.flavfinder.entity;
 
+import com.flavfinder.entity.User;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -8,30 +9,26 @@ import org.hibernate.annotations.GenericGenerator;
  *
  * @author EmileM
  */
-@Entity(name = "SavedLocation")
+@Entity(name = "Location")
 @Table(name = "saved_locations")
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name ="native", strategy = "native")
     private int id;
-    @ManyToOne
-    private User user;
     // This will be the city name
     @Column(name = "city_name")
     private String cityName;
-
     @Column(name = "zip_code")
     private String zipCode;
-
     @Column(name = "latitude")
-    private double lat;
-
+    private double latitude;
     @Column(name = "longitude")
-    private double lon;
-
+    private double longitude;
     @Column(name = "is_default")
     private boolean isDefault;
+    @ManyToOne
+    private User user;
 
     /**
      * Instantiates a new saved location.
@@ -56,8 +53,8 @@ public class Location {
     {
         this.cityName = cityName;
         this.zipCode = zipCode;
-        this.lat = lat;
-        this.lon = lon;
+        this.latitude = lat;
+        this.longitude = lon;
         this.isDefault = isDefault;
         this.user = user;
     }
@@ -139,8 +136,8 @@ public class Location {
      *
      * @return the latitude
      */
-    public double getLat() {
-        return lat;
+    public double getLatitude() {
+        return latitude;
     }
 
     /**
@@ -148,8 +145,8 @@ public class Location {
      *
      * @param lat the latitude to be set
      */
-    public void setLat(double lat) {
-        this.lat = lat;
+    public void setLatitude(double lat) {
+        this.latitude = lat;
     }
 
     /**
@@ -157,8 +154,8 @@ public class Location {
      *
      * @return the longitude
      */
-    public double getLon() {
-        return lon;
+    public double getLongitude() {
+        return longitude;
     }
 
     /**
@@ -166,8 +163,8 @@ public class Location {
      *
      * @param lon longitude to be set
      */
-    public void setLon(double lon) {
-        this.lon = lon;
+    public void setLongitude(double lon) {
+        this.longitude = lon;
     }
 
     /**
@@ -195,8 +192,8 @@ public class Location {
                 ", user=" + user +
                 ", cityName='" + cityName + '\'' +
                 ", zipCode='" + zipCode + '\'' +
-                ", lat=" + lat +
-                ", lon=" + lon +
+                ", lat=" + latitude +
+                ", lon=" + latitude +
                 ", isDefault=" + isDefault +
                 '}';
     }
