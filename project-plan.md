@@ -20,7 +20,7 @@
 - [ ] Create JSP for initial home page
 - [ ] Navigation Wiring - Implement Servlet redirection/forwarding from Login/sign up to Home Page
   - Look into how to protect routes
-- [ ] Complete Weekly log
+- [X] Complete Weekly log
 
 ### Week 5
 #### Focused on solidifying location logic
@@ -31,7 +31,7 @@
 - [ ] Dynamic UI rendering of local restaurants based off location (Nearby Restaurants section)
   - Note: this should only take place IF user allows access to there current location.
   - This should also NOT be filtered.
-- [ ] Complete Weekly log
+- [X] Complete Weekly log
 
 ### Week 6
 #### Focused on Search portion 
