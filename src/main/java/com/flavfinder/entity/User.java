@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import com.flavfinder.entity.Location;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Class to represent a user
@@ -191,5 +192,20 @@ public class User {
                 ", email='" + email + '\'' +
                 ", role='" + role + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && Objects.equals(firstName, user.firstName)
+                && Objects.equals(email, user.email)
+                && Objects.equals(password, user.password)
+                && Objects.equals(role, user.role);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, email, password, role);
     }
 }

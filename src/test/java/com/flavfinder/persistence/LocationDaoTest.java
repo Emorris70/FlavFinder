@@ -55,8 +55,9 @@ class LocationDaoTest {
 
         // Verify
         Location user = (Location) genericDao.getById(2);
-        String expectedCity = user.getCityName();
-        assertEquals(expectedCity, user.getCityName());
+        // Compares the updated object values match.
+        assertEquals(cityToUpdate, user);
+
     }
 
     /**
@@ -78,14 +79,19 @@ class LocationDaoTest {
         int insertedLocation = genericDao.insert(location);
 
         // Retrieve the new city name
-        Location retrievedCityName = (Location) genericDao.getById(insertedLocation);
+        Location expetectedLocation = (Location) genericDao.getById(insertedLocation);
+
         // verify
-        assertNotNull(retrievedCityName);
-        assertEquals(location.getCityName(), retrievedCityName.getCityName());
+        assertNotNull(expetectedLocation);
+        // Compares both object values
+        assertEquals(expetectedLocation, location);
     }
 
     /**
      * Deletion of a location.
+     *
+     * The deletion of a location SHOULD not affect the
+     * associated user simply removes the location.
      */
     @Test
     void delete() {

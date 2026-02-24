@@ -4,6 +4,8 @@ import com.flavfinder.entity.User;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.Objects;
+
 /**
  * class to represent the users saved location
  *
@@ -196,5 +198,20 @@ public class Location {
                 ", lon=" + latitude +
                 ", isDefault=" + isDefault +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Location location = (Location) o;
+        return id == location.id && Double.compare(latitude, location.latitude) == 0
+                && Double.compare(longitude, location.longitude) == 0
+                && isDefault == location.isDefault && Objects.equals(cityName, location.cityName)
+                && Objects.equals(zipCode, location.zipCode) && Objects.equals(user, location.user);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, cityName, zipCode, latitude, longitude, isDefault, user);
     }
 }
