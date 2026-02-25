@@ -28,7 +28,7 @@
         <div class="con-wrapper">
             <label for="first_name">first Name</label>
             <div class="input-wrapper">
-                <img src="images/person.png" alt="avatar logo" />
+                <img src="images/user.png" alt="avatar logo" />
                 <input
                         type="text"
                         name="first_name"
@@ -48,13 +48,13 @@
                         placeholder="Email"
                         required
                 />
-                <img src="images/email.png" alt="mail icon" />
+                <img src="images/mail.png" alt="mail icon" />
             </div>
         </div>
         <div class="con-wrapper">
             <label for="password">password</label>
             <div class="input-wrapper">
-                <img src="images/lock.png" alt="lock icon" />
+                <img src="images/lock-p.png" alt="lock icon" />
                 <input
                         type="password"
                         name="password"

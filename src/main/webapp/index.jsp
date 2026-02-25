@@ -31,14 +31,14 @@
             <div class="con-wrapper">
                 <label for="email">email</label>
                 <div class="input-wrapper">
-                    <img src="images/email.png" alt="mail icon" />
+                    <img src="images/mail.png" alt="mail icon" />
                     <input type="email" name="email" id="email" placeholder="Email" />
                 </div>
             </div>
             <div class="con-wrapper">
                 <label for="password">password</label>
                 <div class="input-wrapper">
-                    <img src="images/lock.png" alt="lock icon" />
+                    <img src="images/lock-p.png" alt="lock icon" />
                     <input
                             type="password"
                             name="password"
