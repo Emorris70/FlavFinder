@@ -1,15 +1,15 @@
 # Time Log
 
-| Date      | Task                                                                                                                                                                                               | Hours |
-|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------|
-| 1/20/2026 | Refined Project Problem/Wire Frame                                                                                                                                                                 | 5     |
-| 1/28/2026 | Set up project repo                                                                                                                                                                                | 2     |
-| 2/6/2026  | Implemented the file structure I was working on. Moreover ensured my maven enviroemnt was up to date. Lastly,<br/> did a bit of research on junit-vintage and jupiter.                             | 6     |
+| Date      | Task                                                                                                                                                                                              | Hours |
+|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------|
+| 1/20/2026 | Refined Project Problem/Wire Frame                                                                                                                                                                | 5     |
+| 1/28/2026 | Set up project repo                                                                                                                                                                               | 2     |
+| 2/6/2026  | Implemented the file structure I was working on. Moreover ensured my maven enviroemnt was up to date. Lastly,<br/> did a bit of research on junit-vintage and jupiter.                            | 6     |
 | 2/7/2026  | Added the structure for both login/signup pages, implemented the css for those pages, created a servlet which handles forwarding and soon to be parsing of new users or validation existing users. | 6     |
-| 2/18/2026 | Implemented Paula feedback on the project plan, created/added the mockup screens demonstrating location change and filter drop down screens.                                                       | 8     |
-| 2/19/2026 | Completed the demo for week 5. Implemented the generic dao within the flavfinder application.                                                                                                      | 4     |
-| 2/21/2026 | Completed week 5 exerice, and built/implemented the saved locations table. In addition, to all proper classes and unit testing. Also integrated the generic DAO.                                   | 8     |
-
+| 2/18/2026 | Implemented Paula feedback on the project plan, created/added the mockup screens demonstrating location change and filter drop down screens.                                                      | 8     |
+| 2/19/2026 | Completed the demo for week 5. Implemented the generic dao within the flavfinder application.                                                                                                     | 4     |
+| 2/21/2026 | Completed week 5 exerice, and built/implemented the saved locations table. In addition, to all proper classes and unit testing. Also integrated the generic DAO.                                  | 8     |
+| 2/24/2026 | Deployed flavfinder through aws, refactored and removed a few classes/methods.                                                                                                                    | 5     |
 ## Notes
 The difference between junit-vintage and junit-jupiter:
 https://www.baeldung.com/java-junit-vintage-engine-vs-junit-jupiter-engine </br>
