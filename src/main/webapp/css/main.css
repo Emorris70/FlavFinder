@@ -14,3 +14,19 @@ body {
 a {
     text-decoration: none;
 }
+.img-t {
+    width: var(--flav-fl-width);
+    height: var(--flav-fl-height);
+}
+.img-t {
+    transition: all 0.3s ease-in-out;
+}
+.img-t:hover {
+    transform: translateY(-5px);
+}
+.main-h1 {
+    display: flex;
+    align-items: baseline;
+    font-size: 24px;
+    gap: 0.22rem;
+}
