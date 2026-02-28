@@ -2,11 +2,14 @@
 * {
     padding: 0;
     margin: 0;
-    /*box-sizing: border-box;*/
+    box-sizing: border-box;
 }
 :root {
     --flav-fl-width: 1.55rem;
     --flav-fl-height: 1.5rem;
+    --xxsmall-icon-size: 1.125rem;
+    --xsmall-icon-size: 1.5rem;
+    --medium-icon-size: 2rem;
 }
 body {
     font-family: "Poppins", sans-serif;
