@@ -1,9 +1,13 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Home - FlavFinder</title>
+    <link rel="stylesheet" href="css/homePage.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+<%-- Reminder: Ensure the header is a includes--%>
 <header>
     <%@include file="flav-logo.jsp"%>
     <div class="search-c">
@@ -33,7 +37,22 @@
         </div>
     </div>
 </header>
-<main></main>
+<main>
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="user" items="${users}">
+            <tr>${user}</tr>
+            <tr>${user}</tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</main>
 <footer></footer>
 </body>
 </html>
