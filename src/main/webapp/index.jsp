@@ -39,11 +39,12 @@
             </div>
 
             <div class="btn-container">
-                <button type="submit" class="btn-submit">Sign in</button>
+                <button type="submit" class="btn-submit">Login</button>
             </div>
             <p class="dir-deco">
                 Don't have an account?<a href="auth?action=sign-up" id="sign-s">Sign up</a>
             </p>
+            <button type="submit" name="submit" value="home">AWS DB Test</button>
         </form>
 </main>
 </body>

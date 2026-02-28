@@ -47,8 +47,10 @@
         </thead>
         <tbody>
         <c:forEach var="user" items="${users}">
-            <tr>${user}</tr>
-            <tr>${user}</tr>
+            <tr>
+                <td>${user.firstName}</td>
+                <td>${user.email}</td>
+            </tr>
         </c:forEach>
         </tbody>
     </table>

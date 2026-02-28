@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.annotation.*;
 
+import com.flavfinder.entity.User;
+import com.flavfinder.persistence.GenericDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -37,11 +39,18 @@ public class AuthServlet extends HttpServlet {
     {
         String url = "";
 
+        // Reminder remove this after a met for week 6
+        GenericDao genericDao = new GenericDao(User.class);
+
         if ("sign-up".equals(req.getParameter("action"))) {
             url = "/signup.jsp";
 
         } else if ("login".equals(req.getParameter("action"))) {
             url = "/index.jsp";
+
+        } else if ("home".equals(req.getParameter("submit"))) {
+            req.setAttribute("users", genericDao.getAll());
+            url = "/homePage.jsp";
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher(url);
