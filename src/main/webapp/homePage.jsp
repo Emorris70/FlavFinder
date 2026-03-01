@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@include file="taglib.jsp"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -37,24 +37,7 @@
         </div>
     </div>
 </header>
-<main>
-    <table>
-        <thead>
-            <tr>
-                <th>First Name</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="user" items="${users}">
-            <tr>
-                <td>${user.firstName}</td>
-                <td>${user.email}</td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-</main>
+<main></main>
 <footer></footer>
 </body>
 </html>

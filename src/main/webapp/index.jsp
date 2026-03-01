@@ -17,7 +17,7 @@
             <!-- Provide feedback whether info is invalid -->
         </div>
     <%--  ensure action points to a servlet  --%>
-        <form action="#" id="auth-exists">
+        <form method="GET" action="auth" id="auth-exists">
             <div class="con-wrapper">
                 <label for="email">email</label>
                 <div class="input-wrapper">
@@ -44,7 +44,6 @@
             <p class="dir-deco">
                 Don't have an account?<a href="auth?action=sign-up" id="sign-s">Sign up</a>
             </p>
-            <button type="submit" name="submit" value="home">AWS DB Test</button>
         </form>
 </main>
 </body>
