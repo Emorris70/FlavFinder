@@ -1,3 +1,4 @@
+<jsp:include page="taglib.jsp"/>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
@@ -9,7 +10,7 @@
 </head>
 <body>
 <header>
-    <%@include file="flav-logo.jsp"%>
+    <jsp:include page="flav-logo.jsp"/>
 </header>
 <main class="container">
         <h1 class="m-h">Welcome Back!</h1>

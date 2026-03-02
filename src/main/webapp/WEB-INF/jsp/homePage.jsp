@@ -1,15 +1,15 @@
-<%@include file="taglib.jsp"%>
+<jsp:include page="../../taglib.jsp"/>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Home - FlavFinder</title>
-    <link rel="stylesheet" href="css/homePage.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="../../css/homePage.css">
+    <link rel="stylesheet" href="../../css/main.css">
 </head>
 <body>
 <%-- Reminder: Ensure the header is a includes--%>
 <header>
-    <%@include file="flav-logo.jsp"%>
+    <jsp:include page="../../flav-logo.jsp"></jsp:include>
     <div class="search-c">
         <input type="search" id="search" name="search-term" placeholder="Search for cuisines...">
     </div>
@@ -17,7 +17,7 @@
         <div class="location-drop-container">
             <div class="location-p">
                 <button class="location-toggle-btn" id="location-toggle-btn">
-                    <img src="images/near-me.png" class="inner-icon" alt="Near me Icon">
+                    <img src="../../images/near-me.png" class="inner-icon" alt="Near me Icon">
 
                 </button>
             </div>
@@ -25,7 +25,7 @@
         </div>
         <div class="to-go-container">
             <a href="#" id="to-go-deco">
-                <img src="images/favorite-heart.png" class="inner-icon" alt="To-Go icon">
+                <img src="../../images/favorite-heart.png" class="inner-icon" alt="To-Go icon">
                 To-Go
             </a>
         </div>

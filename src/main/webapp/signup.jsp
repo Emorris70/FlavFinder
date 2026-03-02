@@ -1,3 +1,4 @@
+<jsp:include page="taglib.jsp"/>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
@@ -9,12 +10,12 @@
 </head>
 <body>
 <header>
-    <%@include file="flav-logo.jsp"%>
+    <jsp:include page="flav-logo.jsp"/>
 </header>
 <main class="container">
     <h1 class="m-h">Welcome to FlavFinder!</h1>
     <%--  Ensure the action point to a servlet to extract form data  --%>
-    <form action="/auth" method="POST" id="auth-form">
+    <form method="POST" action="auth" id="auth-form">
         <div class="con-wrapper">
             <label for="first_name">first Name</label>
             <div class="input-wrapper">
