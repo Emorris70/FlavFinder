@@ -7,7 +7,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
+
+import com.flavfinder.persistence.GenericDao;
 import com.flavfinder.persistence.PropertiesLoader;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * Provides access to the database
  * Created on 8/31/16.
@@ -20,7 +25,7 @@ public class Database implements PropertiesLoader {
 
     // create an object of the class Database
     private static Database instance = new Database();
-
+    private static final Logger log = LogManager.getLogger(Database.class);
     private Properties properties;
     private Connection connection;
 
@@ -68,7 +73,7 @@ public class Database implements PropertiesLoader {
             try {
                 connection.close();
             } catch (SQLException e) {
-                System.out.println("Cannot close connection" + e);
+                log.debug("Cannot close connection", e);
             }
         }
 
@@ -104,9 +109,9 @@ public class Database implements PropertiesLoader {
             }
 
         } catch (SQLException se) {
-            System.out.println("SQL Exception" + se);
+            log.debug("SQL Exception", se);
         } catch (Exception e) {
-            System.out.println("Exception" + e);
+            log.debug("Exception", e);
         } finally {
             disconnect();
         }
