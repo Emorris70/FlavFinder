@@ -23,7 +23,7 @@ public class User {
     private String firstName;
     @Column(name = "email")
     private String email;
-    @Column(name = "password")
+//    @Column(name = "password")
     private String password;
     // Ensure the default value is set to user.
     @Column(name = "role", columnDefinition = "VARCHAR(50) DEFAULT 'user'")

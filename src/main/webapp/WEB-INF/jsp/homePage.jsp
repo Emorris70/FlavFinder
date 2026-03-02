@@ -9,7 +9,7 @@
 <body>
 <%-- Reminder: Ensure the header is a includes--%>
 <header>
-    <jsp:include page="../../flav-logo.jsp"></jsp:include>
+    <jsp:include page="../../flav-logo.jsp"/>
     <div class="search-c">
         <input type="search" id="search" name="search-term" placeholder="Search for cuisines...">
     </div>
