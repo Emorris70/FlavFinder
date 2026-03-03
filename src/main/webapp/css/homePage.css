@@ -8,35 +8,72 @@ header {
     align-items: center;
     height: 65px;
     padding: 0.625rem;
-    border-bottom: 0.5px solid rgba(0, 0, 0, 0.20);
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.10);
     background: #FFF;
+    gap: 5px;
     overflow: hidden;
+}
+.search-c {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1000px
 }
 #search {
     border-radius: 10px;
     border: 1px solid rgba(0, 0, 0, 0.03);
     background: rgba(88, 88, 88, 0.10);
-    width: 785px;
+    padding-left: 25px;
     height: 35px;
+    flex: 1 1 200px;
+}
+.search-icon {
+    position: relative;
+    left: 25px;
+}
+#filter-trigger {
+    position: relative;
+    background: var(--flav-red);
+    display: flex;
+    height: 35px;
+    padding: 10px 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    right: 12px;
+}
+#search:focus {
+    outline: none;
+    border-color: var(--search-border-color);
 }
 .user-content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: 2rem;
+    gap: clamp(4px, 1vw, 18px);
+}
+#search, .user-content {
+    transition: all 0.3s ease-in;
 }
 #location-toggle-btn {
     border-radius: 12px;
-    border: 0.5px solid rgba(0, 0, 0, 0.30);
-    background: rgba(88, 88, 88, 0.08);
+    border: 0.5px solid rgba(0, 0, 0, 0.10);
+    background: rgba(125, 125, 125, 0.08);
     padding: 5px 10px;
 }
 #to-go-deco {
-    background-color: #FF2B2B;
+    background-color: var(--flav-red);
     color: white;
     border-radius: 12px;
     padding: 5px 10px;
+}
+#to-go-deco:active {
+    transform: scale(0.9);
 }
 .inner-icon {
     width: var(--xxsmall-icon-size);
@@ -48,4 +85,24 @@ header {
     align-items: center;
     text-align: center;
     gap: 0.313rem;
+}
+.location-toggle-btn, #user-pf {
+    cursor: pointer;
+}
+.user-drop-container .user-toggle-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#user-pf {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: #333333;
+    border-radius: 50%;
+}
+@media (max-width: 1075px) {
+    #to-go-icon {
+        display: none;
+    }
 }

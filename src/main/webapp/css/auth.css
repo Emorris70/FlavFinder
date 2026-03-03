@@ -63,8 +63,8 @@ label {
 .input-wrapper img {
     position: absolute;
     left: 5px;
-    width: 16px;
-    height: 16px;
+    width: var(--xxxsmall-icon-size);
+    height: var(--xxxsmall-icon-size);
 }
 .btn-container {
     display: flex;

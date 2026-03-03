@@ -6,9 +6,13 @@
 :root {
     --flav-fl-width: 1.55rem;
     --flav-fl-height: 1.5rem;
+    --xxxsmall-icon-size: 1rem;
     --xxsmall-icon-size: 1.125rem;
     --xsmall-icon-size: 1.5rem;
     --medium-icon-size: 2rem;
+    --search-border-color: rgba(88, 88, 88, 0.50); /*  */
+    --mute-contrast: #585858; /* for text */
+    --flav-red: #FF2B2B;
 }
 body {
     font-family: "Poppins", sans-serif;
