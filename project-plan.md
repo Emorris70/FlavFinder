@@ -16,10 +16,8 @@
 ### Week 4
 #### This week should be focused on the initial portion of the MVP
 
-- [ ] Finalize Database Schema - Create MySQL tables for users, saved_restaurants, and search
-- [ ] Create JSP for initial home page
-- [ ] Navigation Wiring - Implement Servlet redirection/forwarding from Login/sign up to Home Page
-  - Look into how to protect routes
+- [X] Finalize Database Schema - Create MySQL tables for users, location, and saved_restaurants
+- [X] Create JSP for initial home page
 - [X] Complete Weekly log
 
 ### Week 5
