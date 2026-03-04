@@ -38,7 +38,7 @@ header {
     background: var(--flav-red);
     display: flex;
     height: 35px;
-    padding: 10px 10px;
+    padding: 5px 5px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     align-items: center;
