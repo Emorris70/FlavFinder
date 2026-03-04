@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Basic CRUD operations test on the saved_locations table.
  */
 class LocationDaoTest {
-    GenericDao genericDao;
+    GenericDao<Location> genericDao;
 
     /**
      * Initializes the application before performing a test.
@@ -22,7 +22,7 @@ class LocationDaoTest {
         Database database = Database.getInstance();
         database.runSQL("cleanDB.sql");
 
-        genericDao = new GenericDao(Location.class);
+        genericDao = new GenericDao<>(Location.class);
     }
 
     /**
@@ -31,7 +31,7 @@ class LocationDaoTest {
     @Test
     void getById() {
         // Gets the row
-        Location location = (Location) genericDao.getById(2);
+        Location location = genericDao.getById(2);
 
         // Check their current location(aka city)
         String ExpectedCity = location.getCityName();
@@ -47,14 +47,14 @@ class LocationDaoTest {
     @Test
     void update() {
         // Gets the COLUMN id field NOT the user_id
-        Location cityToUpdate = (Location) genericDao.getById(2);
+        Location cityToUpdate = genericDao.getById(2);
 
         // change the city name
         cityToUpdate.setCityName("Milwaukee");
         genericDao.update(cityToUpdate);
 
         // Verify
-        Location user = (Location) genericDao.getById(2);
+        Location user = genericDao.getById(2);
         // Compares the updated object values match.
         assertEquals(cityToUpdate, user);
 
@@ -79,7 +79,7 @@ class LocationDaoTest {
         int insertedLocation = genericDao.insert(location);
 
         // Retrieve the new city name
-        Location expetectedLocation = (Location) genericDao.getById(insertedLocation);
+        Location expetectedLocation = genericDao.getById(insertedLocation);
 
         // verify
         assertNotNull(expetectedLocation);

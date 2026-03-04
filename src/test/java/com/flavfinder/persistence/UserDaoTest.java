@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author EmileM
  */
 class UserDaoTest {
-    GenericDao genericDao;
+    GenericDao<User> genericDao;
 
     /**
      * Initializes the application before performing a test.
@@ -27,7 +27,7 @@ class UserDaoTest {
         Database database = Database.getInstance();
         database.runSQL("cleanDB.sql");
 
-        genericDao = new GenericDao(User.class);
+        genericDao = new GenericDao<>(User.class);
     }
 
     /**
@@ -36,7 +36,7 @@ class UserDaoTest {
     @Test
     void getById() {
         // Get the user
-        User user = (User)genericDao.getById(1);
+        User user = genericDao.getById(1);
         String retrievedName = user.getFirstName();
 
         // Verify
@@ -49,11 +49,12 @@ class UserDaoTest {
      */
     @Test
     void update() {
-        User userToUpdate = (User)genericDao.getById(1);
+        User userToUpdate = genericDao.getById(1);
         userToUpdate.setFirstName("Test");
         genericDao.update(userToUpdate);
-        User user = (User)genericDao.getById(1);
-        assertEquals("Test", user.getFirstName());
+        User user = genericDao.getById(1);
+
+        assertEquals(userToUpdate, user);
     }
 
     /**
@@ -67,7 +68,7 @@ class UserDaoTest {
         // If returned value > 1 that mean the user was inserted
         assertNotEquals(0, insertUserId);
         // Gets the user inserted by the id
-        User insertedUser = (User)genericDao.getById(insertUserId);
+        User insertedUser = genericDao.getById(insertUserId);
         String expectedUser = insertedUser.getFirstName();
         // Verify that the user was inserted
         assertEquals(expectedUser, insertedUser.getFirstName());
