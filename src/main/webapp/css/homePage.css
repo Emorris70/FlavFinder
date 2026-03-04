@@ -22,8 +22,7 @@ header {
     max-width: 900px
 }
 #search {
-    border-top-left-radius: 12px;
-    border-bottom-left-radius: 12px;
+    border-radius: 12px 0 0 12px;
     border: 1px solid rgba(0, 0, 0, 0.03);
     background: rgba(88, 88, 88, 0.10);
     padding-left: 25px;
