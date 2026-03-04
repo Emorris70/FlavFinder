@@ -19,10 +19,11 @@ header {
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: 1000px
+    max-width: 900px
 }
 #search {
-    border-radius: 10px;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
     border: 1px solid rgba(0, 0, 0, 0.03);
     background: rgba(88, 88, 88, 0.10);
     padding-left: 25px;
@@ -44,7 +45,7 @@ header {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    right: 12px;
+    right: 0px;
 }
 #search:focus {
     outline: none;
