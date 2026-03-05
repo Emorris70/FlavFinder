@@ -2,6 +2,7 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/dba/dump.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/dba/flavfinder_localhost-2026_03_04_21_16_52-dump.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/test/resources/cleanDB.sql" dialect="MySQL" />
   </component>
 </project>

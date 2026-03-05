@@ -18,8 +18,8 @@
 --
 -- Table structure for table `saved_locations`
 --
+
 DROP TABLE IF EXISTS `saved_locations`;
-DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `saved_locations` (
@@ -48,9 +48,42 @@ INSERT INTO `saved_locations` VALUES (2,1,'madison','53703',43.07,-89.4,1,'2026-
 UNLOCK TABLES;
 
 --
+-- Table structure for table `saved_restaurants`
+--
+
+DROP TABLE IF EXISTS `saved_restaurants`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `saved_restaurants` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `api_restaurant_id` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `category` varchar(100) DEFAULT NULL,
+  `image_url` text,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
+  `saved_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_user_restaurant` (`user_id`,`api_restaurant_id`),
+  CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `saved_restaurants`
+--
+
+LOCK TABLES `saved_restaurants` WRITE;
+/*!40000 ALTER TABLE `saved_restaurants` DISABLE KEYS */;
+/*!40000 ALTER TABLE `saved_restaurants` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
@@ -84,4 +117,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-02-21 12:07:17
+-- Dump completed on 2026-03-04 21:16:54

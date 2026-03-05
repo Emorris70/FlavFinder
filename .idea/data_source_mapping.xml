@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourcePerFileMappings">
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/b0e59084-677b-4485-9844-61d8608dcadc/console.sql" value="b0e59084-677b-4485-9844-61d8608dcadc" />
     <file url="file://$PROJECT_DIR$/dba/dump.sql" value="569cff1b-ff7b-4f58-a3ae-2e89d3a77abb" />
-    <file url="file://$PROJECT_DIR$/src/test/resources/cleanDB.sql" value="bf2c6eb5-f579-4fc0-aef4-ddbd865e8f05" />
+    <file url="file://$PROJECT_DIR$/dba/flavfinder_localhost-2026_03_04_21_16_52-dump.sql" value="bf2c6eb5-f579-4fc0-aef4-ddbd865e8f05" />
   </component>
 </project>
