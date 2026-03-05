@@ -40,13 +40,13 @@
 - [ ] Handle Edge Cases - Add "No results found" states and error handling for when a user denies location permissions
 - [ ] Create JSP page for search results
   - This page should also handle the case of "No results found"
-- [ ] AWS set up and deploy
+- [X] AWS set up and deploy
 - [ ] Complete Weekly Log.
 
 ### Week 7
 #### Focused on filtering portion
 
-- [ ] Complete Checkpoint 2
+- [X] Complete Checkpoint 2
 - [ ] AWS cognito User Authentication
   -  with the help of AWS SDK for Java
 - [ ] Develop Filter UI Components - Build interactive buttons or a dropdown for price tiers ($ to $$$$) and a multi-select or pill-style interface for cuisine types
@@ -57,7 +57,7 @@
 #### Focused on Saved restaurant discoveries 
 
 - [ ] consumption of tomtom api
-- [ ] Build the "To Go" Data Structure - Define the schema or state logic needed to store a user's saved restaurants (ID, Name, and Image)
+- [X] Build the "To Go" Data Structure - Define the schema or state logic needed to store a user's saved restaurants
 - [ ] Create "Save to List" Functionality - Add a toggle (like a heart or bookmark icon) on restaurant cards that adds/removes items from the "To Go" list
 - [ ] Develop "To Go" View - Create a dedicated page where users can view and manage their curated list of future dining spots
 - [ ] Optimize Result Cards - Update the display to clearly show the price point and cuisine tags for each search result to improve scannability

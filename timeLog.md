@@ -11,6 +11,7 @@
 | 2/21/2026 | Completed week 5 exerice, and built/implemented the saved locations table. In addition, to all proper classes and unit testing. Also integrated the generic DAO.                                   | 8     |
 | 2/24/2026 | Deployed flavfinder through aws, refactored and removed a few classes/methods.                                                                                                                     | 5     |
 | 3/4/2026  | Added additional table(saved_restaurants) and completed API research - which will invole refactoing of a few plans.                                                                                | 6     |
+| 3/4/2026  | Completed saved_restaurants unit test and completed week 7 check point.                                                                                                                            | 4     |
 ## Notes
 The difference between junit-vintage and junit-jupiter:
 https://www.baeldung.com/java-junit-vintage-engine-vs-junit-jupiter-engine </br>

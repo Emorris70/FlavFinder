@@ -56,3 +56,5 @@ src/test/resources/hibernate.cfg.xml
 logs
 #dump files
 dba
+# test resources dir
+src/test/resources/cleanDB.sql
