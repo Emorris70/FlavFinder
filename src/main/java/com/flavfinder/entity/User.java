@@ -25,12 +25,14 @@ public class User {
     private String email;
 //    @Column(name = "password")
     private String password;
-    // Ensure the default value is set to user.
     @Column(name = "role", columnDefinition = "VARCHAR(50) DEFAULT 'user'")
     private String role = "user";
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Location> locations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<SavedRestaurants> restaurants = new ArrayList<>();
 
     /**
      * Instantiates a new user
@@ -50,6 +52,44 @@ public class User {
         this.firstName = firstName;
         this.email = email;
         this.password = password;
+    }
+
+    /**
+     * Adds a new restaurant
+     *
+     * @param restaurant the restaurant to add
+     */
+    private void addRestaurant(SavedRestaurants restaurant) {
+        this.restaurants.add(restaurant);
+        restaurant.setUser(this);
+    }
+
+    /**
+     * Removes a restaurant
+     *
+     * @param restaurant the restaurant to remove
+     */
+    private void removeRestaurant(SavedRestaurants restaurant) {
+        this.locations.remove(restaurant);
+        restaurant.setUser(null);
+    }
+
+    /**
+     * Gets a list of all saved restaurants
+     *
+     * @return list of restaurants
+     */
+    public List<SavedRestaurants> getRestaurants() {
+        return restaurants;
+    }
+
+    /**
+     * Sets the list of restaurants
+     *
+     * @param restaurants the restaurant to set
+     */
+    public void setRestaurants(List<SavedRestaurants> restaurants) {
+        this.restaurants = restaurants;
     }
 
     /**

@@ -10,9 +10,9 @@ import java.util.Objects;
  *
  * @author EmileM
  */
-@Entity(name = "savedRestaurants")
+@Entity(name = "SavedRestaurants")
 @Table(name = "saved_restaurants")
-public class savedRestaurants {
+public class SavedRestaurants {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name ="native", strategy = "native")
@@ -35,7 +35,7 @@ public class savedRestaurants {
     /**
      * Instantiates a new savedRestaurant.
      */
-    public savedRestaurants() {
+    public SavedRestaurants() {
 
     }
 
@@ -50,8 +50,8 @@ public class savedRestaurants {
      * @param lat latitude of that restaurant
      * @param lon longitude of that restaurant
      */
-    public savedRestaurants(String restaurantsId, String name, String category,
-                            String imgUrl, double lat, double lon)
+    public SavedRestaurants(String restaurantsId, String name, String category,
+                            String imgUrl, double lat, double lon, User user)
     {
         this.restaurantsId = restaurantsId;
         this.restaurantName = name;
@@ -59,6 +59,7 @@ public class savedRestaurants {
         this.imageUrl = imgUrl;
         this.latitude = lat;
         this.longitude = lon;
+        this.user = user;
     }
 
     /**
@@ -213,7 +214,7 @@ public class savedRestaurants {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        savedRestaurants that = (savedRestaurants) o;
+        SavedRestaurants that = (SavedRestaurants) o;
         return id == that.id && Double.compare(latitude, that.latitude) == 0
                 && Double.compare(longitude, that.longitude) == 0
                 && Objects.equals(restaurantsId, that.restaurantsId)
