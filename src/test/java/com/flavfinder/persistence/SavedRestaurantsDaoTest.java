@@ -6,6 +6,8 @@ import com.flavfinder.util.Database;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -15,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class SavedRestaurantsDaoTest {
     GenericDao<SavedRestaurants> savedDao;
+    GenericDao<User> userDao;
 
     @BeforeEach
     void setUp() {
@@ -22,6 +25,7 @@ class SavedRestaurantsDaoTest {
         database.runSQL("cleanDB.sql");
 
         savedDao = new GenericDao<>(SavedRestaurants.class);
+        userDao = new GenericDao<>(User.class);
     }
 
     /**
@@ -46,13 +50,12 @@ class SavedRestaurantsDaoTest {
      * "snapshot" of the desired restaurant of choice. Simply the
      * general information.
      * --
-     * Utilizing the lazy loading to load the rest of additional
+     * Utilizing the method "lazy loading" to load the rest of additional
      * details using the restaurant id.
      */
     @Test
     void insert() {
         // Get the user to save for...
-        GenericDao<User> userDao = new GenericDao<>(User.class);
         // user(id)
         User user = userDao.getById(1);
 
@@ -70,14 +73,42 @@ class SavedRestaurantsDaoTest {
     }
 
     /**
-     * Test deletes or "removes" a saved restaurant.
+     * Test should verify if a user is deleted
+     * saved restaurants field should also be deleted.
      */
     @Test
-    void delete() {
+    void deleteUser() {
+        // Get the user
+        User user = userDao.getById(1);
+        // Delete the user
+        userDao.delete(user);
 
+        // Verify...
+
+        // saved_restaurants(id)
+        SavedRestaurants restaurants = savedDao.getById(1);
+        // If the user is deleted associated field should be null
+        assertNull(restaurants);
     }
 
+    /**
+     * Test represent "un-hearting" a saved restaurant of choice.
+     */
+    @Test
+    void deleteRestaurant() {
+        SavedRestaurants restaurants = savedDao.getById(1);
+        savedDao.delete(restaurants);
+        // verify
+        SavedRestaurants expected = savedDao.getById(1);
+        assertNull(expected);
+    }
+
+    /**
+     * Get a list of all saved restaurants
+     */
     @Test
     void getAll() {
+        List<SavedRestaurants> restaurants = savedDao.getAll();
+        assertEquals(1, restaurants.size());
     }
 }
