@@ -51,9 +51,11 @@ So that I can explore dining options in my immediate vicinity or scout a complet
 
 ### Filtered Search (M)
 
-As a hungry user with specific tastes and a set budget,
+(NM) As a hungry user with specific tastes and a set budget,
 I want to filter my results by cuisine type and price point ($, $$, $$$),</br>
 So that I only see restaurants that I actually want to eat at and can afford.
+
+(M) As someone with distinct tastes and a preferred cuisine category, I would like the ability to filter results according to both cuisine type and my dietary preferences, such as halal or vegan, and more.
 
 ## Logout (M)
 
