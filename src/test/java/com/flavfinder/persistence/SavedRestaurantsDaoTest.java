@@ -84,7 +84,7 @@ class SavedRestaurantsDaoTest {
                 "https://images.unsplash.com/photo", 40.71, 74.01, user);
 
         assertThrows(ConstraintViolationException.class, () -> {
-            int savedId = savedDao.insert(savedRestaurants);
+            savedDao.insert(savedRestaurants);
         });
     }
 
