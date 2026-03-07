@@ -32,7 +32,7 @@ public class Database implements PropertiesLoader {
     /** private constructor prevents instantiating this class anywhere else
 	**/
     private Database() {
-        loadPropertieContext();
+        loadPropertyContext();
     }
 
     /** get the only Database object available
@@ -117,7 +117,7 @@ public class Database implements PropertiesLoader {
 
     }
 
-    public void loadPropertieContext() {
+    public void loadPropertyContext() {
         try {
             properties = loadProperties("/database.properties");
         } catch (IOException ioException) {
