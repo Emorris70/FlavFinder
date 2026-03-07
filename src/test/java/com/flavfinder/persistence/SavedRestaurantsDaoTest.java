@@ -6,6 +6,7 @@ import com.flavfinder.util.Database;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import org.hibernate.exception.ConstraintViolationException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -70,6 +71,21 @@ class SavedRestaurantsDaoTest {
         SavedRestaurants expected = savedDao.getById(savedId);
         assertEquals(expected, savedRestaurant);
 
+    }
+
+    /**
+     * Test ensures users cannot save the same restaurant
+     */
+    @Test
+    void noDuplicatedSavedValues() {
+        User user = userDao.getById(1);
+
+        SavedRestaurants savedRestaurants = new SavedRestaurants("AZP-123", "Joe's Pizza", "Pizza",
+                "https://images.unsplash.com/photo", 40.71, 74.01, user);
+
+        assertThrows(ConstraintViolationException.class, () -> {
+            int savedId = savedDao.insert(savedRestaurants);
+        });
     }
 
     /**

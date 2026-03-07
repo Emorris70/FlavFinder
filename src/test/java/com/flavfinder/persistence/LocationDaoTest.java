@@ -12,7 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
  * Basic CRUD operations test on the saved_locations table.
  */
 class LocationDaoTest {
-    GenericDao<Location> genericDao;
+    GenericDao<Location> locationDao;
+    GenericDao<User> userDao;
 
     /**
      * Initializes the application before performing a test.
@@ -22,7 +23,8 @@ class LocationDaoTest {
         Database database = Database.getInstance();
         database.runSQL("cleanDB.sql");
 
-        genericDao = new GenericDao<>(Location.class);
+        locationDao = new GenericDao<>(Location.class);
+        userDao = new GenericDao<>(User.class);
     }
 
     /**
@@ -31,7 +33,7 @@ class LocationDaoTest {
     @Test
     void getById() {
         // Gets the row
-        Location location = genericDao.getById(2);
+        Location location = locationDao.getById(2);
 
         // Check their current location(aka city)
         String ExpectedCity = location.getCityName();
@@ -47,14 +49,14 @@ class LocationDaoTest {
     @Test
     void update() {
         // Gets the COLUMN id field NOT the user_id
-        Location cityToUpdate = genericDao.getById(2);
+        Location cityToUpdate = locationDao.getById(2);
 
         // change the city name
         cityToUpdate.setCityName("Milwaukee");
-        genericDao.update(cityToUpdate);
+        locationDao.update(cityToUpdate);
 
         // Verify
-        Location user = genericDao.getById(2);
+        Location user = locationDao.getById(2);
         // Compares the updated object values match.
         assertEquals(cityToUpdate, user);
 
@@ -67,7 +69,6 @@ class LocationDaoTest {
     @Test
     void insert() {
         // Get the user(id)
-        GenericDao<User> userDao = new GenericDao<>(User.class);
         User user = userDao.getById(1);
 
         // Add a new location
@@ -76,10 +77,10 @@ class LocationDaoTest {
 
         // Insert the location
         // Retrieve the returned id
-        int insertedLocation = genericDao.insert(location);
+        int insertedLocation = locationDao.insert(location);
 
         // Retrieve the new city name
-        Location expetectedLocation = genericDao.getById(insertedLocation);
+        Location expetectedLocation = locationDao.getById(insertedLocation);
 
         // verify
         assertNotNull(expetectedLocation);
@@ -96,7 +97,21 @@ class LocationDaoTest {
     @Test
     void delete() {
         // Delete the location by
-        genericDao.delete(genericDao.getById(2));
-        assertNull(genericDao.getById(2));
+        locationDao.delete(locationDao.getById(2));
+        assertNull(locationDao.getById(2));
+    }
+
+    /**
+     * Test user constraint - If a user is deleted associated fields
+     * within the location table should be too.
+     */
+    @Test
+    void deleteUserConstraintTest() {
+        User user = userDao.getById(1);
+        userDao.delete(user);
+
+        // Verify
+        Location location = locationDao.getById(2);
+        assertNull(location);
     }
 }

@@ -75,13 +75,10 @@ class UserDaoTest {
     }
 
     /**
-     * Performs a deletion of a user.
-     *
-     * Confirmed - if a user is removed, associated fields
-     * within the saved_location table is also removed.
+     * Performs a deletion of a user
      */
     @Test
-    void delete() {
+    void deleteLocation() {
         genericDao.delete(genericDao.getById(1));
         assertNull(genericDao.getById(1));
     }
