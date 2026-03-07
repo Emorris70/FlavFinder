@@ -1,6 +1,7 @@
 package com.flavfinder.util;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -31,8 +32,7 @@ public class Database implements PropertiesLoader {
     /** private constructor prevents instantiating this class anywhere else
 	**/
     private Database() {
-        properties = loadProperties("/database.properties");
-
+        loadPropertieContext();
     }
 
     /** get the only Database object available
@@ -115,5 +115,13 @@ public class Database implements PropertiesLoader {
             disconnect();
         }
 
+    }
+
+    public void loadPropertieContext() {
+        try {
+            properties = loadProperties("/database.properties");
+        } catch (IOException ioException) {
+            log.debug("Issue reading properties file", ioException);
+        }
     }
 }
