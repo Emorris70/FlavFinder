@@ -78,7 +78,7 @@ class UserDaoTest {
      * Performs a deletion of a user
      */
     @Test
-    void deleteLocation() {
+    void deleteUser() {
         genericDao.delete(genericDao.getById(1));
         assertNull(genericDao.getById(1));
     }

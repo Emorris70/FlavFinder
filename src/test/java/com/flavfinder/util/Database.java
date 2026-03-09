@@ -72,7 +72,7 @@ public class Database implements PropertiesLoader {
             try {
                 connection.close();
             } catch (SQLException e) {
-                log.debug("Cannot close connection", e);
+                log.debug("Cannot close connection", e.getMessage(), e);
             }
         }
 
@@ -108,20 +108,25 @@ public class Database implements PropertiesLoader {
             }
 
         } catch (SQLException se) {
-            log.debug("SQL Exception", se);
+            log.debug("SQL Exception", se.getMessage(), se);
         } catch (Exception e) {
-            log.debug("Exception", e);
+            log.debug("Exception" + e.getMessage(), e);
         } finally {
             disconnect();
         }
 
     }
 
+    /**
+     * Method to store read properties file context
+     */
     public void loadPropertyContext() {
         try {
             properties = loadProperties("/database.properties");
-        } catch (IOException ioException) {
-            log.debug("Issue reading properties file", ioException);
+        } catch (IOException io) {
+            log.debug("Issue reading properties file"+  io.getMessage() , io);
+        } catch (Exception e) {
+            log.debug("Problem Locating File Path" + e.getMessage(), e);
         }
     }
 }
