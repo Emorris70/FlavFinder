@@ -22,15 +22,10 @@ public interface PropertiesLoader {
      * @return a populated Properties instance or an empty Properties instance if
      * the file path was not found.
      */
-    default Properties loadProperties(String propertiesFilePath){
+    default Properties loadProperties(String propertiesFilePath) throws IOException, Exception{
         Properties properties = new Properties();
-        try {
-            properties.load(this.getClass().getResourceAsStream(propertiesFilePath));
-        } catch (IOException ioe) {
-            log.debug("Database.loadProperties()...Cannot load the properties file: ", ioe);
-        } catch (Exception e) {
-            log.debug("Database.loadProperties()...", e);
-        }
+        properties.load(this.getClass().getResourceAsStream(propertiesFilePath));
+
         return properties;
     }
 }
