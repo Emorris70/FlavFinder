@@ -53,7 +53,7 @@
             Already have an account?<a href="auth?action=login">Login</a>
         </p>
         <div class="btn-container">
-            <button type="submit" class="btn-submit" id="btn-submit">
+            <button type="submit" class="btn-submit">
                 Sign Up
             </button>
         </div>

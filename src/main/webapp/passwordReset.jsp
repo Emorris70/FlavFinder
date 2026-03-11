@@ -18,12 +18,13 @@
                         name="email"
                         id="email"
                         placeholder="name@host.com"
+                        required
                 />
                 <img src="images/mail.png" alt="mail icon" />
             </div>
         </div>
         <div class="btn-container">
-            <button type="submit" class="btn-submit" id="btn-submit">
+            <button type="submit" class="btn-submit">
                 Reset Password
             </button>
         </div>

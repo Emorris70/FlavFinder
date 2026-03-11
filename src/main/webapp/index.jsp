@@ -1,13 +1,7 @@
 <jsp:include page="taglib.jsp"/>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login - FlavFinder</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/auth.css">
-</head>
+<jsp:include page="head.jsp"/>
 <body>
 <header>
     <jsp:include page="flav-logo.jsp"/>
