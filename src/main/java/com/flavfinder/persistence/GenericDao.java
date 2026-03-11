@@ -41,7 +41,8 @@ public class GenericDao<T> {
     }
 
     /**
-     * Gets the entity by id
+     * Gets the entity by id and returns the
+     * entity corresponding to the id.
      *
      * @param id entity id to search by
      * @return an entity
@@ -88,26 +89,19 @@ public class GenericDao<T> {
            return null;
         });
     }
-// look to refactor this
+
     /**
      * Return a list of all entities
      *
      * @return All entities
      */
     public List<T> getAll() {
-
-        Session session = getSession();
-
-        HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
-
-        CriteriaQuery<T> query = builder.createQuery(type);
-        Root<T> root = query.from(type);
-        List<T> list = session.createSelectionQuery( query ).getResultList();
-
-        log.info("The list of entitys " + list);
-        session.close();
-
-        return list;
+        return executeWithSession(session -> {
+           HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
+           CriteriaQuery<T> query = builder.createQuery(type);
+           query.from(type);
+           return session.createSelectionQuery(query).getResultList();
+        });
     }
 
     /**
