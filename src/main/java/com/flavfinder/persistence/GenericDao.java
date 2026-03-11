@@ -54,7 +54,8 @@ public class GenericDao<T> {
     }
 
     /**
-     * insert a new entity
+     * insert a new entity and returns an id
+     * corresponding to new entry row.
      *
      * @param entity entity to be inserted
      */
@@ -66,7 +67,7 @@ public class GenericDao<T> {
     }
 
     /**
-     * update entity
+     * update the entity and returns nothing.
      *
      * @param entity entity to be updated
      */
@@ -112,10 +113,13 @@ public class GenericDao<T> {
     }
 
     /**
+     * Wraps a database operation within a Hibernate session and transaction.
+     * This method ensures that the transaction is committed on success,
+     * rolled back on failure, and the session is always closed.
      *
      * @param action the query to perform
+     * @param <R> the return type produced by the action.
      * @return the result in which the calling method would like to return.
-     * @param <R> the return type.
      */
     private <R> R executeWithSession(Function<Session, R> action) {
         Session session = getSession();
