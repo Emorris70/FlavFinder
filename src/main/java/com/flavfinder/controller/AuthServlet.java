@@ -38,13 +38,17 @@ public class AuthServlet extends HttpServlet {
             throws ServletException, IOException
     {
         String url = "";
+        String title = "";
 
         if ("sign-up".equals(req.getParameter("action"))) {
             url = "/signup.jsp";
+            title = "Sign up - FlavFinder";
+            req.setAttribute("page" ,title);
 
         } else if ("login".equals(req.getParameter("action"))) {
             url = "/index.jsp";
-
+            title = "Login - FlavFinder";
+            req.setAttribute("page", title);
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher(url);

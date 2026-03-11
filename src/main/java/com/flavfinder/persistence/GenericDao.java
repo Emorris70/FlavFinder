@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 
 import java.util.List;
+import java.util.function.Function;
 
 /**
  * A generic Data Access Object providing common CRUD operations for
@@ -45,24 +46,11 @@ public class GenericDao<T> {
      * @param id entity id to search by
      * @return an entity
      */
-    public <T>T getById(int id) {
+    public <T> T getById(int id) {
         Session session = getSession();
         T entity = (T)session.get(type, id);
         session.close();
         return entity;
-    }
-
-    /**
-     * update entity
-     *
-     * @param entity entity to be updated
-     */
-    public void update(T entity) {
-        Session session = getSession();
-        Transaction transaction = session.beginTransaction();
-        session.merge(entity);
-        transaction.commit();
-        session.close();
     }
 
     /**
@@ -71,15 +59,22 @@ public class GenericDao<T> {
      * @param entity entity to be inserted
      */
     public int insert(T entity) {
-        int id = 0;
-        Session session = getSession();
-        Transaction transaction = session.beginTransaction();
-        // Persist - save the "entity"
-        session.persist(entity);
-        transaction.commit();
-        id = (int) session.getIdentifier(entity);
-        session.close();
-        return id;
+        return executeWithSession(session -> {
+            session.persist(entity);
+            return (int) session.getIdentifier(entity);
+        });
+    }
+
+    /**
+     * update entity
+     *
+     * @param entity entity to be updated
+     */
+    public void update(T entity) {
+        executeWithSession(session -> {
+            session.merge(entity);
+            return null;
+        });
     }
 
     /**
@@ -94,7 +89,6 @@ public class GenericDao<T> {
         transaction.commit();
         session.close();
     }
-
 
     /**
      * Return a list of all entities
@@ -111,9 +105,31 @@ public class GenericDao<T> {
         Root<T> root = query.from(type);
         List<T> list = session.createSelectionQuery( query ).getResultList();
 
-        log.debug("The list of entitys " + list);
+        log.info("The list of entitys " + list);
         session.close();
 
         return list;
+    }
+
+    /**
+     *
+     * @param action the query to perform
+     * @return the result in which the calling method would like to return.
+     * @param <R> the return type.
+     */
+    private <R> R executeWithSession(Function<Session, R> action) {
+        Session session = getSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            R result = action.apply(session);
+            transaction.commit();
+            return result;
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
     }
 }
