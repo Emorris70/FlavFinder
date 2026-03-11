@@ -54,7 +54,7 @@ public class GenericDao<T> {
     }
 
     /**
-     * insert a new entity and returns an id
+     * Insert a new entity and returns an id
      * corresponding to new entry row.
      *
      * @param entity entity to be inserted
@@ -67,7 +67,7 @@ public class GenericDao<T> {
     }
 
     /**
-     * update the entity and returns nothing.
+     * Update the entity and returns null.
      *
      * @param entity entity to be updated
      */
@@ -79,16 +79,15 @@ public class GenericDao<T> {
     }
 
     /**
-     * Deletes the entity
+     * Deletes the entity and returns null.
      *
      * @param entity entity to be deleted
      */
     public void delete(T entity) {
-        Session session = getSession();
-        Transaction transaction = session.beginTransaction();
-        session.delete(entity);
-        transaction.commit();
-        session.close();
+        executeWithSession(session -> {
+            session.delete(entity);
+           return null;
+        });
     }
 
     /**
