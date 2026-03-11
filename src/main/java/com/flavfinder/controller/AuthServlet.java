@@ -38,7 +38,7 @@ public class AuthServlet extends HttpServlet {
             throws ServletException, IOException
     {
         String url = "";
-        String title = "";
+        String title;
 
         if ("sign-up".equals(req.getParameter("action"))) {
             url = "/signup.jsp";
@@ -49,6 +49,11 @@ public class AuthServlet extends HttpServlet {
             url = "/index.jsp";
             title = "Login - FlavFinder";
             req.setAttribute("page", title);
+        } else if ("reset-pass".equals(req.getParameter("action"))) {
+            url = "/passwordReset.jsp";
+            title = "Reset Password - FlavFinder";
+            req.setAttribute("page", title);
+
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher(url);

@@ -30,7 +30,7 @@
                         type="email"
                         name="email"
                         id="email"
-                        placeholder="Email"
+                        placeholder="name@host.com"
                         required
                 />
                 <img src="images/mail.png" alt="mail icon" />

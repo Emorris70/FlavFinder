@@ -10,18 +10,18 @@
 <body>
 <header>
 <!--&lt;!&ndash;    Ensure to use the includes tag   &ndash;&gt;-->
-<!--        <div class="a-lc" role="img" aria-label="FlavFinder Logo">-->
-<!--            <h1 class="main-h1">-->
-<!--                FL-->
-<!--                <span class="img-c">-->
-<!--                    <img-->
-<!--                            src="images/location.png"-->
-<!--                            alt="location pin icon"-->
-<!--                            class="img-t"-->
-<!--                    /> </span-->
-<!--                >V-->
-<!--            </h1>-->
-<!--        </div>-->
+        <div class="a-lc" role="img" aria-label="FlavFinder Logo">
+            <h1 class="main-h1">
+                FL
+                <span class="img-c">
+                    <img
+                            src="images/location.png"
+                            alt="location pin icon"
+                            class="img-t"
+                    /> </span
+                >V
+            </h1>
+        </div>
 <!--        <div class="search-c">-->
 <!--            <img src="images/search-icon.png" class="inner-icon search-icon" alt="search icon">-->
 <!--            <input type="text" id="search" name="search-term" placeholder="Search for cuisines...">-->
@@ -57,9 +57,31 @@
 <!--            </div>-->
 <!--        </div>-->
 </header>
-<main>
-    <form action="">
-
+<main class="container">
+    <h1 class="m-h">Forgot Password?</h1>
+    <p class="p-deco">Enter your email to receive a rest link</p>
+<!--  add the action -->
+    <form method="POST"  id="auth-form">
+        <div class="con-wrapper">
+            <label for="email">email</label>
+            <div class="input-wrapper">
+                <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="name@host.com"
+                />
+                <img src="images/mail.png" alt="mail icon" />
+            </div>
+        </div>
+        <div class="btn-container">
+            <button type="submit" class="btn-submit" id="btn-submit">
+                Reset Password
+            </button>
+        </div>
+        <p class="dir-deco center-i">
+            Back to<a href="auth?action=login">Login</a>
+        </p>
     </form>
 </main>
 <footer></footer>

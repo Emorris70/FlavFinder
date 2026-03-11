@@ -23,7 +23,7 @@
                 <label for="email">email</label>
                 <div class="input-wrapper">
                     <img src="images/mail.png" alt="mail icon" />
-                    <input type="email" name="email" id="email" placeholder="Email" />
+                    <input type="email" name="email" id="email" placeholder="name@host.com" />
                 </div>
             </div>
             <div class="con-wrapper">
@@ -38,12 +38,14 @@
                     />
                 </div>
             </div>
-
+            <p class="dir-deco">
+                Don't have an account?<a href="auth?action=sign-up" id="sign-s">Sign up</a>
+            </p>
             <div class="btn-container">
                 <button type="submit" class="btn-submit">Login</button>
             </div>
-            <p class="dir-deco">
-                Don't have an account?<a href="auth?action=sign-up" id="sign-s">Sign up</a>
+            <p class="dir-deco center-i">
+                Forgot Password?<a href="auth?action=reset-pass" id="reset-s">Reset Password</a>
             </p>
         </form>
 </main>
