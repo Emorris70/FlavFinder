@@ -47,10 +47,9 @@ public class GenericDao<T> {
      * @return an entity
      */
     public <T> T getById(int id) {
-        Session session = getSession();
-        T entity = (T)session.get(type, id);
-        session.close();
-        return entity;
+        return executeWithSession(session -> {
+            return (T) session.get(type, id);
+        });
     }
 
     /**
@@ -89,7 +88,7 @@ public class GenericDao<T> {
            return null;
         });
     }
-
+// look to refactor this
     /**
      * Return a list of all entities
      *
