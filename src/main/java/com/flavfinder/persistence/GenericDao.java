@@ -47,9 +47,9 @@ public class GenericDao<T> {
      * @param id entity id to search by
      * @return an entity
      */
-    public <T> T getById(int id) {
+    public T getById(int id) {
         return executeWithSession(session -> {
-            return (T) session.get(type, id);
+            return session.get(type, id);
         });
     }
 
@@ -85,7 +85,7 @@ public class GenericDao<T> {
      */
     public void delete(T entity) {
         executeWithSession(session -> {
-            session.delete(entity);
+            session.remove(entity);
            return null;
         });
     }

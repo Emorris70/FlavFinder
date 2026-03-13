@@ -1,12 +1,15 @@
 package com.flavfinder.APIdentity;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Represents the root
  * @author EmileM
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TomTomResponse{
 
 	@JsonProperty("results")
