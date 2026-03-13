@@ -17,6 +17,9 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
+ * Class is the central point for interacting with external
+ * RESTful APIs.
+ *
  * @author EmileM
  */
 public class APIDao implements PropertiesLoader {
@@ -47,9 +50,10 @@ public class APIDao implements PropertiesLoader {
     }
 
     /**
-     * HTTP GET request to TomTom URL endpoint
+     * HTTP GET request to TomTom URL endpoint. And
+     * returns the mapped JSON response.
      *
-     * @param rawAddress The users location
+     * @param rawAddress The users location.
      */
     public TomTomResponse callTomTom(String rawAddress) {
         Map<String, Object> params = new HashMap<>();
