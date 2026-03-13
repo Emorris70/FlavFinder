@@ -9,7 +9,11 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class APIDaoTest {
+/**
+ * Class represents HTTP request to TomTom
+ * URL end point.
+ */
+class TomApiTest {
 
     /**
      * Test - Gets the countries name
