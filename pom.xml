@@ -17,6 +17,7 @@
     <hibernate-version>6.4.3.Final</hibernate-version>
     <jersey-version>2.29.1</jersey-version>
     <jackson-version>2.10.0</jackson-version>
+    <jaxb-verison>2.3.1</jaxb-verison>
     <maven-compiler-plugin-version>3.13.0</maven-compiler-plugin-version>
     <maven-surefire-plugin-version>3.5.0</maven-surefire-plugin-version>
   </properties>
@@ -83,6 +84,25 @@
       <version>${jersey-version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.glassfish.jersey.media</groupId>
+      <artifactId>jersey-media-json-jackson</artifactId>
+      <version>${jersey-version}</version>
+    </dependency>
+
+<!--  JAXB API  -->
+    <dependency>
+      <groupId>javax.xml.bind</groupId>
+      <artifactId>jaxb-api</artifactId>
+      <version>${jaxb-verison}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.glassfish.jaxb</groupId>
+      <artifactId>jaxb-runtime</artifactId>
+      <version>${jaxb-verison}</version>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
@@ -101,6 +121,12 @@
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
+      <version>${jackson-version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.module</groupId>
+      <artifactId>jackson-module-jaxb-annotations</artifactId>
       <version>${jackson-version}</version>
     </dependency>
   </dependencies>

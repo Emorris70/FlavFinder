@@ -21,7 +21,6 @@ import java.util.Properties;
  */
 public class APIDao implements PropertiesLoader {
     private static final Logger log = LogManager.getLogger(APIDao.class);
-//    private static final Client client = ClientBuilder.newClient();
     private static final double DEFAULT_LAT = 43.0731;
     private static final double DEFAULT_LON = -89.4012;
     private Properties properties;
@@ -48,8 +47,9 @@ public class APIDao implements PropertiesLoader {
     }
 
     /**
+     * HTTP GET request to TomTom URL endpoint
      *
-     * @param rawAddress
+     * @param rawAddress The users location
      */
     public TomTomResponse callTomTom(String rawAddress) {
         Map<String, Object> params = new HashMap<>();
