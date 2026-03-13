@@ -6,7 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Represents the root
+ * Serves as the main entry point for the resource response related to TomTom Geocoding.
+ *
  * @author EmileM
  */
 @JsonIgnoreProperties(ignoreUnknown = true)

@@ -3,6 +3,11 @@ package com.flavfinder.APIdentity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Represents the different Geocoding objects.
+ *
+ * @author EmileM
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ResultsItem{
 
