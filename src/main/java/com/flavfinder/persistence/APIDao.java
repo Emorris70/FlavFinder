@@ -71,16 +71,22 @@ public class APIDao implements PropertiesLoader {
     }
 
     /**
+     * Performs a synchronous GET request to a REST resource and maps the JSON response
+     * to a specified Java type(aka POJO class)
      *
-     * @param baseUrl The targeted URL.
-     * @param path User input.
-     * @param queryParams The query parameters.
-     * @param headers The response header.
-     * @param responseType targeted API class e.g. tomtom or rapidAPI.
-     * @return The JSON results.
-     * @param <T> The type of entity.
+     * This method dynamically builds the target URL using the base URL and path,
+     * appends query parameters, sets required headers, and handles connection cleanup
+     * automatically.
+     *
+     * @param baseUrl The base URL of the API service.
+     * @param action users search/input criteria.
+     * @param queryParams Map of key-value pairs to be appended as query strings.
+     * @param headers Map of HTTP headers required by the API.
+     * @param responseType The Class of the POJO the response should be mapped into.
+     * @return An instance of T containing the mapped API data.
+     * @param <T> The type of the response entity.
      */
-    public <T> T executeGetRequest(String baseUrl, String path, Map<String, Object> queryParams,
+    public <T> T executeGetRequest(String baseUrl, String action, Map<String, Object> queryParams,
                                    Map<String, String> headers, Class<T> responseType)
     {
         Client client = ClientBuilder.newClient();
@@ -93,8 +99,8 @@ public class APIDao implements PropertiesLoader {
             // represents the users entered value.
             // e.g. if user enters 1234 mc street translate to
             // 1234%20mc%20street...
-            if (path != null) {
-                target = target.path(path);
+            if (action != null) {
+                target = target.path(action);
             }
 
             // 2. Add Query Parameters dynamically
