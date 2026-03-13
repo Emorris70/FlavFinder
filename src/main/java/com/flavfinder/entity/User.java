@@ -2,7 +2,6 @@ package com.flavfinder.entity;
 import org.hibernate.annotations.GenericGenerator;
 import jakarta.persistence.*;
 
-import com.flavfinder.entity.Location;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
