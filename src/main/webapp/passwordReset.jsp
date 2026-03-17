@@ -25,7 +25,7 @@
         </div>
         <div class="btn-container">
             <button type="submit" class="btn-submit">
-                Reset Password
+                Reset
             </button>
         </div>
         <p class="dir-deco center-i">
