@@ -12,6 +12,15 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Map;
 
+/**
+ * Abstract base class providing a reusable HTTP GET execution strategy
+ * for subclasses that interact with external RESTful APIs.
+ *
+ * Subclasses are responsible for defining the specific API endpoint, users action(input)
+ * query parameters, and expected response type.
+ *
+ * @author EmileM
+ */
 abstract class GenericRequest {
     private static final Logger log = LogManager.getLogger(GenericRequest.class);
 
@@ -67,7 +76,7 @@ abstract class GenericRequest {
                 }
             }
 
-            log.debug("Target URL: " + target.getUri());
+            log.debug("Executing GET request to: {}", target.getUri());
 
             // Maps the JSON TEXT e.g. the targeting API class
             // simulates: mapper.readValue(response, targetClass.class)
