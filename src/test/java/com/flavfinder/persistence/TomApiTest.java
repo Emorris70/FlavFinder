@@ -27,7 +27,7 @@ class TomApiTest {
     }
 
     /**
-     * Test - Gets the countries name.
+     * Test - Gets the country subdivision name.
      */
     @Test
     void getCountryName() {
