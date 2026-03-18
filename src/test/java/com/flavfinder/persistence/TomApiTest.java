@@ -16,12 +16,12 @@ import static org.junit.jupiter.api.Assertions.*;
  * URL end point.
  */
 class TomApiTest {
-    APIDao dao;
+    Resources dao;
     TomTomResponse response;
 
     @BeforeEach
     void setUp() {
-        dao = new APIDao();
+        dao = new Resources();
         // Ensures I make one request
         response = dao.callTomTom("4 north 2nd street san jose");
     }

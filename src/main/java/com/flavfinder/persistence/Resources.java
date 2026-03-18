@@ -8,17 +8,15 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-/*
-    think about changing the name of this class.
- */
+
 /**
  * Class is the central point for interacting with external
  * RESTful APIs.
  *
  * @author EmileM
  */
-public class APIDao extends GenericRequest implements PropertiesLoader {
-    private static final Logger log = LogManager.getLogger(APIDao.class);
+public class Resources extends GenericRequest implements PropertiesLoader {
+    private static final Logger log = LogManager.getLogger(Resources.class);
     private static final double DEFAULT_LAT = 43.0731;
     private static final double DEFAULT_LON = -89.4012;
     private Properties properties;
@@ -27,10 +25,11 @@ public class APIDao extends GenericRequest implements PropertiesLoader {
      * Instantiates a new APIDao and Initializes the
      * properties.
      */
-    public APIDao() {
+    public Resources() {
         loadProperties();
     }
 
+    // TODO Add application start up
     /**
      * Retrieves properties file values.
      */
