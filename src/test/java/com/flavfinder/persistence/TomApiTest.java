@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,8 +21,12 @@ class TomApiTest {
     TomTomResponse response;
 
     @BeforeEach
-    void setUp() {
-        dao = new Resources();
+    void setUp() throws Exception {
+        // Test also for parameterized constructor
+        Properties properties = new Properties();
+        properties.load(getClass().getResourceAsStream("/api.properties"));
+
+        dao = new Resources(properties);
         // Ensures I make one request
         response = dao.callTomTom("4 north 2nd street san jose");
     }

@@ -1,6 +1,7 @@
 package com.flavfinder.persistence;
 
 import com.flavfinder.APIdentity.TomTomResponse;
+import jakarta.servlet.ServletContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,26 +23,23 @@ public class Resources extends GenericRequest implements PropertiesLoader {
     private Properties properties;
 
     /**
-     * Instantiates a new APIDao and Initializes the
-     * properties.
+     * Instantiates a new Resources. Also, acts as a fall-back
+     * for unit testing.
      */
     public Resources() {
-        loadProperties();
+
     }
 
-    // TODO Add application start up
     /**
-     * Retrieves properties file values.
+     * Instantiates a new Resources and populates the properties variable.
+     *
+     * @param properties The read properties file context.
      */
-    public void loadProperties() {
-        try {
-            properties = loadProperties("/api.properties");
-        } catch (IOException e) {
-            log.debug("Issue reading properties file:" + e.getMessage(), e);
-        } catch (Exception e) {
-            log.debug("Problem locating class path:" + e.getMessage(), e);
-        }
+    public Resources(Properties properties) {
+        this();
+        this.properties = properties;
     }
+
 
     /**
      * HTTP GET request to TomTom URL endpoint. And
@@ -51,6 +49,7 @@ public class Resources extends GenericRequest implements PropertiesLoader {
      */
     public TomTomResponse callTomTom(String rawAddress) {
         Map<String, Object> params = new HashMap<>();
+
         params.put("key", properties.getProperty("tomtom_key"));
         params.put("limit", 1);
         params.put("countrySet", "US");
