@@ -23,8 +23,7 @@ public class Resources extends GenericRequest implements PropertiesLoader {
     private Properties properties;
 
     /**
-     * Instantiates a new Resources. Also, acts as a fall-back
-     * for unit testing.
+     * Instantiates a new Resources.
      */
     public Resources() {
 
