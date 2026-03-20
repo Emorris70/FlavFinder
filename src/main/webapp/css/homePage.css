@@ -57,7 +57,7 @@ header {
     align-items: center;
     gap: clamp(4px, 1vw, 18px);
 }
-#search, .user-content {
+#search, .user-content, #to-go-deco, #filter-trigger {
     transition: all 0.3s ease-in;
 }
 #location-toggle-btn {
@@ -74,6 +74,9 @@ header {
 }
 #to-go-deco:active {
     transform: scale(0.9);
+}
+#to-go-deco:hover, #filter-trigger:hover {
+    background: var(--on-hover-dr);
 }
 .inner-icon {
     width: var(--xxsmall-icon-size);

@@ -13,6 +13,7 @@
     --search-border-color: rgba(88, 88, 88, 0.50); /*  */
     --mute-contrast: #585858; /* for text */
     --flav-red: #FF2B2B;
+    --on-hover-dr: #e12828;
 }
 body {
     font-family: "Poppins", sans-serif;
