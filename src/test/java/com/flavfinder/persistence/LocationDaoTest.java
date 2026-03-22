@@ -95,7 +95,7 @@ class LocationDaoTest {
      * associated user simply removes the location.
      */
     @Test
-    void delete() {
+    void deleteLocation() {
         // Delete the location by
         locationDao.delete(locationDao.getById(2));
         assertNull(locationDao.getById(2));

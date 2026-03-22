@@ -11,7 +11,7 @@ import java.util.Objects;
  * @author EmileM
  */
 @Entity(name = "SavedRestaurants")
-@Table(name = "saved_restaurants")
+@Table(name = "restaurants")
 public class SavedRestaurants {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
