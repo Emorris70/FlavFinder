@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Objects;
-
+// TODO refactor this class
 /**
  * Class represents a saved restaurant info card
  *
@@ -29,6 +29,7 @@ public class SavedRestaurants {
     private double latitude;
     @Column(name = "longitude")
     private double longitude;
+    // TODO should be a many-many
     @ManyToOne
     private User user;
 
