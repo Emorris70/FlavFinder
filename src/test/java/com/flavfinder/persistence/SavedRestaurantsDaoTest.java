@@ -10,6 +10,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+// TODO test new join table logic
 
 /**
  * Unit test simulating the process of saving a restaurant.
