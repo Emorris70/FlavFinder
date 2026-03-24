@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.annotation.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.jmx.Server;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -36,7 +35,7 @@ public class ApplicationStart extends HttpServlet implements PropertiesLoader {
      */
     public void init() throws ServletException {
         try {
-            this.properties = loadProperties("/api.properties");
+            this.properties = loadProperties("/config.properties");
 
             ServletContext context = getServletContext();
             context.setAttribute("properties", properties);

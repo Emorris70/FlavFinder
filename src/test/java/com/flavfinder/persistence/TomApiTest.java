@@ -24,7 +24,7 @@ class TomApiTest {
     void setUp() throws Exception {
         // Test also for parameterized constructor
         Properties properties = new Properties();
-        properties.load(getClass().getResourceAsStream("/api.properties"));
+        properties.load(getClass().getResourceAsStream("/config.properties"));
 
         dao = new Resources(properties);
         // Ensures I make one request
