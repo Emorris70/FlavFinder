@@ -13,7 +13,7 @@ import java.util.Properties;
  * @author EmileM
  */
 public class CognitoClientUtil implements PropertiesLoader {
-    Properties properties;
+    private Properties properties;
     // Single shared instance
     private static CognitoIdentityProviderClient cognitoClient;
 

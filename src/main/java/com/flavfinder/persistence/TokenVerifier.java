@@ -19,14 +19,7 @@ import java.util.Properties;
  * @author EmileM
  */
 public class TokenVerifier {
-    private String jwksUrl;
-
-    /**
-     * Instantiates a new TokenVerifier.
-     */
-    public TokenVerifier() {
-
-    }
+    private final String jwksUrl;
 
     /**
      * Instantiates a new TokenVerifier.

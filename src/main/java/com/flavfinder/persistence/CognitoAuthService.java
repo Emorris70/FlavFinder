@@ -15,17 +15,12 @@ import java.util.Properties;
  * @author EmileM
  */
 public class CognitoAuthService {
-    private CognitoIdentityProviderClient cognitoClient;
-    private String clientId;
+    private final CognitoIdentityProviderClient cognitoClient;
+    private final String clientId;
     // Will be used once I add password reset later
     // or other general admin uses.
-    private String userPoolId;
+    private final String userPoolId;
     private Properties properties;
-
-    /**
-     * Instantiates a new CognitoAuthService.
-     */
-    public CognitoAuthService() {}
 
     /**
      * Instantiates a new CognitoAuthService. lastly,
