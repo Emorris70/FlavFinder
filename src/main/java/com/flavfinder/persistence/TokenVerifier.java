@@ -18,7 +18,7 @@ import java.util.Properties;
  * @author EmileM
  */
 public class TokenVerifier {
-    private final String jwksUrl;
+    private String jwksUrl;
 
     /**
      * Instantiates a new TokenVerifier.
@@ -38,5 +38,17 @@ public class TokenVerifier {
         // This is the URL where Cognito publishes its public keys
         this.jwksUrl = "https://cognito-idp." + region + ".amazonaws.com/"
                 + userPoolId + "/.well-known/jwks.json";
+    }
+
+    /**
+     * Verifies the JWT token signature and extracts
+     * the user claims.
+     *
+     * @param idToken the token returned from Cognito after login.
+     * @return AuthenticatedUser containing the extracted claims.
+     * @throws Exception if the token is invalid, expired, or tampered with.
+     */
+    public AuthenticatedUser verify(String idToken) throws Exception {
+
     }
 }
