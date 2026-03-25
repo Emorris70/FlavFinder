@@ -14,6 +14,7 @@
     --mute-contrast: #585858; /* for text */
     --flav-red: #FF2B2B;
     --on-hover-dr: #e12828;
+    --flav-blue: #003daf;
 }
 body {
     font-family: "Poppins", sans-serif;

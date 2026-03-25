@@ -19,9 +19,7 @@
     <jackson-version>2.15.2</jackson-version>
     <jaxb-version>4.0.2</jaxb-version>
     <aws-cog-verison>2.25.0</aws-cog-verison>
-    <auth0-verison>4.5.1</auth0-verison>
-    <org-json-verison>20251224</org-json-verison>
-    <commons-version>2.21.0</commons-version>
+    <nimbus-version>9.37.3</nimbus-version>
     <maven-compiler-plugin-version>3.13.0</maven-compiler-plugin-version>
     <maven-surefire-plugin-version>3.5.0</maven-surefire-plugin-version>
   </properties>
@@ -141,23 +139,10 @@
       <version>${aws-cog-verison}</version>
     </dependency>
 
-    <!-- for parsing access token -->
     <dependency>
-      <groupId>com.auth0</groupId>
-      <artifactId>java-jwt</artifactId>
-      <version>${auth0-verison}</version>
-    </dependency>
-    <!--  Generic Reader - turns JSON string into a jsonobject  -->
-    <dependency>
-      <groupId>org.json</groupId>
-      <artifactId>json</artifactId>
-      <version>${org-json-verison}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-      <version>${commons-version}</version>
+      <groupId>com.nimbusds</groupId>
+      <artifactId>nimbus-jose-jwt</artifactId>
+      <version>${nimbus-version}</version>
     </dependency>
 
   </dependencies>
