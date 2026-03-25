@@ -7,6 +7,9 @@ import software.amazon.awssdk.services.cognitoidentityprovider.CognitoIdentityPr
 import java.util.Properties;
 
 /**
+ * Builds and returns a single shared connection to AWS Cognito.
+ * NOT the specific user pool
+ *
  * @author EmileM
  */
 public class CognitoClientUtil implements PropertiesLoader {
@@ -17,9 +20,7 @@ public class CognitoClientUtil implements PropertiesLoader {
     /**
      * Instantiates a new CognitoClientUtil
      */
-    public CognitoClientUtil() {
-
-    }
+    public CognitoClientUtil() {}
 
     /**
      * Instantiates a new CognitoClientUtil. And initializes
@@ -30,5 +31,22 @@ public class CognitoClientUtil implements PropertiesLoader {
     public CognitoClientUtil(Properties properties) {
         this();
         this.properties = properties;
+    }
+
+    /**
+     * Establishes and returns the shared Cognito client connection.
+     *
+     * @return the cognito client connection.
+     */
+    public CognitoIdentityProviderClient getClient() {
+        if (cognitoClient == null) {
+            String region = properties.getProperty("aws.cognito.region");
+
+            cognitoClient = CognitoIdentityProviderClient.builder()
+                    .region(Region.of(region))
+                    .credentialsProvider(DefaultCredentialsProvider.create())
+                    .build();
+        }
+        return cognitoClient;
     }
 }
