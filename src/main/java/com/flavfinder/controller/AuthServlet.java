@@ -89,6 +89,7 @@ public class AuthServlet extends HttpServlet {
         TokenVerifier tokenVerifier = (TokenVerifier) getServletContext().getAttribute("tokenVerifier");
 
         String action = req.getParameter("action");
+        //
 
         // get the submit button values
         if ("signUp-btn".equals(action)) {
