@@ -53,7 +53,7 @@ public class ApplicationStart extends HttpServlet implements PropertiesLoader {
             context.setAttribute("cognitoAuth", cognitoAuth);
 
             TokenVerifier tokenVerifier = new TokenVerifier(cognitoProperties);
-            context.setAttribute("token", tokenVerifier);
+            context.setAttribute("tokenVerifier", tokenVerifier);
 
         } catch (IOException e) {
             log.error("Issue reading properties file:" + e.getMessage(), e);

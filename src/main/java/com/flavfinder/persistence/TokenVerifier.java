@@ -1,5 +1,6 @@
 package com.flavfinder.persistence;
 
+import com.flavfinder.APIdentity.AuthenticatedUser;
 import com.nimbusds.jose.JWSVerifier;
 import com.nimbusds.jose.crypto.RSASSAVerifier;
 import com.nimbusds.jose.jwk.JWKSet;
@@ -49,6 +50,40 @@ public class TokenVerifier {
      * @throws Exception if the token is invalid, expired, or tampered with.
      */
     public AuthenticatedUser verify(String idToken) throws Exception {
+        // Parse the raw token string
+        SignedJWT signedJWT = SignedJWT.parse(idToken);
 
+        // fetch Cognito's public keys from the JWKS url.
+        JWKSet jwkSet = JWKSet.load(new URL(jwksUrl));
+
+        // find the matching public key using the token's key ID (kid)
+        RSAKey rsaKey = (RSAKey) jwkSet.getKeyByKeyId(
+                signedJWT.getHeader().getKeyID()
+        );
+
+        if (rsaKey == null) {
+            throw new Exception("Public key not found for token");
+        }
+
+        // verify the signature
+        JWSVerifier verifier = new RSASSAVerifier(rsaKey.toRSAPublicKey());
+        // IF the signature doesn't match Cognito's signature
+        // Compares the signature against AWS Cognito's signature
+        if (!signedJWT.verify(verifier)) {
+            throw new Exception("Token signature is invalid");
+        }
+
+        // Check token expiration
+        Date expirationTime = signedJWT.getJWTClaimsSet().getExpirationTime();
+        if (expirationTime.before(new Date())) {
+            throw new Exception("Token has expired");
+        }
+
+        // Extract claims and return AuthenticatedUser
+        String sub = signedJWT.getJWTClaimsSet().getSubject();
+        String email = signedJWT.getJWTClaimsSet().getStringClaim("email");
+        String firstName = signedJWT.getJWTClaimsSet().getStringClaim("name");
+
+        return new AuthenticatedUser(sub, email, firstName);
     }
 }
