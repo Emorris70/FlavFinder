@@ -49,9 +49,9 @@ public class ApplicationStart extends HttpServlet implements PropertiesLoader {
 
             // Create one client instance through-out the application.
             CognitoClientUtil clientUtil = new CognitoClientUtil(cognitoProperties);
-            context.setAttribute("cognitoUtil", clientUtil);
 
             // Create one CognitoAuthService instance through-out the application.
+            // pass the properties file context and the ONE instance of the client
             CognitoAuthService cognitoAuth = new CognitoAuthService(cognitoProperties, clientUtil.getClient());
             context.setAttribute("cognitoAuth", cognitoAuth);
 

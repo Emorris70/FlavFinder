@@ -21,8 +21,7 @@ public class CognitoAuthService {
     public CognitoAuthService(Properties properties, CognitoIdentityProviderClient client) {
 
         this.properties = properties;
-//        IF I create a new instance of the CognitoClientUtil class there might be loss.
-        // Since I already create one instance in app start.
+        this.cognitoClient = client;
         this.clientId = properties.getProperty("aws.cognito.clientId");
         this.userPoolId = properties.getProperty("aws.cognito.userPoolId");
     }
