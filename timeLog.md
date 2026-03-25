@@ -13,6 +13,7 @@
 | 3/4/2026  | Added additional table(saved_restaurants) and completed API research - which will invole refactoing of a few plans.                                                                                | 6     |
 | 3/4/2026  | Completed saved_restaurants unit test and completed week 7 check point.                                                                                                                            | 4     |
 | 3/10/2026 | Refactored GenericDao simply eliminate redundant code and this also fixed the maven install issue.                                                                                                 | 6-7   |
+| 3/22/2026 | Refactored couple of tables: Renamed saved_restaurants to restaurant and added a new join table NOT query.                                                                                         | 2     |
 ## Notes
 The difference between junit-vintage and junit-jupiter:
 https://www.baeldung.com/java-junit-vintage-engine-vs-junit-jupiter-engine </br>
