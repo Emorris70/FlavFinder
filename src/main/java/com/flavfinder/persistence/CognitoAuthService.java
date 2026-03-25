@@ -3,7 +3,8 @@ package com.flavfinder.persistence;
 import software.amazon.awssdk.services.cognitoidentityprovider.CognitoIdentityProviderClient;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.*;
 
-import javax.xml.stream.events.Attribute;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -96,5 +97,46 @@ public class CognitoAuthService {
                 .build();
 
         cognitoClient.confirmSignUp(request);
+    }
+
+    /**
+     * Authenticates a user against the Cognito User Pool.
+     *
+     * @param email the user's email.
+     * @param password the user's password.
+     * @return AuthenticationResultType contains the tokens.
+     *
+     * Results should contain:
+     * IdToken - who the user is.
+     * accessToken - used for API calls.
+     * refreshToken - used to get new token when expired.
+     *
+     * @throws NotAuthorizedException If the email or password is incorrect.
+     * @throws UserNotConfirmedException If the user hasn't confirmed their email.
+     * @throws UserNotFoundException If no account exists with that email.
+     * @throws TooManyRequestsException If too many attempts are made.
+     * @throws PasswordResetRequiredException If the user need to reset their password.
+     */
+    public AuthenticationResultType login(String email, String password)
+            throws NotAuthorizedException, UserNotConfirmedException,
+            UserNotFoundException, TooManyRequestsException,
+            PasswordResetRequiredException
+    {
+
+        // Build the auth parameters
+        Map<String, String> authParams = new HashMap<>();
+        authParams.put("USERNAME", email);
+        authParams.put("PASSWORD", password);
+
+        // Build the login request
+        InitiateAuthRequest request = InitiateAuthRequest.builder()
+                .authFlow(AuthFlowType.USER_PASSWORD_AUTH)
+                .clientId(clientId)
+                .authParameters(authParams)
+                .build();
+        // Send request and return the result
+        InitiateAuthResponse response = cognitoClient.initiateAuth(request);
+
+        return response.authenticationResult();
     }
 }
