@@ -85,7 +85,7 @@ public class AuthServlet extends HttpServlet {
         if ("sign-up".equals(req.getParameter("action"))) {
             // register the user
             // redirect or confirm page
-            // ensure the continue page redirects back to the index.jsp page(login)
+            // ensure the continue button redirects back to the index.jsp page(login)
             // index.jsp - ensure to call verify method to verify user
             // store the returned values in HttpSession(sub(user_id), email, firstName)
         }
