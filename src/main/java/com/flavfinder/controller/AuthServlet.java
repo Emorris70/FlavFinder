@@ -88,7 +88,7 @@ public class AuthServlet extends HttpServlet {
         //
 
         // get the submit button values
-        if ("signUp-btn".equals(action)) {
+        if ("signUp".equals(action)) {
             // register the user
             String firstName = req.getParameter("first_name");
             String email = req.getParameter("email");
@@ -99,27 +99,27 @@ public class AuthServlet extends HttpServlet {
 
                 session.setAttribute("pendingConfirmEmail", email);
                 session.setAttribute("title", "confirm - FlavFinder");
-                resp.sendRedirect("/confirm.jsp");
+                resp.sendRedirect("confirm.jsp");
 
             } catch (UsernameExistsException e) {
                 session.setAttribute("error", "An account with this email already exists");
-                resp.sendRedirect("/signup.jsp");
+                resp.sendRedirect("signup.jsp");
 
             } catch (InvalidPasswordException e) {
                 session.setAttribute("error", "Password does not meet requirements");
-                resp.sendRedirect("/signup.jsp");
+                resp.sendRedirect("signup.jsp");
 
             } catch (InvalidParameterException e) {
                 session.setAttribute("error", "Please ensure all fields are filled out correctly");
-                resp.sendRedirect("/signup.jsp");
+                resp.sendRedirect("signup.jsp");
 
             } catch (TooManyRequestsException e) {
                 session.setAttribute("error", "Too many attempts please try again later");
-                resp.sendRedirect("/signup.jsp");
+                resp.sendRedirect("signup.jsp");
 
             } catch (Exception e) {
                 session.setAttribute("error", "Something went wrong please try again later");
-                resp.sendRedirect("/signup.jsp");
+                resp.sendRedirect("signup.jsp");
 
             }
             // redirect or confirm page also set the title
@@ -135,19 +135,19 @@ public class AuthServlet extends HttpServlet {
 
                 // clean up
                 session.removeAttribute("pendingConfirmEmail");
-                resp.sendRedirect("/index.jsp");
+                resp.sendRedirect("index.jsp");
             } catch (CodeMismatchException e) {
                 session.setAttribute("error", "Invalid verification code");
-                resp.sendRedirect("/confirm.jsp");
+                resp.sendRedirect("confirm.jsp");
 
             } catch (ExpiredCodeException e) {
                 // TODO find a way to make this possible
                 session.setAttribute("error", "Code has expired please request a new one");
-                resp.sendRedirect("/confirm.jsp");
+                resp.sendRedirect("confirm.jsp");
 
             } catch (Exception e) {
                 session.setAttribute("error", "Something went wrong please try again later");
-                resp.sendRedirect("/confirm.jsp");
+                resp.sendRedirect("confirm.jsp");
 
             }
         }

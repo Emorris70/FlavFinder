@@ -8,6 +8,7 @@
 </header>
 <main class="container">
     <h1 class="m-h">Welcome to FlavFinder!</h1>
+<%--  TODO password error message should display requirments  --%>
     <div class="errorMsg">
         <c:if test="${not empty sessionScope.error}">
             <p class="error-msg">${sessionScope.error}</p>
@@ -61,7 +62,7 @@
         <div class="btn-container">
             <button type="submit"
                     name="action"
-                    value="signUp-btn"
+                    value="signUp"
                     class="btn-submit" >
                 Sign Up
             </button>
