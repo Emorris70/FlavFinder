@@ -17,6 +17,8 @@ import java.util.Properties;
 public class CognitoAuthService {
     private CognitoIdentityProviderClient cognitoClient;
     private String clientId;
+    // Will be used once I add password reset later
+    // or other general admin uses.
     private String userPoolId;
     private Properties properties;
 
