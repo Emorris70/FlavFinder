@@ -11,6 +11,7 @@
     <h1 class="m-h">Check your email</h1>
     <p class="p-deco s-p">Enter the code that we sent to the email address. The code expires in 15 minutes.</p>
     <!--  might need to change this  -->
+<%--  TODO add error display message  --%>
     <form method="POST" action="auth" id="auth-exists">
         <div class="con-wrapper">
             <label for="v-c">Verification code</label>

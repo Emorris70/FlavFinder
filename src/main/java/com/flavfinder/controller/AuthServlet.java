@@ -1,7 +1,9 @@
 package com.flavfinder.controller;
 
+import com.flavfinder.persistence.CognitoAuthService;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.Servlet;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -76,6 +78,10 @@ public class AuthServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException
     {
+        // Note to self verifying occurs IF a user try to login
+        CognitoAuthService cognitoAuth = (CognitoAuthService) getServletContext().getAttribute("cognitoAuth");
+
+        // Get the parameter values
 
     }
 }

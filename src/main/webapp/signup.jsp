@@ -8,7 +8,7 @@
 </header>
 <main class="container">
     <h1 class="m-h">Welcome to FlavFinder!</h1>
-    <%--  Ensure the action point to a servlet to extract form data  --%>
+<%--  TODO ADD error display messages  --%>
     <form method="POST" action="auth" id="auth-form">
         <div class="con-wrapper">
             <label for="first_name">first Name</label>
