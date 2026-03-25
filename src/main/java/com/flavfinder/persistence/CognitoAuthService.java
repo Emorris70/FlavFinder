@@ -35,8 +35,8 @@ public class CognitoAuthService {
     public CognitoAuthService(Properties properties, CognitoIdentityProviderClient client) {
         this.properties = properties;
         this.cognitoClient = client;
-        this.clientId = properties.getProperty("aws.cognito.clientId");
-        this.userPoolId = properties.getProperty("aws.cognito.userPoolId");
+        this.clientId = this.properties.getProperty("aws.cognito.clientId");
+        this.userPoolId = this.properties.getProperty("aws.cognito.userPoolId");
     }
 
     /**
