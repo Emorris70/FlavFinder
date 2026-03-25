@@ -1,5 +1,6 @@
 package com.flavfinder.controller;
 
+import com.flavfinder.persistence.CognitoAuthService;
 import com.flavfinder.persistence.CognitoClientUtil;
 import com.flavfinder.persistence.PropertiesLoader;
 import com.flavfinder.persistence.Resources;
@@ -47,8 +48,12 @@ public class ApplicationStart extends HttpServlet implements PropertiesLoader {
             context.setAttribute("resources", resource);
 
             // Create one client instance through-out the application.
-            CognitoClientUtil client = new CognitoClientUtil(cognitoProperties);
-            context.setAttribute("cognito", client);
+            CognitoClientUtil clientUtil = new CognitoClientUtil(cognitoProperties);
+            context.setAttribute("cognitoUtil", clientUtil);
+
+            // Create one CognitoAuthService instance through-out the application.
+            CognitoAuthService cognitoAuth = new CognitoAuthService(cognitoProperties, clientUtil.getClient());
+            context.setAttribute("cognitoAuth", cognitoAuth);
 
         } catch (IOException e) {
             log.error("Issue reading properties file:" + e.getMessage(), e);
