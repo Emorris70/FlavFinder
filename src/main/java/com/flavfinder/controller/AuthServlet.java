@@ -33,7 +33,7 @@ public class AuthServlet extends HttpServlet {
     private final Logger logger = LogManager.getLogger(this.getClass());
     /**
      * Forwards the end-user to the desired page.
-     * This action is triggered through a anchor tag
+     * This action is triggered through an anchor tag
      *
      * @param req Client's Request.
      * @param resp Server's Response.

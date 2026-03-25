@@ -15,9 +15,9 @@ import java.util.Properties;
  * @author EmileM
  */
 public class CognitoAuthService {
-    private final CognitoIdentityProviderClient cognitoClient;
-    private final String clientId;
-    private final String userPoolId;
+    private CognitoIdentityProviderClient cognitoClient;
+    private String clientId;
+    private String userPoolId;
     private Properties properties;
 
     /**
