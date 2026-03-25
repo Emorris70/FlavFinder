@@ -3,6 +3,10 @@ package com.flavfinder.persistence;
 import software.amazon.awssdk.services.cognitoidentityprovider.CognitoIdentityProviderClient;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.*;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -37,6 +41,26 @@ public class CognitoAuthService {
     }
 
     /**
+     * Computes the SECRET_HASH required for Cognito API requests
+     * when the App Client is configured with a client Secret.
+     *
+     * @param username the user's email address used as the subject.
+     * @return Base64 encoded SECRET_HASH string to be passed.
+     * @throws Exception if the HmacSHA256 algorithm is unavailable or keys are invalid.
+     */
+    private String computeSecretHash(String username) throws Exception {
+        String clientSecret = properties.getProperty("aws.cognito.clientSecret");
+
+        Mac mac = Mac.getInstance("HmacSHA256");
+        SecretKeySpec secretKey = new SecretKeySpec(
+                clientSecret.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
+        mac.init(secretKey);
+        mac.update(username.getBytes(StandardCharsets.UTF_8));
+        byte[] rawHmac = mac.doFinal(clientId.getBytes(StandardCharsets.UTF_8));
+        return Base64.getEncoder().encodeToString(rawHmac);
+    }
+
+    /**
      * Registers a new user in the Cognito User Pool.
      *
      * @param firstName the user's first name.
@@ -50,7 +74,7 @@ public class CognitoAuthService {
      */
     public void register(String firstName, String email, String password)
             throws UsernameExistsException, InvalidPasswordException,
-            InvalidParameterException, TooManyRequestsException
+            InvalidParameterException, TooManyRequestsException, Exception
     {
         // Attributes to store in cognito
         AttributeType firstNameAttr = AttributeType.builder()
@@ -68,6 +92,7 @@ public class CognitoAuthService {
                 .clientId(clientId)
                 .username(email)
                 .password(password)
+                .secretHash(computeSecretHash(email))
                 .userAttributes(firstNameAttr, emailAttr)
                 .build();
 
@@ -85,12 +110,15 @@ public class CognitoAuthService {
      * @throws CodeMismatchException If the code that was sent to user doesn't match.
      * @throws ExpiredCodeException If the code expired
      */
-    public void confirmSignUp(String email, String code) throws CodeMismatchException, ExpiredCodeException {
+    public void confirmSignUp(String email, String code) throws
+            CodeMismatchException, ExpiredCodeException, Exception
+    {
         // Build the confirm signup request
         ConfirmSignUpRequest request = ConfirmSignUpRequest.builder()
                 .clientId(clientId)
                 .username(email)
                 .confirmationCode(code)
+                .secretHash(computeSecretHash(email))
                 .build();
 
         cognitoClient.confirmSignUp(request);
@@ -117,13 +145,14 @@ public class CognitoAuthService {
     public AuthenticationResultType login(String email, String password)
             throws NotAuthorizedException, UserNotConfirmedException,
             UserNotFoundException, TooManyRequestsException,
-            PasswordResetRequiredException
+            PasswordResetRequiredException, Exception
     {
 
         // Build the auth parameters
         Map<String, String> authParams = new HashMap<>();
         authParams.put("USERNAME", email);
         authParams.put("PASSWORD", password);
+        authParams.put("SECRET_HASH", computeSecretHash(email));
 
         // Build the login request
         InitiateAuthRequest request = InitiateAuthRequest.builder()

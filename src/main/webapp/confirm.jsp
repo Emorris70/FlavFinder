@@ -2,7 +2,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <jsp:include page="head.jsp"/>
-<%-- TODO ensure to set the title for this page--%>
 <body>
 <header>
     <jsp:include page="flav-logo.jsp"/>
@@ -18,9 +17,9 @@
     </div>
     <form method="POST" action="auth" id="auth-exists">
         <div class="con-wrapper">
-            <label for="v-c">Verification code</label>
+            <label for="v-code">Verification code</label>
             <div class="input-wrapper">
-                <input type="text" name="v-c" id="v-c" placeholder="Enter code" />
+                <input type="text" name="v-code" id="v-code" placeholder="Enter code" />
             </div>
         </div>
         <div class="btn-container sw-dir">

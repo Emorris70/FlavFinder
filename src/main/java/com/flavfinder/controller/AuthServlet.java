@@ -14,10 +14,7 @@ import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import software.amazon.awssdk.services.cognitoidentityprovider.model.InvalidParameterException;
-import software.amazon.awssdk.services.cognitoidentityprovider.model.InvalidPasswordException;
-import software.amazon.awssdk.services.cognitoidentityprovider.model.TooManyRequestsException;
-import software.amazon.awssdk.services.cognitoidentityprovider.model.UsernameExistsException;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.*;
 
 import java.io.IOException;
 // TODO rework the overall jdoc
@@ -83,7 +80,6 @@ public class AuthServlet extends HttpServlet {
             throws ServletException, IOException
     {
         HttpSession session = req.getSession();
-        String url = "";
 
         CognitoAuthService cognitoAuth = (CognitoAuthService) getServletContext().getAttribute("cognitoAuth");
         TokenVerifier tokenVerifier = (TokenVerifier) getServletContext().getAttribute("tokenVerifier");
@@ -121,13 +117,39 @@ public class AuthServlet extends HttpServlet {
                 session.setAttribute("error", "Too many attempts please try again later");
                 resp.sendRedirect("/signup.jsp");
 
+            } catch (Exception e) {
+                session.setAttribute("error", "Something went wrong please try again later");
+                resp.sendRedirect("/signup.jsp");
+
             }
             // redirect or confirm page also set the title
             // ensure the continue button redirects back to the index.jsp page(login)
             // this will have to be in an else if index.jsp - ensure to call verify method to verify user
             // store the returned values in HttpSession(sub(user_id), email, firstName)
         } else if ("confirm".equals(action)) {
+            String email = (String) session.getAttribute("pendingConfirmEmail");
+            String code = req.getParameter("v-code");
 
+            try {
+                cognitoAuth.confirmSignUp(email, code);
+
+                // clean up
+                session.removeAttribute("pendingConfirmEmail");
+                resp.sendRedirect("/index.jsp");
+            } catch (CodeMismatchException e) {
+                session.setAttribute("error", "Invalid verification code");
+                resp.sendRedirect("/confirm.jsp");
+
+            } catch (ExpiredCodeException e) {
+                // TODO find a way to make this possible
+                session.setAttribute("error", "Code has expired please request a new one");
+                resp.sendRedirect("/confirm.jsp");
+
+            } catch (Exception e) {
+                session.setAttribute("error", "Something went wrong please try again later");
+                resp.sendRedirect("/confirm.jsp");
+
+            }
         }
 
     }
