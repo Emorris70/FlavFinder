@@ -14,7 +14,21 @@ public class CognitoClientUtil implements PropertiesLoader {
     // Single shared instance
     private static CognitoIdentityProviderClient cognitoClient;
 
+    /**
+     * Instantiates a new CognitoClientUtil
+     */
     public CognitoClientUtil() {
 
+    }
+
+    /**
+     * Instantiates a new CognitoClientUtil. And initializes
+     * the properties variable.
+     *
+     * @param properties
+     */
+    public CognitoClientUtil(Properties properties) {
+        this();
+        this.properties = properties;
     }
 }
