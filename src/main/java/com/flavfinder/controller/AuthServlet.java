@@ -1,6 +1,7 @@
 package com.flavfinder.controller;
 
 import com.flavfinder.persistence.CognitoAuthService;
+import com.flavfinder.persistence.TokenVerifier;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.Servlet;
 import jakarta.servlet.ServletContext;
@@ -10,8 +11,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.annotation.*;
 
+import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.UsernameExistsException;
 
 import java.io.IOException;
 // TODO rework the overall jdoc
@@ -78,15 +81,33 @@ public class AuthServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException
     {
-        // Note to self verifying occurs IF a user try to login
+        HttpSession session = req.getSession();
+        String errorMsg = "";
+
         CognitoAuthService cognitoAuth = (CognitoAuthService) getServletContext().getAttribute("cognitoAuth");
+        TokenVerifier tokenVerifier = (TokenVerifier) getServletContext().getAttribute("tokenVerifier");
+
+        String action = req.getParameter("action");
 
         // get the submit button values
-        if ("sign-up".equals(req.getParameter("action"))) {
+        if ("signUp-btn".equals(req.getParameter(action))) {
             // register the user
-            // redirect or confirm page
+            String firstName = req.getParameter("first_name");
+            String email = req.getParameter("email");
+            String password = req.getParameter("password");
+
+            try {
+                cognitoAuth.register(firstName, email, password);
+            } catch (UsernameExistsException e) {
+
+            }
+
+            // call session within this scope
+            // and also session within the else if scope for login
+
+            // redirect or confirm page also set the title
             // ensure the continue button redirects back to the index.jsp page(login)
-            // index.jsp - ensure to call verify method to verify user
+            // this will have to be in an else if index.jsp - ensure to call verify method to verify user
             // store the returned values in HttpSession(sub(user_id), email, firstName)
         }
 

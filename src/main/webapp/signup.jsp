@@ -55,7 +55,7 @@
         <div class="btn-container">
             <button type="submit"
                     name="action"
-                    value="sign-up"
+                    value="signUp-btn"
                     class="btn-submit" >
                 Sign Up
             </button>
