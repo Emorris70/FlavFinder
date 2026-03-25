@@ -1,8 +1,7 @@
 package com.flavfinder.persistence;
 
 import software.amazon.awssdk.services.cognitoidentityprovider.CognitoIdentityProviderClient;
-import software.amazon.awssdk.services.cognitoidentityprovider.model.AttributeType;
-import software.amazon.awssdk.services.cognitoidentityprovider.model.SignUpRequest;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.*;
 
 import javax.xml.stream.events.Attribute;
 import java.util.Properties;
@@ -45,8 +44,16 @@ public class CognitoAuthService {
      * @param firstName the user's first name.
      * @param email the user's email.
      * @param password  the user's password
+     *
+     * @throws UsernameExistsException  If the email is already registered
+     * @throws InvalidPasswordException   If the password doesn't meet policy requirements
+     * @throws InvalidParameterException   If any required field is invalid or missing
+     * @throws TooManyRequestsException  If too many requests are made in a short period
      */
-    public void register(String firstName, String email, String password) {
+    public void register(String firstName, String email, String password)
+            throws UsernameExistsException, InvalidPasswordException,
+            InvalidParameterException, TooManyRequestsException
+    {
         // Attributes to store in cognito
         AttributeType firstNameAttr = AttributeType.builder()
                 .name("name")
@@ -68,5 +75,26 @@ public class CognitoAuthService {
 
         // sends the request to cognito
         cognitoClient.signUp(request);
+    }
+
+    /**
+     * Confirms a new user's registration using the
+     * verification code sent to their email.
+     *
+     * @param email the user's email to confirm
+     * @param code the verification code sent to the user's email
+     *
+     * @throws CodeMismatchException If the code that was sent to user doesn't match.
+     * @throws ExpiredCodeException If the code expired
+     */
+    public void confirmSignUp(String email, String code) throws CodeMismatchException, ExpiredCodeException {
+        // Build the confirm signup request
+        ConfirmSignUpRequest request = ConfirmSignUpRequest.builder()
+                .clientId(clientId)
+                .username(email)
+                .confirmationCode(code)
+                .build();
+
+        cognitoClient.confirmSignUp(request);
     }
 }
