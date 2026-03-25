@@ -19,7 +19,10 @@
             </div>
         </div>
         <div class="btn-container sw-dir">
-            <button type="submit" class="btn-submit">Continue</button>
+            <button type="submit"
+                    name="action"
+                    value="confirm"
+                    class="btn-submit">Continue</button>
             <!--    Ensure this redirect back to the sign-up page.        -->
             <button type="button" class="btn-submit back-btn">Back</button>
         </div>

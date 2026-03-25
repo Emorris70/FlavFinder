@@ -1,6 +1,7 @@
 package com.flavfinder.controller;
 
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.Servlet;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,12 +12,18 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
-
+// TODO rework the overall jdoc
 /**
  * This authorization class manages end-user forwarding, handles
  * new user creation forms, and validates specific user credentials.
  *
  * @author EmileM
+ */
+
+/**
+ * SDK       -> handles everything auth related
+ * Nimbus    -> handles JWT signature verification after login
+ * ME        -> handle session storage + redirects
  */
 
 @WebServlet(
@@ -25,7 +32,8 @@ import java.io.IOException;
 public class AuthServlet extends HttpServlet {
     private final Logger logger = LogManager.getLogger(this.getClass());
     /**
-     * Forwards the end-user to either the signup or login page.
+     * Forwards the end-user to the desired page.
+     * This action is triggered through a anchor tag
      *
      * @param req Client's Request.
      * @param resp Server's Response.
@@ -56,5 +64,18 @@ public class AuthServlet extends HttpServlet {
 
         RequestDispatcher dispatcher = req.getRequestDispatcher(url);
         dispatcher.forward(req, resp);
+    }
+
+    /**
+     *
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException
+    {
+
     }
 }

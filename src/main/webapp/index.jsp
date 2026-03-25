@@ -36,7 +36,11 @@
                 Don't have an account?<a href="auth?action=sign-up" id="sign-s">Sign up</a>
             </p>
             <div class="btn-container">
-                <button type="submit" class="btn-submit">Login</button>
+                <button
+                        type="submit"
+                        name="action"
+                        value="login"
+                        class="btn-submit">Login</button>
             </div>
             <p class="dir-deco center-i">
                 Forgot Password?<a href="auth?action=reset-pass" id="reset-s">Reset Password</a>
