@@ -14,6 +14,9 @@ import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.InvalidParameterException;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.InvalidPasswordException;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.TooManyRequestsException;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.UsernameExistsException;
 
 import java.io.IOException;
@@ -53,17 +56,15 @@ public class AuthServlet extends HttpServlet {
 
         if ("sign-up".equals(req.getParameter("action"))) {
             url = "/signup.jsp";
-            title = "Sign up - FlavFinder";
-            req.setAttribute("page" ,title);
+            req.setAttribute("page" ,"Sign up - FlavFinder");
 
         } else if ("login".equals(req.getParameter("action"))) {
             url = "/index.jsp";
-            title = "Login - FlavFinder";
-            req.setAttribute("page", title);
+            req.setAttribute("page", "Login - FlavFinder");
+
         } else if ("reset-pass".equals(req.getParameter("action"))) {
             url = "/passwordReset.jsp";
-            title = "Reset Password - FlavFinder";
-            req.setAttribute("page", title);
+            req.setAttribute("page", "Reset Password - FlavFinder");
 
         }
 
@@ -82,7 +83,7 @@ public class AuthServlet extends HttpServlet {
             throws ServletException, IOException
     {
         HttpSession session = req.getSession();
-        String errorMsg = "";
+        String url = "";
 
         CognitoAuthService cognitoAuth = (CognitoAuthService) getServletContext().getAttribute("cognitoAuth");
         TokenVerifier tokenVerifier = (TokenVerifier) getServletContext().getAttribute("tokenVerifier");
@@ -90,7 +91,7 @@ public class AuthServlet extends HttpServlet {
         String action = req.getParameter("action");
 
         // get the submit button values
-        if ("signUp-btn".equals(req.getParameter(action))) {
+        if ("signUp-btn".equals(action)) {
             // register the user
             String firstName = req.getParameter("first_name");
             String email = req.getParameter("email");
@@ -98,17 +99,34 @@ public class AuthServlet extends HttpServlet {
 
             try {
                 cognitoAuth.register(firstName, email, password);
+
+                session.setAttribute("pendingConfirmEmail", email);
+                session.setAttribute("title", "confirm - FlavFinder");
+                resp.sendRedirect("/confirm.jsp");
+
             } catch (UsernameExistsException e) {
+                session.setAttribute("error", "An account with this email already exists");
+                resp.sendRedirect("/signup.jsp");
+
+            } catch (InvalidPasswordException e) {
+                session.setAttribute("error", "Password does not meet requirements");
+                resp.sendRedirect("/signup.jsp");
+
+            } catch (InvalidParameterException e) {
+                session.setAttribute("error", "Please ensure all fields are filled out correctly");
+                resp.sendRedirect("/signup.jsp");
+
+            } catch (TooManyRequestsException e) {
+                session.setAttribute("error", "Too many attempts please try again later");
+                resp.sendRedirect("/signup.jsp");
 
             }
-
-            // call session within this scope
-            // and also session within the else if scope for login
-
             // redirect or confirm page also set the title
             // ensure the continue button redirects back to the index.jsp page(login)
             // this will have to be in an else if index.jsp - ensure to call verify method to verify user
             // store the returned values in HttpSession(sub(user_id), email, firstName)
+        } else if ("confirm".equals(action)) {
+
         }
 
     }

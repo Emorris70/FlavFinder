@@ -8,7 +8,12 @@
 </header>
 <main class="container">
     <h1 class="m-h">Welcome to FlavFinder!</h1>
-<%--  TODO ADD error display messages  --%>
+    <div class="errorMsg">
+        <c:if test="${not empty sessionScope.error}">
+            <p class="error-msg">${sessionScope.error}</p>
+            <c:remove var="error" scope="session"/>
+        </c:if>
+    </div>
     <form method="POST" action="auth" id="auth-form">
         <div class="con-wrapper">
             <label for="first_name">first Name</label>
@@ -45,6 +50,7 @@
                         name="password"
                         id="password"
                         placeholder="Password"
+                        <%-- add title and pattern--%>
                         required
                 />
             </div>

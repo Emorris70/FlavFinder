@@ -8,10 +8,12 @@
 </header>
 <main class="container">
         <h1 class="m-h">Welcome Back!</h1>
-        <div id="validation-sec">
-            <!-- Provide feedback whether info is invalid -->
+        <div class="errorMsg">
+            <c:if test="${not empty sessionScope.error}">
+                <p class="error-msg">${sessionScope.error}</p>
+                <c:remove var="error" scope="session"/>
+            </c:if>
         </div>
-    <%--  ensure action points to a servlet  --%>
         <form method="GET" action="auth" id="auth-exists">
             <div class="con-wrapper">
                 <label for="email">email</label>

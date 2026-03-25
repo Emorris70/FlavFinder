@@ -10,8 +10,12 @@
 <main class="container override-animation">
     <h1 class="m-h">Check your email</h1>
     <p class="p-deco s-p">Enter the code that we sent to the email address. The code expires in 15 minutes.</p>
-    <!--  might need to change this  -->
-<%--  TODO add error display message  --%>
+    <div class="errorMsg">
+        <c:if test="${not empty sessionScope.error}">
+            <p class="error-msg">${sessionScope.error}</p>
+            <c:remove var="error" scope="session"/>
+        </c:if>
+    </div>
     <form method="POST" action="auth" id="auth-exists">
         <div class="con-wrapper">
             <label for="v-c">Verification code</label>
@@ -25,7 +29,10 @@
                     value="confirm"
                     class="btn-submit">Continue</button>
             <!--    Ensure this redirect back to the sign-up page.        -->
-            <button type="button" class="btn-submit back-btn">Back</button>
+            <button type="button"
+                    name="action"
+                    value="back"
+                    class="btn-submit back-btn">Back</button>
         </div>
     </form>
 </main>
