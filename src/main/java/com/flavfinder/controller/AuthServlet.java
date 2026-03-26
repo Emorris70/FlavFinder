@@ -4,8 +4,7 @@ import com.flavfinder.APIdentity.AuthenticatedUser;
 import com.flavfinder.persistence.CognitoAuthService;
 import com.flavfinder.persistence.TokenVerifier;
 import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.Servlet;
-import jakarta.servlet.ServletContext;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,18 +17,16 @@ import org.apache.logging.log4j.Logger;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.*;
 
 import java.io.IOException;
-// TODO rework the overall jdoc
-/**
- * This authorization class manages end-user forwarding, handles
- * new user creation forms, and validates specific user credentials.
- *
- * @author EmileM
- */
 
 /**
- * SDK       -> handles everything auth related
- * Nimbus    -> handles JWT signature verification after login
- * ME        -> handle session storage + redirects
+ * This authorization class manages end-user forwarding/redirection, handles
+ * new user creation forms, and validates specific user credentials.
+ *
+ * SDK  -> handles everything auth related
+ * Nimbus  -> handles JWT signature verification after login
+ * ME     -> handle session storage + redirects
+ *
+ * @author EmileM
  */
 
 @WebServlet(
@@ -50,7 +47,6 @@ public class AuthServlet extends HttpServlet {
             throws ServletException, IOException
     {
         String url = "";
-        String title;
 
         if ("sign-up".equals(req.getParameter("action"))) {
             url = "/signup.jsp";
@@ -71,7 +67,8 @@ public class AuthServlet extends HttpServlet {
     }
 
     /**
-     *
+     * Handles all form submissions for authentication.
+     * Manages user registration, confirmation, and login.
      *
      * @param req Client's Request.
      * @param resp Server's Response
@@ -166,6 +163,7 @@ public class AuthServlet extends HttpServlet {
                 session.setAttribute("email", user.getEmail());
                 session.setAttribute("firstName", user.getFirstName());
 
+                // redirect to the HomeServlet route(/home)
                 resp.sendRedirect(req.getContextPath() + "/home");
 
             } catch (NotAuthorizedException e) {
@@ -182,6 +180,8 @@ public class AuthServlet extends HttpServlet {
 
             } catch (Exception e) {
                 session.setAttribute("error", "Something went wrong please try again");
+                resp.sendRedirect("index.jsp");
+
             }
         }
 
