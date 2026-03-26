@@ -32,6 +32,7 @@ public class ApplicationStart extends HttpServlet implements PropertiesLoader {
      *
      * @throws ServletException if a servlet exception occurs.
      */
+    @Override
     public void init() throws ServletException {
         try {
             this.properties = loadProperties("/config.properties");
