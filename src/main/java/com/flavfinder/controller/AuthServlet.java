@@ -1,5 +1,6 @@
 package com.flavfinder.controller;
 
+import com.flavfinder.APIdentity.AuthenticatedUser;
 import com.flavfinder.persistence.CognitoAuthService;
 import com.flavfinder.persistence.TokenVerifier;
 import jakarta.servlet.RequestDispatcher;
@@ -71,10 +72,11 @@ public class AuthServlet extends HttpServlet {
 
     /**
      *
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
+     *
+     * @param req Client's Request.
+     * @param resp Server's Response
+     * @throws ServletException If a ServletException occurs.
+     * @throws IOException If a Input/Output exception occurs.
      */
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException
@@ -118,24 +120,22 @@ public class AuthServlet extends HttpServlet {
                 resp.sendRedirect("signup.jsp");
 
             } catch (Exception e) {
-                session.setAttribute("error", "Something went wrong please try again later");
+                session.setAttribute("error", "Something went wrong please try again");
                 resp.sendRedirect("signup.jsp");
 
             }
-            // redirect or confirm page also set the title
-            // ensure the continue button redirects back to the index.jsp page(login)
-            // this will have to be in an else if index.jsp - ensure to call verify method to verify user
-            // store the returned values in HttpSession(sub(user_id), email, firstName)
+
         } else if ("confirm".equals(action)) {
             String email = (String) session.getAttribute("pendingConfirmEmail");
             String code = req.getParameter("v-code");
-
+            // TODO add redirection back to sign up page for back btn
             try {
                 cognitoAuth.confirmSignUp(email, code);
 
                 // clean up
                 session.removeAttribute("pendingConfirmEmail");
                 resp.sendRedirect("index.jsp");
+
             } catch (CodeMismatchException e) {
                 session.setAttribute("error", "Invalid verification code");
                 resp.sendRedirect("confirm.jsp");
@@ -146,9 +146,42 @@ public class AuthServlet extends HttpServlet {
                 resp.sendRedirect("confirm.jsp");
 
             } catch (Exception e) {
-                session.setAttribute("error", "Something went wrong please try again later");
+                session.setAttribute("error", "Something went wrong please try again");
                 resp.sendRedirect("confirm.jsp");
 
+            }
+        } else if ("login".equals(action)) {
+            String email = req.getParameter("email");
+            String password = req.getParameter("password");
+
+            try {
+                // Authenticate against Cognito
+                AuthenticationResultType result = cognitoAuth.login(email, password);
+
+                // Verify token and extract claims
+                AuthenticatedUser user = tokenVerifier.verify(result.idToken());
+
+                session.setAttribute("user", user);
+                session.setAttribute("sub", user.getSub());
+                session.setAttribute("email", user.getEmail());
+                session.setAttribute("firstName", user.getFirstName());
+
+                resp.sendRedirect(req.getContextPath() + "/home");
+
+            } catch (NotAuthorizedException e) {
+                session.setAttribute("error", "Incorrect email or password");
+                resp.sendRedirect("index.jsp");
+
+            } catch (UserNotConfirmedException e) {
+                session.setAttribute("error", "Please confirm your email before logging in");
+                resp.sendRedirect("index.jsp");
+
+            } catch (UserNotFoundException e) {
+                session.setAttribute("error", "No account found with that email");
+                resp.sendRedirect("index.jsp");
+
+            } catch (Exception e) {
+                session.setAttribute("error", "Something went wrong please try again");
             }
         }
 

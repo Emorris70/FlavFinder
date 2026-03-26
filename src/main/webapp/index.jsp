@@ -14,7 +14,7 @@
                 <c:remove var="error" scope="session"/>
             </c:if>
         </div>
-        <form method="GET" action="auth" id="auth-exists">
+        <form method="POST" action="auth" id="auth-exists">
             <div class="con-wrapper">
                 <label for="email">email</label>
                 <div class="input-wrapper">
