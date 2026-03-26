@@ -35,7 +35,7 @@ public class HomeServlet extends HttpServlet {
 
         // Double check session is valid before forwarding
         if (session == null || session.getAttribute("user") == null) {
-            resp.sendRedirect(req.getContextPath() + "index.jsp");
+            resp.sendRedirect(req.getContextPath() + "/index.jsp");
             return;
         }
 
