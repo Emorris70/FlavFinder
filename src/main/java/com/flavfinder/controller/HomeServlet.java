@@ -22,11 +22,16 @@ public class HomeServlet extends HttpServlet {
 
     /**
      * Forwards authenticated users to the home page.
+     * --
+     * Performs a double check accompanied by AuthFilter.
+     * Acting as the general protection.
+     * --
+     * AuthFilter (General) -> HomeServlet(Specific) -> home.jsp
      *
      * @param req  Client's Request.
      * @param resp Server's Response.
      * @throws ServletException If a ServletException occurs.
-     * @throws IOException      If an Input/Output exception occurs.
+     * @throws IOException If an Input/Output exception occurs.
      */
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -36,9 +41,9 @@ public class HomeServlet extends HttpServlet {
         // Double check session is valid before forwarding
         if (session == null || session.getAttribute("user") == null) {
             resp.sendRedirect(req.getContextPath() + "/index.jsp");
-            return;
+        } else {
+            log.info("Authenticated user forward back to home");
+            req.getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(req, resp);
         }
-
-        req.getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(req, resp);
     }
 }

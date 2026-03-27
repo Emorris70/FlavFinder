@@ -35,13 +35,61 @@ public class AuthFilter implements Filter {
      * @param response Server's response.
      * @param chain    The filter chain.
      * @throws ServletException If a servlet exception occurs.
-     * @throws IOException      If an Input/Output exception occurs.
+     * @throws IOException If an Input/Output exception occurs.
      */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws ServletException, IOException {
 
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse resp = (HttpServletResponse) response;
 
+        // Prevent browser caching
+        resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        resp.setHeader("Pragma", "no-cache");
+        resp.setDateHeader("Expires", 0);
+
+        String path = req.getRequestURI();
+
+        // Public routes are always accessible
+        boolean isPublic = path.contains("/index.jsp") ||
+                path.contains("/signup.jsp") ||
+                path.contains("/confirm.jsp") ||
+                path.contains("/auth") ||
+                path.contains("/css") ||
+                path.contains("/images") ||
+                path.contains("/js");
+
+        HttpSession session = req.getSession(false);
+
+        if (isPublic) {
+
+            if (path.contains("/index.jsp") ||
+                    path.contains("/signup.jsp") ||
+                    path.contains("/confirm.jsp")) {
+
+                // prevents authenticated user from going back to public routes.
+                if (session != null && session.getAttribute("user") != null) {
+                    log.info("Authenticated user redirected back to home");
+                    resp.sendRedirect(req.getContextPath() + "/home");
+                    return;
+                }
+            }
+            // Let the request through without checking session
+            chain.doFilter(request, response);
+
+            return;
+        }
+
+        if (session == null || session.getAttribute("user") == null) {
+            log.warn("Unauthenticated access attempt to: " + path);
+            resp.sendRedirect(req.getContextPath() + "/index.jsp");
+            return;
+        }
+
+        // Session is valid, let the request through
+        log.info("Authenticated access to: " + path);
+        chain.doFilter(request, response);
     }
 
     @Override
