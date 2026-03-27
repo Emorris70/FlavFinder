@@ -37,8 +37,6 @@
 #### Focused on filtering portion
 
 - [X] Complete Checkpoint 2
-- [X] AWS cognito User Authentication
-  -  with the help of AWS SDK for Java
 
 ### Week 8
 #### Focused on Saved restaurant discoveries 
@@ -50,43 +48,53 @@
 ### Week 9
 #### Focus on Termination of the session (logout)
 
-- [ ] Complete Checkpoint 3
+- [X] Complete Checkpoint 3
+- [X] AWS cognito User Authentication VIA SDK
 - [ ] Implement log out logic
-- []
+- [X] Complete Weekly Log
+
+### Week 10
+
+- [ ] Complete all to-do's
+- [ ] Add overall drop-down features for the header portion
+- [ ] Ensure the "back" button within confirm.jsp redirect or forwards the user back to signup page
 - [ ] Complete Weekly Log
 
-### Week 12
-#### Focus on polishing and refining indie project
+### Week 11
 
-- [ ]
-- [ ] Complete Weekly Log
-
-### Week 13-16
-#### Should be focused on finalization
 - [ ] Implement a little pop-up screen asking user for permission to current location
 - [ ] Dynamic UI rendering of local restaurants based off location (Nearby Restaurants section)
   - Note: this should only take place IF user allows access to there current location.
   - This should also NOT be filtered.
+- [ ] Complete Weekly Log
 
-## Week 14
+### Week 12
+
 - [ ] Build Search Input Component - Create the UI for the search bar that captures the "Cuisine" string and triggers the API call
 - [ ] Develop Location Toggle Logic - Build the state management to switch between "Current Location" and "Manual Input"
 - [ ] Render Results List  - Display the matching restaurants in a clean, filterable list view based on the search query
+- [ ] Complete Weekly Log
+
+### Week 13
+
 - [ ] Handle Edge Cases - Add "No results found" states and error handling for when a user denies location permissions
 - [ ] Create JSP page for search results
 - [ ] Complete Weekly Log
 
-## Week 15
+## Week 14
 
 - [ ] Develop Filter UI Components - Build interactive buttons or a dropdown for price tiers ($ to $$$$) and a multi-select or pill-style interface for cuisine types
 - [ ] Implement Multi-Parameter Search Logic - Update the API service to handle combined queries (e.g., "Find 'Sushi' + '$$' + 'Current Location'")
 - [ ] Complete Weekly Log
+
+## Week 15
+
+- [ ] Create "Save to List" Functionality - Add a toggle (like a heart or bookmark icon) on restaurant cards that adds/removes items from the "To Go" list
+- [ ] Develop "To Go" View - Create a dedicated page where users can view and manage their curated list of future dining spots
 - [ ] Complete Weekly Log
 
 ## Week 16
 
-- [ ] Create "Save to List" Functionality - Add a toggle (like a heart or bookmark icon) on restaurant cards that adds/removes items from the "To Go" list
-- [ ] Develop "To Go" View - Create a dedicated page where users can view and manage their curated list of future dining spots
 - [ ] Optimize Result Cards - Update the display to clearly show the price point and cuisine tags for each search result to improve scannability
 - [ ] Allow for Deletion of saved restaurants - Users should be allowed to remove saved restaurants within the "To Go" view
 - [ ] Create the JSP for "To-go" page

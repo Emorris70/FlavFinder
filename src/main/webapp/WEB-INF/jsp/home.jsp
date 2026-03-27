@@ -48,7 +48,11 @@
         </div>
     </div>
 </header>
-<main></main>
+<main>
+    <p>Email: ${sessionScope.firstName}</p>
+    <br>
+    <p>First Name: ${sessionScope.email}</p>
+</main>
 <footer></footer>
 </body>
 </html>
