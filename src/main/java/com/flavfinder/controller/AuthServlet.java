@@ -46,8 +46,14 @@ public class AuthServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException
     {
-        String url = "";
+        HttpSession session = req.getSession(false);
 
+        if (session != null) {
+            session.removeAttribute("error");
+        }
+
+        String url = "";
+        // TODO fix the bug
         if ("sign-up".equals(req.getParameter("action"))) {
             url = "/signup.jsp";
             req.setAttribute("page" ,"Sign up - FlavFinder");
@@ -79,6 +85,7 @@ public class AuthServlet extends HttpServlet {
             throws ServletException, IOException
     {
         HttpSession session = req.getSession();
+        session.removeAttribute("error");
 
         CognitoAuthService cognitoAuth = (CognitoAuthService) getServletContext().getAttribute("cognitoAuth");
         TokenVerifier tokenVerifier = (TokenVerifier) getServletContext().getAttribute("tokenVerifier");

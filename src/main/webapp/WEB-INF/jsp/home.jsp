@@ -49,9 +49,9 @@
     </div>
 </header>
 <main>
-    <p>Email: ${sessionScope.firstName}</p>
+    <p>First Name: ${sessionScope.firstName}</p>
     <br>
-    <p>First Name: ${sessionScope.email}</p>
+    <p>Email: ${sessionScope.email}</p>
 </main>
 <footer></footer>
 </body>
