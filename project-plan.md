@@ -83,8 +83,8 @@
 
 ## Week 14
 
-- [ ] Develop Filter UI Components - Build interactive buttons or a dropdown for price tiers ($ to $$$$) and a multi-select or pill-style interface for cuisine types
-- [ ] Implement Multi-Parameter Search Logic - Update the API service to handle combined queries (e.g., "Find 'Sushi' + '$$' + 'Current Location'")
+- [ ] Develop Filter UI Components - Build interactive buttons or a dropdown for cuisine types and dietary preferences.
+- [ ] Implement Multi-Parameter Search Logic - Update the API service to handle combined queries (e.g., "Find 'Sushi' + 'dietary presences' + 'Current Location'")
 - [ ] Complete Weekly Log
 
 ## Week 15
