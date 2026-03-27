@@ -9,6 +9,7 @@
 <main class="container">
     <h1 class="m-h">Welcome to FlavFinder!</h1>
 <%--  TODO password error message should be more detailed --%>
+<%--  TODO add styling to the div --%>
     <div class="errorMsg">
         <c:if test="${not empty sessionScope.error}">
             <p class="error-msg">${sessionScope.error}</p>
