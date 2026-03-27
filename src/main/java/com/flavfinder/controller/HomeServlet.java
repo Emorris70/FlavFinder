@@ -35,7 +35,7 @@ public class HomeServlet extends HttpServlet {
      */
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        // ENSURE not to create a new session
+        // ensures not to create a new session
         HttpSession session = req.getSession(false);
 
         // Double check session is valid before forwarding

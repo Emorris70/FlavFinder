@@ -24,21 +24,11 @@
 #### Focused on solidifying location logic
 
 - [X] Geolocation API Research
-- [ ] Map out the data flow from Java to JS
-- [ ] Implement a little pop-up screen asking user for permission to current location
-- [ ] Dynamic UI rendering of local restaurants based off location (Nearby Restaurants section)
-  - Note: this should only take place IF user allows access to there current location.
-  - This should also NOT be filtered.
 - [X] Complete Weekly log
 
 ### Week 6
 #### Focused on Search portion 
 
-- [ ] Build Search Input Component - Create the UI for the search bar that captures the "Cuisine" string and triggers the API call
-- [ ] Develop Location Toggle Logic - Build the state management to switch between "Current Location" and "Manual Input"
-- [ ] Render Results List  - Display the matching restaurants in a clean, filterable list view based on the search query
-- [ ] Handle Edge Cases - Add "No results found" states and error handling for when a user denies location permissions
-- [ ] Create JSP page for search results
   - This page should also handle the case of "No results found"
 - [X] AWS set up and deploy
 - [ ] Complete Weekly Log.
@@ -47,22 +37,14 @@
 #### Focused on filtering portion
 
 - [X] Complete Checkpoint 2
-- [ ] AWS cognito User Authentication
+- [X] AWS cognito User Authentication
   -  with the help of AWS SDK for Java
-- [ ] Develop Filter UI Components - Build interactive buttons or a dropdown for price tiers ($ to $$$$) and a multi-select or pill-style interface for cuisine types
-- [ ] Implement Multi-Parameter Search Logic - Update the API service to handle combined queries (e.g., "Find 'Sushi' + '$$' + 'Current Location'")
-- [ ] Complete Weekly Log
 
 ### Week 8
 #### Focused on Saved restaurant discoveries 
 
-- [ ] consumption of tomtom api
+- [X] consumption of tomtom api
 - [X] Build the "To Go" Data Structure - Define the schema or state logic needed to store a user's saved restaurants
-- [ ] Create "Save to List" Functionality - Add a toggle (like a heart or bookmark icon) on restaurant cards that adds/removes items from the "To Go" list
-- [ ] Develop "To Go" View - Create a dedicated page where users can view and manage their curated list of future dining spots
-- [ ] Optimize Result Cards - Update the display to clearly show the price point and cuisine tags for each search result to improve scannability
-- [ ] Allow for Deletion of saved restaurants - Users should be allowed to remove saved restaurants within the "To Go" view
-- [ ] Create the JSP for "To-go" page
 - [ ] Complete Weekly Log
 
 ### Week 9
@@ -81,3 +63,31 @@
 
 ### Week 13-16
 #### Should be focused on finalization
+- [ ] Implement a little pop-up screen asking user for permission to current location
+- [ ] Dynamic UI rendering of local restaurants based off location (Nearby Restaurants section)
+  - Note: this should only take place IF user allows access to there current location.
+  - This should also NOT be filtered.
+
+## Week 14
+- [ ] Build Search Input Component - Create the UI for the search bar that captures the "Cuisine" string and triggers the API call
+- [ ] Develop Location Toggle Logic - Build the state management to switch between "Current Location" and "Manual Input"
+- [ ] Render Results List  - Display the matching restaurants in a clean, filterable list view based on the search query
+- [ ] Handle Edge Cases - Add "No results found" states and error handling for when a user denies location permissions
+- [ ] Create JSP page for search results
+- [ ] Complete Weekly Log
+
+## Week 15
+
+- [ ] Develop Filter UI Components - Build interactive buttons or a dropdown for price tiers ($ to $$$$) and a multi-select or pill-style interface for cuisine types
+- [ ] Implement Multi-Parameter Search Logic - Update the API service to handle combined queries (e.g., "Find 'Sushi' + '$$' + 'Current Location'")
+- [ ] Complete Weekly Log
+- [ ] Complete Weekly Log
+
+## Week 16
+
+- [ ] Create "Save to List" Functionality - Add a toggle (like a heart or bookmark icon) on restaurant cards that adds/removes items from the "To Go" list
+- [ ] Develop "To Go" View - Create a dedicated page where users can view and manage their curated list of future dining spots
+- [ ] Optimize Result Cards - Update the display to clearly show the price point and cuisine tags for each search result to improve scannability
+- [ ] Allow for Deletion of saved restaurants - Users should be allowed to remove saved restaurants within the "To Go" view
+- [ ] Create the JSP for "To-go" page
+- [ ] Complete Weekly Log
