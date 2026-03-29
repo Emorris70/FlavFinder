@@ -7,7 +7,8 @@ header {
     justify-content: space-between;
     align-items: center;
     height: 65px;
-    padding: 0.625rem;
+    /*padding: 0.625rem;*/
+    padding: 1.625rem;
     border-bottom: 0.5px solid rgba(0, 0, 0, 0.10);
     background: #FFF;
     gap: 5px;
@@ -103,6 +104,17 @@ header {
     border: none;
     background: #333333;
     border-radius: 50%;
+}
+/* drop down */
+.drop-down {
+    /*display: none;*/
+    border-radius: 8px;
+    border: 0.5px solid rgba(0, 0, 0, 0.30);
+    background: #FFF;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    position: absolute;
+    top: 50px;
+    z-index: 9999;
 }
 @media (max-width: 1075px) {
     #to-go-icon {
