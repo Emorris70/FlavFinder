@@ -1,11 +1,16 @@
 const init = () => {
 console.log("Hello World!!");
+dropDown();
 }
 
 const dropDown = () => {
-    const dropDownDiv = document.getElementById("drop-down");
-    dropDownDiv.addEventListener("click", () => {
+    const locationBtn = document.getElementById("location-toggle-btn");
+    const dropElement = document.getElementById("drop-down")
 
+    locationBtn.addEventListener("click", () => {
+        dropElement.classList.add("show");
     });
+
+
 }
 window.addEventListener("DOMContentLoaded", init);

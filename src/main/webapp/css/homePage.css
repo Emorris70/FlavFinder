@@ -107,7 +107,7 @@ header {
 }
 /* drop down */
 .drop-down {
-    /*display: none;*/
+    display: none;
     border-radius: 8px;
     border: 0.5px solid rgba(0, 0, 0, 0.30);
     background: #FFF;
@@ -115,6 +115,9 @@ header {
     position: absolute;
     top: 50px;
     z-index: 9999;
+}
+.show {
+    display: block;
 }
 @media (max-width: 1075px) {
     #to-go-icon {

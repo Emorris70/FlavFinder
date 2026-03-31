@@ -53,7 +53,7 @@ public class AuthServlet extends HttpServlet {
         }
 
         String url = "";
-        // TODO fix the bug
+
         if ("sign-up".equals(req.getParameter("action"))) {
             url = "/signup.jsp";
             req.setAttribute("page" ,"Sign up - FlavFinder");

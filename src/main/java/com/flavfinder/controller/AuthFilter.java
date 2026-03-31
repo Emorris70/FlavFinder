@@ -66,7 +66,8 @@ public class AuthFilter implements Filter {
 
             if (path.contains("/index.jsp") ||
                     path.contains("/signup.jsp") ||
-                    path.contains("/confirm.jsp")) {
+                    path.contains("/confirm.jsp") ||
+                    path.contains("/auth")) {
 
                 // prevents authenticated user from going back to public routes.
                 if (session != null && session.getAttribute("user") != null) {
