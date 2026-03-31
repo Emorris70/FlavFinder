@@ -40,22 +40,6 @@
                     </button>
                 </div>
                 <!--    add drop down content        -->
-                <div class="location-dropdown-content drop-down" id="drop-down">
-                    <p class="p-deco">Set Discovery Location</p>
-                    <p>Choose a location to discover nearby restaurants</p>
-                    <div class="current-location-c">
-                        <!-- IMG -->
-                        <p class="p-h1">Use Current Location</p>
-                        <p class="p-sub">Auto-detect location</p>
-                    </div>
-                    <div class="custom-location-c">
-                        <!-- IMG -->
-                        <p class="p-h1">Set Custom Location</p>
-                        <p class="p-sub">Enter the city/code to explore</p>
-                        <!-- INPUT-->
-                        <button type="submit">Set</button>
-                    </div>
-                </div>
             </div>
             <div class="to-go-container">
 <!--     Ensure to add a link to the to-go page when completed           -->
@@ -73,6 +57,35 @@
             </div>
         </div>
 </header>
+<main>
+<!--  The class attribute show should append to the parent rather  -->
+    <div class="location-popUp-content pop-up-bg" id="pop-up">
+        <div class="content-card-deco">
+            <div class="drop-c">
+                <p class="p-deco">Set Discovery Location</p>
+                <p class="p-deco muted-con">Choose a location to discover nearby restaurants</p>
+            </div>
+            <div class="c-items">
+                <button class="current-location-c">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         height="24px" viewBox="0 -960 960 960"
+                         width="24px" fill="#e3e3e3">
+                        <path d="M516-120 402-402 120-516v-56l720-268-268 720h-56Zm26-148 162-436-436 162 196 78 78 196Zm-78-196Z"/>
+                    </svg>
+                    <p class="p-h1">Use Current Location</p>
+                    <p class="p-sub">Auto-detect location</p>
+                </button>
+                <div class="custom-location-c">
+                    <!-- IMG -->
+                    <p class="p-h1">Set Custom Location</p>
+                    <p class="p-sub">Enter the city/code to explore</p>
+                    <!-- INPUT-->
+                    <button type="submit">Set</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 <footer></footer>
 </body>
 </html>

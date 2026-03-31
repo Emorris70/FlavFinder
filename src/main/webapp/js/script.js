@@ -1,16 +1,16 @@
 const init = () => {
-console.log("Hello World!!");
-dropDown();
+    console.log("Hello World!!");
+    popUp();
 }
 
-const dropDown = () => {
+const popUp = () => {
     const locationBtn = document.getElementById("location-toggle-btn");
-    const dropElement = document.getElementById("drop-down")
+    const dropElement = document.getElementById("pop-up");
 
     locationBtn.addEventListener("click", () => {
-        dropElement.classList.add("show");
+        console.log("clicked");
+        dropElement.classList.toggle("show");
     });
-
 
 }
 window.addEventListener("DOMContentLoaded", init);

@@ -106,18 +106,47 @@ header {
     border-radius: 50%;
 }
 /* drop down */
-.drop-down {
-    display: none;
-    border-radius: 8px;
-    border: 0.5px solid rgba(0, 0, 0, 0.30);
-    background: #FFF;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-    position: absolute;
-    top: 50px;
-    z-index: 9999;
+/*.drop-down {*/
+/*    display: none;*/
+/*    border-radius: 8px;*/
+/*    border: 0.5px solid rgba(0, 0, 0, 0.30);*/
+/*    background: #FFF;*/
+/*    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);*/
+/*    position: absolute;*/
+/*    top: 50px;*/
+/*    z-index: 9999;*/
+/*}*/
+.pop-up-bg {
+    visibility: hidden;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: visibility 0.3s ease-in-out;
 }
-.show {
-    display: block;
+.pop-up-bg.show {
+    visibility: visible;
+}
+.content-card-deco {
+    background: #FFFFFF;
+}
+/*.p-deco {*/
+/*    font-size: 14px;*/
+/*}*/
+.muted-con {
+    color: var(--mute-contrast);
+}
+.current-location-c {
+    display: flex;
+    flex-direction: row;
 }
 @media (max-width: 1075px) {
     #to-go-icon {

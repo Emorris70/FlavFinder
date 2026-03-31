@@ -22,9 +22,9 @@ import java.io.IOException;
  * This authorization class manages end-user forwarding/redirection, handles
  * new user creation forms, and validates specific user credentials.
  *
- * SDK  -> handles everything auth related
- * Nimbus  -> handles JWT signature verification after login
- * ME     -> handle session storage + redirects
+ * SDK -> handles everything auth related
+ * Nimbus -> handles JWT signature verification after login
+ * ME -> handle session storage / redirects
  *
  * @author EmileM
  */
