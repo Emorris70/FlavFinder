@@ -1,33 +1,40 @@
+"use strict";
+
 /**
  * Initializes the application.
  * @returns {void}
  * @author EmileM
  */
-const init = () => {
-    console.log("Hello World!!");
-    popUp();
+const initApp = () => {
+    handleLocationPopup();
 }
 
 /**
  * Handles the pop-up functionality.
  */
-const popUp = () => {
+const handleLocationPopup = () => {
+
     const locationBtn = document.getElementById("location-toggle-btn");
-    const dropElement = document.getElementById("pop-up");
+    const popupElement = document.getElementById("pop-up");
     const currentLocation = document.querySelector('.current-location-c');
     const customLocation = document.querySelector('.custom-location-c');
     const closeBtn = document.querySelector('.close');
     const currentRadio = currentLocation.querySelector('input[type="radio"]');
 
-    // displays the pop-up
+    /**
+     * Opens the pop-up.
+     *
+     * @returns {void}
+     */
     locationBtn.addEventListener("click", () => {
-        console.log("clicked");
-        dropElement.classList.toggle("show");
+        popupElement.classList.toggle("show");
     });
 
     /**
      * Applies styling to the current-location and removes it from custom-location. lastly,
      * indicates that the radio button is active.
+     *
+     * @returns {void}
      */
     currentLocation.addEventListener('click', () => {
         currentLocation.classList.add('selected');
@@ -39,6 +46,8 @@ const popUp = () => {
     /**
      * Applies styling to the custom-location and removes it from the current-location. And
      * indicates that the radio button is not active.
+     *
+     * @returns {void}
      */
     customLocation.addEventListener('click', () => {
         customLocation.classList.add('selected');
@@ -48,20 +57,24 @@ const popUp = () => {
 
     /**
      * Closes the pop-up.
+     *
+     * @returns {void}
      */
     closeBtn.addEventListener('click', () => {
-        dropElement.classList.remove('show');
-        console.log("clicked");
+        popupElement.classList.remove('show');
     });
 
     /**
      * Closes the pop-up when the user clicks outside of it.
+     *
+     * @returns {void}
+     * @param {Event} event - The event object.
      */
     window.addEventListener('click', event => {
-        if (event.target === dropElement) {
-            dropElement.classList.remove('show');
+        if (event.target === popupElement) {
+            popupElement.classList.remove('show');
         }
-    })
+    });
 
 }
-window.addEventListener("DOMContentLoaded", init);
+window.addEventListener("DOMContentLoaded", initApp);

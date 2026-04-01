@@ -5,6 +5,7 @@
     <title>Home - FlavFinder</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/homePage.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
+    <script src="${pageContext.request.contextPath}/js/script.js"></script>
 </head>
 <body>
 <%-- Reminder: Ensure the header is a includes--%>
@@ -49,6 +50,7 @@
     </div>
 </header>
 <main>
+    <jsp:include page="locationPopUp.jsp"/>
     <p>First Name: ${sessionScope.firstName}</p>
     <br>
     <p>Email: ${sessionScope.email}</p>

@@ -76,7 +76,7 @@ public class AuthFilter implements Filter {
                     return;
                 }
             }
-            // Let the request through without checking session
+            // Let the request through without checking the session
             chain.doFilter(request, response);
 
             return;
