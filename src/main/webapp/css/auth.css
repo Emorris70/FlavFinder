@@ -169,6 +169,7 @@ label {
     border: 1.8px solid var(--flav-blue);
     background: #FFFFFF;
     color: var(--flav-blue);
+    padding: 0.313rem 0.07rem !important;
 }
 .back-btn:hover {
     border: 1.8px solid gray;
@@ -188,6 +189,9 @@ label {
     .btn-submit {
         padding: 0.458rem 6.125rem;
     }
+    .back-btn {
+        padding: 0.213rem 0.05rem !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -202,6 +206,9 @@ label {
     .btn-submit {
         padding: 0.458rem 5.125rem;
         font-size: 0.875rem;
+    }
+    .back-btn {
+        padding: 0.213rem 0.04rem !important;
     }
     .dir-deco {
         font-size: 0.75rem;
