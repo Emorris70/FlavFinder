@@ -27,11 +27,7 @@
                     name="action"
                     value="confirm"
                     class="btn-submit">Continue</button>
-            <!--    Ensure this redirect back to the sign-up page.        -->
-            <button type="button"
-                    name="action"
-                    value="back"
-                    class="btn-submit back-btn">Back</button>
+            <a href="auth?action=sign-up" class="btn-submit back-btn">Back</a>
         </div>
     </form>
 </main>

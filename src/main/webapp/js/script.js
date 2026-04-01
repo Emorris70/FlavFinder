@@ -10,7 +10,7 @@ const initApp = () => {
 }
 
 /**
- * Handles the pop-up functionality.
+ * Handles the pop-up functionality for the location selection.
  */
 const handleLocationPopup = () => {
 

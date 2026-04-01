@@ -131,7 +131,6 @@ public class AuthServlet extends HttpServlet {
         } else if ("confirm".equals(action)) {
             String email = (String) session.getAttribute("pendingConfirmEmail");
             String code = req.getParameter("v-code");
-            // TODO add redirection back to sign up page for back btn
             try {
                 cognitoAuth.confirmSignUp(email, code);
 

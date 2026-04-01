@@ -105,17 +105,7 @@ header {
     background: #333333;
     border-radius: 50%;
 }
-/* drop down */
-/*.drop-down {*/
-/*    display: none;*/
-/*    border-radius: 8px;*/
-/*    border: 0.5px solid rgba(0, 0, 0, 0.30);*/
-/*    background: #FFF;*/
-/*    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);*/
-/*    position: absolute;*/
-/*    top: 50px;*/
-/*    z-index: 9999;*/
-/*}*/
+/* pop up */
 .pop-up-bg {
     visibility: hidden;
     opacity: 0;
@@ -210,7 +200,7 @@ header {
     margin-left: auto;
 }
 .selected {
-    border-color: var(--flav-red); /* or whatever color */
+    border-color: var(--flav-red);
     background: rgba(255, 0, 0, 0.1);
 }
 .selected .svg-deco {
@@ -283,6 +273,16 @@ input[type="radio"]:checked {
 .custom-submit:hover {
     background-color: var(--flav-red);
 }
+/*.drop-down {*/
+/*    display: none;*/
+/*    border-radius: 8px;*/
+/*    border: 0.5px solid rgba(0, 0, 0, 0.30);*/
+/*    background: #FFF;*/
+/*    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);*/
+/*    position: absolute;*/
+/*    top: 50px;*/
+/*    z-index: 9999;*/
+/*}*/
 @media (max-width: 1075px) {
     #to-go-icon {
         display: none;
