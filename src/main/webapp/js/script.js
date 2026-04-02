@@ -2,6 +2,7 @@
 
 /**
  * Initializes the application.
+ *
  * @returns {void}
  * @author EmileM
  */

@@ -54,6 +54,7 @@
     <p>First Name: ${sessionScope.firstName}</p>
     <br>
     <p>Email: ${sessionScope.email}</p>
+    <a href="${pageContext.request.contextPath}/logout">Logout</a>
 </main>
 <footer></footer>
 </body>

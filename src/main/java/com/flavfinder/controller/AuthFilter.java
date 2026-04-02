@@ -55,6 +55,7 @@ public class AuthFilter implements Filter {
         boolean isPublic = path.contains("/index.jsp") ||
                 path.contains("/signup.jsp") ||
                 path.contains("/confirm.jsp") ||
+                path.contains("/logout") ||
                 path.contains("/auth") ||
                 path.contains("/css") ||
                 path.contains("/images") ||
