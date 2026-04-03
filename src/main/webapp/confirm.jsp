@@ -3,9 +3,7 @@
 <html lang="en">
 <jsp:include page="head.jsp"/>
 <body>
-<header>
-    <jsp:include page="flav-logo.jsp"/>
-</header>
+<jsp:include page="header.jsp"/>
 <main class="container override-animation">
     <h1 class="m-h">Check your email</h1>
     <p class="p-deco s-p">Enter the code that we sent to the email address. The code expires in 15 minutes.</p>

@@ -3,9 +3,7 @@
 <html lang="en">
 <jsp:include page="head.jsp"/>
 <body>
-<header>
-    <jsp:include page="flav-logo.jsp"/>
-</header>
+<jsp:include page="header.jsp"/>
 <main class="container">
     <h1 class="m-h">Welcome to FlavFinder!</h1>
 <%--  TODO password error message should be more detailed --%>
