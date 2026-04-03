@@ -162,11 +162,8 @@ public class AuthServlet extends HttpServlet {
 
                 // Verify token and extract claims
                 AuthenticatedUser user = tokenVerifier.verify(result.idToken());
-
+                // user id
                 session.setAttribute("user", user);
-                session.setAttribute("sub", user.getSub());
-                session.setAttribute("email", user.getEmail());
-                session.setAttribute("firstName", user.getFirstName());
 
                 // redirect to the HomeServlet route(/home)
                 resp.sendRedirect(req.getContextPath() + "/home");

@@ -18,7 +18,6 @@
                          class="inner-icon" alt="Near me Icon">
                 </button>
             </div>
-            <!--    add drop down content        -->
             <div class="location-dropdown-content"></div>
         </div>
         <div class="to-go-container">
