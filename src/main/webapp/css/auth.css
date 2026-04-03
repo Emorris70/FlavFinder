@@ -166,7 +166,6 @@ label {
     flex-direction: column;
 }
 .back-btn {
-    border: 1.8px solid var(--flav-blue);
     background: #FFFFFF;
     color: var(--flav-blue);
     padding: 0.313rem 0.07rem !important;
