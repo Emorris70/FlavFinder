@@ -8,10 +8,12 @@
  */
 const initApp = () => {
     handleLocationPopup();
+    handleDropdown();
 }
 
 /**
  * Handles the pop-up functionality for the location selection.
+ * @returns {void}
  */
 const handleLocationPopup = () => {
 
@@ -21,6 +23,11 @@ const handleLocationPopup = () => {
     const customLocation = document.querySelector('.custom-location-c');
     const closeBtn = document.querySelector('.close');
     const currentRadio = currentLocation.querySelector('input[type="radio"]');
+
+    /**
+     * Checks if the required elements exist before proceeding.
+     */
+    if (!locationBtn || !popupElement || !currentLocation || !customLocation || !closeBtn) return;
 
     /**
      * Opens the pop-up.
@@ -78,4 +85,58 @@ const handleLocationPopup = () => {
     });
 
 }
+
+/**
+ * Handles the dropdown functionality.
+ * @returns {void}
+ */
+const handleDropdown = () => {
+    const dropdown = document.querySelector('.dropdown');
+    const dropdownContent = document.querySelector('.user-dropdown-content');
+
+    /**
+     * Checks if the dropdown and dropdownContent exist before proceeding.
+     */
+    if (!dropdown || !dropdownContent) return;
+
+    /**
+     * Toggles the visibility of the dropdown content.
+     * @returns {void}
+     */
+    dropdown.addEventListener('click', () => {
+        dropdownContent.classList.toggle('drop-down-content');
+
+    });
+
+    closeOnClickOutside(dropdownContent, 'drop-down-content', dropdown);
+}
+
+/**
+ * Closes the dropdown content when the user clicks outside of it.
+ *
+ * @param {HTMLElement} targetElement - The element to monitor.
+ * @param {string} attribute - The CSS class to remove on outside click.
+ * @param {HTMLElement|null} excludeElement - Element to exclude from outside-click detection (e.g. toggle button).
+ * @returns {void}
+ */
+const closeOnClickOutside =
+    (targetElement, attribute, excludeElement = null) => {
+
+    if (!targetElement || !attribute) return;
+
+    window.addEventListener('click', event => {
+        // Check if the user clicked inside the target element or the excluded element
+        //  Click inside the dropdown (links, icons, text) -> stays open, interaction works normally.
+        const clickedInsideTarget = targetElement.contains(event.target);
+        // Click the toggle button -> button does its job of opening/closing via handleDropdown(),
+        // closeOnClickOutside() doesn't interfere with it.
+        const clickedExcluded = excludeElement && excludeElement.contains(event.target);
+
+        // If the user clicks outside the target element, remove the attribute
+        if (!clickedInsideTarget && !clickedExcluded) {
+            targetElement.classList.remove(attribute);
+        }
+    });
+}
+
 window.addEventListener("DOMContentLoaded", initApp);

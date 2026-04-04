@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Test page</title>
-    <script src="js/script.js"></script>
 <!--    <link rel="stylesheet" href="css/auth.css">-->
     <link rel="stylesheet" href="css/homePage.css">
     <link rel="stylesheet" href="css/main.css">
+    <script src="js/script.js"></script>
 </head>
 <body>
 <header>
@@ -50,22 +50,22 @@
             </div>
             <div class="user-drop-container">
                 <div class="user-toggle-btn">
-                    <button class="user-pf" id="user-pf"></button>
+                    <button class="user-name dropdown" id="user-pf">em</button>
                 </div>
-<!--                <div class="user-dropdown-content">-->
-<!--                    <div class="to-go">-->
-<!--                        <img src="/images/favorite-heart.png" alt="to-go icon" class="to-go-icon">-->
-<!--                        <a href="#">To-go</a>-->
-<!--                    </div>-->
-<!--                    <div class="settings user-d">-->
-<!--                        <img src="/images/settings.png" alt="settings icon" class="settings-icon">-->
-<!--                        <a href="#">Settings</a>-->
-<!--                    </div>-->
-<!--                    <div class="log-out user-d">-->
-<!--                        <img src="/images/logout.png" alt="logout icon" class="logout-icon">-->
-<!--                        <a href="${pageContext.request.contextPath}/logout">Logout</a>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <div class="user-dropdown-content drop-r">
+                    <div class="to-go user-d-c">
+                        <img src="images/favorite.png" alt="to-go icon" class="to-go-icon h-icon">
+                        <a href="#">To-go</a>
+                    </div>
+                    <div class="settings user-d-c">
+                        <img src="images/settings.png" alt="settings icon" class="settings-icon h-icon">
+                        <a href="#">Settings</a>
+                    </div>
+                    <div class="log-out user-d-c">
+                        <img src="images/logout.png" alt="logout icon" class="logout-icon h-icon">
+                        <a href="${pageContext.request.contextPath}/logout">Logout</a>
+                    </div>
+                </div>
             </div>
         </div>
 </header>
@@ -142,20 +142,6 @@
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="user-dropdown-content">
-        <div class="to-go">
-            <img src="images/favorite.png" alt="to-go icon" class="to-go-icon">
-            <a href="#">To-go</a>
-        </div>
-        <div class="settings user-d">
-            <img src="images/settings.png" alt="settings icon" class="settings-icon">
-            <a href="#">Settings</a>
-        </div>
-        <div class="log-out user-d">
-            <img src="images/logout.png" alt="logout icon" class="logout-icon">
-            <a href="${pageContext.request.contextPath}/logout">Logout</a>
         </div>
     </div>
 </main>

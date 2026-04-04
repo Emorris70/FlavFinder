@@ -33,7 +33,7 @@ import java.io.IOException;
         urlPatterns = {"/auth"}
 )
 public class AuthServlet extends HttpServlet {
-    private final Logger logger = LogManager.getLogger(this.getClass());
+    private final Logger log = LogManager.getLogger(this.getClass());
     /**
      * Forwards the end-user to the desired page.
      * This action is triggered through an anchor tag

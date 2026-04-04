@@ -1,3 +1,4 @@
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <header>
     <jsp:include page="../../flav-logo.jsp"/>
     <div class="search-c">
@@ -30,10 +31,24 @@
         </div>
         <div class="user-drop-container">
             <div class="user-toggle-btn">
-                <button class="user-pf" id="user-pf"></button>
+                <button class="user-pf dropdown" id="user-pf">
+                    ${fn:substring(sessionScope.user.firstName, 0, 2)}
+                </button>
             </div>
-            <!--    add drop down container/content        -->
-            <div class="user-dropdown-content"></div>
+            <div class="user-dropdown-content drop-r">
+                <div class="to-go user-d-c">
+                    <img src="${pageContext.request.contextPath}/images/favorite.png" alt="to-go icon" class="to-go-icon h-icon">
+                    <a href="#">To-go</a>
+                </div>
+                <div class="settings user-d-c">
+                    <img src="${pageContext.request.contextPath}/images/settings.png" alt="settings icon" class="settings-icon h-icon">
+                    <a href="#">Settings</a>
+                </div>
+                <div class="log-out user-d-c">
+                    <img src="${pageContext.request.contextPath}/images/logout.png" alt="logout icon" class="logout-icon h-icon">
+                    <a href="${pageContext.request.contextPath}/logout">Logout</a>
+                </div>
+            </div>
         </div>
     </div>
 </header>
