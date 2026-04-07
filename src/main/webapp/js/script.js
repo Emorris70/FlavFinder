@@ -1,5 +1,5 @@
 "use strict";
-
+// TODO Plan on changing the file name to something more descriptive.
 /**
  * Initializes the application.
  *
@@ -73,7 +73,7 @@ const handleLocationPopup = () => {
     });
 
     /**
-     * Closes the pop-up when the user clicks outside of it.
+     * Closes the pop-up when the user clicks outside it.
      *
      * @returns {void}
      * @param {Event} event - The event object.
@@ -128,6 +128,7 @@ const closeOnClickOutside =
         // Check if the user clicked inside the target element or the excluded element
         //  Click inside the dropdown (links, icons, text) -> stays open, interaction works normally.
         const clickedInsideTarget = targetElement.contains(event.target);
+
         // Click the toggle button -> button does its job of opening/closing via handleDropdown(),
         // closeOnClickOutside() doesn't interfere with it.
         const clickedExcluded = excludeElement && excludeElement.contains(event.target);
