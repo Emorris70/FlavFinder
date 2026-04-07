@@ -43,6 +43,7 @@
                 </div>
                 <form method="POST" action="${pageContext.request.contextPath}/location" class="custom-form">
                     <input class="custom-input" type="text" name="cust-location" id="cust-l" placeholder="City & ZIP or full address">
+<%--                TODO loop through the response to relay location info    --%>
                     <button type="submit" value="" class="custom-submit">Set</button>
                 </form>
             </div>
