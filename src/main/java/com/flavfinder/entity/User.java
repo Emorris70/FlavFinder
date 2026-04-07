@@ -18,12 +18,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name="native", strategy = "native")
     private int id;
-    @Column(name = "first_name")
-    private String firstName;
-    @Column(name = "email")
-    private String email;
-//    @Column(name = "password")
-    private String password;
+
+    @Column(name = "cognito_sub", unique = true, nullable = false)
+    private String sub;
+
     @Column(name = "role", columnDefinition = "VARCHAR(50) DEFAULT 'user'")
     private String role = "user";
 
@@ -43,14 +41,10 @@ public class User {
     /**
      * Creation of a new user entry.
      *
-     * @param firstName The user first name
-     * @param email The user email address
-     * @param password User hashed password
+     * @param sub The user's cognito sub
      */
-    public User(String firstName, String email, String password) {
-        this.firstName = firstName;
-        this.email = email;
-        this.password = password;
+    public User(String sub) {
+        this.sub = sub;
     }
 
 //    /**
@@ -148,57 +142,19 @@ public class User {
     }
 
     /**
-     * Gets the user first name
-     *
-     * @return First name of user
+     * Gets the user sub
+     * @return The user sub
      */
-    public String getFirstName() {
-        return firstName;
+    public String getSub() {
+        return sub;
     }
 
     /**
-     * Sets the user first name
-     *
-     * @param firstName The first name of user
+     * Sets the user sub
+     * @param sub The sub to be set
      */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    /**
-     * Gets the users email
-     *
-     * @return The users email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * Sets the user email
-     *
-     * @param email The email to be set for user
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     * Gets the user password
-     *
-     * @return The user password
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * Sets the user password
-     *
-     * @param password The password to be set
-     */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSub(String sub) {
+        this.sub = sub;
     }
 
     /**
@@ -219,32 +175,17 @@ public class User {
         this.role = role;
     }
 
-    /**
-     * Concatenates the user information.
-     *
-     * @return User info
-     */
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", email='" + email + '\'' +
-                ", role='" + role + '\'' +
-                '}';
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && Objects.equals(firstName, user.firstName)
-                && Objects.equals(email, user.email)
-                && Objects.equals(password, user.password)
-                && Objects.equals(role, user.role);
+        return id == user.id && Objects.equals(sub, user.sub)
+                && Objects.equals(role, user.role)
+                && Objects.equals(locations, user.locations);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, email, password, role);
+        return Objects.hash(id, sub, role, locations);
     }
 }
