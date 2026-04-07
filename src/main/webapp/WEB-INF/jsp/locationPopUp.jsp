@@ -1,3 +1,5 @@
+<jsp:include page="../../taglib.jsp"/>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <div class="location-popUp-content pop-up-bg" id="pop-up"> <!--  parent  -->
     <div class="content-card-deco"> <!--  card  -->
         <div class="drop-c">
@@ -37,10 +39,11 @@
                     <div class="inner-lc">
                         <p class="p-h1">Set Custom Location</p>
                         <p class="p-deco-2 muted-con">Enter the city/code to explore</p>
+                        <label for="cust-l"></label>
                     </div>
                 </div>
-                <form method="POST" action="#" class="custom-form">
-                    <input class="custom-input" type="text" name="cust-location" placeholder="City & ZIP or full address">
+                <form method="POST" action="${pageContext.request.contextPath}/location" class="custom-form">
+                    <input class="custom-input" type="text" name="cust-location" id="cust-l" placeholder="City & ZIP or full address">
                     <button type="submit" value="" class="custom-submit">Set</button>
                 </form>
             </div>
