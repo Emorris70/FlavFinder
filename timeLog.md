@@ -15,6 +15,7 @@
 | 3/10/2026        | Refactored GenericDao simply eliminate redundant code and this also fixed the maven install issue.                                                                                                 | 6-7   |
 | 3/22/2026        | Refactored couple of tables: Renamed saved_restaurants to restaurant and added a new join table NOT query.                                                                                         | 2     |
 | 3/23 - 3/26/2026 | Added Cognito features VIA SDK, including proper classes to establish the connection, perform operations, and validation of JWS(JWT) token.                                                        | 24+   |
+| 4/3/2026         | Reduced redundent code and implemented some additional front end logic for both drop down and pop up features.                                                                                     | 7+    |
 
 ## Notes
 The difference between junit-vintage and junit-jupiter:
