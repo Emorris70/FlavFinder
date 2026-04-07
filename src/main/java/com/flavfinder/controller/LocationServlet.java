@@ -58,4 +58,27 @@ public class LocationServlet extends HttpServlet {
         // Simple refresh of the page
         resp.sendRedirect(req.getContextPath() + "/home");
     }
+
+    /**
+     * Handles GET requests for the current location.
+     * Passed in as a parameter from the JS file.
+     *
+     * @param req Client's request
+     * @param resp Server's response
+     * @throws ServletException If a ServletException occurs.
+     * @throws IOException If an Input/Output exception occurs.
+     */
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        double lat = Double.parseDouble(req.getParameter("lat"));
+        double lon = Double.parseDouble(req.getParameter("lon"));
+        HttpSession session = req.getSession(false);
+
+        session.setAttribute("userLat", lat);
+        session.setAttribute("userLon", lon);
+
+        resp.sendRedirect(req.getContextPath() + "/home");
+    }
 }

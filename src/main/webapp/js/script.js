@@ -9,6 +9,7 @@
 const initApp = () => {
     handleLocationPopup();
     handleDropdown();
+    handleCurrentLocation();
 }
 
 /**
@@ -136,6 +137,33 @@ const closeOnClickOutside =
         // If the user clicks outside the target element, remove the attribute
         if (!clickedInsideTarget && !clickedExcluded) {
             targetElement.classList.remove(attribute);
+        }
+    });
+}
+
+/**
+ * Handles the current location functionality.
+ *
+ * @returns {void}
+ * @author EmileM
+ */
+const handleCurrentLocation = () => {
+    const currentLocation = document.querySelector('.current-location-c');
+
+    if (!currentLocation) return;
+
+    currentLocation.addEventListener('click', () => {
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+
+                // Send to LocationServlet via GET
+                window.location.href = `${contextPath}/location?lat=${lat}&lon=${lon}`;
+            }, error => {
+                console.error('Geolocation error:', error);
+            });
         }
     });
 }

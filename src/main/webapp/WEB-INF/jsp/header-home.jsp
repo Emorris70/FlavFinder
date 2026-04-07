@@ -18,9 +18,14 @@
                 <button class="location-toggle-btn" id="location-toggle-btn">
                     <img src="${pageContext.request.contextPath}/images/near-me.png"
                          class="inner-icon" alt="Near me Icon">
-                    <c:if test="${not empty sessionScope.userLocation}">
-                        ${sessionScope.userLocation.results[0].address.municipality}, ${sessionScope.userLocation.results[0].address.countrySubdivisionCode}
-                    </c:if>
+                    <c:choose>
+                        <c:when test="${not empty sessionScope.userLocation}">
+                            ${sessionScope.userLocation.results[0].address.municipality}, ${sessionScope.userLocation.results[0].address.countrySubdivisionCode}
+                        </c:when>
+                        <c:when test="${not empty sessionScope.userLat}">
+                            Current Location
+                        </c:when>
+                    </c:choose>
                 </button>
             </div>
             <div class="location-dropdown-content"></div>
