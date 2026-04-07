@@ -1,5 +1,4 @@
-<jsp:include page="../../taglib.jsp"/>
-<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <div class="location-popUp-content pop-up-bg" id="pop-up"> <!--  parent  -->
     <div class="content-card-deco"> <!--  card  -->
         <div class="drop-c">
