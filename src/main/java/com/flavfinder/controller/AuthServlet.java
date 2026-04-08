@@ -1,7 +1,9 @@
 package com.flavfinder.controller;
 
 import com.flavfinder.APIdentity.AuthenticatedUser;
+import com.flavfinder.entity.User;
 import com.flavfinder.persistence.CognitoAuthService;
+import com.flavfinder.persistence.GenericDao;
 import com.flavfinder.persistence.TokenVerifier;
 import jakarta.servlet.RequestDispatcher;
 
@@ -100,7 +102,10 @@ public class AuthServlet extends HttpServlet {
             String password = req.getParameter("password");
 
             try {
-                cognitoAuth.register(firstName, email, password);
+                String sub = cognitoAuth.register(firstName, email, password);
+
+                GenericDao<User> userDao = new GenericDao<>(User.class);
+                userDao.insert(new User(sub));
 
                 session.setAttribute("pendingConfirmEmail", email);
                 session.setAttribute("title", "confirm - FlavFinder");

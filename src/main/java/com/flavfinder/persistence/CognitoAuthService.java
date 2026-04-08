@@ -72,7 +72,7 @@ public class CognitoAuthService {
      * @throws InvalidParameterException   If any required field is invalid or missing
      * @throws TooManyRequestsException  If too many requests are made in a short period
      */
-    public void register(String firstName, String email, String password)
+    public String register(String firstName, String email, String password)
             throws UsernameExistsException, InvalidPasswordException,
             InvalidParameterException, TooManyRequestsException, Exception
     {
@@ -97,7 +97,8 @@ public class CognitoAuthService {
                 .build();
 
         // sends the request to cognito
-        cognitoClient.signUp(request);
+        SignUpResponse response = cognitoClient.signUp(request);
+        return response.userSub();
     }
 
     /**
