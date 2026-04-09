@@ -1,6 +1,5 @@
 package com.flavfinder.entity;
 
-import com.flavfinder.entity.User;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -13,7 +12,7 @@ import java.util.Objects;
  */
 @Entity(name = "Location")
 @Table(name = "saved_locations")
-public class Location {
+public class SavedLocation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name ="native", strategy = "native")
@@ -35,7 +34,7 @@ public class Location {
     /**
      * Instantiates a new saved location.
      */
-    public Location() {
+    public SavedLocation() {
 
     }
 
@@ -50,8 +49,8 @@ public class Location {
      * @param isDefault boolean case to be stored
      * @param user the user corresponding to the new location
      */
-    public Location(String cityName, String zipCode,
-                    double lat, double lon, boolean isDefault, User user)
+    public SavedLocation(String cityName, String zipCode,
+                         double lat, double lon, boolean isDefault, User user)
     {
         this.cityName = cityName;
         this.zipCode = zipCode;
@@ -203,11 +202,11 @@ public class Location {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Location location = (Location) o;
-        return id == location.id && Double.compare(latitude, location.latitude) == 0
-                && Double.compare(longitude, location.longitude) == 0
-                && isDefault == location.isDefault && Objects.equals(cityName, location.cityName)
-                && Objects.equals(zipCode, location.zipCode) && Objects.equals(user, location.user);
+        SavedLocation savedLocation = (SavedLocation) o;
+        return id == savedLocation.id && Double.compare(latitude, savedLocation.latitude) == 0
+                && Double.compare(longitude, savedLocation.longitude) == 0
+                && isDefault == savedLocation.isDefault && Objects.equals(cityName, savedLocation.cityName)
+                && Objects.equals(zipCode, savedLocation.zipCode) && Objects.equals(user, savedLocation.user);
     }
 
     @Override

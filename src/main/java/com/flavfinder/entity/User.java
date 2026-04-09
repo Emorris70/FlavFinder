@@ -26,7 +26,7 @@ public class User {
     private String role = "user";
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<Location> locations = new ArrayList<>();
+    private List<SavedLocation> savedLocations = new ArrayList<>();
 
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 //    private List<SavedRestaurants> restaurants = new ArrayList<>();
@@ -63,7 +63,7 @@ public class User {
 //     * @param restaurant the restaurant to remove
 //     */
 //    private void removeRestaurant(SavedRestaurants restaurant) {
-//        this.locations.remove(restaurant);
+//        this.savedLocations.remove(restaurant);
 //        restaurant.setUser(null);
 //    }
 //
@@ -86,41 +86,41 @@ public class User {
 //    }
 
     /**
-     * Adds a new location
+     * Adds a new savedLocation
      *
-     * @param location the location to add
+     * @param savedLocation the savedLocation to add
      */
-    public void addLocation(Location location) {
-        this.locations.add(location);
-        location.setUser(this);
+    public void addLocation(SavedLocation savedLocation) {
+        this.savedLocations.add(savedLocation);
+        savedLocation.setUser(this);
     }
 
     /**
-     * Removes a location
+     * Removes a savedLocation
      *
-     * @param location the location to remove
+     * @param savedLocation the savedLocation to remove
      */
-    public void removeLocation(Location location) {
-        this.locations.remove(location);
-        location.setUser(null);
+    public void removeLocation(SavedLocation savedLocation) {
+        this.savedLocations.remove(savedLocation);
+        savedLocation.setUser(null);
     }
 
     /**
-     * Get a list of saved locations
+     * Get a list of saved savedLocations
      *
-     * @return the list of locations
+     * @return the list of savedLocations
      */
-    public List<Location> getLocation() {
-        return locations;
+    public List<SavedLocation> getLocation() {
+        return savedLocations;
     }
 
     /**
-     * Sets the list of locations
+     * Sets the list of savedLocations
      *
-     * @param location the location to set
+     * @param savedLocation the savedLocation to set
      */
-    public void setLocation(List<Location> location) {
-        this.locations = location;
+    public void setLocation(List<SavedLocation> savedLocation) {
+        this.savedLocations = savedLocation;
     }
 
     /**
@@ -181,11 +181,11 @@ public class User {
         User user = (User) o;
         return id == user.id && Objects.equals(sub, user.sub)
                 && Objects.equals(role, user.role)
-                && Objects.equals(locations, user.locations);
+                && Objects.equals(savedLocations, user.savedLocations);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, sub, role, locations);
+        return Objects.hash(id, sub, role, savedLocations);
     }
 }

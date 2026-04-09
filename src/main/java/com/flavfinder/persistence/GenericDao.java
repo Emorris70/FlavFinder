@@ -104,6 +104,23 @@ public class GenericDao<T> {
         });
     }
 
+    /**
+     * Find entities by a field and value.
+     *
+     * @param field the field to search by.
+     * @param value the value to search for.
+     * @return a list of entities
+     */
+    public List<T> findBy(String field, Object value) {
+        return executeWithSession(session -> {
+            HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<T> query = builder.createQuery(type);
+            var root = query.from(type);
+            query.where(builder.equal(root.get(field), value));
+            return session.createSelectionQuery(query).getResultList();
+        });
+    }
+
     // TODO add method to perform a JOIN
 
     /**

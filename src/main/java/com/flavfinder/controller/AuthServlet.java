@@ -166,9 +166,20 @@ public class AuthServlet extends HttpServlet {
                 AuthenticationResultType result = cognitoAuth.login(email, password);
 
                 // Verify token and extract claims
-                AuthenticatedUser user = tokenVerifier.verify(result.idToken());
-                // user id
-                session.setAttribute("user", user);
+                AuthenticatedUser authUser = tokenVerifier.verify(result.idToken());
+
+                GenericDao<User> userDao = new GenericDao<>(User.class);
+
+                // get, the associated user sub id from the database
+                User dbUser = userDao.findBy("sub", authUser.getSub()).get(0);
+
+                // Cognito user for token/claims e.g., email, name, sub, etc.
+                session.setAttribute("user", authUser);
+
+                // DB user for internal id
+                // When this attribute is called, simply target the associated id field in the DB
+                // e.g., int userId = dbUser.getId();
+                session.setAttribute("dbUser", dbUser);
 
                 // redirect to the HomeServlet route(/home)
                 resp.sendRedirect(req.getContextPath() + "/home");
