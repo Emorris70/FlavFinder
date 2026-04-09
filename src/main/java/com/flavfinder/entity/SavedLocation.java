@@ -194,7 +194,7 @@ public class SavedLocation {
                 ", cityName='" + cityName + '\'' +
                 ", zipCode='" + zipCode + '\'' +
                 ", lat=" + latitude +
-                ", lon=" + latitude +
+                ", lon=" + longitude +
                 ", isDefault=" + isDefault +
                 '}';
     }

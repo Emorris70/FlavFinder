@@ -24,8 +24,9 @@ public class SavedLocationDao extends GenericDao<SavedLocation> {
      * @param userId The user id.
      * @return The saved location.
      */
-    public SavedLocation findByUserId(String userId) {
-        List<SavedLocation> results = findBy("user_id", userId);
+    public SavedLocation findByUserId(int userId) {
+        // Find all the saved locations by the user(id)
+        List<SavedLocation> results = findBy("user", userId);
 
         // IF the results are empty, return null else return the first result
         return results.isEmpty() ? null : results.get(0);
