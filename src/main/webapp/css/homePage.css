@@ -59,7 +59,7 @@ header {
     gap: clamp(4px, 1vw, 18px);
 }
 #search, .user-content, #to-go-deco, #filter-trigger {
-    transition: all 0.3s ease-in;
+    transition: all 0.2s ease-in;
 }
 #location-toggle-btn {
     border-radius: 12px;

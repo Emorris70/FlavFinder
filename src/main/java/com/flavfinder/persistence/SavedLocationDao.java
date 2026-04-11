@@ -1,6 +1,9 @@
 package com.flavfinder.persistence;
 
 import com.flavfinder.entity.SavedLocation;
+import jakarta.persistence.criteria.CriteriaQuery;
+import org.hibernate.engine.spi.SessionDelegatorBaseImpl;
+import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 
 import java.util.List;
 
@@ -21,14 +24,17 @@ public class SavedLocationDao extends GenericDao<SavedLocation> {
     /**
      * Gets the saved location by the user id.
      *
-     * @param userId The user id.
-     * @return The saved location.
+     * @param userId The internal user id.
+     * @return The saved location or null if not found.
      */
     public SavedLocation findByUserId(int userId) {
-        // Find all the saved locations by the user(id)
-        List<SavedLocation> results = findBy("user", userId);
-
-        // IF the results are empty, return null else return the first result
-        return results.isEmpty() ? null : results.get(0);
+        return executeWithSession(session -> {
+            HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<SavedLocation> query = builder.createQuery(SavedLocation.class);
+            var root = query.from(SavedLocation.class);
+            query.where(builder.equal(root.get("user").get("id"), userId));
+            List<SavedLocation> results = session.createSelectionQuery(query).getResultList();
+            return results.isEmpty() ? null : results.get(0);
+        });
     }
 }

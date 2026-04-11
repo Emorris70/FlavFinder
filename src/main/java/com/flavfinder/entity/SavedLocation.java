@@ -17,7 +17,6 @@ public class SavedLocation {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name ="native", strategy = "native")
     private int id;
-    // This will be the city name
     @Column(name = "city_name")
     private String cityName;
     @Column(name = "zip_code")
