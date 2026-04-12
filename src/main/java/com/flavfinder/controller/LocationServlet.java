@@ -105,6 +105,7 @@ public class LocationServlet extends HttpServlet {
             existing.setZipCode(zip);
             existing.setLatitude(lat);
             existing.setLongitude(lon);
+            existing.setDefault(false);
             locationDao.update(existing);
         }
 
@@ -140,13 +141,14 @@ public class LocationServlet extends HttpServlet {
         if (lat == null || lon == null) {
             log.warn("Geolocation params missing: user may have denied access");
             session.setAttribute("locationError", "Location access was denied. Please enter a location manually.");
-            // change the to forward to the home page
+            // TODO forward the user instead
             resp.sendRedirect(req.getContextPath() + "/home");
             return;
         }
 
         double parsedLat = Double.parseDouble(lat);
         double parsedLon = Double.parseDouble(lon);
+        log.info("User's current location: " + parsedLat + ", " + parsedLon);
 
         AuthenticatedUser authUser = (AuthenticatedUser) session.getAttribute("user");
         List<User> users = userDao.findBy("sub", authUser.getSub());
@@ -163,6 +165,8 @@ public class LocationServlet extends HttpServlet {
         if (existing == null) {
             locationDao.insert(new SavedLocation(null, null, parsedLat, parsedLon, true, dbUser));
         } else {
+            existing.setCityName(null);
+            existing.setZipCode(null);
             existing.setLatitude(parsedLat);
             existing.setLongitude(parsedLon);
             existing.setDefault(true);
