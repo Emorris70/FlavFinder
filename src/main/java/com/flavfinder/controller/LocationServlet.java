@@ -148,7 +148,6 @@ public class LocationServlet extends HttpServlet {
 
         double parsedLat = Double.parseDouble(lat);
         double parsedLon = Double.parseDouble(lon);
-        log.info("User's current location: " + parsedLat + ", " + parsedLon);
 
         AuthenticatedUser authUser = (AuthenticatedUser) session.getAttribute("user");
         List<User> users = userDao.findBy("sub", authUser.getSub());

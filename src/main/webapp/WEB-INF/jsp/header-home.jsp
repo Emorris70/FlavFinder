@@ -1,5 +1,4 @@
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
+<%@ include file= "includes/taglib.jsp" %>
 <header>
     <jsp:include page="../../flav-logo.jsp"/>
     <div class="search-c">

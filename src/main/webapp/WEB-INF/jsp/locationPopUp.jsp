@@ -1,4 +1,5 @@
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ include file= "includes/taglib.jsp" %>
+<%-- TODO add error handling and stying --%>
 <div class="location-popUp-content pop-up-bg" id="pop-up"> <!--  parent  -->
     <div class="content-card-deco"> <!--  card  -->
         <div class="drop-c">
