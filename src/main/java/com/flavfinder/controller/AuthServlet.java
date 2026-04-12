@@ -1,9 +1,11 @@
 package com.flavfinder.controller;
 
 import com.flavfinder.APIdentity.AuthenticatedUser;
+import com.flavfinder.entity.SavedLocation;
 import com.flavfinder.entity.User;
 import com.flavfinder.persistence.CognitoAuthService;
 import com.flavfinder.persistence.GenericDao;
+import com.flavfinder.persistence.SavedLocationDao;
 import com.flavfinder.persistence.TokenVerifier;
 import jakarta.servlet.RequestDispatcher;
 
@@ -164,12 +166,9 @@ public class AuthServlet extends HttpServlet {
             try {
                 // Authenticate against Cognito
                 AuthenticationResultType result = cognitoAuth.login(email, password);
-
-                // Verify token and extract claims
                 AuthenticatedUser authUser = tokenVerifier.verify(result.idToken());
 
                 GenericDao<User> userDao = new GenericDao<>(User.class);
-
                 // get, the associated user sub id from the database
                 User dbUser = userDao.findBy("sub", authUser.getSub()).get(0);
 
@@ -180,6 +179,26 @@ public class AuthServlet extends HttpServlet {
                 // When this attribute is called, simply target the associated id field in the DB
                 // e.g., int userId = dbUser.getId();
                 session.setAttribute("dbUser", dbUser);
+
+                // Restore saved locations from DB
+                SavedLocationDao locationDao = new SavedLocationDao();
+                SavedLocation savedLocation = locationDao.findByUserId(dbUser.getId());
+
+                if (savedLocation != null) {
+                    if (savedLocation.isDefault()) {
+                        // Browser geolocation, restore lat/lon
+                        session.setAttribute("userLat", savedLocation.getLatitude());
+                        session.setAttribute("userLon", savedLocation.getLongitude());
+                        log.info("Login: restored geolocation: {}, {}", savedLocation.getLatitude(), savedLocation.getLongitude());
+                    } else {
+                        // Custom location, restore TomTom response isn't available,
+                        // so store the saved location entity itself for HomeServlet to use
+                        session.setAttribute("savedLocation", savedLocation);
+                        log.info("Login: restored custom location: {}", savedLocation.getCityName());
+                    }
+                } else {
+                    log.info("Login: no saved location found for userId={}", dbUser.getId());
+                }
 
                 // redirect to the HomeServlet route(/home)
                 resp.sendRedirect(req.getContextPath() + "/home");

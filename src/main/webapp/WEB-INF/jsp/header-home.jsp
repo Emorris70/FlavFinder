@@ -24,6 +24,9 @@
                         <c:when test="${not empty sessionScope.userLat}">
                             Current Location
                         </c:when>
+                        <c:when test="${not empty sessionScope.savedLocation}">
+                            ${sessionScope.savedLocation.cityName}
+                        </c:when>
                     </c:choose>
                 </button>
             </div>
