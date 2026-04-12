@@ -1,4 +1,4 @@
-<jsp:include page="WEB-INF/jsp/includes/taglib.jsp"/>
+<%@include file="WEB-INF/jsp/includes/taglib.jsp"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <jsp:include page="head.jsp"/>
@@ -7,12 +7,12 @@
 <main class="container override-animation">
     <h1 class="m-h">Check your email</h1>
     <p class="p-deco s-p">Enter the code that we sent to the email address. The code expires in 15 minutes.</p>
-    <div class="errorMsg">
-        <c:if test="${not empty sessionScope.error}">
+    <c:if test="${not empty sessionScope.error}">
+        <div class="errorMsg">
             <p class="error-msg">${sessionScope.error}</p>
-            <c:remove var="error" scope="session"/>
-        </c:if>
-    </div>
+        </div>
+        <c:remove var="error" scope="session"/>
+    </c:if>
     <form method="POST" action="auth" id="auth-exists">
         <div class="con-wrapper">
             <label for="v-code">Verification code</label>

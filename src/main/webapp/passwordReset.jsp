@@ -1,4 +1,4 @@
-<jsp:include page="WEB-INF/jsp/includes/taglib.jsp"/>
+<%@include file="WEB-INF/jsp/includes/taglib.jsp"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <jsp:include page="head.jsp"/>
@@ -7,6 +7,12 @@
 <main class="container">
     <h1 class="m-h">Forgot Password?</h1>
     <p class="p-deco">Enter your email to receive a rest link</p>
+    <c:if test="${not empty sessionScope.error}">
+        <div class="errorMsg">
+            <p class="error-msg">${sessionScope.error}</p>
+        </div>
+        <c:remove var="error" scope="session"/>
+    </c:if>
     <form method="POST" action="auth" id="auth-form">
         <div class="con-wrapper">
             <label for="email">email</label>

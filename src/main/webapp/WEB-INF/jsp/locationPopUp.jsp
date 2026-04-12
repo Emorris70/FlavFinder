@@ -12,6 +12,12 @@
                 </svg>
             </p>
             <p class="p-deco-2 muted-con">Choose a location to discover nearby restaurants</p>
+            <c:if test="${not empty sessionScope.error}">
+                <div class="errorMsg">
+                    <p class="error-msg">${sessionScope.error}</p>
+                </div>
+                <c:remove var="error" scope="session"/>
+            </c:if>
         </div>
         <div class="c-items">
             <label class="current-location-c location-c-deco">

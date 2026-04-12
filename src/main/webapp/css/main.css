@@ -38,3 +38,6 @@ a {
     font-size: 24px;
     gap: 0.22rem;
 }
+#search, .user-content, #to-go-deco, #filter-trigger, .location-toggle-btn {
+    transition: all 0.2s ease-in;
+}

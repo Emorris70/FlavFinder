@@ -58,9 +58,6 @@ header {
     align-items: center;
     gap: clamp(4px, 1vw, 18px);
 }
-#search, .user-content, #to-go-deco, #filter-trigger {
-    transition: all 0.2s ease-in;
-}
 #location-toggle-btn {
     border-radius: 12px;
     border: 0.5px solid rgba(0, 0, 0, 0.10);
@@ -125,12 +122,12 @@ header {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    transition: visibility 0s 0.3s, opacity 0.3s ease;
+    transition: visibility 0s 0.3s, opacity 0.3s ease !important;
 }
 .pop-up-bg.show {
     visibility: visible;
     opacity: 1;
-    transition: visibility 0s, opacity 0.3s ease;
+    transition: visibility 0s, opacity 0.3s ease !important;
 }
 .content-card-deco {
     background: #FFFFFF;
@@ -138,7 +135,7 @@ header {
     border-radius: 8px;
     transform: scale(0.9);
     opacity: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease !important;
 }
 .pop-up-bg.show .content-card-deco {
     transform: scale(1);

@@ -22,7 +22,8 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * Handles location-related requests.
+ * Handles location-related requests. In addition,
+ * stores the user's location in the database.
  *
  * @author EmileM
  */
@@ -61,7 +62,7 @@ public class LocationServlet extends HttpServlet {
         // Validates the input
         if (customLocation == null || customLocation.trim().isEmpty()) {
             session.setAttribute("locationError", "Please enter a valid location");
-            req.getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(req, resp);
+            resp.sendRedirect(req.getContextPath() + "/home");
             return;
         }
 
@@ -73,7 +74,7 @@ public class LocationServlet extends HttpServlet {
         if (response.getResults() == null || response.getResults().isEmpty()) {
             log.warn("TomTom returned no results for: " + customLocation);
             req.setAttribute("locationError", "Location not found. Please try a different search.");
-            req.getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(req, resp);
+            resp.sendRedirect(req.getContextPath() + "/home");
             return;
         }
 
