@@ -142,7 +142,7 @@ public class LocationServlet extends HttpServlet {
         if (lat == null || lon == null) {
             log.warn("Geolocation params missing: user may have denied access");
             session.setAttribute("locationError", "Location access was denied. Please enter a location manually.");
-            // TODO forward the user instead
+
             resp.sendRedirect(req.getContextPath() + "/home");
             return;
         }

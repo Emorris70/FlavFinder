@@ -1,16 +1,11 @@
 <%@ include file= "includes/taglib.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-<%--  unitilize includes for this head portion for home.jsp  --%>
-    <title>Home - FlavFinder</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/homePage.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
-</head>
+<jsp:include page="includes/app-head.jsp"/>
 <body>
-<jsp:include page="header-home.jsp"/>
+<jsp:include page="includes/header-home.jsp"/>
 <main>
-    <jsp:include page="locationPopUp.jsp"/>
+    <jsp:include page="includes/locationPopUp.jsp"/>
 </main>
 <footer></footer>
 <script>

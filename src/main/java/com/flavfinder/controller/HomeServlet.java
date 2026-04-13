@@ -43,6 +43,7 @@ public class HomeServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/index.jsp");
         } else {
             log.info("Authenticated user forward back to home");
+            session.setAttribute("page", "Home - FlavFinder");
             req.getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(req, resp);
         }
     }
