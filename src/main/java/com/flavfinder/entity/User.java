@@ -179,13 +179,11 @@ public class User {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && Objects.equals(sub, user.sub)
-                && Objects.equals(role, user.role)
-                && Objects.equals(savedLocations, user.savedLocations);
+        return id == user.id && Objects.equals(sub, user.sub);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, sub, role, savedLocations);
+        return Objects.hash(id, sub);
     }
 }
