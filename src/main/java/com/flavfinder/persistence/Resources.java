@@ -1,5 +1,6 @@
 package com.flavfinder.persistence;
 
+import com.flavfinder.APIdentity.LocalBusinessResponse;
 import com.flavfinder.APIdentity.TomTomResponse;
 import jakarta.servlet.ServletContext;
 import org.apache.logging.log4j.LogManager;
@@ -45,6 +46,7 @@ public class Resources extends GenericRequest implements PropertiesLoader {
      * returns the mapped JSON response.
      *
      * @param rawAddress The users location.
+     * @return TomTomResponse the mapped JSON response.
      */
     public TomTomResponse callTomTom(String rawAddress) {
         Map<String, Object> params = new HashMap<>();
@@ -63,6 +65,38 @@ public class Resources extends GenericRequest implements PropertiesLoader {
                 params,
                 null,
                 TomTomResponse.class
+        );
+    }
+
+    /**
+     * HTTP GET request to Local Business API endpoint.
+     * And returns the mapped JSON response.
+     *
+     * @param lat users latitude
+     * @param lon users longitude
+     * @param query users search query
+     * @return LocalBusinessResponse the mapped JSON response.
+     */
+    public LocalBusinessResponse callLocalBusiness(double lat, double lon, String query) {
+        Map<String, Object> params = new HashMap<>();
+
+        params.put("query", query);
+        params.put("lat", lat);
+        params.put("lng", lon);
+        params.put("limit", 5);
+        params.put("language", "en");
+        params.put("region", "us");
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("x-rapidapi-key", properties.getProperty("rapidapi_key"));
+        headers.put("x-rapidapi-host", properties.getProperty("rapidapi_host"));
+
+        return executeGetRequest(
+                properties.getProperty("rapidapi_url"),
+                null,
+                params,
+                headers,
+                LocalBusinessResponse.class
         );
     }
 }

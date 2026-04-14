@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class LocationDaoTest {
     GenericDao<SavedLocation> locationDao;
-    SavedLocationDao locationDao2;
     GenericDao<User> userDao;
 
     /**
@@ -25,7 +24,6 @@ class LocationDaoTest {
         database.runSQL("cleanDB.sql");
 
         locationDao = new GenericDao<>(SavedLocation.class);
-        locationDao2 = new SavedLocationDao();
         userDao = new GenericDao<>(User.class);
     }
 
