@@ -85,6 +85,7 @@ public class Resources extends GenericRequest implements PropertiesLoader {
         params.put("lng", lon);
         params.put("limit", 5);
         params.put("language", "en");
+        params.put("subtypes", "restaurant");
         params.put("region", "us");
 
         Map<String, String> headers = new HashMap<>();
