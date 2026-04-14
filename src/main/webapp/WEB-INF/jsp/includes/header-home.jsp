@@ -4,7 +4,9 @@
     <div class="search-c">
         <img src="${pageContext.request.contextPath}/images/search-icon.png"
              class="inner-icon search-icon" alt="search icon">
-        <input type="text" id="search" name="search-term" placeholder="Search for cuisines...">
+        <form method="GET" action="${pageContext.request.contextPath}/search">
+            <input type="text" id="search" name="search-term" placeholder="Search for cuisines...">
+        </form>
         <span id="filter-trigger" class="filter-btn">
                 <img src="${pageContext.request.contextPath}/images/tune.png"
                      class="inner-icon filter-icon" alt="filter icon">
