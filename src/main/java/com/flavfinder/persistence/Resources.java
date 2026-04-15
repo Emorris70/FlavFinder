@@ -19,8 +19,6 @@ import java.util.Properties;
  */
 public class Resources extends GenericRequest implements PropertiesLoader {
     private static final Logger log = LogManager.getLogger(Resources.class);
-    private static final double DEFAULT_LAT = 43.0731;
-    private static final double DEFAULT_LON = -89.4012;
     private Properties properties;
 
     /**
@@ -54,8 +52,8 @@ public class Resources extends GenericRequest implements PropertiesLoader {
         params.put("key", properties.getProperty("tomtom_key"));
         params.put("limit", 1);
         params.put("countrySet", "US");
-        params.put("lat", DEFAULT_LAT);
-        params.put("lon", DEFAULT_LON);
+        params.put("lat", properties.getProperty("default_lat"));
+        params.put("lon", properties.getProperty("default_lon"));
         params.put("storeResult", false);
         params.put("view", "Unified");
 
