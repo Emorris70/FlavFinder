@@ -32,10 +32,9 @@ public class HomeServlet extends HttpServlet {
 
     /**
      * Forwards authenticated users to the home page.
-     * --
+     * <p>
      * Performs a double check accompanied by AuthFilter.
      * Acting as the general protection.
-     * --
      * AuthFilter (General) -> HomeServlet(Specific) -> home.jsp
      *
      * @param req  Client's Request.
@@ -75,20 +74,33 @@ public class HomeServlet extends HttpServlet {
             log.info("HomeServlet: using saved location from DB: {}, {}", lat, lon);
         }
 
+        log.info("HomeServlet — session state: userLat={}, userLocation={}, savedLocation={}",
+                session.getAttribute("userLat"),
+                session.getAttribute("userLocation") != null ? "present" : "null",
+                session.getAttribute("savedLocation") != null ? "present" : "null");
+
         // Only call the API if we have coords
         if (lat != null && lon != null) {
             try {
-                log.info("HomeServlet - fetching nearby restaurants for {}, {}", lat, lon);
-                LocalBusinessResponse nearbyRestaurants = resources.callLocalBusiness(lat, lon, "restaurant");
+                log.info("HomeServlet — calling API with lat={}, lon={}", lat, lon);
+                LocalBusinessResponse nearbyRestaurants = resources.callLocalBusiness(lat, lon, "food near me");
                 req.setAttribute("nearbyRestaurants", nearbyRestaurants);
-                log.info("HomeServlet - {} results returned", nearbyRestaurants.getData() != null
-                        ? nearbyRestaurants.getData().size() : 0);
+
+                if (nearbyRestaurants.getData() != null) {
+                    log.info("HomeServlet — {} results returned", nearbyRestaurants.getData().size());
+                    for (var business : nearbyRestaurants.getData()) {
+                        log.info("HomeServlet — result: name='{}', lat={}, lon={}, type='{}'",
+                                business.getName(),
+                                business.getLatitude(),
+                                business.getLongitude(),
+                                business.getType());
+                    }
+                } else {
+                    log.warn("HomeServlet - API returned null data");
+                }
             } catch (Exception e) {
-                log.error("HomeServlet - failed to fetch nearby restaurants", e);
-                // Don't block the page load if the API call fails
+                log.error("HomeServlet — failed to fetch nearby restaurants", e);
             }
-        } else {
-            log.info("HomeServlet - no location in session, skipping nearby fetch");
         }
 
         log.info("HomeServlet - forwarding to home.jsp");

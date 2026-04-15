@@ -40,7 +40,8 @@
                                 <c:choose>
                                     <c:when test="${not empty restaurant.photosSample}">
                                         <img src="${restaurant.photosSample[0].photoUrl}"
-                                             alt="${restaurant.name}" class="card-img">
+                                             alt="${restaurant.name}" class="card-img"
+                                             referrerpolicy="no-referrer">
                                     </c:when>
                                     <c:otherwise>
                                         <img src="${pageContext.request.contextPath}/images/near-me.png"
@@ -74,8 +75,12 @@
                                         <path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/>
                                     </svg>
                                     <span class="card-distance" data-lat="${restaurant.latitude}" data-lon="${restaurant.longitude}">--</span>
-                                    <span class="open-status ${restaurant.openingStatus.toLowerCase().contains('open') ? 'status-open' : 'status-closed'}">
-                                            ${restaurant.openingStatus.toLowerCase().contains('open') ? 'Open' : 'Closed'}
+                                    <span class="open-status ${not empty restaurant.openingStatus and restaurant.openingStatus.toLowerCase().contains('open') ? 'status-open' : 'status-closed'}">
+                                        <c:choose>
+                                            <c:when test="${not empty restaurant.openingStatus and restaurant.openingStatus.toLowerCase().contains('open')}">Open</c:when>
+                                            <c:when test="${not empty restaurant.openingStatus and restaurant.openingStatus.toLowerCase().contains('close')}">Closed</c:when>
+                                            <c:otherwise>--</c:otherwise>
+                                        </c:choose>
                                     </span>
                                 </div>
                             </div>
@@ -103,7 +108,8 @@
                                         <c:choose>
                                             <c:when test="${not empty restaurant.photosSample}">
                                                 <img src="${restaurant.photosSample[0].photoUrl}"
-                                                     alt="${restaurant.name}" class="card-img">
+                                                     alt="${restaurant.name}" class="card-img"
+                                                     referrerpolicy="no-referrer">
                                             </c:when>
                                             <c:otherwise>
                                                 <img src="${pageContext.request.contextPath}/images/near-me.png"
@@ -137,8 +143,12 @@
                                                 <path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/>
                                             </svg>
                                             <span class="card-distance" data-lat="${restaurant.latitude}" data-lon="${restaurant.longitude}">--</span>
-                                            <span class="open-status ${restaurant.openingStatus.toLowerCase().contains('open') ? 'status-open' : 'status-closed'}">
-                                                    ${restaurant.openingStatus.toLowerCase().contains('open') ? 'Open' : 'Closed'}
+                                            <span class="open-status ${not empty restaurant.openingStatus and restaurant.openingStatus.toLowerCase().contains('open') ? 'status-open' : 'status-closed'}">
+                                                <c:choose>
+                                                        <c:when test="${not empty restaurant.openingStatus and restaurant.openingStatus.toLowerCase().contains('open')}">Open</c:when>
+                                                        <c:when test="${not empty restaurant.openingStatus and restaurant.openingStatus.toLowerCase().contains('close')}">Closed</c:when>
+                                                        <c:otherwise>--</c:otherwise>
+                                                </c:choose>
                                             </span>
                                         </div>
                                     </div>

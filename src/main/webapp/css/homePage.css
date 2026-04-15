@@ -7,8 +7,7 @@ header {
     justify-content: space-between;
     align-items: center;
     height: 65px;
-    /*padding: 0.625rem;*/
-    padding: 1.625rem;
+    padding: 0.625rem;
     border-bottom: 0.5px solid rgba(0, 0, 0, 0.10);
     background: #FFF;
     gap: 5px;
@@ -392,6 +391,7 @@ input[type="radio"]:checked {
     text-decoration: none;
     color: inherit;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 100%;
 }
 .restaurant-card:hover {
     transform: translateY(-3px);
@@ -445,6 +445,8 @@ input[type="radio"]:checked {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
+    flex: 1;
+    justify-content: space-between;
 }
 .card-title-row {
     display: flex;
@@ -525,6 +527,7 @@ input[type="radio"]:checked {
     min-width: 280px;
     max-width: 320px;
     flex-shrink: 0;
+    height: 280px;
 }
 .card-wide .card-img-wrap {
     height: 160px;
@@ -542,9 +545,11 @@ input[type="radio"]:checked {
     min-width: 220px;
     max-width: 220px;
     flex-shrink: 0;
+    height: 240px;
 }
 .card-grid .card-img-wrap {
-    height: 140px;
+    height: 130px;
+    flex-shrink: 0;
 }
 
 /* hide scrollbar visually but keep it functional */
@@ -564,9 +569,6 @@ input[type="radio"]:checked {
 }
 
 @media (max-width: 1200px) {
-    .cards-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
 }
 @media (max-width: 1075px) {
     #to-go-icon {
@@ -574,14 +576,8 @@ input[type="radio"]:checked {
     }
 }
 @media (max-width: 900px) {
-    .cards-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
 }
 @media (max-width: 600px) {
-    .cards-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
     .home-content {
         padding: 1rem;
     }
