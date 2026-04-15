@@ -1,5 +1,9 @@
 package com.flavfinder.controller;
 
+import com.flavfinder.APIdentity.LocalBusinessResponse;
+import com.flavfinder.APIdentity.TomTomResponse;
+import com.flavfinder.entity.SavedLocation;
+import com.flavfinder.persistence.Resources;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -19,6 +23,12 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/home")
 public class HomeServlet extends HttpServlet {
     private static final Logger log = LogManager.getLogger(HomeServlet.class);
+    private Resources resources;
+
+    @Override
+    public void init() throws ServletException {
+        resources = (Resources) getServletContext().getAttribute("resources");
+    }
 
     /**
      * Forwards authenticated users to the home page.
@@ -35,16 +45,54 @@ public class HomeServlet extends HttpServlet {
      */
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        // ensures not to create a new session
+
         HttpSession session = req.getSession(false);
 
-        // Double check session is valid before forwarding
         if (session == null || session.getAttribute("user") == null) {
             resp.sendRedirect(req.getContextPath() + "/index.jsp");
-        } else {
-            log.info("Authenticated user forward back to home");
-            session.setAttribute("page", "Home - FlavFinder");
-            req.getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(req, resp);
+            return;
         }
+
+        // Resolve lat/lon from whichever location state is in session
+        Double lat = null;
+        Double lon = null;
+
+        if (session.getAttribute("userLat") != null) {
+            lat = (Double) session.getAttribute("userLat");
+            lon = (Double) session.getAttribute("userLon");
+            log.info("HomeServlet: using geolocation: {}, {}", lat, lon);
+
+        } else if (session.getAttribute("userLocation") != null) {
+            TomTomResponse loc = (TomTomResponse) session.getAttribute("userLocation");
+            lat = loc.getResults().get(0).getPosition().getLat();
+            lon = loc.getResults().get(0).getPosition().getLon();
+            log.info("HomeServlet: using TomTom custom location: {}, {}", lat, lon);
+
+        } else if (session.getAttribute("savedLocation") != null) {
+            SavedLocation saved = (SavedLocation) session.getAttribute("savedLocation");
+            lat = saved.getLatitude();
+            lon = saved.getLongitude();
+            log.info("HomeServlet: using saved location from DB: {}, {}", lat, lon);
+        }
+
+        // Only call the API if we have coords
+        if (lat != null && lon != null) {
+            try {
+                log.info("HomeServlet - fetching nearby restaurants for {}, {}", lat, lon);
+                LocalBusinessResponse nearbyRestaurants = resources.callLocalBusiness(lat, lon, "restaurant");
+                req.setAttribute("nearbyRestaurants", nearbyRestaurants);
+                log.info("HomeServlet - {} results returned", nearbyRestaurants.getData() != null
+                        ? nearbyRestaurants.getData().size() : 0);
+            } catch (Exception e) {
+                log.error("HomeServlet - failed to fetch nearby restaurants", e);
+                // Don't block the page load if the API call fails
+            }
+        } else {
+            log.info("HomeServlet - no location in session, skipping nearby fetch");
+        }
+
+        log.info("HomeServlet - forwarding to home.jsp");
+        session.setAttribute("page", "Home - FlavFinder");
+        req.getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(req, resp);
     }
 }

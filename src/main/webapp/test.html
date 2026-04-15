@@ -23,14 +23,18 @@
                 >V
             </h1>
         </div>
-        <div class="search-c">
-            <img src="images/search-icon.png" class="inner-icon search-icon" alt="search icon">
+    <div class="search-c">
+        <img src="images/search-icon.png"
+             class="inner-icon search-icon" alt="search icon">
+        <form method="GET" action="${pageContext.request.contextPath}/search" class="search-form">
             <input type="text" id="search" name="search-term" placeholder="Search for cuisines...">
-            <span id="filter-trigger" class="filter-btn">
-                <img src="images/tune.png" class="inner-icon filter-icon" alt="filter icon">
+        </form>
+        <span id="filter-trigger" class="filter-btn">
+                <img src="images/tune.png"
+                     class="inner-icon filter-icon" alt="filter icon">
             </span>
-<!--    add drop down container/content        -->
-        </div>
+        <!--    add drop down container/content        -->
+    </div>
         <div class="user-content">
             <div class="location-drop-container">
                 <div class="location-p">
@@ -69,80 +73,102 @@
             </div>
         </div>
 </header>
-<!-- TODO:
- Note to self - IF the user goes with whatever option there need to be
- a way to save the current styling depending on IF they chose the current location
- or custom location.
-
- Look to adding local-storage features. Or something.
-
-
- JAVASCRIPT:
-    Depending on if the user chose the current location or custom location,
-    the styling should changed depending on what was clicked.
-
-    Meaning If the user chose the current location, the styling should be changed
-    to reflect that.
-
- JAVA:
-    Process the data and save it to the database.
-
-    Current SavedLocation -> GET the current location of the user(servlet).
-    -> save to database.
-
-    Custom SavedLocation -> Make a request to Resources -> GET and display location name
-    -> save to database.
-
--->
 <main>
-    <div class="location-popUp-content pop-up-bg" id="pop-up"> <!--  parent  -->
-        <div class="content-card-deco"> <!--  card  -->
-            <div class="drop-c">
-                <p class="p-deco-1 p-flex">
-                    Set Discovery Location
-                        <svg class="close" xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 -960 960 960"
-                             fill="#e3e3e3">
-                            <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
-                        </svg>
-                </p>
-                <p class="p-deco-2 muted-con">Choose a location to discover nearby restaurants</p>
-            </div>
-            <div class="c-items">
-                <label class="current-location-c location-c-deco">
-                    <div class="svg-deco">
-                        <svg class="location-icon" xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 -960 960 960"
-                             fill="#e3e3e3">
-                            <path d="M516-120 402-402 120-516v-56l720-268-268 720h-56Zm26-148 162-436-436 162 196 78 78 196Zm-78-196Z"/>
-                        </svg>
-                    </div>
-                    <div class="content-info">
-                        <p class="p-h1">Use Current Location</p>
-                        <p class="p-deco-2 muted-con">Auto-detect location</p>
-                    </div>
-                    <input class="radio-end radio-deco" type="radio" name="location" value="current">
-                </label>
-                <div class="custom-location-c location-c-deco flex-override">
-                    <div class="custom-lc">
-                        <div class="svg-deco">
-                            <svg class="location-icon" xmlns="http://www.w3.org/2000/svg"
-                                 viewBox="0 -960 960 960"
-                                 fill="#e3e3e3">
-                                <path d="M536.5-503.5Q560-527 560-560t-23.5-56.5Q513-640 480-640t-56.5 23.5Q400-593 400-560t23.5 56.5Q447-480 480-480t56.5-23.5ZM480-186q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/></svg>
-                        </div>
-                        <div class="inner-lc">
-                            <p class="p-h1">Set Custom Location</p>
-                            <p class="p-deco-2 muted-con">Enter the city/code to explore</p>
-                        </div>
-                    </div>
-                    <form method="POST" action="#" class="custom-form">
-                        <input class="custom-input" type="text" name="cust-location" placeholder="City & ZIP or full address">
-                        <button type="submit" value="" class="custom-submit">Set</button>
-                    </form>
+<!--    <div class="location-popUp-content pop-up-bg" id="pop-up"> &lt;!&ndash;  parent  &ndash;&gt;-->
+<!--        <div class="content-card-deco"> &lt;!&ndash;  card  &ndash;&gt;-->
+<!--            <div class="drop-c">-->
+<!--                <p class="p-deco-1 p-flex">-->
+<!--                    Set Discovery Location-->
+<!--                        <svg class="close" xmlns="http://www.w3.org/2000/svg"-->
+<!--                             viewBox="0 -960 960 960"-->
+<!--                             fill="#e3e3e3">-->
+<!--                            <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>-->
+<!--                        </svg>-->
+<!--                </p>-->
+<!--                <p class="p-deco-2 muted-con">Choose a location to discover nearby restaurants</p>-->
+<!--            </div>-->
+<!--            <div class="c-items">-->
+<!--                <label class="current-location-c location-c-deco">-->
+<!--                    <div class="svg-deco">-->
+<!--                        <svg class="location-icon" xmlns="http://www.w3.org/2000/svg"-->
+<!--                             viewBox="0 -960 960 960"-->
+<!--                             fill="#e3e3e3">-->
+<!--                            <path d="M516-120 402-402 120-516v-56l720-268-268 720h-56Zm26-148 162-436-436 162 196 78 78 196Zm-78-196Z"/>-->
+<!--                        </svg>-->
+<!--                    </div>-->
+<!--                    <div class="content-info">-->
+<!--                        <p class="p-h1">Use Current Location</p>-->
+<!--                        <p class="p-deco-2 muted-con">Auto-detect location</p>-->
+<!--                    </div>-->
+<!--                    <input class="radio-end radio-deco" type="radio" name="location" value="current">-->
+<!--                </label>-->
+<!--                <div class="custom-location-c location-c-deco flex-override">-->
+<!--                    <div class="custom-lc">-->
+<!--                        <div class="svg-deco">-->
+<!--                            <svg class="location-icon" xmlns="http://www.w3.org/2000/svg"-->
+<!--                                 viewBox="0 -960 960 960"-->
+<!--                                 fill="#e3e3e3">-->
+<!--                                <path d="M536.5-503.5Q560-527 560-560t-23.5-56.5Q513-640 480-640t-56.5 23.5Q400-593 400-560t23.5 56.5Q447-480 480-480t56.5-23.5ZM480-186q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/></svg>-->
+<!--                        </div>-->
+<!--                        <div class="inner-lc">-->
+<!--                            <p class="p-h1">Set Custom Location</p>-->
+<!--                            <p class="p-deco-2 muted-con">Enter the city/code to explore</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <form method="POST" action="#" class="custom-form">-->
+<!--                        <input class="custom-input" type="text" name="cust-location" placeholder="City & ZIP or full address">-->
+<!--                        <button type="submit" value="" class="custom-submit">Set</button>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+    <%-- Nearby Restaurants Section --%>
+    <div class="restaurant-section">
+        <h3 class="section-title">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" class="section-icon">
+                <path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/>
+            </svg>
+            Nearby Restaurants
+        </h3>
+                <div class="cards-grid">
+                        <a href="${pageContext.request.contextPath}/restaurant?placeId=${restaurant.placeId}"
+                           class="restaurant-card card-grid">
+                            <div class="card-img-wrap">
+                                        <img src="${restaurant.photosSample[0].photoUrl}"
+                                             alt="${restaurant.name}" class="card-img">
+                                <button class="fav-btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                        <path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-title-row">
+                                    <span class="card-name">${restaurant.name}</span>
+                                    <span class="card-price">${not empty restaurant.priceLevel ? restaurant.priceLevel : ''}</span>
+                                </div>
+                                    <div class="card-rating">
+                                        <svg class="star-icon" viewBox="0 0 24 24">
+                                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                        </svg>
+                                        <span class="rating-val">${restaurant.rating}</span>
+                                        <span class="review-count">(${restaurant.reviewCount})</span>
+                                        <span class="card-separator">·</span>
+                                        <span class="card-type">${restaurant.type}</span>
+                                    </div>
+                                <div class="card-footer-row">
+                                    <svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                        <path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/>
+                                    </svg>
+                                    <span class="card-distance" data-lat="${restaurant.latitude}" data-lon="${restaurant.longitude}">--</span>
+                                    <span class="open-status ${restaurant.openingStatus.toLowerCase().contains('open') ? 'status-open' : 'status-closed'}">
+                                                    ${restaurant.openingStatus.toLowerCase().contains('open') ? 'Open' : 'Closed'}
+                                            </span>
+                                </div>
+                            </div>
+                        </a>
                 </div>
-            </div>
-        </div>
     </div>
 </main>
 <footer></footer>

@@ -10,6 +10,7 @@ const initApp = () => {
     handleLocationPopup();
     handleDropdown();
     handleCurrentLocation();
+    handleRestaurantCard();
 }
 
 /**
@@ -165,6 +166,23 @@ const handleCurrentLocation = () => {
                 console.error('Geolocation error:', error);
             });
         }
+    });
+}
+
+/**
+ * Handles the restaurant card functionality.
+ * Prevent default and stop propagation to prevent the card from being clicked.
+ *
+ * @returns {void}
+ */
+const handleRestaurantCard = () => {
+    document.querySelectorAll('.fav-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            // TODO: toggle saved state when that feature is built
+            this.classList.toggle('saved');
+        });
     });
 }
 
