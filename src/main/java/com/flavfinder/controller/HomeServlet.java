@@ -80,28 +80,29 @@ public class HomeServlet extends HttpServlet {
                 session.getAttribute("savedLocation") != null ? "present" : "null");
 
         // Only call the API if we have coords
-        if (lat != null && lon != null) {
-            try {
-                log.info("HomeServlet — calling API with lat={}, lon={}", lat, lon);
-                LocalBusinessResponse nearbyRestaurants = resources.callLocalBusiness(lat, lon, "food near me");
-                req.setAttribute("nearbyRestaurants", nearbyRestaurants);
-
-                if (nearbyRestaurants.getData() != null) {
-                    log.info("HomeServlet — {} results returned", nearbyRestaurants.getData().size());
-                    for (var business : nearbyRestaurants.getData()) {
-                        log.info("HomeServlet — result: name='{}', lat={}, lon={}, type='{}'",
-                                business.getName(),
-                                business.getLatitude(),
-                                business.getLongitude(),
-                                business.getType());
-                    }
-                } else {
-                    log.warn("HomeServlet - API returned null data");
-                }
-            } catch (Exception e) {
-                log.error("HomeServlet — failed to fetch nearby restaurants", e);
-            }
-        }
+        // TODO Note: commented out this section to reduce API calls uncomment when needed.
+//        if (lat != null && lon != null) {
+//            try {
+//                log.info("HomeServlet — calling API with lat={}, lon={}", lat, lon);
+//                LocalBusinessResponse nearbyRestaurants = resources.callLocalBusiness(lat, lon, "food near me");
+//                req.setAttribute("nearbyRestaurants", nearbyRestaurants);
+//
+//                if (nearbyRestaurants.getData() != null) {
+//                    log.info("HomeServlet — {} results returned", nearbyRestaurants.getData().size());
+//                    for (var business : nearbyRestaurants.getData()) {
+//                        log.info("HomeServlet — result: name='{}', lat={}, lon={}, type='{}'",
+//                                business.getName(),
+//                                business.getLatitude(),
+//                                business.getLongitude(),
+//                                business.getType());
+//                    }
+//                } else {
+//                    log.warn("HomeServlet - API returned null data");
+//                }
+//            } catch (Exception e) {
+//                log.error("HomeServlet — failed to fetch nearby restaurants", e);
+//            }
+//        }
 
         log.info("HomeServlet - forwarding to home.jsp");
         session.setAttribute("page", "Home - FlavFinder");

@@ -27,9 +27,7 @@
             <c:if test="${not empty sessionScope.recentlyViewed}">
             <div class="restaurant-section">
                 <h3 class="section-title">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" class="section-icon">
-                        <path d="M480-120q-138 0-240.5-91.5T122-440h82q14 104 92.5 172T480-200q117 0 198.5-81.5T760-480q0-117-81.5-198.5T480-760q-69 0-129 30t-101 80h110v80H120v-240h80v94q51-64 124.5-99T480-840q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-480q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-120Zm112-192L440-464v-216h80v184l128 128-56 56Z"/>
-                    </svg>
+                    <img src="${pageContext.request.contextPath}/images/clock.png" alt="Recently Viewed icon" class="section-icon">
                     Recently Viewed
                 </h3>
                 <div class="cards-row">
@@ -93,9 +91,7 @@
             <%-- Nearby Restaurants Section --%>
             <div class="restaurant-section">
                 <h3 class="section-title">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" class="section-icon">
-                        <path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/>
-                    </svg>
+                    <img src="${pageContext.request.contextPath}/images/h-location-i.png" alt="Nearby icon" class="section-icon">
                     Nearby Restaurants
                 </h3>
                 <c:choose>

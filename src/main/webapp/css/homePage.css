@@ -8,7 +8,7 @@ header {
     align-items: center;
     height: 65px;
     padding: 0.625rem;
-    border-bottom: 0.5px solid rgba(0, 0, 0, 0.10);
+    box-shadow: 0 0 20px 0 #e4e4e4 inset;
     background: #FFF;
     gap: 5px;
     overflow: hidden;
@@ -64,7 +64,8 @@ header {
 #location-toggle-btn {
     border-radius: 12px;
     border: 0.5px solid rgba(0, 0, 0, 0.10);
-    background: rgba(125, 125, 125, 0.08);
+    background: #FFFFFF;
+    box-shadow: 0 0 10px 0 rgba(254, 106, 0, 0.2) inset;
     padding: 5px 10px;
 }
 #to-go-deco {
@@ -377,7 +378,6 @@ input[type="radio"]:checked {
 .section-icon {
     width: 1.25rem;
     height: 1.25rem;
-    fill: #1a1a1a;
 }
 
 /* ── Cards Shared ── */
