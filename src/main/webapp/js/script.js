@@ -31,6 +31,13 @@ const handleLocationPopup = () => {
      */
     if (!locationBtn || !popupElement || !currentLocation || !customLocation || !closeBtn) return;
 
+    // Auto-open if the server rendered an error into the popup, then dismiss after 5s
+    const errorMsg = popupElement.querySelector('.errorMsg');
+    if (errorMsg) {
+        popupElement.classList.add("show");
+        setTimeout(() => errorMsg.remove(), 5000);
+    }
+
     /**
      * Opens the pop-up.
      *

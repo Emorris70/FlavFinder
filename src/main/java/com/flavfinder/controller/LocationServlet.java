@@ -73,7 +73,7 @@ public class LocationServlet extends HttpServlet {
         // In case if no results are found
         if (response.getResults() == null || response.getResults().isEmpty()) {
             log.warn("TomTom returned no results for: " + customLocation);
-            req.setAttribute("locationError", "Location not found. Please try a different search.");
+            session.setAttribute("locationError", "Location not found. Please try a different search.");
             resp.sendRedirect(req.getContextPath() + "/home");
             return;
         }
@@ -147,8 +147,17 @@ public class LocationServlet extends HttpServlet {
             return;
         }
 
-        double parsedLat = Double.parseDouble(lat);
-        double parsedLon = Double.parseDouble(lon);
+        double parsedLat;
+        double parsedLon;
+        try {
+            parsedLat = Double.parseDouble(lat);
+            parsedLon = Double.parseDouble(lon);
+        } catch (NumberFormatException e) {
+            log.warn("Invalid geolocation params: lat={}, lon={}", lat, lon);
+            session.setAttribute("locationError", "Invalid location data. Please try again.");
+            resp.sendRedirect(req.getContextPath() + "/home");
+            return;
+        }
 
         AuthenticatedUser authUser = (AuthenticatedUser) session.getAttribute("user");
         List<User> users = userDao.findBy("sub", authUser.getSub());

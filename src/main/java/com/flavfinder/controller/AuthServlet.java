@@ -21,6 +21,7 @@ import org.apache.logging.log4j.Logger;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.*;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * This authorization class manages end-user forwarding/redirection, handles
@@ -70,6 +71,9 @@ public class AuthServlet extends HttpServlet {
             url = "/passwordReset.jsp";
             req.setAttribute("page", "Reset Password - FlavFinder");
 
+        } else {
+            resp.sendRedirect(req.getContextPath() + "/index.jsp");
+            return;
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher(url);
@@ -111,27 +115,27 @@ public class AuthServlet extends HttpServlet {
 
                 session.setAttribute("pendingConfirmEmail", email);
                 session.setAttribute("title", "confirm - FlavFinder");
-                resp.sendRedirect("confirm.jsp");
+                resp.sendRedirect(req.getContextPath() + "/confirm.jsp");
 
             } catch (UsernameExistsException e) {
                 session.setAttribute("error", "An account with this email already exists");
-                resp.sendRedirect("signup.jsp");
+                resp.sendRedirect(req.getContextPath() + "/signup.jsp");
 
             } catch (InvalidPasswordException e) {
                 session.setAttribute("error", "Password does not meet requirements");
-                resp.sendRedirect("signup.jsp");
+                resp.sendRedirect(req.getContextPath() + "/signup.jsp");
 
             } catch (InvalidParameterException e) {
                 session.setAttribute("error", "Please ensure all fields are filled out correctly");
-                resp.sendRedirect("signup.jsp");
+                resp.sendRedirect(req.getContextPath() + "/signup.jsp");
 
             } catch (TooManyRequestsException e) {
                 session.setAttribute("error", "Too many attempts please try again later");
-                resp.sendRedirect("signup.jsp");
+                resp.sendRedirect(req.getContextPath() + "/signup.jsp");
 
             } catch (Exception e) {
                 session.setAttribute("error", "Something went wrong please try again");
-                resp.sendRedirect("signup.jsp");
+                resp.sendRedirect(req.getContextPath() + "/signup.jsp");
 
             }
 
@@ -143,20 +147,20 @@ public class AuthServlet extends HttpServlet {
 
                 // clean up
                 session.removeAttribute("pendingConfirmEmail");
-                resp.sendRedirect("index.jsp");
+                resp.sendRedirect(req.getContextPath() + "/index.jsp");
 
             } catch (CodeMismatchException e) {
                 session.setAttribute("error", "Invalid verification code");
-                resp.sendRedirect("confirm.jsp");
+                resp.sendRedirect(req.getContextPath() + "/confirm.jsp");
 
             } catch (ExpiredCodeException e) {
                 // TODO find a way to make this possible
                 session.setAttribute("error", "Code has expired please request a new one");
-                resp.sendRedirect("confirm.jsp");
+                resp.sendRedirect(req.getContextPath() + "/confirm.jsp");
 
             } catch (Exception e) {
                 session.setAttribute("error", "Something went wrong please try again");
-                resp.sendRedirect("confirm.jsp");
+                resp.sendRedirect(req.getContextPath() + "/confirm.jsp");
 
             }
         } else if ("login".equals(action)) {
@@ -169,8 +173,14 @@ public class AuthServlet extends HttpServlet {
                 AuthenticatedUser authUser = tokenVerifier.verify(result.idToken());
 
                 GenericDao<User> userDao = new GenericDao<>(User.class);
-                // get, the associated user sub id from the database
-                User dbUser = userDao.findBy("sub", authUser.getSub()).get(0);
+                List<User> dbUsers = userDao.findBy("sub", authUser.getSub());
+                if (dbUsers.isEmpty()) {
+                    log.error("Login: no DB user found for sub: {}", authUser.getSub());
+                    session.setAttribute("error", "Something went wrong please try again");
+                    resp.sendRedirect(req.getContextPath() + "/index.jsp");
+                    return;
+                }
+                User dbUser = dbUsers.get(0);
 
                 // Cognito user for token/claims e.g., email, name, sub, etc.
                 session.setAttribute("user", authUser);

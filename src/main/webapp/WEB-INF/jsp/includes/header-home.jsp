@@ -29,6 +29,7 @@
                         <c:when test="${not empty sessionScope.savedLocation}">
                             ${sessionScope.savedLocation.cityName}
                         </c:when>
+                        <c:otherwise>Set Location</c:otherwise>
                     </c:choose>
                 </button>
             </div>
