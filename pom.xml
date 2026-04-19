@@ -20,6 +20,7 @@
     <jaxb-version>4.0.2</jaxb-version>
     <aws-cog-verison>2.25.0</aws-cog-verison>
     <nimbus-version>9.37.3</nimbus-version>
+    <lombok-verison>1.18.36</lombok-verison>
     <maven-compiler-plugin-version>3.13.0</maven-compiler-plugin-version>
     <maven-surefire-plugin-version>3.5.0</maven-surefire-plugin-version>
   </properties>
@@ -143,6 +144,15 @@
       <groupId>com.nimbusds</groupId>
       <artifactId>nimbus-jose-jwt</artifactId>
       <version>${nimbus-version}</version>
+    </dependency>
+
+    <!-- ===== Project Lombok ===== -->
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${lombok-verison}</version>
+      <scope>provided</scope>
     </dependency>
 
   </dependencies>
