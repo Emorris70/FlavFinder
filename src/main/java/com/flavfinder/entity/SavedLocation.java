@@ -1,6 +1,7 @@
 package com.flavfinder.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Objects;
@@ -212,4 +213,5 @@ public class SavedLocation {
     public int hashCode() {
         return Objects.hash(id, cityName, zipCode, latitude, longitude, isDefault, user);
     }
+
 }

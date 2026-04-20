@@ -1,4 +1,6 @@
 package com.flavfinder.entity;
+import lombok.Data;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 import jakarta.persistence.*;
 
@@ -13,6 +15,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name="user")
+@Data
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
@@ -123,67 +126,55 @@ public class User {
         this.savedLocations = savedLocation;
     }
 
-    /**
-     * Gets the user id
-     *
-     * @return The user id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * Sets the user id
-     *
-     * @param id The id to be set for user
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
-     * Gets the user sub
-     * @return The user sub
-     */
-    public String getSub() {
-        return sub;
-    }
-
-    /**
-     * Sets the user sub
-     * @param sub The sub to be set
-     */
-    public void setSub(String sub) {
-        this.sub = sub;
-    }
-
-    /**
-     * Gets the use role
-     *
-     * @return The role of the user
-     */
-    public String getRole() {
-        return role;
-    }
-
-    /**
-     * Sets the user role
-     *
-     * @param role The user role to be set
-     */
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id && Objects.equals(sub, user.sub);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, sub);
-    }
+//    /**
+//     * Gets the user id
+//     *
+//     * @return The user id
+//     */
+//    public int getId() {
+//        return id;
+//    }
+//
+//    /**
+//     * Sets the user id
+//     *
+//     * @param id The id to be set for user
+//     */
+//    public void setId(int id) {
+//        this.id = id;
+//    }
+//
+//    /**
+//     * Gets the user sub
+//     * @return The user sub
+//     */
+//    public String getSub() {
+//        return sub;
+//    }
+//
+//    /**
+//     * Sets the user sub
+//     * @param sub The sub to be set
+//     */
+//    public void setSub(String sub) {
+//        this.sub = sub;
+//    }
+//
+//    /**
+//     * Gets the use role
+//     *
+//     * @return The role of the user
+//     */
+//    public String getRole() {
+//        return role;
+//    }
+//
+//    /**
+//     * Sets the user role
+//     *
+//     * @param role The user role to be set
+//     */
+//    public void setRole(String role) {
+//        this.role = role;
+//    }
 }
