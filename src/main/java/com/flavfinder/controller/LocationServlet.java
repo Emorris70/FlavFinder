@@ -100,7 +100,14 @@ public class LocationServlet extends HttpServlet {
         SavedLocation existing = locationDao.findByUserId(dbUser.getId());
 
         if (existing == null) {
-//            locationDao.insert(new SavedLocation(city, zip, lat, lon, false, dbUser));
+            locationDao.insert(SavedLocation.builder()
+                    .cityName(city)
+                    .zipCode(zip)
+                    .latitude(lat)
+                    .longitude(lon)
+                    .isDefault(false)
+                    .user(dbUser)
+                    .build());
         } else {
             existing.setCityName(city);
             existing.setZipCode(zip);
@@ -172,7 +179,12 @@ public class LocationServlet extends HttpServlet {
         SavedLocation existing = locationDao.findByUserId(dbUser.getId());
 
         if (existing == null) {
-//            locationDao.insert(new SavedLocation(null, null, parsedLat, parsedLon, true, dbUser));
+            locationDao.insert(SavedLocation.builder()
+                    .latitude(parsedLat)
+                    .longitude(parsedLon)
+                    .isDefault(true)
+                    .user(dbUser)
+                    .build());
         } else {
             existing.setCityName(null);
             existing.setZipCode(null);
