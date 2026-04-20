@@ -52,7 +52,7 @@ class LocationDaoTest {
         SavedLocation cityToUpdate = locationDao.getById(3);
 
         // change the city name
-        cityToUpdate.setCityName("Milwaukee");
+        cityToUpdate.setCityName("Madison");
         locationDao.update(cityToUpdate);
 
         // Verify

@@ -33,6 +33,8 @@ public class SavedLocation {
     @Column(name = "is_default")
     private boolean isDefault;
     @ManyToOne
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private User user;
 
 }
