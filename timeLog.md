@@ -16,7 +16,14 @@
 | 3/22/2026        | Refactored couple of tables: Renamed saved_restaurants to restaurant and added a new join table NOT query.                                                                                         | 2     |
 | 3/23 - 3/26/2026 | Added Cognito features VIA SDK, including proper classes to establish the connection, perform operations, and validation of JWS(JWT) token.                                                        | 24+   |
 | 4/3/2026         | Reduced redundent code and implemented some additional front end logic for both drop down and pop up features.                                                                                     | 7+    |
-
+| 4/7/2026         | Added location servlet class, wired up the location button logic, and minor POJO type fixes                                                                                                        | 7     |
+| 4/8/2026         | Added dao for location based logic.                                                                                                                                                                | 6     |
+| 4/10/2026        | Ensured locations get saved into the db.                                                                                                                                                           | 6     |
+| 4/11/2026        | Overal jsp adjustments, actaully loading in saved location coordiantes                                                                                                                             | 7     |
+| 4/12/2026        | Minor clean up of jsp pages and completion of a TODO.                                                                                                                                              | 2     |
+| 4/14/2026        | Started and finished the nearby logic.                                                                                                                                                             | 6+    |
+| 4/19/2026        | Overal clean ups, bug fixes, minor css edits, popup behavior fixes, and add lombok dependencies.                                                                                                   | 7     |
+| 4/20/2026        |                                                                                                                                                                                                    ||
 ## Notes
 The difference between junit-vintage and junit-jupiter:
 https://www.baeldung.com/java-junit-vintage-engine-vs-junit-jupiter-engine </br>

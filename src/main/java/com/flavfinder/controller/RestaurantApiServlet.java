@@ -1,7 +1,6 @@
 package com.flavfinder.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.flavfinder.APIdentity.BusinessItem;
 import com.flavfinder.APIdentity.LocalBusinessResponse;
 import com.flavfinder.APIdentity.TomTomResponse;
 import com.flavfinder.entity.SavedLocation;
@@ -29,7 +28,7 @@ import java.util.List;
  *
  * <p>Response codes:
  * <ul>
- *   <li>200 – JSON array of {@link BusinessItem} results</li>
+ *   <li>200 – JSON array of business results</li>
  *   <li>204 – authenticated but no location is set in session</li>
  *   <li>400 – missing or blank {@code category} query param</li>
  *   <li>401 – no active session / unauthenticated user</li>
