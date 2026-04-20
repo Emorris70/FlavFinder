@@ -68,6 +68,9 @@ header {
     box-shadow: 0 0 10px 0 rgba(254, 106, 0, 0.2) inset;
     padding: 5px 10px;
 }
+#location-toggle-btn:hover {
+    box-shadow:  0 0 10px 0 rgb(0, 61, 175, 0.2)inset;
+}
 #to-go-deco {
     background-color: var(--flav-red);
     color: white;

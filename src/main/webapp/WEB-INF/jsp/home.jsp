@@ -89,7 +89,7 @@
             </c:if>
 
             <%-- Nearby Restaurants Section --%>
-            <div class="restaurant-section">
+            <div class="restaurant-section" id="nearby-section">
                 <h3 class="section-title">
                     <img src="${pageContext.request.contextPath}/images/h-location-i.png" alt="Nearby icon" class="section-icon">
                     Nearby Restaurants
