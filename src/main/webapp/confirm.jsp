@@ -13,7 +13,7 @@
         </div>
         <c:remove var="error" scope="session"/>
     </c:if>
-    <form method="POST" action="auth" id="auth-exists">
+    <form method="POST" action="${pageContext.request.contextPath}/auth" id="auth-exists">
         <div class="con-wrapper">
             <label for="v-code">Verification code</label>
             <div class="input-wrapper">
