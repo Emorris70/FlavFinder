@@ -6,7 +6,6 @@
 <jsp:include page="header.jsp"/>
 <main class="container">
     <h1 class="m-h">Welcome to FlavFinder!</h1>
-<%--  TODO password error message should be more detailed --%>
     <c:if test="${not empty error}">
         <div class="errorMsg">
             <p class="error-msg">${error}</p>
