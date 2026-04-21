@@ -1,6 +1,7 @@
 package com.flavfinder.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.flavfinder.APIdentity.BusinessItem;
 import com.flavfinder.APIdentity.LocalBusinessResponse;
 import com.flavfinder.APIdentity.TomTomResponse;
 import com.flavfinder.entity.SavedLocation;
@@ -103,7 +104,7 @@ public class RestaurantApiServlet extends HttpServlet {
 
         List<BusinessItem> results;
         try {
-            LocalBusinessResponse apiResp = resources.callLocalBusiness(lat, lon, category + " restaurants");
+            LocalBusinessResponse apiResp = resources.callLocalBusiness(lat, lon, category + " food ");
             results = apiResp.getData() != null ? apiResp.getData() : Collections.emptyList();
             log.info("RestaurantApiServlet — {} results for category '{}'", results.size(), category);
         } catch (Exception e) {

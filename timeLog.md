@@ -23,7 +23,7 @@
 | 4/12/2026        | Minor clean up of jsp pages and completion of a TODO.                                                                                                                                              | 2     |
 | 4/14/2026        | Started and finished the nearby logic.                                                                                                                                                             | 6+    |
 | 4/19/2026        | Overal clean ups, bug fixes, minor css edits, popup behavior fixes, and add lombok dependencies.                                                                                                   | 7     |
-| 4/20/2026        |                                                                                                                                                                                                    ||
+| 4/20/2026        | Finished pill category logic and fixed any initial bugs/errors                                                                                                                                     | 8     |
 ## Notes
 The difference between junit-vintage and junit-jupiter:
 https://www.baeldung.com/java-junit-vintage-engine-vs-junit-jupiter-engine </br>

@@ -12,6 +12,7 @@ const initApp = () => {
     handleCurrentLocation();
     handleRestaurantCard();
     handleCategoryPills();
+    handleSidebar();
 }
 
 /**
@@ -384,6 +385,47 @@ const buildCard = (r) => {
         </div>`;
 
     return card;
+}
+
+/**
+ * Handles the mobile sidebar (hamburger menu).
+ *
+ * Wires up three entry points that open the sidebar:
+ *   - Hamburger button in the header
+ * And two that close it:
+ *   - The × close button inside the sidebar
+ *   - Clicking the dimmed overlay behind the sidebar
+ *
+ * Opening adds `.open` to both the sidebar and overlay so CSS transitions
+ * handle the slide-in and fade-in respectively. Closing reverses that.
+ *
+ * The sidebar location button mirrors the main header location button —
+ * clicking it closes the sidebar then triggers the location popup so the
+ * user lands in the right flow without any visible interruption.
+ *
+ * @returns {void}
+ */
+const handleSidebar = () => {
+    const hamburger   = document.getElementById('hamburger');
+    const sidebar     = document.getElementById('sidebar');
+    const overlay     = document.getElementById('sidebar-overlay');
+    const closeBtn    = document.getElementById('sidebar-close');
+    const sidebarLocBtn = document.getElementById('sidebar-location-btn');
+
+    if (!hamburger || !sidebar || !overlay) return;
+
+    const openSidebar  = () => { sidebar.classList.add('open');    overlay.classList.add('open'); };
+    const closeSidebar = () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); };
+
+    hamburger.addEventListener('click', openSidebar);
+    closeBtn?.addEventListener('click', closeSidebar);
+    overlay.addEventListener('click', closeSidebar);
+
+    // Mirror the header location button — close sidebar first, then open popup
+    sidebarLocBtn?.addEventListener('click', () => {
+        closeSidebar();
+        document.getElementById('location-toggle-btn')?.click();
+    });
 }
 
 window.addEventListener("DOMContentLoaded", initApp);
