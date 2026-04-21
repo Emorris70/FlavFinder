@@ -7,9 +7,9 @@
 <main class="container">
     <h1 class="m-h">Welcome to FlavFinder!</h1>
 <%--  TODO password error message should be more detailed --%>
-    <c:if test="${not empty sessionScope.error}">
+    <c:if test="${not empty error}">
         <div class="errorMsg">
-            <p class="error-msg">${sessionScope.error}</p>
+            <p class="error-msg">${error}</p>
         </div>
         <c:remove var="error" scope="session"/>
     </c:if>
@@ -23,7 +23,7 @@
                         name="first_name"
                         id="first_name"
                         placeholder="First name"
-                        required
+                        value="${param.first_name}"
                 />
             </div>
         </div>
@@ -35,7 +35,7 @@
                         name="email"
                         id="email"
                         placeholder="name@host.com"
-                        required
+                        value="${param.email}"
                 />
                 <img src="images/mail.png" alt="mail icon" />
             </div>
@@ -53,8 +53,29 @@
                         required
                 />
             </div>
-            <div class="pass-requriments">
-<%--    TODO add detail of pass requirments            --%>
+            <div class="pass-requirements">
+                <ul class="req-list">
+                    <li class="req-item" id="req-length">
+                        <span class="req-dot"></span>
+                        <span class="req-text">At least 8 characters</span>
+                    </li>
+                    <li class="req-item" id="req-uppercase">
+                        <span class="req-dot"></span>
+                        <span class="req-text">At least 1 uppercase letter</span>
+                    </li>
+                    <li class="req-item" id="req-lowercase">
+                        <span class="req-dot"></span>
+                        <span class="req-text">At least 1 lowercase letter</span>
+                    </li>
+                    <li class="req-item" id="req-number">
+                        <span class="req-dot"></span>
+                        <span class="req-text">At least 1 number</span>
+                    </li>
+                    <li class="req-item" id="req-special">
+                        <span class="req-dot"></span>
+                        <span class="req-text">At least 1 special character</span>
+                    </li>
+                </ul>
             </div>
         </div>
         <p class="dir-deco">
@@ -70,5 +91,40 @@
         </div>
     </form>
 </main>
+<script>
+    (() => {
+        const passwordInput  = document.getElementById('password');
+        const requirementsEl = document.querySelector('.pass-requirements');
+        if (!passwordInput || !requirementsEl) return;
+
+        const rules = [
+            { id: 'req-length',    test: v => v.length >= 8 },
+            { id: 'req-uppercase', test: v => /[A-Z]/.test(v) },
+            { id: 'req-lowercase', test: v => /[a-z]/.test(v) },
+            { id: 'req-number',    test: v => /[0-9]/.test(v) },
+            { id: 'req-special',   test: v => /[^A-Za-z0-9]/.test(v) },
+        ];
+
+        // Expand on focus
+        passwordInput.addEventListener('focus', () => {
+            requirementsEl.classList.add('expanded');
+        });
+
+        // Collapse on blur only if the field is still empty
+        passwordInput.addEventListener('blur', () => {
+            if (passwordInput.value === '') {
+                requirementsEl.classList.remove('expanded');
+            }
+        });
+
+        // Validate each rule on every keystroke
+        passwordInput.addEventListener('input', () => {
+            const val = passwordInput.value;
+            rules.forEach(({ id, test }) => {
+                document.getElementById(id)?.classList.toggle('req-met', test(val));
+            });
+        });
+    })();
+</script>
 </body>
 </html>

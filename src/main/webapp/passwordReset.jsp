@@ -5,15 +5,17 @@
 <body>
 <jsp:include page="header.jsp"/>
 <main class="container">
-    <h1 class="m-h">Forgot Password?</h1>
-    <p class="p-deco">Enter your email to receive a rest link</p>
-    <c:if test="${not empty sessionScope.error}">
+    <div class="c-col">
+        <h1 class="m-h">Forgot Password?</h1>
+        <p class="p-deco reset-p-1">Enter your email to begin</p>
+    </div>
+    <c:if test="${not empty error}">
         <div class="errorMsg">
-            <p class="error-msg">${sessionScope.error}</p>
+            <p class="error-msg">${error}</p>
         </div>
         <c:remove var="error" scope="session"/>
     </c:if>
-    <form method="POST" action="auth" id="auth-form">
+    <form method="POST" action="${pageContext.request.contextPath}/auth" id="auth-form">
         <div class="con-wrapper">
             <label for="email">email</label>
             <div class="input-wrapper">
@@ -22,13 +24,13 @@
                         name="email"
                         id="email"
                         placeholder="name@host.com"
-                        required
+                        value="${param.email}"
                 />
                 <img src="images/mail.png" alt="mail icon" />
             </div>
         </div>
         <div class="btn-container">
-            <button type="submit" class="btn-submit">
+            <button type="submit" name="action" value="forgotPassword" class="btn-submit">
                 Reset
             </button>
         </div>

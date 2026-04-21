@@ -39,6 +39,7 @@ import java.util.List;
 )
 public class AuthServlet extends HttpServlet {
     private final Logger log = LogManager.getLogger(this.getClass());
+
     /**
      * Forwards the end-user to the desired page.
      * This action is triggered through an anchor tag
@@ -49,8 +50,7 @@ public class AuthServlet extends HttpServlet {
      * @throws IOException If a Input/Output exception occurs.
      */
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException
-    {
+            throws ServletException, IOException {
         HttpSession session = req.getSession(false);
 
         if (session != null) {
@@ -61,7 +61,7 @@ public class AuthServlet extends HttpServlet {
 
         if ("sign-up".equals(req.getParameter("action"))) {
             url = "/signup.jsp";
-            req.setAttribute("page" ,"Sign up - FlavFinder");
+            req.setAttribute("page", "Sign up - FlavFinder");
 
         } else if ("login".equals(req.getParameter("action"))) {
             url = "/index.jsp";
@@ -69,6 +69,10 @@ public class AuthServlet extends HttpServlet {
 
         } else if ("reset-pass".equals(req.getParameter("action"))) {
             url = "/passwordReset.jsp";
+            req.setAttribute("page", "Reset Password - FlavFinder");
+
+        } else if ("reset-pass-confirm".equals(req.getParameter("action"))) {
+            url = "/resetPasswordConfirm.jsp";
             req.setAttribute("page", "Reset Password - FlavFinder");
 
         } else {
@@ -100,12 +104,22 @@ public class AuthServlet extends HttpServlet {
 
         String action = req.getParameter("action");
 
-        // get the submit button values
         if ("signUp".equals(action)) {
-            // register the user
             String firstName = req.getParameter("first_name");
             String email = req.getParameter("email");
             String password = req.getParameter("password");
+
+            if (anyBlank(firstName, password)) {
+                req.setAttribute("error", "Please fill out all fields");
+                req.getRequestDispatcher("/signup.jsp").forward(req, resp);
+                return;
+            }
+
+            if (!isValidEmail(email)) {
+                req.setAttribute("error", "Please enter a valid email address");
+                req.getRequestDispatcher("/signup.jsp").forward(req, resp);
+                return;
+            }
 
             try {
                 String sub = cognitoAuth.register(firstName, email, password);
@@ -142,10 +156,21 @@ public class AuthServlet extends HttpServlet {
         } else if ("confirm".equals(action)) {
             String email = (String) session.getAttribute("pendingConfirmEmail");
             String code = req.getParameter("v-code");
+
+            if (email == null) {
+                resp.sendRedirect(req.getContextPath() + "/signup.jsp");
+                return;
+            }
+
+            if (anyBlank(code)) {
+                req.setAttribute("error", "Please enter the verification code");
+                req.getRequestDispatcher("/confirm.jsp").forward(req, resp);
+                return;
+            }
+
             try {
                 cognitoAuth.confirmSignUp(email, code);
 
-                // clean up
                 session.removeAttribute("pendingConfirmEmail");
                 resp.sendRedirect(req.getContextPath() + "/index.jsp");
 
@@ -163,12 +188,18 @@ public class AuthServlet extends HttpServlet {
                 resp.sendRedirect(req.getContextPath() + "/confirm.jsp");
 
             }
+
         } else if ("login".equals(action)) {
             String email = req.getParameter("email");
             String password = req.getParameter("password");
 
+            if (!isValidEmail(email) || anyBlank(password)) {
+                req.setAttribute("error", "Please fill out all fields");
+                req.getRequestDispatcher("/index.jsp").forward(req, resp);
+                return;
+            }
+
             try {
-                // Authenticate against Cognito
                 AuthenticationResultType result = cognitoAuth.login(email, password);
                 AuthenticatedUser authUser = tokenVerifier.verify(result.idToken());
 
@@ -190,19 +221,15 @@ public class AuthServlet extends HttpServlet {
                 // e.g., int userId = dbUser.getId();
                 session.setAttribute("dbUser", dbUser);
 
-                // Restore saved locations from DB
                 SavedLocationDao locationDao = new SavedLocationDao();
                 SavedLocation savedLocation = locationDao.findByUserId(dbUser.getId());
 
                 if (savedLocation != null) {
                     if (savedLocation.isDefault()) {
-                        // Browser geolocation, restore lat/lon
                         session.setAttribute("userLat", savedLocation.getLatitude());
                         session.setAttribute("userLon", savedLocation.getLongitude());
                         log.info("Login: restored geolocation: {}, {}", savedLocation.getLatitude(), savedLocation.getLongitude());
                     } else {
-                        // Custom location, restore TomTom response isn't available,
-                        // so store the saved location entity itself for HomeServlet to use
                         session.setAttribute("savedLocation", savedLocation);
                         log.info("Login: restored custom location: {}", savedLocation.getCityName());
                     }
@@ -210,27 +237,122 @@ public class AuthServlet extends HttpServlet {
                     log.info("Login: no saved location found for userId={}", dbUser.getId());
                 }
 
-                // redirect to the HomeServlet route(/home)
                 resp.sendRedirect(req.getContextPath() + "/home");
 
             } catch (NotAuthorizedException e) {
                 session.setAttribute("error", "Incorrect email or password");
-                resp.sendRedirect("index.jsp");
+                resp.sendRedirect(req.getContextPath() + "/index.jsp");
 
             } catch (UserNotConfirmedException e) {
                 session.setAttribute("error", "Please confirm your email before logging in");
-                resp.sendRedirect("index.jsp");
+                resp.sendRedirect(req.getContextPath() + "/index.jsp");
 
             } catch (UserNotFoundException e) {
                 session.setAttribute("error", "No account found with that email");
-                resp.sendRedirect("index.jsp");
+                resp.sendRedirect(req.getContextPath() + "/index.jsp");
 
             } catch (Exception e) {
                 session.setAttribute("error", "Something went wrong please try again");
-                resp.sendRedirect("index.jsp");
+                resp.sendRedirect(req.getContextPath() + "/index.jsp");
+
+            }
+
+        } else if ("forgotPassword".equals(action)) {
+            String email = req.getParameter("email");
+
+            if (!isValidEmail(email)) {
+                req.setAttribute("error", "Please enter a valid email address");
+                req.getRequestDispatcher("/passwordReset.jsp").forward(req, resp);
+                return;
+            }
+
+            try {
+                cognitoAuth.forgotPassword(email);
+                session.setAttribute("resetEmail", email);
+                resp.sendRedirect(req.getContextPath() + "/auth?action=reset-pass-confirm");
+
+            } catch (UserNotFoundException e) {
+                session.setAttribute("error", "No account found with that email");
+                resp.sendRedirect(req.getContextPath() + "/passwordReset.jsp");
+
+            } catch (InvalidParameterException e) {
+                session.setAttribute("error", "Account not confirmed. Please verify your email first");
+                resp.sendRedirect(req.getContextPath() + "/passwordReset.jsp");
+
+            } catch (TooManyRequestsException e) {
+                session.setAttribute("error", "Too many attempts, please try again later");
+                resp.sendRedirect(req.getContextPath() + "/passwordReset.jsp");
+
+            } catch (Exception e) {
+                session.setAttribute("error", "Something went wrong please try again");
+                resp.sendRedirect(req.getContextPath() + "/passwordReset.jsp");
+
+            }
+
+        } else if ("confirmForgotPassword".equals(action)) {
+            String email = (String) session.getAttribute("resetEmail");
+            String code = req.getParameter("v-code");
+            String newPassword = req.getParameter("password");
+
+            if (email == null) {
+                resp.sendRedirect(req.getContextPath() + "/auth?action=reset-pass");
+                return;
+            }
+
+            if (anyBlank(code, newPassword)) {
+                req.setAttribute("error", "Please fill out all fields");
+                req.getRequestDispatcher("/resetPasswordConfirm.jsp").forward(req, resp);
+                return;
+            }
+
+            try {
+                cognitoAuth.confirmForgotPassword(email, code, newPassword);
+                session.removeAttribute("resetEmail");
+                session.setAttribute("successMsg", "Password reset successfully. Please log in.");
+                resp.sendRedirect(req.getContextPath() + "/index.jsp");
+
+            } catch (CodeMismatchException e) {
+                session.setAttribute("error", "Invalid verification code");
+                resp.sendRedirect(req.getContextPath() + "/resetPasswordConfirm.jsp");
+
+            } catch (ExpiredCodeException e) {
+                session.setAttribute("error", "Code has expired, please request a new one");
+                resp.sendRedirect(req.getContextPath() + "/passwordReset.jsp");
+
+            } catch (InvalidPasswordException e) {
+                session.setAttribute("error", "Password does not meet requirements");
+                resp.sendRedirect(req.getContextPath() + "/resetPasswordConfirm.jsp");
+
+            } catch (TooManyRequestsException e) {
+                session.setAttribute("error", "Too many attempts, please try again later");
+                resp.sendRedirect(req.getContextPath() + "/resetPasswordConfirm.jsp");
+
+            } catch (Exception e) {
+                session.setAttribute("error", "Something went wrong please try again");
+                resp.sendRedirect(req.getContextPath() + "/resetPasswordConfirm.jsp");
 
             }
         }
+    }
 
+    /**
+     * Checks if any of the given values are blank.
+     * @param values The values to check.
+     * @return true if any value is blank or null, false otherwise.
+     */
+    private boolean anyBlank(String... values) {
+        for (String v : values) {
+            if (v == null || v.isBlank()) return true;
+        }
+        return false;
+    }
+
+    /**
+     * Checks if the given email address is valid.
+     * @param email The email address to validate.
+     * @return true if the email address is valid, false otherwise.
+     */
+    private boolean isValidEmail(String email) {
+        return !anyBlank(email) && email.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$");
     }
 }

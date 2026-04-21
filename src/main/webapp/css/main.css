@@ -67,3 +67,16 @@ a {
     50% { transform: translateX(5px); }
     75% { transform: translateX(-5px); }
 }
+.success-msg {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #1a7f37;
+    background-color: #f0faf3;
+    border: 1px solid #c3e6cb;
+    border-radius: 6px;
+    text-align: center;
+    box-sizing: border-box;
+    animation: fadeIn 0.3s ease-in;
+}

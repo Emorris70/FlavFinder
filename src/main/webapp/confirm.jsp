@@ -7,9 +7,9 @@
 <main class="container override-animation">
     <h1 class="m-h">Check your email</h1>
     <p class="p-deco s-p">Enter the code that we sent to the email address. The code expires in 15 minutes.</p>
-    <c:if test="${not empty sessionScope.error}">
+    <c:if test="${not empty error}">
         <div class="errorMsg">
-            <p class="error-msg">${sessionScope.error}</p>
+            <p class="error-msg">${error}</p>
         </div>
         <c:remove var="error" scope="session"/>
     </c:if>
@@ -17,7 +17,7 @@
         <div class="con-wrapper">
             <label for="v-code">Verification code</label>
             <div class="input-wrapper">
-                <input type="text" name="v-code" id="v-code" placeholder="Enter code" />
+                <input type="text" name="v-code" id="v-code" placeholder="Enter code" value="${param['v-code']}" />
             </div>
         </div>
         <div class="btn-container sw-dir">

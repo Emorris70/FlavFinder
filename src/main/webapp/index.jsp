@@ -6,9 +6,15 @@
 <jsp:include page="header.jsp"/>
 <main class="container">
         <h1 class="m-h">Welcome Back!</h1>
-        <c:if test="${not empty sessionScope.error}">
+        <c:if test="${not empty sessionScope.successMsg}">
             <div class="errorMsg">
-                <p class="error-msg">${sessionScope.error}</p>
+                <p class="success-msg">${sessionScope.successMsg}</p>
+            </div>
+            <c:remove var="successMsg" scope="session"/>
+        </c:if>
+        <c:if test="${not empty error}">
+            <div class="errorMsg">
+                <p class="error-msg">${error}</p>
             </div>
             <c:remove var="error" scope="session"/>
         </c:if>
@@ -17,7 +23,7 @@
                 <label for="email">email</label>
                 <div class="input-wrapper">
                     <img src="images/mail.png" alt="mail icon" />
-                    <input type="email" name="email" id="email" placeholder="name@host.com" />
+                    <input type="email" name="email" id="email" placeholder="name@host.com" value="${param.email}" />
                 </div>
             </div>
             <div class="con-wrapper">
