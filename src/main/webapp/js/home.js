@@ -1,5 +1,5 @@
 "use strict";
-// TODO Plan on changing the file name to something more descriptive.
+
 /**
  * Initializes the application.
  *
