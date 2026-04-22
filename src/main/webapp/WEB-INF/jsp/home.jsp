@@ -163,6 +163,6 @@
 <script>
     const contextPath = "${pageContext.request.contextPath}";
 </script>
-<script src="${pageContext.request.contextPath}/js/script.js"></script>
+<script src="${pageContext.request.contextPath}/js/home.js"></script>
 </body>
 </html>
