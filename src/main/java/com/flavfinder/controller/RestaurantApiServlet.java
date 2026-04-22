@@ -17,7 +17,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * JSON endpoint that returns nearby restaurants filtered by cuisine category.
@@ -26,6 +28,11 @@ import java.util.List;
  * <p>Reads the user's coordinates from whichever location state is present in the
  * session (geolocation → TomTom custom → saved DB location), then delegates to
  * the Local Business API using the requested category as the search query.
+ *
+ * <p>Every result returned by the API is stored in the session-level
+ * {@code restaurantCache} ({@code Map<String, BusinessItem>}) so that
+ * {@link RestaurantViewServlet} can render the detail page without an
+ * additional API call.
  *
  * <p>Response codes:
  * <ul>
@@ -113,8 +120,35 @@ public class RestaurantApiServlet extends HttpServlet {
             return;
         }
 
+        cacheResults(session, results);
+
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         mapper.writeValue(resp.getWriter(), results);
+    }
+
+    /**
+     * Stores each result in the session-level {@code restaurantCache} map,
+     * creating the map if it does not yet exist. Keyed by {@code place_id}.
+     *
+     * <p>This allows {@link RestaurantViewServlet} to serve the detail page
+     * from session without spending an additional API quota call.
+     *
+     * @param session The current HTTP session.
+     * @param results The list of {@link BusinessItem} objects to cache.
+     */
+    @SuppressWarnings("unchecked")
+    private void cacheResults(HttpSession session, List<BusinessItem> results) {
+        Map<String, BusinessItem> cache =
+                (Map<String, BusinessItem>) session.getAttribute("restaurantCache");
+        if (cache == null) {
+            cache = new HashMap<>();
+            session.setAttribute("restaurantCache", cache);
+        }
+        for (BusinessItem item : results) {
+            if (item.getPlaceId() != null) {
+                cache.put(item.getPlaceId(), item);
+            }
+        }
     }
 }
