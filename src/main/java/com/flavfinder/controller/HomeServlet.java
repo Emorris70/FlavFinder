@@ -1,9 +1,11 @@
 package com.flavfinder.controller;
 
-import com.flavfinder.APIdentity.LocalBusinessResponse;
 import com.flavfinder.APIdentity.TomTomResponse;
 import com.flavfinder.entity.SavedLocation;
+import com.flavfinder.entity.SavedRestaurant;
+import com.flavfinder.entity.User;
 import com.flavfinder.persistence.Resources;
+import com.flavfinder.persistence.SavedRestaurantDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,6 +16,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Handles forwarding authenticated users to the home page.
@@ -24,10 +29,12 @@ import java.io.IOException;
 public class HomeServlet extends HttpServlet {
     private static final Logger log = LogManager.getLogger(HomeServlet.class);
     private Resources resources;
+    private SavedRestaurantDao savedRestaurantDao;
 
     @Override
     public void init() throws ServletException {
         resources = (Resources) getServletContext().getAttribute("resources");
+        savedRestaurantDao = new SavedRestaurantDao();
     }
 
     /**
@@ -103,6 +110,16 @@ public class HomeServlet extends HttpServlet {
 //                log.error("HomeServlet — failed to fetch nearby restaurants", e);
 //            }
 //        }
+
+        if (session.getAttribute("savedPlaceIds") == null) {
+            User user = (User) session.getAttribute("dbUser");
+            List<SavedRestaurant> saved = savedRestaurantDao.findByUserId(user.getId());
+            Set<String> placeIds = new HashSet<>();
+            for (SavedRestaurant sr : saved) {
+                placeIds.add(sr.getRestaurant().getApiRestaurantId());
+            }
+            session.setAttribute("savedPlaceIds", placeIds);
+        }
 
         log.info("HomeServlet - forwarding to home.jsp");
         session.setAttribute("page", "Home - FlavFinder");

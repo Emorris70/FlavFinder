@@ -1,4 +1,4 @@
-<%@ include file= "includes/taglib.jsp" %>
+<%@ include file="includes/taglib.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <jsp:include page="includes/app-head.jsp"/>
@@ -6,6 +6,81 @@
 <jsp:include page="includes/header-home.jsp"/>
 <main>
     <jsp:include page="includes/locationPopUp.jsp"/>
+    <div class="home-content">
 
+        <div class="restaurant-section">
+            <h2 class="section-heading">Saved Restaurants</h2>
+
+            <c:choose>
+                <c:when test="${not empty requestScope.savedRestaurants}">
+                    <div class="saved-grid">
+                        <c:forEach var="restaurant" items="${requestScope.savedRestaurants}">
+                            <a href="${pageContext.request.contextPath}/restaurant?placeId=${restaurant.placeId}"
+                               class="restaurant-card card-saved">
+                                <div class="card-img-wrap">
+                                    <c:choose>
+                                        <c:when test="${not empty restaurant.photosSample}">
+                                            <img src="${restaurant.photosSample[0].photoUrl}"
+                                                 alt="${restaurant.name}" class="card-img"
+                                                 referrerpolicy="no-referrer">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img src="${pageContext.request.contextPath}/images/near-me.png"
+                                                 alt="${restaurant.name}" class="card-img">
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <button class="fav-btn saved" data-place-id="${restaurant.placeId}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                            <path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-title-row">
+                                        <span class="card-name">${restaurant.name}</span>
+                                        <span class="card-price">${not empty restaurant.priceLevel ? restaurant.priceLevel : ''}</span>
+                                    </div>
+                                    <c:if test="${restaurant.rating > 0}">
+                                        <div class="card-rating">
+                                            <svg class="star-icon" viewBox="0 0 24 24">
+                                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                            </svg>
+                                            <span class="rating-val">${restaurant.rating}</span>
+                                            <span class="review-count">(${restaurant.reviewCount})</span>
+                                            <span class="card-separator">·</span>
+                                            <span class="card-type">${restaurant.type}</span>
+                                        </div>
+                                    </c:if>
+                                    <div class="card-footer-row">
+                                        <svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                            <path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/>
+                                        </svg>
+                                        <span class="card-distance" data-lat="${restaurant.latitude}" data-lon="${restaurant.longitude}">--</span>
+                                        <span class="open-status ${not empty restaurant.openingStatus and restaurant.openingStatus.toLowerCase().contains('open') ? 'status-open' : 'status-closed'}">
+                                            <c:choose>
+                                                <c:when test="${not empty restaurant.openingStatus and restaurant.openingStatus.toLowerCase().contains('open')}">Open</c:when>
+                                                <c:when test="${not empty restaurant.openingStatus and restaurant.openingStatus.toLowerCase().contains('close')}">Closed</c:when>
+                                                <c:otherwise>--</c:otherwise>
+                                            </c:choose>
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </c:forEach>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <p class="no-results">No saved restaurants yet. Heart a restaurant to save it here.</p>
+                </c:otherwise>
+            </c:choose>
+        </div>
+
+    </div>
+</main>
+<footer></footer>
+<script>
+    const contextPath = "${pageContext.request.contextPath}";
+</script>
+<script src="${pageContext.request.contextPath}/js/home.js"></script>
 </body>
 </html>

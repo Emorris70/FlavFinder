@@ -565,6 +565,27 @@ input[type="radio"]:checked {
     scrollbar-width: none;
 }
 
+/* ── Saved Restaurants flex-wrap fixed-width cards ── */
+.saved-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+}
+.card-saved {
+    width: 280px;
+    flex-shrink: 0;
+    height: 280px;
+}
+.card-saved .card-img-wrap {
+    height: 160px;
+    flex-shrink: 0;
+}
+@media (max-width: 600px) {
+    .card-saved {
+        width: 100%;
+    }
+}
+
 /* ── Empty State ── */
 .no-results {
     color: var(--mute-contrast);

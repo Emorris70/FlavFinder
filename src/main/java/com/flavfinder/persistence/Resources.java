@@ -1,5 +1,6 @@
 package com.flavfinder.persistence;
 
+import com.flavfinder.APIdentity.BusinessItem;
 import com.flavfinder.APIdentity.LocalBusinessResponse;
 import com.flavfinder.APIdentity.TomTomResponse;
 import org.apache.logging.log4j.LogManager;
@@ -21,6 +22,7 @@ public class Resources extends GenericRequest implements PropertiesLoader {
     private static final Logger log = LogManager.getLogger(Resources.class);
     private static final long CACHE_TTL_MS = 15 * 60 * 1000L; // 15 minutes
 
+    /** Wraps a LocalBusinessResponse with a creation timestamp for TTL checks. */
     private static final class CacheEntry {
         final LocalBusinessResponse response;
         final long createdAt;
@@ -28,12 +30,30 @@ public class Resources extends GenericRequest implements PropertiesLoader {
             this.response = response;
             this.createdAt = System.currentTimeMillis();
         }
+        /** Returns true if this entry has exceeded {@code CACHE_TTL_MS}. */
         boolean isExpired() {
             return System.currentTimeMillis() - createdAt > CACHE_TTL_MS;
         }
     }
 
+    private static final long ITEM_TTL_MS = 24 * 60 * 60 * 1000L; // 24 hours
+
+    /** Wraps a single BusinessItem with a creation timestamp for TTL checks. */
+    private static final class ItemEntry {
+        final BusinessItem item;
+        final long createdAt;
+        ItemEntry(BusinessItem item) {
+            this.item = item;
+            this.createdAt = System.currentTimeMillis();
+        }
+        /** Returns true if this entry has exceeded {@code ITEM_TTL_MS}. */
+        boolean isExpired() {
+            return System.currentTimeMillis() - createdAt > ITEM_TTL_MS;
+        }
+    }
+
     private final ConcurrentHashMap<String, CacheEntry> businessCache = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, ItemEntry>  itemCache     = new ConcurrentHashMap<>();
 
     private Properties properties;
 
@@ -125,5 +145,31 @@ public class Resources extends GenericRequest implements PropertiesLoader {
 
         businessCache.put(cacheKey, new CacheEntry(response));
         return response;
+    }
+
+    /**
+     * Stores a single {@link BusinessItem} in the item cache keyed by its place ID.
+     * Overwrites any existing entry. Used at save-time so the detail page can
+     * hydrate the saved restaurant without an additional API call.
+     *
+     * @param placeId The API place ID (api_restaurant_id).
+     * @param item    The full BusinessItem to cache.
+     */
+    public void putItem(String placeId, BusinessItem item) {
+        itemCache.put(placeId, new ItemEntry(item));
+    }
+
+    /**
+     * Retrieves a cached {@link BusinessItem} by place ID if it exists and has not
+     * exceeded the 24-hour TTL. Expired entries are evicted on access.
+     *
+     * @param placeId The API place ID to look up.
+     * @return The cached BusinessItem, or {@code null} if absent or expired.
+     */
+    public BusinessItem getItem(String placeId) {
+        ItemEntry entry = itemCache.get(placeId);
+        if (entry != null && !entry.isExpired()) return entry.item;
+        itemCache.remove(placeId);
+        return null;
     }
 }

@@ -9,7 +9,9 @@ import java.util.List;
 
 /**
  * Represents a restaurant snapshot stored in the DB.
- * Snapshot fields are populated at save time from the API response.
+ * Snapshot fields are populated at save time from the API response
+ * and are used for distance calculations and fallback display when
+ * the full {@code BusinessItem} is not in the app-level cache.
  *
  * @author EmileM
  */

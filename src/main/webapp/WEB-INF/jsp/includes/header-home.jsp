@@ -36,7 +36,7 @@
             <div class="location-dropdown-content"></div>
         </div>
         <div class="to-go-container">
-            <a href="#" id="to-go-deco">
+            <a href="${pageContext.request.contextPath}/saved" id="to-go-deco">
                 <img src="${pageContext.request.contextPath}/images/favorite-heart.png"
                      class="inner-icon" id="to-go-icon" alt="To-Go icon">
                 To-Go
@@ -51,7 +51,7 @@
             <div class="user-dropdown-content drop-r">
                 <div class="to-go user-d-c">
                     <img src="${pageContext.request.contextPath}/images/favorite.png" alt="to-go icon" class="to-go-icon h-icon">
-                    <a href="#">To-go</a>
+                    <a href="${pageContext.request.contextPath}/saved">To-go</a>
                 </div>
                 <div class="settings user-d-c">
                     <img src="${pageContext.request.contextPath}/images/settings.png" alt="settings icon" class="settings-icon h-icon">
@@ -98,7 +98,7 @@
             </button>
         </li>
         <li>
-            <a href="#" class="sidebar-item">
+            <a href="${pageContext.request.contextPath}/saved" class="sidebar-item">
                 <img src="${pageContext.request.contextPath}/images/gray-heart.png" class="inner-icon" alt="to-go icon">
                 To-Go
             </a>

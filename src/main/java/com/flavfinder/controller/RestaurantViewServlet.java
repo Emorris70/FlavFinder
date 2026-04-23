@@ -1,6 +1,7 @@
 package com.flavfinder.controller;
 
 import com.flavfinder.APIdentity.BusinessItem;
+import com.flavfinder.persistence.Resources;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -43,6 +44,12 @@ public class RestaurantViewServlet extends HttpServlet {
 
     private static final Logger log = LogManager.getLogger(RestaurantViewServlet.class);
     private static final int MAX_RECENTLY_VIEWED = 10;
+    private Resources resources;
+
+    @Override
+    public void init() throws ServletException {
+        resources = (Resources) getServletContext().getAttribute("resources");
+    }
 
     /**
      * Resolves and renders the restaurant detail page.
@@ -75,7 +82,14 @@ public class RestaurantViewServlet extends HttpServlet {
         BusinessItem restaurant = cache != null ? cache.get(placeId) : null;
 
         if (restaurant == null) {
-            log.warn("RestaurantViewServlet — placeId '{}' not in session cache, redirecting home", placeId);
+            restaurant = resources.getItem(placeId);
+            if (restaurant != null && cache != null) {
+                cache.put(placeId, restaurant);
+            }
+        }
+
+        if (restaurant == null) {
+            log.warn("RestaurantViewServlet — placeId '{}' not found in any cache, redirecting home", placeId);
             resp.sendRedirect(req.getContextPath() + "/home");
             return;
         }

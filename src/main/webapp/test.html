@@ -3,74 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test page</title>
-<!--    <link rel="stylesheet" href="css/auth.css">-->
+    <title>FlavFinder — Design Sandbox</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/homePage.css">
     <link rel="stylesheet" href="css/cardView.css">
-    <script src="js/home.js"></script>
+    <style>
+        /* ── Sandbox helpers (not for production) ── */
+        .demo-label {
+            text-align: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #aaa;
+            padding: 2rem 0 0.5rem;
+        }
+        .demo-divider {
+            border: none;
+            border-top: 2px dashed #e0e0e0;
+            margin: 2.5rem 2rem;
+        }
+    </style>
 </head>
 <body>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 1 — HOME PAGE
+     ═══════════════════════════════════════════════ -->
+<p class="demo-label">Home Page</p>
+
 <header>
-<!--&lt;!&ndash;    Ensure to use the includes tag   &ndash;&gt;-->
-        <div class="a-lc" role="img" aria-label="FlavFinder Logo">
-            <h1 class="main-h1">
-                FL
-                <span class="img-c">
-                    <img
-                            src="images/location.png"
-                            alt="location pin icon"
-                            class="img-t"
-                    /> </span
-                >V
-            </h1>
+    <div class="a-lc" role="img" aria-label="FlavFinder Logo">
+        <h1 class="main-h1">FL<span class="img-c"><img src="images/location.png" alt="location pin" class="img-t"/></span>V</h1>
+    </div>
+    <div class="search-c">
+        <img src="images/search-icon.png" class="inner-icon search-icon" alt="search icon">
+        <input type="text" id="search" name="search-term" placeholder="Search for cuisines...">
+        <span id="filter-trigger">
+            <img src="images/tune.png" class="inner-icon" alt="filter">
+        </span>
+    </div>
+    <div class="user-content">
+        <div class="location-drop-container">
+            <button class="location-toggle-btn" id="location-toggle-btn">
+                <img src="images/near-me.png" class="inner-icon" alt="near me">
+                Current Location
+            </button>
         </div>
-        <div class="search-c">
-            <img src="images/search-icon.png" class="inner-icon search-icon" alt="search icon">
-            <input type="text" id="search" name="search-term" placeholder="Search for cuisines...">
-            <span id="filter-trigger" class="filter-btn">
-                <img src="images/tune.png" class="inner-icon filter-icon" alt="filter icon">
-            </span>
-<!--    add drop down container/content        -->
+        <div class="to-go-container">
+            <a href="#togo-demo" id="to-go-deco">
+                <img src="images/favorite-heart.png" class="inner-icon" id="to-go-icon" alt="To-Go">
+                To-Go
+            </a>
         </div>
-        <div class="user-content">
-            <div class="location-drop-container">
-                <div class="location-p">
-                    <button class="location-toggle-btn" id="location-toggle-btn">
-                        <img src="images/near-me.png" class="inner-icon" alt="Near me Icon">
-                        current location
-                    </button>
-                </div>
-                <!--    add drop down content        -->
+        <div class="user-drop-container">
+            <div class="user-toggle-btn">
+                <button class="user-pf dropdown" id="user-pf">em</button>
             </div>
-            <div class="to-go-container">
-<!--     Ensure to add a link to the to-go page when completed           -->
-                <a href="#" id="to-go-deco">
-                    <img src="images/favorite-heart.png" class="inner-icon" id="to-go-icon" alt="To-Go icon">
-                    To-Go
-                </a>
-            </div>
-            <div class="user-drop-container">
-                <div class="user-toggle-btn">
-                    <button class="user-name dropdown" id="user-pf">em</button>
+            <div class="user-dropdown-content drop-r">
+                <div class="to-go user-d-c">
+                    <img src="images/favorite.png" alt="to-go" class="h-icon">
+                    <a href="#togo-demo">To-go</a>
                 </div>
-                <div class="user-dropdown-content drop-r">
-                    <div class="to-go user-d-c">
-                        <img src="images/favorite.png" alt="to-go icon" class="to-go-icon h-icon">
-                        <a href="#">To-go</a>
-                    </div>
-                    <div class="settings user-d-c">
-                        <img src="images/settings.png" alt="settings icon" class="settings-icon h-icon">
-                        <a href="#">Settings</a>
-                    </div>
-                    <div class="log-out user-d-c">
-                        <img src="images/logout.png" alt="logout icon" class="logout-icon h-icon">
-                        <a href="${pageContext.request.contextPath}/logout">Logout</a>
-                    </div>
+                <div class="settings user-d-c">
+                    <img src="images/settings.png" alt="settings" class="h-icon">
+                    <a href="#">Settings</a>
+                </div>
+                <div class="log-out user-d-c">
+                    <img src="images/logout.png" alt="logout" class="h-icon">
+                    <a href="#">Logout</a>
                 </div>
             </div>
         </div>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+    </button>
 </header>
+
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+<nav class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+        <div class="sidebar-user">
+            <span class="sidebar-avatar">em</span>
+            <span class="sidebar-name">Emile</span>
+        </div>
+        <button class="sidebar-close" id="sidebar-close">&#x2715;</button>
+    </div>
+    <ul class="sidebar-nav">
+        <li>
+            <button class="sidebar-item" id="sidebar-location-btn">
+                <img src="images/near-me.png" class="inner-icon" alt="location">
+                Current Location
+            </button>
+        </li>
+        <li>
+            <a href="#togo-demo" class="sidebar-item">
+                <img src="images/gray-heart.png" class="inner-icon" alt="to-go">
+                To-Go
+            </a>
+        </li>
+        <li>
+            <a href="#" class="sidebar-item">
+                <img src="images/settings.png" class="inner-icon" alt="settings">
+                Settings
+            </a>
+        </li>
+        <li>
+            <a href="#" class="sidebar-item sidebar-logout">
+                <img src="images/logout.png" class="inner-icon" alt="logout">
+                Logout
+            </a>
+        </li>
+    </ul>
+</nav>
+
 <main>
     <div class="home-content">
         <div class="category-section">
@@ -88,252 +135,197 @@
             </div>
         </div>
 
-        <!-- ─── Demo: ≤5 cards → horizontal scroll ─── -->
+        <!-- Recently Viewed Row -->
         <div class="restaurant-section">
             <h3 class="section-title">
-                <img src="images/h-location-i.png" alt="" class="section-icon">
-                4 cards — horizontal scroll
+                <img src="images/clock.png" alt="" class="section-icon">
+                Recently Viewed
             </h3>
-            <div class="cards-scroll-wrap">
-                <div class="cards-grid">
-                    <a href="#" class="restaurant-card card-grid">
-                        <div class="card-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80" class="card-img" alt="Trattoria Roma">
-                            <button class="fav-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg></button>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title-row"><span class="card-name">Trattoria Roma</span><span class="card-price">$$</span></div>
-                            <div class="card-rating"><svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="rating-val">4.5</span><span class="review-count">(312)</span><span class="card-separator">·</span><span class="card-type">Italian</span></div>
-                            <div class="card-footer-row"><svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg><span class="card-distance">0.3 mi</span><span class="open-status status-open">Open</span></div>
-                        </div>
-                    </a>
-                    <a href="#" class="restaurant-card card-grid">
-                        <div class="card-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=600&q=80" class="card-img" alt="Sakura Sushi">
-                            <button class="fav-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg></button>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title-row"><span class="card-name">Sakura Sushi</span><span class="card-price">$$$</span></div>
-                            <div class="card-rating"><svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="rating-val">4.8</span><span class="review-count">(207)</span><span class="card-separator">·</span><span class="card-type">Japanese</span></div>
-                            <div class="card-footer-row"><svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg><span class="card-distance">0.7 mi</span><span class="open-status status-open">Open</span></div>
-                        </div>
-                    </a>
-                    <a href="#" class="restaurant-card card-grid">
-                        <div class="card-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80" class="card-img" alt="El Rancho">
-                            <button class="fav-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg></button>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title-row"><span class="card-name">El Rancho</span><span class="card-price">$</span></div>
-                            <div class="card-rating"><svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="rating-val">4.1</span><span class="review-count">(89)</span><span class="card-separator">·</span><span class="card-type">Mexican</span></div>
-                            <div class="card-footer-row"><svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg><span class="card-distance">1.1 mi</span><span class="open-status status-closed">Closed</span></div>
-                        </div>
-                    </a>
-                    <a href="#" class="restaurant-card card-grid">
-                        <div class="card-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80" class="card-img" alt="The Smokehouse">
-                            <button class="fav-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg></button>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title-row"><span class="card-name">The Smokehouse</span><span class="card-price">$$</span></div>
-                            <div class="card-rating"><svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="rating-val">4.3</span><span class="review-count">(541)</span><span class="card-separator">·</span><span class="card-type">American</span></div>
-                            <div class="card-footer-row"><svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg><span class="card-distance">0.5 mi</span><span class="open-status status-open">Open</span></div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- ─── Demo: >5 cards → stacked grid ─── -->
-        <div class="restaurant-section">
-            <h3 class="section-title">
-                <img src="images/h-location-i.png" alt="" class="section-icon">
-                8 cards — stacked layout
-            </h3>
-            <div class="cards-scroll-wrap">
-                <div class="cards-grid">
-                    <a href="#" class="restaurant-card card-grid">
-                        <div class="card-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80" class="card-img" alt="Trattoria Roma">
-                            <button class="fav-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg></button>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title-row"><span class="card-name">Trattoria Roma</span><span class="card-price">$$</span></div>
-                            <div class="card-rating"><svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="rating-val">4.5</span><span class="review-count">(312)</span><span class="card-separator">·</span><span class="card-type">Italian</span></div>
-                            <div class="card-footer-row"><svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg><span class="card-distance">0.3 mi</span><span class="open-status status-open">Open</span></div>
-                        </div>
-                    </a>
-                    <a href="#" class="restaurant-card card-grid">
-                        <div class="card-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=600&q=80" class="card-img" alt="Sakura Sushi">
-                            <button class="fav-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg></button>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title-row"><span class="card-name">Sakura Sushi</span><span class="card-price">$$$</span></div>
-                            <div class="card-rating"><svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="rating-val">4.8</span><span class="review-count">(207)</span><span class="card-separator">·</span><span class="card-type">Japanese</span></div>
-                            <div class="card-footer-row"><svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg><span class="card-distance">0.7 mi</span><span class="open-status status-open">Open</span></div>
-                        </div>
-                    </a>
-                    <a href="#" class="restaurant-card card-grid">
-                        <div class="card-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80" class="card-img" alt="El Rancho">
-                            <button class="fav-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg></button>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title-row"><span class="card-name">El Rancho</span><span class="card-price">$</span></div>
-                            <div class="card-rating"><svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="rating-val">4.1</span><span class="review-count">(89)</span><span class="card-separator">·</span><span class="card-type">Mexican</span></div>
-                            <div class="card-footer-row"><svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg><span class="card-distance">1.1 mi</span><span class="open-status status-closed">Closed</span></div>
-                        </div>
-                    </a>
-                    <a href="#" class="restaurant-card card-grid">
-                        <div class="card-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80" class="card-img" alt="The Smokehouse">
-                            <button class="fav-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg></button>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title-row"><span class="card-name">The Smokehouse</span><span class="card-price">$$</span></div>
-                            <div class="card-rating"><svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="rating-val">4.3</span><span class="review-count">(541)</span><span class="card-separator">·</span><span class="card-type">American</span></div>
-                            <div class="card-footer-row"><svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg><span class="card-distance">0.5 mi</span><span class="open-status status-open">Open</span></div>
-                        </div>
-                    </a>
-                    <a href="#" class="restaurant-card card-grid">
-                        <div class="card-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" class="card-img" alt="Spice Garden">
-                            <button class="fav-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg></button>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title-row"><span class="card-name">Spice Garden</span><span class="card-price">$$</span></div>
-                            <div class="card-rating"><svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="rating-val">4.6</span><span class="review-count">(193)</span><span class="card-separator">·</span><span class="card-type">Indian</span></div>
-                            <div class="card-footer-row"><svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg><span class="card-distance">1.4 mi</span><span class="open-status status-open">Open</span></div>
-                        </div>
-                    </a>
-                    <a href="#" class="restaurant-card card-grid">
-                        <div class="card-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&q=80" class="card-img" alt="Thai Orchid">
-                            <button class="fav-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg></button>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title-row"><span class="card-name">Thai Orchid</span><span class="card-price">$$</span></div>
-                            <div class="card-rating"><svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="rating-val">4.2</span><span class="review-count">(156)</span><span class="card-separator">·</span><span class="card-type">Thai</span></div>
-                            <div class="card-footer-row"><svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg><span class="card-distance">0.9 mi</span><span class="open-status status-closed">Closed</span></div>
-                        </div>
-                    </a>
-                    <a href="#" class="restaurant-card card-grid">
-                        <div class="card-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=600&q=80" class="card-img" alt="Golden Dragon">
-                            <button class="fav-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg></button>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title-row"><span class="card-name">Golden Dragon</span><span class="card-price">$</span></div>
-                            <div class="card-rating"><svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="rating-val">3.9</span><span class="review-count">(74)</span><span class="card-separator">·</span><span class="card-type">Chinese</span></div>
-                            <div class="card-footer-row"><svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg><span class="card-distance">0.6 mi</span><span class="open-status status-open">Open</span></div>
-                        </div>
-                    </a>
-                    <a href="#" class="restaurant-card card-grid">
-                        <div class="card-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80" class="card-img" alt="Olive & Vine">
-                            <button class="fav-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg></button>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title-row"><span class="card-name">Olive & Vine</span><span class="card-price">$$$</span></div>
-                            <div class="card-rating"><svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="rating-val">4.7</span><span class="review-count">(428)</span><span class="card-separator">·</span><span class="card-type">Mediterranean</span></div>
-                            <div class="card-footer-row"><svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg><span class="card-distance">1.8 mi</span><span class="open-status status-open">Open</span></div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</main>
-<footer></footer>
-<!-- ═══════════════════════════════════════════════════════
-     NULL PHOTOS STATE TEST
-     ═══════════════════════════════════════════════════════ -->
-<hr style="margin:2rem 0; border-color:#ddd;">
-<p style="text-align:center; font-family:sans-serif; color:#888; font-size:0.8rem; margin-bottom:0;">▼ null photos fallback ▼</p>
-
-<main class="cv-main">
-
-    <!-- Hero -->
-    <div class="cv-hero">
-        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80"
-             alt="Sakura Garden"
-             class="cv-hero-img"
-             referrerpolicy="no-referrer">
-        <div class="cv-hero-overlay">
-            <div class="cv-hero-top">
-                <a href="#" class="cv-back-btn" aria-label="Back to home">
-                    <svg viewBox="0 0 24 24" class="cv-back-icon">
-                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-                    </svg>
+            <div class="cards-row">
+                <a href="#" class="restaurant-card card-wide">
+                    <div class="card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" class="card-img" alt="Sakura Garden">
+                        <button class="fav-btn saved" data-place-id="abc1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg></button>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title-row"><span class="card-name">Sakura Garden</span><span class="card-price">$$$</span></div>
+                        <div class="card-rating"><svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="rating-val">4.8</span><span class="review-count">(207)</span><span class="card-separator">·</span><span class="card-type">Japanese</span></div>
+                        <div class="card-footer-row"><svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg><span class="card-distance">0.7 mi</span><span class="open-status status-open">Open</span></div>
+                    </div>
                 </a>
-                <button class="cv-save-btn fav-btn" aria-label="Save restaurant">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-                        <path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/>
-                    </svg>
-                </button>
+                <a href="#" class="restaurant-card card-wide">
+                    <div class="card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80" class="card-img" alt="Trattoria Roma">
+                        <button class="fav-btn" data-place-id="abc2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg></button>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title-row"><span class="card-name">Trattoria Roma</span><span class="card-price">$$</span></div>
+                        <div class="card-rating"><svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="rating-val">4.5</span><span class="review-count">(312)</span><span class="card-separator">·</span><span class="card-type">Italian</span></div>
+                        <div class="card-footer-row"><svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg><span class="card-distance">0.3 mi</span><span class="open-status status-open">Open</span></div>
+                    </div>
+                </a>
+                <a href="#" class="restaurant-card card-wide">
+                    <div class="card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80" class="card-img" alt="El Rancho">
+                        <button class="fav-btn" data-place-id="abc3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg></button>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title-row"><span class="card-name">El Rancho</span><span class="card-price">$</span></div>
+                        <div class="card-rating"><svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="rating-val">4.1</span><span class="review-count">(89)</span><span class="card-separator">·</span><span class="card-type">Mexican</span></div>
+                        <div class="card-footer-row"><svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg><span class="card-distance">1.1 mi</span><span class="open-status status-closed">Closed</span></div>
+                    </div>
+                </a>
             </div>
-            <div class="cv-hero-meta">
-                <h1 class="cv-name">Sakura Garden</h1>
-                <div class="cv-meta-row">
-                    <svg class="cv-star" viewBox="0 0 24 24">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                    </svg>
-                    <span class="cv-rating">3.9</span>
-                    <span class="cv-reviews">(84)</span>
-                    <span class="cv-dot">·</span>
-                    <span class="cv-type">Japanese</span>
-                </div>
-                <span class="cv-status-pill cv-closed">Closed</span>
+        </div>
+
+        <!-- Nearby Grid -->
+        <div class="restaurant-section" id="nearby-section">
+            <h3 class="section-title">
+                <img src="images/h-location-i.png" alt="" class="section-icon">
+                Nearby Restaurants
+            </h3>
+            <div class="cards-grid">
+                <a href="#" class="restaurant-card card-grid">
+                    <div class="card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80" class="card-img" alt="The Smokehouse">
+                        <button class="fav-btn" data-place-id="nb1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg></button>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title-row"><span class="card-name">The Smokehouse</span><span class="card-price">$$</span></div>
+                        <div class="card-rating"><svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="rating-val">4.3</span><span class="review-count">(541)</span><span class="card-separator">·</span><span class="card-type">American</span></div>
+                        <div class="card-footer-row"><svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg><span class="card-distance">0.5 mi</span><span class="open-status status-open">Open</span></div>
+                    </div>
+                </a>
+                <a href="#" class="restaurant-card card-grid">
+                    <div class="card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" class="card-img" alt="Spice Garden">
+                        <button class="fav-btn" data-place-id="nb2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg></button>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title-row"><span class="card-name">Spice Garden</span><span class="card-price">$$</span></div>
+                        <div class="card-rating"><svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="rating-val">4.6</span><span class="review-count">(193)</span><span class="card-separator">·</span><span class="card-type">Indian</span></div>
+                        <div class="card-footer-row"><svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg><span class="card-distance">1.4 mi</span><span class="open-status status-open">Open</span></div>
+                    </div>
+                </a>
+                <a href="#" class="restaurant-card card-grid">
+                    <div class="card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80" class="card-img" alt="Olive & Vine">
+                        <button class="fav-btn" data-place-id="nb3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg></button>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title-row"><span class="card-name">Olive & Vine</span><span class="card-price">$$$</span></div>
+                        <div class="card-rating"><svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="rating-val">4.7</span><span class="review-count">(428)</span><span class="card-separator">·</span><span class="card-type">Mediterranean</span></div>
+                        <div class="card-footer-row"><svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg><span class="card-distance">1.8 mi</span><span class="open-status status-open">Open</span></div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
-
-    <div class="cv-content">
-
-        <!-- Action Buttons -->
-        <div class="cv-actions">
-            <a href="#" class="cv-btn cv-btn-primary">
-                <svg viewBox="0 0 24 24" class="cv-btn-icon">
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                </svg>
-                Directions
-            </a>
-            <a href="tel:+14145550192" class="cv-btn cv-btn-outline">
-                <img src="images/phone.png" class="r-card-icon" alt="phone icon">
-                Call
-            </a>
-            <a href="#" class="cv-btn cv-btn-outline">
-                <img src="images/website.png" class="r-card-icon" alt="website icon">
-                Website
-            </a>
-        </div>
-
-        <!-- Photo Strip — empty state -->
-        <div class="cv-section cv-section-photos">
-            <h2 class="cv-section-label">Photos</h2>
-            <p class="cv-photos-empty">Could not load photos.</p>
-        </div>
-
-        <!-- Details Section -->
-        <div class="cv-section cv-details">
-            <h2 class="cv-section-label">Details</h2>
-            <div class="cv-detail-row">
-                <img src="images/g-location.png" class="cv-detail-icon" alt="address icon">
-                <span class="cv-detail-text">88 Cherry Blossom Ave, Portland, OR 97201</span>
-            </div>
-            <div class="cv-detail-row">
-                <img src="images/g-phone.png" class="cv-detail-icon" alt="phone icon">
-                <a href="tel:+15035550188" class="cv-detail-link">+1 (503) 555-0188</a>
-            </div>
-        </div>
-
-    </div><!-- cv-content -->
-
 </main>
 
+<hr class="demo-divider">
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 2 — TO-GO / SAVED RESTAURANTS PAGE
+     ═══════════════════════════════════════════════ -->
+<p class="demo-label" id="togo-demo">To-Go Page — Saved Restaurants</p>
+
+<main>
+    <div class="home-content">
+        <div class="restaurant-section">
+            <h2 class="section-heading">Saved Restaurants</h2>
+
+            <!-- 3-column grid — 6 cards (fully saved state) -->
+            <div class="saved-grid">
+
+                <a href="#" class="restaurant-card card-saved">
+                    <div class="card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" class="card-img" alt="Sakura Garden">
+                        <button class="fav-btn saved" data-place-id="s1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg></button>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title-row"><span class="card-name">Sakura Garden</span><span class="card-price">$$$</span></div>
+                        <div class="card-rating"><svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="rating-val">4.8</span><span class="review-count">(207)</span><span class="card-separator">·</span><span class="card-type">Japanese</span></div>
+                        <div class="card-footer-row"><svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg><span class="card-distance">0.7 mi</span><span class="open-status status-open">Open</span></div>
+                    </div>
+                </a>
+
+                <a href="#" class="restaurant-card card-saved">
+                    <div class="card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80" class="card-img" alt="Trattoria Roma">
+                        <button class="fav-btn saved" data-place-id="s2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg></button>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title-row"><span class="card-name">Trattoria Roma</span><span class="card-price">$$</span></div>
+                        <div class="card-rating"><svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="rating-val">4.5</span><span class="review-count">(312)</span><span class="card-separator">·</span><span class="card-type">Italian</span></div>
+                        <div class="card-footer-row"><svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg><span class="card-distance">0.3 mi</span><span class="open-status status-open">Open</span></div>
+                    </div>
+                </a>
+
+                <a href="#" class="restaurant-card card-saved">
+                    <div class="card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80" class="card-img" alt="El Rancho">
+                        <button class="fav-btn saved" data-place-id="s3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg></button>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title-row"><span class="card-name">El Rancho</span><span class="card-price">$</span></div>
+                        <div class="card-rating"><svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="rating-val">4.1</span><span class="review-count">(89)</span><span class="card-separator">·</span><span class="card-type">Mexican</span></div>
+                        <div class="card-footer-row"><svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg><span class="card-distance">1.1 mi</span><span class="open-status status-closed">Closed</span></div>
+                    </div>
+                </a>
+
+                <a href="#" class="restaurant-card card-saved">
+                    <div class="card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80" class="card-img" alt="The Smokehouse">
+                        <button class="fav-btn saved" data-place-id="s4"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg></button>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title-row"><span class="card-name">The Smokehouse</span><span class="card-price">$$</span></div>
+                        <div class="card-rating"><svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="rating-val">4.3</span><span class="review-count">(541)</span><span class="card-separator">·</span><span class="card-type">American</span></div>
+                        <div class="card-footer-row"><svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg><span class="card-distance">0.5 mi</span><span class="open-status status-open">Open</span></div>
+                    </div>
+                </a>
+
+                <a href="#" class="restaurant-card card-saved">
+                    <div class="card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" class="card-img" alt="Spice Garden">
+                        <button class="fav-btn saved" data-place-id="s5"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg></button>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title-row"><span class="card-name">Spice Garden</span><span class="card-price">$$</span></div>
+                        <div class="card-rating"><svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="rating-val">4.6</span><span class="review-count">(193)</span><span class="card-separator">·</span><span class="card-type">Indian</span></div>
+                        <div class="card-footer-row"><svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg><span class="card-distance">1.4 mi</span><span class="open-status status-open">Open</span></div>
+                    </div>
+                </a>
+
+                <a href="#" class="restaurant-card card-saved">
+                    <div class="card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80" class="card-img" alt="Olive & Vine">
+                        <button class="fav-btn saved" data-place-id="s6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg></button>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title-row"><span class="card-name">Olive & Vine</span><span class="card-price">$$$</span></div>
+                        <div class="card-rating"><svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="rating-val">4.7</span><span class="review-count">(428)</span><span class="card-separator">·</span><span class="card-type">Mediterranean</span></div>
+                        <div class="card-footer-row"><svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-301q99-80 149.5-154T680-594q0-90-56-148t-144-58q-88 0-144 58t-56 148q0 65 50.5 139T480-301Zm0 101Q339-304 269.5-402T200-594q0-125 78-205.5T480-880q124 0 202 80.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg><span class="card-distance">1.8 mi</span><span class="open-status status-open">Open</span></div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+
+        <!-- Empty state demo -->
+        <hr class="demo-divider">
+        <p class="demo-label">Empty State</p>
+        <div class="restaurant-section">
+            <h2 class="section-heading">Saved Restaurants</h2>
+            <p class="no-results">No saved restaurants yet. Heart a restaurant to save it here.</p>
+        </div>
+
+    </div>
+</main>
+
+<footer></footer>
 <script>const contextPath = '';</script>
-<script src="js/cardView.js"></script>
+<script src="js/home.js"></script>
 </body>
 </html>

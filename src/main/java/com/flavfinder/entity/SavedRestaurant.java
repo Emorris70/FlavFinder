@@ -38,6 +38,10 @@ public class SavedRestaurant {
     @Column(name = "saved_at", nullable = false)
     private LocalDateTime savedAt;
 
+    /**
+     * Sets {@code savedAt} to the current date-time before the first persist
+     * if the caller did not supply a value explicitly.
+     */
     @PrePersist
     private void prePersist() {
         if (savedAt == null) {

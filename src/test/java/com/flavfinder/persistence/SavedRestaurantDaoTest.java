@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -48,7 +50,7 @@ class SavedRestaurantDaoTest {
     @Test
     void insert() {
         User user = userDao.getById(1);
-        Restaurant restaurant = restaurantDao.getById(1);
+        Restaurant restaurant = restaurantDao.getById(2);
 
         SavedRestaurant entry = SavedRestaurant.builder()
                 .user(user)
@@ -64,7 +66,7 @@ class SavedRestaurantDaoTest {
     }
 
     /**
-     * Delete a saved restaurant — user and restaurant rows should remain.
+     * Delete a saved restaurant - user and restaurant rows should remain.
      */
     @Test
     void delete() {
@@ -77,7 +79,7 @@ class SavedRestaurantDaoTest {
     }
 
     /**
-     * Cascade delete — removing the user should remove their saved restaurants.
+     * Cascade delete - removing the user should remove their saved restaurants.
      */
     @Test
     void deleteUserCascade() {
@@ -85,5 +87,19 @@ class SavedRestaurantDaoTest {
         userDao.delete(user);
 
         assertNull(savedRestaurantDao.getById(1));
+    }
+
+    /**
+     * Fetch all saved restaurants for a user via join.
+     * Mirrors: SELECT sr.* FROM saved_restaurants sr JOIN user u ON sr.user_id = u.id WHERE u.id = 1
+     */
+    @Test
+    void joinByUser() {
+        List<SavedRestaurant> results = savedRestaurantDao.joinBy("user", "id", 1);
+
+        assertNotNull(results);
+        assertFalse(results.isEmpty());
+        assertEquals(1, results.size());
+        assertEquals("api_abc123", results.get(0).getRestaurant().getApiRestaurantId());
     }
 }
