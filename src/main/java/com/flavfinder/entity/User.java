@@ -30,8 +30,8 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<SavedLocation> savedLocations = new ArrayList<>();
 
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-//    private List<SavedRestaurants> restaurants = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<SavedRestaurant> savedRestaurants = new ArrayList<>();
 
     /**
      * Instantiates a new user
@@ -49,43 +49,26 @@ public class User {
         this.sub = sub;
     }
 
-//    /**
-//     * Adds a new restaurant
-//     *
-//     * @param restaurant the restaurant to add
-//     */
-//    private void addRestaurant(SavedRestaurants restaurant) {
-//        this.restaurants.add(restaurant);
-//        restaurant.setUser(this);
-//    }
-//
-//    /**
-//     * Removes a restaurant
-//     *
-//     * @param restaurant the restaurant to remove
-//     */
-//    private void removeRestaurant(SavedRestaurants restaurant) {
-//        this.savedLocations.remove(restaurant);
-//        restaurant.setUser(null);
-//    }
-//
-//    /**
-//     * Gets a list of all saved restaurants
-//     *
-//     * @return list of restaurants
-//     */
-//    public List<SavedRestaurants> getRestaurants() {
-//        return restaurants;
-//    }
-//
-//    /**
-//     * Sets the list of restaurants
-//     *
-//     * @param restaurants the restaurant to set
-//     */
-//    public void setRestaurants(List<SavedRestaurants> restaurants) {
-//        this.restaurants = restaurants;
-//    }
+    /**
+     * Adds a saved restaurant entry.
+     *
+     * @param savedRestaurant the join entry to add
+     */
+    public void addSavedRestaurant(SavedRestaurant savedRestaurant) {
+        this.savedRestaurants.add(savedRestaurant);
+        savedRestaurant.setUser(this);
+    }
+
+    /**
+     * Removes a saved restaurant entry.
+     *
+     * @param savedRestaurant the join entry to remove
+     */
+    public void removeSavedRestaurant(SavedRestaurant savedRestaurant) {
+        this.savedRestaurants.remove(savedRestaurant);
+        savedRestaurant.setUser(null);
+    }
+
 
     /**
      * Adds a new savedLocation
@@ -106,23 +89,4 @@ public class User {
         this.savedLocations.remove(savedLocation);
         savedLocation.setUser(null);
     }
-
-    /**
-     * Get a list of saved savedLocations
-     *
-     * @return the list of savedLocations
-     */
-    public List<SavedLocation> getLocation() {
-        return savedLocations;
-    }
-
-    /**
-     * Sets the list of savedLocations
-     *
-     * @param savedLocation the savedLocation to set
-     */
-    public void setLocation(List<SavedLocation> savedLocation) {
-        this.savedLocations = savedLocation;
-    }
-
 }

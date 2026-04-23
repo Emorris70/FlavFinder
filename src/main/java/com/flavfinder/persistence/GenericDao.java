@@ -121,7 +121,28 @@ public class GenericDao<T> {
         });
     }
 
-    // TODO add method to perform a JOIN
+    /**
+     * Returns all entities of type T that are joined to a related entity
+     * matching a given field and value.
+     *
+     * Example: fetch all SavedRestaurant rows where sr.user.id = 1
+     *   joinBy("user", "id", 1)
+     *
+     * @param joinField  the association field on T (e.g. "user", "restaurant")
+     * @param matchField the field on the joined entity to filter by (e.g. "id")
+     * @param value      the value to match
+     * @return list of matching entities
+     */
+    public List<T> joinBy(String joinField, String matchField, Object value) {
+        return executeWithSession(session -> {
+            HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<T> query = builder.createQuery(type);
+            var root = query.from(type);
+            var join = root.join(joinField);
+            query.where(builder.equal(join.get(matchField), value));
+            return session.createSelectionQuery(query).getResultList();
+        });
+    }
 
     /**
      * Wraps a database operation within a Hibernate session and transaction.
