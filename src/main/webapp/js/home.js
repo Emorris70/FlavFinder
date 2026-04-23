@@ -26,12 +26,10 @@ const handleLocationPopup = () => {
     const currentLocation = document.querySelector('.current-location-c');
     const customLocation = document.querySelector('.custom-location-c');
     const closeBtn = document.querySelector('.close');
-    const currentRadio = currentLocation.querySelector('input[type="radio"]');
 
-    /**
-     * Checks if the required elements exist before proceeding.
-     */
     if (!locationBtn || !popupElement || !currentLocation || !customLocation || !closeBtn) return;
+
+    const currentRadio = currentLocation.querySelector('input[type="radio"]');
 
     // Auto-open if the server rendered an error into the popup, then dismiss after 5s
     const errorMsg = popupElement.querySelector('.errorMsg');

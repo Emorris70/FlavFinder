@@ -31,7 +31,7 @@
 
   - This page should also handle the case of "No results found"
 - [X] AWS set up and deploy
-- [ ] Complete Weekly Log.
+- [X] Complete Weekly Log.
 
 ### Week 7
 #### Focused on filtering portion
@@ -43,41 +43,38 @@
 
 - [X] consumption of tomtom api
 - [X] Build the "To Go" Data Structure - Define the schema or state logic needed to store a user's saved restaurants
-- [ ] Complete Weekly Log
+- [X] Complete Weekly Log
 
 ### Week 9
 #### Focus on Termination of the session (logout)
 
 - [X] Complete Checkpoint 3
 - [X] AWS cognito User Authentication VIA SDK
-- [ ] Implement log out logic
+- [X] Implement log out logic
 - [X] Complete Weekly Log
 
 ### Week 10
 
-- [ ] Complete all to-do's
-- [ ] Add overall drop-down features for the header portion
-- [ ] Ensure the "back" button within confirm.jsp redirect or forwards the user back to signup page
+- [X] Add overall drop-down features for the header portion
+- [X] Ensure the "back" button within confirm.jsp redirect or forwards the user back to signup page
 - [ ] Complete Weekly Log
 
 ### Week 11
 
-- [ ] Implement a little pop-up screen asking user for permission to current location
-- [ ] Dynamic UI rendering of local restaurants based off location (Nearby Restaurants section)
+- [X] Dynamic UI rendering of local restaurants based off location (Nearby Restaurants section)
   - Note: this should only take place IF user allows access to there current location.
   - This should also NOT be filtered.
-- [ ] Complete Weekly Log
+- [X] Complete Weekly Log
 
 ### Week 12
 
-- [ ] Build Search Input Component - Create the UI for the search bar that captures the "Cuisine" string and triggers the API call
-- [ ] Develop Location Toggle Logic - Build the state management to switch between "Current Location" and "Manual Input"
-- [ ] Render Results List  - Display the matching restaurants in a clean, filterable list view based on the search query
+- [X] Develop Location Toggle Logic - Build the state management to switch between "Current Location" and "Manual Input"
+- [X] Render Results List  - Display the matching restaurants in a clean, filterable list view based on the search query
 - [ ] Complete Weekly Log
 
 ### Week 13
 
-- [ ] Handle Edge Cases - Add "No results found" states and error handling for when a user denies location permissions
+- [X] Handle Edge Cases - Add "No results found" states and error handling for when a user denies location permissions
 - [ ] Create JSP page for search results
 - [ ] Complete Weekly Log
 
@@ -85,6 +82,7 @@
 
 - [ ] Develop Filter UI Components - Build interactive buttons or a dropdown for cuisine types and dietary preferences.
 - [ ] Implement Multi-Parameter Search Logic - Update the API service to handle combined queries (e.g., "Find 'Sushi' + 'dietary presences' + 'Current Location'")
+- [ ] Build Search Input Component - Create the UI for the search bar that captures the "Cuisine" string and triggers the API call
 - [ ] Complete Weekly Log
 
 ## Week 15

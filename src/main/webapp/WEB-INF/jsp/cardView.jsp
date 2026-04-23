@@ -83,116 +83,116 @@
 
     <div class="cv-content">
 
-    <%-- ── Action Buttons ── --%>
-    <div class="cv-actions">
-        <c:if test="${not empty restaurant.placeLink}">
-            <a href="${fn:escapeXml(restaurant.placeLink)}"
-               class="cv-btn cv-btn-primary"
-               target="_blank" rel="noopener noreferrer">
-                <svg viewBox="0 0 24 24" class="cv-btn-icon">
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                </svg>
-                Directions
-            </a>
-        </c:if>
-        <c:if test="${not empty restaurant.phoneNumber}">
-            <a href="tel:${fn:escapeXml(restaurant.phoneNumber)}" class="cv-btn cv-btn-outline">
-                <img src="${pageContext.request.contextPath}/images/phone.png" class="r-card-icon" alt="phone icon">
-                Call
-            </a>
-        </c:if>
-        <c:if test="${not empty restaurant.website}">
-            <a href="${fn:escapeXml(restaurant.website)}"
-               class="cv-btn cv-btn-outline"
-               target="_blank" rel="noopener noreferrer">
-                <img src="${pageContext.request.contextPath}/images/website.png" class="r-card-icon" alt="website icon">
-                Website
-            </a>
-        </c:if>
-        <c:if test="${not empty restaurant.bookingLink}">
-            <a href="${fn:escapeXml(restaurant.bookingLink)}"
-               class="cv-btn cv-btn-outline"
-               target="_blank" rel="noopener noreferrer">
-                <img src="${pageContext.request.contextPath}/images/reservation.png" class="r-card-icon" alt="reservation icon">
-                Reserve
-            </a>
-        </c:if>
-    </div>
-
-    <%-- ── Photo Strip ── --%>
-    <div class="cv-section cv-section-photos">
-        <h2 class="cv-section-label">Photos</h2>
-        <c:choose>
-            <c:when test="${fn:length(restaurant.photosSample) > 1}">
-                <div class="cv-photos">
-                    <c:forEach var="photo" items="${restaurant.photosSample}">
-                        <a href="${photo.photoUrlLarge}"
-                           target="_blank" rel="noopener noreferrer"
-                           class="cv-photo-link">
-                            <img src="${photo.photoUrl}"
-                                 alt="${fn:escapeXml(restaurant.name)}"
-                                 class="cv-photo-thumb"
-                                 referrerpolicy="no-referrer">
-                        </a>
-                    </c:forEach>
-                </div>
-            </c:when>
-            <c:otherwise>
-                <p class="cv-photos-empty">Could not load photos.</p>
-            </c:otherwise>
-        </c:choose>
-    </div>
-
-    <%-- ── Details Section ── --%>
-    <div class="cv-section cv-details">
-        <h2 class="cv-section-label">Details</h2>
-
-        <c:if test="${not empty restaurant.fullAddress}">
-            <div class="cv-detail-row">
-                <img src="${pageContext.request.contextPath}/images/g-location.png" class="cv-detail-icon" alt="address icon">
-                <span class="cv-detail-text">${fn:escapeXml(restaurant.fullAddress)}</span>
-            </div>
-        </c:if>
-
-        <c:if test="${not empty restaurant.phoneNumber}">
-            <div class="cv-detail-row">
-                <img src="${pageContext.request.contextPath}/images/g-phone.png" class="cv-detail-icon" alt="phone icon">
-                <a href="tel:${fn:escapeXml(restaurant.phoneNumber)}" class="cv-detail-link">
-                    ${fn:escapeXml(restaurant.phoneNumber)}
+        <%-- ── Action Buttons ── --%>
+        <div class="cv-actions">
+            <c:if test="${not empty restaurant.placeLink}">
+                <a href="${fn:escapeXml(restaurant.placeLink)}"
+                   class="cv-btn cv-btn-primary"
+                   target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" class="cv-btn-icon">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    Directions
                 </a>
-            </div>
-        </c:if>
+            </c:if>
+            <c:if test="${not empty restaurant.phoneNumber}">
+                <a href="tel:${fn:escapeXml(restaurant.phoneNumber)}" class="cv-btn cv-btn-outline">
+                    <img src="${pageContext.request.contextPath}/images/phone.png" class="r-card-icon" alt="phone icon">
+                    Call
+                </a>
+            </c:if>
+            <c:if test="${not empty restaurant.website}">
+                <a href="${fn:escapeXml(restaurant.website)}"
+                   class="cv-btn cv-btn-outline"
+                   target="_blank" rel="noopener noreferrer">
+                    <img src="${pageContext.request.contextPath}/images/website.png" class="r-card-icon" alt="website icon">
+                    Website
+                </a>
+            </c:if>
+            <c:if test="${not empty restaurant.bookingLink}">
+                <a href="${fn:escapeXml(restaurant.bookingLink)}"
+                   class="cv-btn cv-btn-outline"
+                   target="_blank" rel="noopener noreferrer">
+                    <img src="${pageContext.request.contextPath}/images/reservation.png" class="r-card-icon" alt="reservation icon">
+                    Reserve
+                </a>
+            </c:if>
+        </div>
 
-        <c:if test="${not empty restaurant.workingHours}">
-            <div class="cv-detail-row">
-                <img src="${pageContext.request.contextPath}/images/g-clock.png" class="cv-detail-icon" alt="hours icon">
-                <div class="cv-hours-wrap">
-                    <button class="cv-hours-toggle"
-                            id="cv-hours-toggle"
-                            aria-expanded="false"
-                            aria-controls="cv-hours-body">
-                        Hours
-                        <svg class="cv-chevron" viewBox="0 0 24 24">
-                            <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
-                        </svg>
-                    </button>
-                    <div class="cv-hours-body" id="cv-hours-body" hidden>
-                        <c:forEach var="entry" items="${restaurant.workingHours}">
-                            <div class="cv-hours-entry" data-day="${fn:escapeXml(entry.key)}">
-                                <span class="cv-hours-day">${fn:escapeXml(entry.key)}</span>
-                                <span class="cv-hours-times">
+        <%-- ── Photo Strip ── --%>
+        <div class="cv-section cv-section-photos">
+            <h2 class="cv-section-label">Photos</h2>
+            <c:choose>
+                <c:when test="${fn:length(restaurant.photosSample) > 1}">
+                    <div class="cv-photos">
+                        <c:forEach var="photo" items="${restaurant.photosSample}">
+                            <a href="${photo.photoUrlLarge}"
+                               target="_blank" rel="noopener noreferrer"
+                               class="cv-photo-link">
+                                <img src="${photo.photoUrl}"
+                                     alt="${fn:escapeXml(restaurant.name)}"
+                                     class="cv-photo-thumb"
+                                     referrerpolicy="no-referrer">
+                            </a>
+                        </c:forEach>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <p class="cv-photos-empty">Could not load photos.</p>
+                </c:otherwise>
+            </c:choose>
+        </div>
+
+        <%-- ── Details Section ── --%>
+        <div class="cv-section cv-details">
+            <h2 class="cv-section-label">Details</h2>
+
+            <c:if test="${not empty restaurant.fullAddress}">
+                <div class="cv-detail-row">
+                    <img src="${pageContext.request.contextPath}/images/g-location.png" class="cv-detail-icon" alt="address icon">
+                    <span class="cv-detail-text">${fn:escapeXml(restaurant.fullAddress)}</span>
+                </div>
+            </c:if>
+
+            <c:if test="${not empty restaurant.phoneNumber}">
+                <div class="cv-detail-row">
+                    <img src="${pageContext.request.contextPath}/images/g-phone.png" class="cv-detail-icon" alt="phone icon">
+                    <a href="tel:${fn:escapeXml(restaurant.phoneNumber)}" class="cv-detail-link">
+                            ${fn:escapeXml(restaurant.phoneNumber)}
+                    </a>
+                </div>
+            </c:if>
+
+            <c:if test="${not empty restaurant.workingHours}">
+                <div class="cv-detail-row">
+                    <img src="${pageContext.request.contextPath}/images/g-clock.png" class="cv-detail-icon" alt="hours icon">
+                    <div class="cv-hours-wrap">
+                        <button class="cv-hours-toggle"
+                                id="cv-hours-toggle"
+                                aria-expanded="false"
+                                aria-controls="cv-hours-body">
+                            Hours
+                            <svg class="cv-chevron" viewBox="0 0 24 24">
+                                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+                            </svg>
+                        </button>
+                        <div class="cv-hours-body" id="cv-hours-body" hidden>
+                            <c:forEach var="entry" items="${restaurant.workingHours}">
+                                <div class="cv-hours-entry" data-day="${fn:escapeXml(entry.key)}">
+                                    <span class="cv-hours-day">${fn:escapeXml(entry.key)}</span>
+                                    <span class="cv-hours-times">
                                     <c:forEach var="t" items="${entry.value}" varStatus="s">
                                         ${fn:escapeXml(t)}<c:if test="${!s.last}">, </c:if>
                                     </c:forEach>
                                 </span>
-                            </div>
-                        </c:forEach>
+                                </div>
+                            </c:forEach>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </c:if>
+            </c:if>
 
-    </div><%-- cv-details --%>
+        </div><%-- cv-details --%>
 
     </div><%-- cv-content --%>
 
