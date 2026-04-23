@@ -1,16 +1,11 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: emorr
-  Date: 4/22/2026
-  Time: 4:11 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ include file= "includes/taglib.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>Title</title>
-</head>
+<jsp:include page="includes/app-head.jsp"/>
 <body>
+<jsp:include page="includes/header-home.jsp"/>
+<main>
+    <jsp:include page="includes/locationPopUp.jsp"/>
 
 </body>
 </html>
