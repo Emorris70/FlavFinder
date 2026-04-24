@@ -1,6 +1,6 @@
 <%@ include file= "taglib.jsp" %>
 <header>
-    <jsp:include page="flav-logo.jsp"/>
+    <jsp:include page="flav-logo-home.jsp"/>
     <div class="search-c">
         <img src="${pageContext.request.contextPath}/images/search-icon.png"
              class="inner-icon search-icon" alt="search icon">

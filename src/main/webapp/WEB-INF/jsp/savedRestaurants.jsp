@@ -9,7 +9,7 @@
     <div class="home-content">
 
         <div class="restaurant-section">
-            <h2 class="section-heading">Saved Restaurants</h2>
+            <h2 class="section-heading">To-Go</h2>
 
             <c:choose>
                 <c:when test="${not empty requestScope.savedRestaurants}">

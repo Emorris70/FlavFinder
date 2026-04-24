@@ -30,6 +30,10 @@ a {
 .img-t:hover {
     transform: translateY(-5px);
 }
+a.a-lc {
+    text-decoration: none;
+    color: inherit;
+}
 .main-h1 {
     display: flex;
     align-items: baseline;

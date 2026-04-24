@@ -69,7 +69,7 @@ public class SavedRestaurantsServlet extends HttpServlet {
 
         log.info("SavedRestaurantsServlet — {} saved restaurants for user {}", displayItems.size(), user.getId());
 
-        session.setAttribute("page", "To-go — FlavFinder");
+        session.setAttribute("page", "To-go \u2014 FlavFinder");
         req.setAttribute("savedRestaurants", displayItems);
         req.getRequestDispatcher("/WEB-INF/jsp/savedRestaurants.jsp").forward(req, resp);
     }

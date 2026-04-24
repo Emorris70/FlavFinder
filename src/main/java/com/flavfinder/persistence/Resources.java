@@ -148,6 +148,44 @@ public class Resources extends GenericRequest implements PropertiesLoader {
     }
 
     /**
+     * Fetches full details for a single business by its place ID directly from the API.
+     * Result is stored in the item cache on success.
+     *
+     * @param placeId The API place ID to look up.
+     * @return The full BusinessItem, or {@code null} if the API returns nothing.
+     */
+    public BusinessItem callBusinessDetails(String placeId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("business_id", placeId);
+        params.put("language", "en");
+        params.put("region", "us");
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("x-rapidapi-key", properties.getProperty("rapidapi_key"));
+        headers.put("x-rapidapi-host", properties.getProperty("rapidapi_host"));
+
+        log.info("Resources — fetching business details for placeId '{}'", placeId);
+        try {
+            LocalBusinessResponse response = executeGetRequest(
+                    properties.getProperty("rapidapi_detail_url"),
+                    null,
+                    params,
+                    headers,
+                    LocalBusinessResponse.class
+            );
+            BusinessItem item = (response != null && response.getData() != null && !response.getData().isEmpty())
+                    ? response.getData().get(0) : null;
+            if (item != null) {
+                itemCache.put(placeId, new ItemEntry(item));
+            }
+            return item;
+        } catch (Exception e) {
+            log.error("Resources — business-details call failed for placeId '{}'", placeId, e);
+            return null;
+        }
+    }
+
+    /**
      * Stores a single {@link BusinessItem} in the item cache keyed by its place ID.
      * Overwrites any existing entry. Used at save-time so the detail page can
      * hydrate the saved restaurant without an additional API call.

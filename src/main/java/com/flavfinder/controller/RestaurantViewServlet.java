@@ -1,6 +1,9 @@
 package com.flavfinder.controller;
 
 import com.flavfinder.APIdentity.BusinessItem;
+import com.flavfinder.APIdentity.PhotoSample;
+import com.flavfinder.entity.Restaurant;
+import com.flavfinder.persistence.GenericDao;
 import com.flavfinder.persistence.Resources;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -45,10 +48,12 @@ public class RestaurantViewServlet extends HttpServlet {
     private static final Logger log = LogManager.getLogger(RestaurantViewServlet.class);
     private static final int MAX_RECENTLY_VIEWED = 10;
     private Resources resources;
+    private GenericDao<Restaurant> restaurantDao;
 
     @Override
     public void init() throws ServletException {
         resources = (Resources) getServletContext().getAttribute("resources");
+        restaurantDao = new GenericDao<>(Restaurant.class);
     }
 
     /**
@@ -89,7 +94,16 @@ public class RestaurantViewServlet extends HttpServlet {
         }
 
         if (restaurant == null) {
-            log.warn("RestaurantViewServlet — placeId '{}' not found in any cache, redirecting home", placeId);
+            log.info("RestaurantViewServlet — placeId '{}' not in any cache, calling API", placeId);
+            restaurant = resources.callBusinessDetails(placeId);
+            if (restaurant != null) {
+                injectSnapshotPhotoIfNeeded(restaurant, placeId);
+                if (cache != null) cache.put(placeId, restaurant);
+            }
+        }
+
+        if (restaurant == null) {
+            log.warn("RestaurantViewServlet — placeId '{}' not found after API call, redirecting home", placeId);
             resp.sendRedirect(req.getContextPath() + "/home");
             return;
         }
@@ -100,6 +114,25 @@ public class RestaurantViewServlet extends HttpServlet {
         session.setAttribute("page", restaurant.getName() + " \u2014 FlavFinder");
         req.setAttribute("restaurant", restaurant);
         req.getRequestDispatcher("/WEB-INF/jsp/cardView.jsp").forward(req, resp);
+    }
+
+    /**
+     * Prepends the reliable DB thumbnail as index-0 of photosSample so the hero
+     * image always loads, regardless of whether the API returned its own photos.
+     * Any API photos are kept after index-0 for the photo strip.
+     */
+    private void injectSnapshotPhotoIfNeeded(BusinessItem item, String placeId) {
+        List<Restaurant> matches = restaurantDao.findBy("apiRestaurantId", placeId);
+        if (matches.isEmpty() || matches.get(0).getImageUrl() == null) return;
+        String url = matches.get(0).getImageUrl();
+        PhotoSample photo = new PhotoSample();
+        photo.setPhotoUrl(url);
+        photo.setPhotoUrlLarge(url);
+        List<PhotoSample> photos = new ArrayList<>();
+        photos.add(photo);
+        if (item.getPhotosSample() != null) photos.addAll(item.getPhotosSample());
+        item.setPhotosSample(photos);
+        log.info("RestaurantViewServlet — prepended DB snapshot photo for '{}'", placeId);
     }
 
     /**
