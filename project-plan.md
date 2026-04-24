@@ -70,30 +70,28 @@
 
 - [X] Develop Location Toggle Logic - Build the state management to switch between "Current Location" and "Manual Input"
 - [X] Render Results List  - Display the matching restaurants in a clean, filterable list view based on the search query
-- [ ] Complete Weekly Log
+- [X] Complete Weekly Log
 
 ### Week 13
 
 - [X] Handle Edge Cases - Add "No results found" states and error handling for when a user denies location permissions
-- [ ] Create JSP page for search results
-- [ ] Complete Weekly Log
+- [X] Complete Weekly Log
 
 ## Week 14
 
 - [ ] Develop Filter UI Components - Build interactive buttons or a dropdown for cuisine types and dietary preferences.
 - [ ] Implement Multi-Parameter Search Logic - Update the API service to handle combined queries (e.g., "Find 'Sushi' + 'dietary presences' + 'Current Location'")
 - [ ] Build Search Input Component - Create the UI for the search bar that captures the "Cuisine" string and triggers the API call
+- [ ] Create JSP page for search results
 - [ ] Complete Weekly Log
 
 ## Week 15
 
-- [ ] Create "Save to List" Functionality - Add a toggle (like a heart or bookmark icon) on restaurant cards that adds/removes items from the "To Go" list
-- [ ] Develop "To Go" View - Create a dedicated page where users can view and manage their curated list of future dining spots
+- [X] Create "Save to List" Functionality - Add a toggle (like a heart or bookmark icon) on restaurant cards that adds/removes items from the "To Go" list
+- [X] Develop "To Go" View - Create a dedicated page where users can view and manage their curated list of future dining spots
 - [ ] Complete Weekly Log
 
 ## Week 16
 
-- [ ] Optimize Result Cards - Update the display to clearly show the price point and cuisine tags for each search result to improve scannability
-- [ ] Allow for Deletion of saved restaurants - Users should be allowed to remove saved restaurants within the "To Go" view
-- [ ] Create the JSP for "To-go" page
+- [X] Allow for Deletion of saved restaurants - Users should be allowed to remove saved restaurants within the "To Go" view
 - [ ] Complete Weekly Log
