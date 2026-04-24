@@ -733,16 +733,16 @@ input[type="radio"]:checked {
     #to-go-icon {
         display: none;
     }
+    .hamburger {
+        display: flex;
+    }
+    .user-content {
+        display: none;
+    }
 }
 @media (max-width: 900px) {
 }
 @media (max-width: 768px) {
-    .user-content {
-        display: none;
-    }
-    .hamburger {
-        display: flex;
-    }
 }
 @media (max-width: 600px) {
     .home-content {
