@@ -124,10 +124,8 @@ public class AuthServlet extends HttpServlet {
             try {
                 String sub = cognitoAuth.register(firstName, email, password);
 
-                GenericDao<User> userDao = new GenericDao<>(User.class);
-                userDao.insert(new User(sub));
-
                 session.setAttribute("pendingConfirmEmail", email);
+                session.setAttribute("pendingConfirmSub", sub);
                 session.setAttribute("title", "confirm - FlavFinder");
                 resp.sendRedirect(req.getContextPath() + "/confirm.jsp");
 
@@ -171,7 +169,12 @@ public class AuthServlet extends HttpServlet {
             try {
                 cognitoAuth.confirmSignUp(email, code);
 
+                String sub = (String) session.getAttribute("pendingConfirmSub");
+                GenericDao<User> userDao = new GenericDao<>(User.class);
+                userDao.insert(new User(sub));
+
                 session.removeAttribute("pendingConfirmEmail");
+                session.removeAttribute("pendingConfirmSub");
                 resp.sendRedirect(req.getContextPath() + "/index.jsp");
 
             } catch (CodeMismatchException e) {

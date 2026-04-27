@@ -24,7 +24,7 @@
             </div>
         </div>
             <%-- Recently Viewed Section --%>
-            <c:if test="${not empty sessionScope.recentlyViewed}">
+            <c:if test="${not empty sessionScope.recentlyViewed and empty requestScope.searchTerm}">
             <div class="restaurant-section">
                 <h3 class="section-title">
                     <img src="${pageContext.request.contextPath}/images/clock.png" alt="Recently Viewed icon" class="section-icon">
@@ -93,7 +93,10 @@
             <div class="restaurant-section" id="nearby-section">
                 <h3 class="section-title">
                     <img src="${pageContext.request.contextPath}/images/h-location-i.png" alt="Nearby icon" class="section-icon">
-                    Nearby Restaurants
+                    <c:choose>
+                        <c:when test="${not empty requestScope.searchTerm}">Results for "${requestScope.searchTerm}"</c:when>
+                        <c:otherwise>Nearby Restaurants</c:otherwise>
+                    </c:choose>
                 </h3>
                 <c:choose>
                     <c:when test="${not empty requestScope.nearbyRestaurants.data}">
@@ -155,7 +158,17 @@
                         </div>
                     </c:when>
                     <c:otherwise>
-                        <p class="no-results">Set a location to discover nearby restaurants.</p>
+                        <c:choose>
+                            <c:when test="${not empty requestScope.searchTerm and empty requestScope.nearbyRestaurants}">
+                                <p class="no-results">Set a location to search for restaurants.</p>
+                            </c:when>
+                            <c:when test="${not empty requestScope.searchTerm}">
+                                <p class="no-results">No results found for "${requestScope.searchTerm}".</p>
+                            </c:when>
+                            <c:otherwise>
+                                <p class="no-results">Set a location to discover nearby restaurants.</p>
+                            </c:otherwise>
+                        </c:choose>
                     </c:otherwise>
                 </c:choose>
             </div>
