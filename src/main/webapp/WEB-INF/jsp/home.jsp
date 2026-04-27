@@ -177,6 +177,24 @@
 <footer></footer>
 <script>
     const contextPath = "${pageContext.request.contextPath}";
+    <c:choose>
+        <c:when test="${not empty sessionScope.userLat}">
+            const userLat = ${sessionScope.userLat};
+            const userLon = ${sessionScope.userLon};
+        </c:when>
+        <c:when test="${not empty sessionScope.userLocation}">
+            const userLat = ${sessionScope.userLocation.results[0].position.lat};
+            const userLon = ${sessionScope.userLocation.results[0].position.lon};
+        </c:when>
+        <c:when test="${not empty sessionScope.savedLocation}">
+            const userLat = ${sessionScope.savedLocation.latitude};
+            const userLon = ${sessionScope.savedLocation.longitude};
+        </c:when>
+        <c:otherwise>
+            const userLat = null;
+            const userLon = null;
+        </c:otherwise>
+    </c:choose>
 </script>
 <script src="${pageContext.request.contextPath}/js/home.js"></script>
 </body>

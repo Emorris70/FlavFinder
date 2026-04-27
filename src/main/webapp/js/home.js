@@ -13,6 +13,7 @@ const initApp = () => {
     wireFavButtons(document);
     handleCategoryPills();
     handleSidebar();
+    updateDistances(document);
 }
 
 /**
@@ -325,6 +326,7 @@ const renderCards = (section, restaurants) => {
     replaceNearbyContent(section, grid);
 
     wireFavButtons(grid);
+    updateDistances(grid);
 }
 
 /**
@@ -432,6 +434,50 @@ const handleSidebar = () => {
     sidebarLocBtn?.addEventListener('click', () => {
         closeSidebar();
         document.getElementById('location-toggle-btn')?.click();
+    });
+}
+
+/**
+ * Calculates the great-circle distance between two coordinates using the
+ * Haversine formula.
+ *
+ * @param {number} lat1 - Latitude of point 1 in decimal degrees.
+ * @param {number} lon1 - Longitude of point 1 in decimal degrees.
+ * @param {number} lat2 - Latitude of point 2 in decimal degrees.
+ * @param {number} lon2 - Longitude of point 2 in decimal degrees.
+ * @returns {number} Distance in miles.
+ */
+const calcDistance = (lat1, lon1, lat2, lon2) => {
+    const R = 3958.8;
+    const toRad = deg => deg * Math.PI / 180;
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
+    const a = Math.sin(dLat / 2) ** 2 +
+              Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+              Math.sin(dLon / 2) ** 2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+/**
+ * Populates every .card-distance element within a given root with a
+ * human-readable distance from the user's current location.
+ *
+ * Skips silently if userLat/userLon are not set (no location in session)
+ * or if a card is missing valid coordinate data attributes.
+ *
+ * @param {ParentNode} root - Element to scope the query to (document or a grid).
+ * @returns {void}
+ */
+const updateDistances = (root) => {
+    if (userLat == null || userLon == null) return;
+
+    root.querySelectorAll('.card-distance').forEach(el => {
+        const lat = parseFloat(el.dataset.lat);
+        const lon = parseFloat(el.dataset.lon);
+        if (isNaN(lat) || isNaN(lon)) return;
+
+        const miles = calcDistance(userLat, userLon, lat, lon);
+        el.textContent = miles < 0.1 ? '< 0.1 mi' : miles.toFixed(1) + ' mi';
     });
 }
 
