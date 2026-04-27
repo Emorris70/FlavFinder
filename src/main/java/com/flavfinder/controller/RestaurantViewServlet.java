@@ -124,12 +124,16 @@ public class RestaurantViewServlet extends HttpServlet {
     private void injectSnapshotPhotoIfNeeded(BusinessItem item, String placeId) {
         List<Restaurant> matches = restaurantDao.findBy("apiRestaurantId", placeId);
         if (matches.isEmpty() || matches.get(0).getImageUrl() == null) return;
+
         String url = matches.get(0).getImageUrl();
         PhotoSample photo = new PhotoSample();
+
         photo.setPhotoUrl(url);
         photo.setPhotoUrlLarge(url);
+
         List<PhotoSample> photos = new ArrayList<>();
         photos.add(photo);
+
         if (item.getPhotosSample() != null) photos.addAll(item.getPhotosSample());
         item.setPhotosSample(photos);
         log.info("RestaurantViewServlet — prepended DB snapshot photo for '{}'", placeId);

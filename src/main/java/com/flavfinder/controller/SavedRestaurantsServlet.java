@@ -40,6 +40,14 @@ public class SavedRestaurantsServlet extends HttpServlet {
         savedRestaurantDao = new SavedRestaurantDao();
     }
 
+    /**
+     * Loads the user's saved restaurants and forwards to savedRestaurants.jsp.
+     *
+     * @param req Client's request.
+     * @param resp Server's response.
+     * @throws ServletException If a servlet-level error occurs.
+     * @throws IOException If an Input/Output exception occurs.
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -80,6 +88,7 @@ public class SavedRestaurantsServlet extends HttpServlet {
      */
     private BusinessItem buildFromSnapshot(Restaurant snapshot) {
         BusinessItem item = new BusinessItem();
+
         item.setPlaceId(snapshot.getApiRestaurantId());
         item.setName(snapshot.getName());
         item.setLatitude(snapshot.getLatitude());
