@@ -28,7 +28,7 @@ class LocationDaoTest {
     }
 
     /**
-     * Get the users current saved location.
+     * Get the users' current saved location.
      */
     @Test
     void getById() {
@@ -64,7 +64,7 @@ class LocationDaoTest {
 
     /**
      * Insert a new location; this should simulate
-     * going from current location to a custom location.
+     * going from the current location to a custom location.
      */
     @Test
     void insert() {
@@ -108,7 +108,7 @@ class LocationDaoTest {
     }
 
     /**
-     * Test user constraint - If a user is deleted associated fields
+     * Test user constraint - If a user is deleted, associated fields
      * within the location table should be too.
      */
     @Test

@@ -130,7 +130,7 @@ public class GenericDao<T> {
      *
      * @param joinField  the association field on T (e.g. "user", "restaurant")
      * @param matchField the field on the joined entity to filter by (e.g. "id")
-     * @param value      the value to match
+     * @param value the value to match
      * @return list of matching entities
      */
     public List<T> joinBy(String joinField, String matchField, Object value) {

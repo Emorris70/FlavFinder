@@ -183,7 +183,6 @@ public class AuthServlet extends HttpServlet {
                 resp.sendRedirect(req.getContextPath() + "/confirm.jsp");
 
             } catch (ExpiredCodeException e) {
-                // TODO find a way to make this possible
                 session.setAttribute("error", "Code has expired please request a new one");
                 resp.sendRedirect(req.getContextPath() + "/confirm.jsp");
 

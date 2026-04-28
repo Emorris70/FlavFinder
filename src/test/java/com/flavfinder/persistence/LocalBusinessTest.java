@@ -12,6 +12,10 @@ import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for the Local Business API.
+ * @author EmileM
+ */
 @Disabled
 class LocalBusinessTest {
     private static final Logger log = LogManager.getLogger(LocalBusinessTest.class);
@@ -39,7 +43,6 @@ class LocalBusinessTest {
     void callLocalBusiness() {
         assertNotNull(response);
 
-        assertNotNull(response);
         assertEquals("OK", response.getStatus());
         assertNotNull(response.getData());
         assertFalse(response.getData().isEmpty());

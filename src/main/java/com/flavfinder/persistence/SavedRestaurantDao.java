@@ -33,7 +33,7 @@ public class SavedRestaurantDao extends GenericDao<SavedRestaurant> {
     /**
      * Returns the saved restaurant row for a specific user + restaurant pair, or null.
      *
-     * @param userId       Internal user id.
+     * @param userId Internal user id.
      * @param restaurantId Internal restaurant id.
      * @return The matching SavedRestaurant or null if not found.
      */
