@@ -102,25 +102,7 @@ public class LocationServlet extends HttpServlet {
 
         // Check existing location based on user(id)
         User dbUser = users.get(0);
-        SavedLocation existing = locationDao.findByUserId(dbUser.getId());
-
-        if (existing == null) {
-            locationDao.insert(SavedLocation.builder()
-                    .cityName(city)
-                    .zipCode(zip)
-                    .latitude(lat)
-                    .longitude(lon)
-                    .isDefault(false)
-                    .user(dbUser)
-                    .build());
-        } else {
-            existing.setCityName(city);
-            existing.setZipCode(zip);
-            existing.setLatitude(lat);
-            existing.setLongitude(lon);
-            existing.setDefault(false);
-            locationDao.update(existing);
-        }
+        getExistingLocation(dbUser, false, city, zip, lat, lon);
 
 
         // Store the response in the session
@@ -186,27 +168,46 @@ public class LocationServlet extends HttpServlet {
         }
 
         User dbUser = users.get(0);
-        SavedLocation existing = locationDao.findByUserId(dbUser.getId());
-
-        if (existing == null) {
-            locationDao.insert(SavedLocation.builder()
-                    .latitude(parsedLat)
-                    .longitude(parsedLon)
-                    .isDefault(true)
-                    .user(dbUser)
-                    .build());
-        } else {
-            existing.setCityName(null);
-            existing.setZipCode(null);
-            existing.setLatitude(parsedLat);
-            existing.setLongitude(parsedLon);
-            existing.setDefault(true);
-            locationDao.update(existing);
-        }
+        getExistingLocation(dbUser, true, null, null, parsedLat, parsedLon);
 
         session.setAttribute("userLat", parsedLat);
         session.setAttribute("userLon", parsedLon);
         session.removeAttribute("userLocation");
         resp.sendRedirect(req.getContextPath() + "/home");
+    }
+
+    /**
+     * Helper method to upsert a saved location for a given user.
+     *
+     * @param user   The database user
+     * @param status Whether the location is the default
+     * @param city   The city name
+     * @param zip    The zip code
+     * @param lat    Latitude of the location
+     * @param lon    Longitude of the location
+     */
+    public void getExistingLocation(User user, boolean status,
+                                    String city, String zip,
+                                    double lat, double lon) {
+        SavedLocation existing = locationDao.findByUserId(user.getId());
+
+        if (existing == null) {
+            SavedLocation newLocation = SavedLocation.builder()
+                    .cityName(city)
+                    .zipCode(zip)
+                    .latitude(lat)
+                    .longitude(lon)
+                    .isDefault(status)
+                    .user(user)
+                    .build();
+            locationDao.insert(newLocation);
+        } else {
+            existing.setCityName(city);
+            existing.setZipCode(zip);
+            existing.setLatitude(lat);
+            existing.setLongitude(lon);
+            existing.setDefault(status);
+            locationDao.update(existing);
+        }
     }
 }
