@@ -324,7 +324,6 @@ const renderCards = (section, restaurants) => {
     grid.className = 'cards-grid';
     restaurants.forEach(r => grid.appendChild(buildCard(r)));
     replaceNearbyContent(section, grid);
-
     wireFavButtons(grid);
     updateDistances(grid);
 }
@@ -430,7 +429,7 @@ const handleSidebar = () => {
     closeBtn?.addEventListener('click', closeSidebar);
     overlay.addEventListener('click', closeSidebar);
 
-    // Mirror the header location button — close sidebar first, then open popup
+    // Mirror the header location button, close the sidebar first, then open the popup
     sidebarLocBtn?.addEventListener('click', () => {
         closeSidebar();
         document.getElementById('location-toggle-btn')?.click();

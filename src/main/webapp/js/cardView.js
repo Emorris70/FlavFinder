@@ -9,6 +9,7 @@
 const initCardView = () => {
     handleHoursAccordion();
     highlightToday();
+    handleBackButton();
 };
 
 /**
@@ -49,6 +50,29 @@ const highlightToday = () => {
     document.querySelectorAll('.cv-hours-entry').forEach(row => {
         if (row.dataset.day?.toLowerCase() === today) {
             row.classList.add('cv-today');
+        }
+    });
+};
+
+/**
+ * Intercepts the back button click and uses the browser history stack so the
+ * user returns to whatever page they navigated from (home, search results, etc.)
+ * with its scroll position and state intact.
+ *
+ * Falls back to the href (/home) if there is no history entry to go back to.
+ *
+ * @returns {void}
+ */
+const handleBackButton = () => {
+    const btn = document.getElementById('cv-back-btn');
+    if (!btn) return;
+
+    btn.addEventListener('click', e => {
+        e.preventDefault();
+        if (history.length > 1) {
+            history.back();
+        } else {
+            window.location.href = btn.href;
         }
     });
 };

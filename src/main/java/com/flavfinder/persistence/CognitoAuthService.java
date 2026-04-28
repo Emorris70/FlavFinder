@@ -191,6 +191,20 @@ public class CognitoAuthService {
     }
 
     /**
+     * Permanently deletes a user from the Cognito User Pool using the admin API.
+     *
+     * @param email the user's email address (used as the Cognito username).
+     * @throws Exception if the AWS SDK call fails.
+     */
+    public void deleteUser(String email) throws Exception {
+        AdminDeleteUserRequest request = AdminDeleteUserRequest.builder()
+                .userPoolId(userPoolId)
+                .username(email)
+                .build();
+        cognitoClient.adminDeleteUser(request);
+    }
+
+    /**
      * Confirms the forgot password flow by submitting the reset code and new password.
      *
      * @param email the user's email address.

@@ -57,7 +57,7 @@
                 </div>
                 <div class="settings user-d-c">
                     <img src="${pageContext.request.contextPath}/images/settings.png" alt="settings icon" class="settings-icon h-icon">
-                    <a href="#">Settings</a>
+                    <a href="${pageContext.request.contextPath}/settings">Settings</a>
                 </div>
                 <div class="log-out user-d-c">
                     <img src="${pageContext.request.contextPath}/images/logout.png" alt="logout icon" class="logout-icon h-icon">
@@ -106,7 +106,7 @@
             </a>
         </li>
         <li>
-            <a href="#" class="sidebar-item">
+            <a href="${pageContext.request.contextPath}/settings" class="sidebar-item">
                 <img src="${pageContext.request.contextPath}/images/settings.png" class="inner-icon" alt="settings icon">
                 Settings
             </a>
