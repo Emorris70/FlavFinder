@@ -23,8 +23,12 @@ public interface PropertiesLoader {
      * the file path was not found.
      */
     default Properties loadProperties(String propertiesFilePath) throws IOException, Exception{
+        InputStream stream = this.getClass().getResourceAsStream(propertiesFilePath);
+        if (stream == null) {
+            throw new IOException("Properties file not found on classpath: " + propertiesFilePath);
+        }
         Properties properties = new Properties();
-        properties.load(this.getClass().getResourceAsStream(propertiesFilePath));
+        properties.load(stream);
 
         return properties;
     }

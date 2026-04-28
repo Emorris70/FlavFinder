@@ -147,6 +147,7 @@ public class AuthServlet extends HttpServlet {
 
             } catch (Exception e) {
                 session.setAttribute("error", "Something went wrong please try again");
+                log.error("Failed to register user: {}", e.getMessage());
                 resp.sendRedirect(req.getContextPath() + "/signup.jsp");
 
             }
@@ -188,6 +189,7 @@ public class AuthServlet extends HttpServlet {
 
             } catch (Exception e) {
                 session.setAttribute("error", "Something went wrong please try again");
+                log.error("Failed to confirm user: {}", e.getMessage());
                 resp.sendRedirect(req.getContextPath() + "/confirm.jsp");
 
             }
@@ -256,6 +258,7 @@ public class AuthServlet extends HttpServlet {
 
             } catch (Exception e) {
                 session.setAttribute("error", "Something went wrong please try again");
+                log.error("Login failed: {}", e.getMessage());
                 resp.sendRedirect(req.getContextPath() + "/index.jsp");
 
             }
@@ -288,6 +291,7 @@ public class AuthServlet extends HttpServlet {
 
             } catch (Exception e) {
                 session.setAttribute("error", "Something went wrong please try again");
+                log.error("Failed to reset password: {}", e.getMessage());
                 resp.sendRedirect(req.getContextPath() + "/passwordReset.jsp");
 
             }
@@ -332,6 +336,7 @@ public class AuthServlet extends HttpServlet {
 
             } catch (Exception e) {
                 session.setAttribute("error", "Something went wrong please try again");
+                log.error("Failed to reset password: {}", e.getMessage());
                 resp.sendRedirect(req.getContextPath() + "/resetPasswordConfirm.jsp");
 
             }

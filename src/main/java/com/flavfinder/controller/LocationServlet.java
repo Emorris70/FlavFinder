@@ -59,6 +59,11 @@ public class LocationServlet extends HttpServlet {
         String customLocation = req.getParameter("cust-location");
         HttpSession session = req.getSession(false);
 
+        if (session == null) {
+            resp.sendRedirect(req.getContextPath() + "/index.jsp");
+            return;
+        }
+
         // Validates the input
         if (customLocation == null || customLocation.trim().isEmpty()) {
             session.setAttribute("locationError", "Please enter a valid location");
@@ -144,6 +149,11 @@ public class LocationServlet extends HttpServlet {
         String lat = req.getParameter("lat");
         String lon = req.getParameter("lon");
         HttpSession session = req.getSession(false);
+
+        if (session == null) {
+            resp.sendRedirect(req.getContextPath() + "/index.jsp");
+            return;
+        }
 
         // Edge case user denied browser geolocation
         if (lat == null || lon == null) {

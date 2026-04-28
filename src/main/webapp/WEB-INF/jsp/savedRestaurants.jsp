@@ -37,8 +37,8 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="card-title-row">
-                                        <span class="card-name">${restaurant.name}</span>
-                                        <span class="card-price">${not empty restaurant.priceLevel ? restaurant.priceLevel : ''}</span>
+                                        <span class="card-name">${fn:escapeXml(restaurant.name)}</span>
+                                        <span class="card-price">${not empty restaurant.priceLevel ? fn:escapeXml(restaurant.priceLevel) : ''}</span>
                                     </div>
                                     <c:if test="${restaurant.rating > 0}">
                                         <div class="card-rating">
@@ -48,7 +48,7 @@
                                             <span class="rating-val">${restaurant.rating}</span>
                                             <span class="review-count">(${restaurant.reviewCount})</span>
                                             <span class="card-separator">·</span>
-                                            <span class="card-type">${restaurant.type}</span>
+                                            <span class="card-type">${fn:escapeXml(restaurant.type)}</span>
                                         </div>
                                     </c:if>
                                     <div class="card-footer-row">
@@ -80,6 +80,25 @@
 <footer></footer>
 <script>
     const contextPath = "${pageContext.request.contextPath}";
+    <c:choose>
+        <c:when test="${not empty sessionScope.userLat}">
+            const userLat = ${sessionScope.userLat};
+            const userLon = ${sessionScope.userLon};
+        </c:when>
+        <c:when test="${not empty sessionScope.userLocation}">
+            const userLat = ${sessionScope.userLocation.results[0].position.lat};
+            const userLon = ${sessionScope.userLocation.results[0].position.lon};
+        </c:when>
+        <c:when test="${not empty sessionScope.savedLocation}">
+            const userLat = ${sessionScope.savedLocation.latitude};
+            const userLon = ${sessionScope.savedLocation.longitude};
+        </c:when>
+        <c:otherwise>
+            const userLat = null;
+            const userLon = null;
+        </c:otherwise>
+    </c:choose>
+    const savedPlaceIds = new Set([<c:forEach var="pid" items="${sessionScope.savedPlaceIds}" varStatus="s">'${pid}'<c:if test="${!s.last}">,</c:if></c:forEach>]);
 </script>
 <script src="${pageContext.request.contextPath}/js/home.js"></script>
 </body>

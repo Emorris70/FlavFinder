@@ -1,5 +1,6 @@
 package com.flavfinder.controller;
 
+import com.flavfinder.APIdentity.AuthenticatedUser;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -35,7 +36,8 @@ public class LogoutServlet extends HttpServlet {
         HttpSession session = req.getSession(false);
 
         if (session != null) {
-            log.info("User logged out: " + session.getAttribute("email"));
+            AuthenticatedUser user = (AuthenticatedUser) session.getAttribute("user");
+            log.info("User logged out: {}", user != null ? user.getEmail() : "unknown");
             session.invalidate();
         }
 

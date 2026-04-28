@@ -44,6 +44,12 @@ public class AuthFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
 
+        // Security headers
+        resp.setHeader("X-Frame-Options", "DENY");
+        resp.setHeader("X-Content-Type-Options", "nosniff");
+        resp.setHeader("X-XSS-Protection", "1; mode=block");
+        resp.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+
         // Prevent browser caching
         resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         resp.setHeader("Pragma", "no-cache");

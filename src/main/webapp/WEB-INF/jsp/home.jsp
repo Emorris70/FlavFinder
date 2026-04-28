@@ -66,7 +66,7 @@
                                         <span class="rating-val">${restaurant.rating}</span>
                                         <span class="review-count">(${restaurant.reviewCount})</span>
                                         <span class="card-separator">·</span>
-                                        <span class="card-type">${restaurant.type}</span>
+                                        <span class="card-type">${fn:escapeXml(restaurant.type)}</span>
                                     </div>
                                 </c:if>
                                 <div class="card-footer-row">
@@ -126,7 +126,7 @@
                                     <div class="card-body">
                                         <div class="card-title-row">
                                             <span class="card-name">${restaurant.name}</span>
-                                            <span class="card-price">${not empty restaurant.priceLevel ? restaurant.priceLevel : ''}</span>
+                                            <span class="card-price">${not empty restaurant.priceLevel ? fn:escapeXml(restaurant.priceLevel) : ''}</span>
                                         </div>
                                         <c:if test="${restaurant.rating > 0}">
                                             <div class="card-rating">
@@ -136,7 +136,7 @@
                                                 <span class="rating-val">${restaurant.rating}</span>
                                                 <span class="review-count">(${restaurant.reviewCount})</span>
                                                 <span class="card-separator">·</span>
-                                                <span class="card-type">${restaurant.type}</span>
+                                                <span class="card-type">${fn:escapeXml(restaurant.type)}</span>
                                             </div>
                                         </c:if>
                                         <div class="card-footer-row">

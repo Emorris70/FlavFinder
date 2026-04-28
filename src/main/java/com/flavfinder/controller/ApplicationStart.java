@@ -58,8 +58,10 @@ public class ApplicationStart extends HttpServlet implements PropertiesLoader {
 
         } catch (IOException e) {
             log.error("Issue reading properties file:" + e.getMessage(), e);
+            throw new ServletException("Failed to load application properties", e);
         } catch (Exception e) {
             log.error("Problem locating properties file:" + e.getMessage(), e);
+            throw new ServletException("Failed to initialize application", e);
         }
     }
 }

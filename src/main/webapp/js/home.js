@@ -198,6 +198,10 @@ const wireFavButtons = (root) => {
 
             try {
                 const res = await fetch(`${contextPath}/save?placeId=${encodeURIComponent(placeId)}`, { method });
+                if (res.status === 401) {
+                    window.location.href = `${contextPath}/index.jsp`;
+                    return;
+                }
                 if (res.ok) {
                     this.classList.toggle('saved');
                     if (this.classList.contains('saved')) {
@@ -269,6 +273,10 @@ const handleCategoryPills = () => {
 
                 if (res.status === 204) {
                     replaceNearbyContent(nearbySection, buildStatusNode('p', 'no-results', 'Set a location to discover nearby restaurants.'));
+                    return;
+                }
+                if (res.status === 401) {
+                    window.location.href = `${contextPath}/index.jsp`;
                     return;
                 }
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
