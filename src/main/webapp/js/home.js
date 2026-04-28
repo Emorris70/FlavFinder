@@ -200,6 +200,11 @@ const wireFavButtons = (root) => {
                 const res = await fetch(`${contextPath}/save?placeId=${encodeURIComponent(placeId)}`, { method });
                 if (res.ok) {
                     this.classList.toggle('saved');
+                    if (this.classList.contains('saved')) {
+                        savedPlaceIds.add(placeId);
+                    } else {
+                        savedPlaceIds.delete(placeId);
+                    }
                 } else {
                     console.error('Save toggle failed:', res.status);
                 }
@@ -247,7 +252,12 @@ const handleCategoryPills = () => {
             const selected = pill.textContent.trim();
 
             if (selected.toLowerCase() === 'all') {
-                if (originalContent) replaceNearbyContent(nearbySection, originalContent.cloneNode(true));
+                if (originalContent) {
+                    const restored = originalContent.cloneNode(true);
+                    replaceNearbyContent(nearbySection, restored);
+                    wireFavButtons(restored);
+                    updateDistances(restored);
+                }
                 return;
             }
 
@@ -362,7 +372,7 @@ const buildCard = (r) => {
     card.innerHTML = `
         <div class="card-img-wrap">
             <img src="${esc(photoUrl)}" alt="${esc(r.name)}" class="card-img" referrerpolicy="no-referrer">
-            <button class="fav-btn" data-place-id="${esc(r.place_id)}">
+            <button class="fav-btn ${savedPlaceIds.has(r.place_id) ? 'saved' : ''}" data-place-id="${esc(r.place_id)}">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
                     <path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/>
                 </svg>

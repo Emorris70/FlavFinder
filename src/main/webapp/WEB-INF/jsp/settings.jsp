@@ -94,7 +94,12 @@
     </div>
 </div>
 
-<script>const contextPath = '${pageContext.request.contextPath}';</script>
+<script>
+    const contextPath = '${pageContext.request.contextPath}';
+    const userLat = null;
+    const userLon = null;
+    const savedPlaceIds = new Set();
+</script>
 <script src="${pageContext.request.contextPath}/js/home.js"></script>
 <script src="${pageContext.request.contextPath}/js/settings.js"></script>
 </body>

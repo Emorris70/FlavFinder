@@ -1,5 +1,7 @@
 package com.flavfinder.controller;
 
+import com.flavfinder.APIdentity.BusinessItem;
+import com.flavfinder.APIdentity.LocalBusinessResponse;
 import com.flavfinder.APIdentity.TomTomResponse;
 import com.flavfinder.entity.SavedLocation;
 import com.flavfinder.entity.SavedRestaurant;
@@ -16,8 +18,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -88,28 +93,20 @@ public class HomeServlet extends HttpServlet {
 
         // Only call the API if we have coords
         // TODO Note: commented out this section to reduce API calls uncomment when needed.
-//        if (lat != null && lon != null) {
-//            try {
-//                log.info("HomeServlet — calling API with lat={}, lon={}", lat, lon);
-//                LocalBusinessResponse nearbyRestaurants = resources.callLocalBusiness(lat, lon, "food near me");
-//                req.setAttribute("nearbyRestaurants", nearbyRestaurants);
-//
-//                if (nearbyRestaurants.getData() != null) {
-//                    log.info("HomeServlet — {} results returned", nearbyRestaurants.getData().size());
-//                    for (var business : nearbyRestaurants.getData()) {
-//                        log.info("HomeServlet — result: name='{}', lat={}, lon={}, type='{}'",
-//                                business.getName(),
-//                                business.getLatitude(),
-//                                business.getLongitude(),
-//                                business.getType());
-//                    }
-//                } else {
-//                    log.warn("HomeServlet - API returned null data");
-//                }
-//            } catch (Exception e) {
-//                log.error("HomeServlet — failed to fetch nearby restaurants", e);
-//            }
-//        }
+        if (lat != null && lon != null) {
+            try {
+                log.info("HomeServlet — calling API with lat={}, lon={}", lat, lon);
+                LocalBusinessResponse nearbyRestaurants = resources.callLocalBusiness(lat, lon, "food near me");
+                req.setAttribute("nearbyRestaurants", nearbyRestaurants);
+
+                List<BusinessItem> items = nearbyRestaurants.getData() != null
+                        ? nearbyRestaurants.getData() : Collections.emptyList();
+                cacheResults(session, items);
+                log.info("HomeServlet — {} results returned", items.size());
+            } catch (Exception e) {
+                log.error("HomeServlet — failed to fetch nearby restaurants", e);
+            }
+        }
 
         if (session.getAttribute("savedPlaceIds") == null) {
             User user = (User) session.getAttribute("dbUser");
@@ -124,5 +121,27 @@ public class HomeServlet extends HttpServlet {
         log.info("HomeServlet - forwarding to home.jsp");
         session.setAttribute("page", "Home - FlavFinder");
         req.getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(req, resp);
+    }
+
+    /**
+     * Stores each result in the session-level {@code restaurantCache} map,
+     * creating the map if it does not yet exist. Keyed by {@code place_id}.
+     *
+     * @param session The current HTTP session.
+     * @param results The list of {@link BusinessItem} objects to cache.
+     */
+    @SuppressWarnings("unchecked")
+    private void cacheResults(HttpSession session, List<BusinessItem> results) {
+        Map<String, BusinessItem> cache =
+                (Map<String, BusinessItem>) session.getAttribute("restaurantCache");
+        if (cache == null) {
+            cache = new HashMap<>();
+            session.setAttribute("restaurantCache", cache);
+        }
+        for (BusinessItem item : results) {
+            if (item.getPlaceId() != null) {
+                cache.put(item.getPlaceId(), item);
+            }
+        }
     }
 }
