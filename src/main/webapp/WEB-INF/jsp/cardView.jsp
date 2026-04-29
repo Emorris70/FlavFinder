@@ -39,7 +39,9 @@
                         <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
                     </svg>
                 </a>
-                <button class="cv-save-btn fav-btn" aria-label="Save restaurant">
+                <button class="cv-save-btn fav-btn ${sessionScope.savedPlaceIds != null && sessionScope.savedPlaceIds.contains(restaurant.placeId) ? 'saved' : ''}"
+                        data-place-id="${restaurant.placeId}"
+                        aria-label="Save restaurant">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
                         <path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/>
                     </svg>

@@ -1,5 +1,9 @@
 package com.flavfinder.persistence;
 
+import com.flavfinder.entity.Restaurant;
+import com.flavfinder.entity.SavedLocation;
+import com.flavfinder.entity.SavedRestaurant;
+import com.flavfinder.entity.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
@@ -21,17 +25,35 @@ public class SessionFactoryProvider {
      * Create session factory.
      */
     public static void createSessionFactory() {
+        MetadataSources sources;
 
-        // Create registry
-        registry = new StandardServiceRegistryBuilder().configure().build();
+        if (System.getenv("MYSQL_URL") != null) {
+            registry = new StandardServiceRegistryBuilder()
+                    .applySetting("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver")
+                    .applySetting("hibernate.connection.url",      System.getenv("MYSQL_URL"))
+                    .applySetting("hibernate.connection.username", System.getenv("MYSQLUSER"))
+                    .applySetting("hibernate.connection.password", System.getenv("MYSQLPASSWORD"))
+                    .applySetting("hibernate.dialect", "org.hibernate.dialect.MySQLDialect")
+                    .applySetting("hibernate.hbm2ddl.auto", "update")
+                    .applySetting("show_sql", "false")
+                    .applySetting("hibernate.c3p0.min_size", "2")
+                    .applySetting("hibernate.c3p0.max_size", "10")
+                    .applySetting("hibernate.c3p0.timeout",  "300")
+                    .applySetting("hibernate.c3p0.max_statements", "50")
+                    .applySetting("hibernate.c3p0.idle_test_period","3000")
+                    .build();
+            sources = new MetadataSources(registry);
+            sources.addAnnotatedClass(User.class);
+            sources.addAnnotatedClass(SavedLocation.class);
+            sources.addAnnotatedClass(SavedRestaurant.class);
+            sources.addAnnotatedClass(Restaurant.class);
+        } else {
+            // Local dev: use hibernate.cfg.xml
+            registry = new StandardServiceRegistryBuilder().configure().build();
+            sources = new MetadataSources(registry);
+        }
 
-        // Create MetadataSources
-        MetadataSources sources = new MetadataSources(registry);
-
-        // Create Metadata
         Metadata metadata = sources.getMetadataBuilder().build();
-
-        // Create SessionFactory
         sessionFactory = metadata.getSessionFactoryBuilder().build();
     }
 
@@ -45,6 +67,5 @@ public class SessionFactoryProvider {
             createSessionFactory();
         }
         return sessionFactory;
-
     }
 }
