@@ -21,6 +21,8 @@ import org.apache.logging.log4j.Logger;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.*;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -122,12 +124,10 @@ public class AuthServlet extends HttpServlet {
             }
 
             try {
-                String sub = cognitoAuth.register(firstName, email, password);
+//                String sub = cognitoAuth.register(firstName, email, password);
+                cognitoAuth.register(firstName, email, password);
 
-                session.setAttribute("pendingConfirmEmail", email);
-                session.setAttribute("pendingConfirmSub", sub);
-                session.setAttribute("title", "confirm - FlavFinder");
-                resp.sendRedirect(req.getContextPath() + "/confirm.jsp");
+                resp.sendRedirect(req.getContextPath() + "/confirm.jsp?e=" + URLEncoder.encode(email, StandardCharsets.UTF_8));
 
             } catch (UsernameExistsException e) {
                 session.setAttribute("error", "An account with this email already exists");
@@ -153,7 +153,7 @@ public class AuthServlet extends HttpServlet {
             }
 
         } else if ("confirm".equals(action)) {
-            String email = (String) session.getAttribute("pendingConfirmEmail");
+            String email = req.getParameter("e");
             String code = req.getParameter("v-code");
 
             if (email == null) {
@@ -167,29 +167,32 @@ public class AuthServlet extends HttpServlet {
                 return;
             }
 
+            String confirmUrl = "confirm.jsp?e=" + URLEncoder.encode(email, StandardCharsets.UTF_8);
+
             try {
                 cognitoAuth.confirmSignUp(email, code);
 
-                String sub = (String) session.getAttribute("pendingConfirmSub");
-                GenericDao<User> userDao = new GenericDao<>(User.class);
-                userDao.insert(new User(sub));
+//                String sub = (String) session.getAttribute("pendingConfirmSub");
+//                GenericDao<User> userDao = new GenericDao<>(User.class);
+//                userDao.insert(new User(sub));
 
-                session.removeAttribute("pendingConfirmEmail");
-                session.removeAttribute("pendingConfirmSub");
+//                session.removeAttribute("pendingConfirmEmail");
+//                session.removeAttribute("pendingConfirmSub");
+                session.setAttribute("successMsg", "Account confirmed! Please log in.");
                 resp.sendRedirect(req.getContextPath() + "/index.jsp");
 
             } catch (CodeMismatchException e) {
                 session.setAttribute("error", "Invalid verification code");
-                resp.sendRedirect(req.getContextPath() + "/confirm.jsp");
+                resp.sendRedirect(req.getContextPath() + confirmUrl);
 
             } catch (ExpiredCodeException e) {
                 session.setAttribute("error", "Code has expired please request a new one");
-                resp.sendRedirect(req.getContextPath() + "/confirm.jsp");
+                resp.sendRedirect(req.getContextPath() + confirmUrl);
 
             } catch (Exception e) {
                 session.setAttribute("error", "Something went wrong please try again");
                 log.error("Failed to confirm user: {}", e.getMessage());
-                resp.sendRedirect(req.getContextPath() + "/confirm.jsp");
+                resp.sendRedirect(req.getContextPath() + confirmUrl);
 
             }
 
@@ -207,14 +210,19 @@ public class AuthServlet extends HttpServlet {
                 AuthenticationResultType result = cognitoAuth.login(email, password);
                 AuthenticatedUser authUser = tokenVerifier.verify(result.idToken());
 
+                authUser.setAccessToken(result.accessToken());
+
                 GenericDao<User> userDao = new GenericDao<>(User.class);
+                // Needed for user already in the table
                 List<User> dbUsers = userDao.findBy("sub", authUser.getSub());
+
+                // First login: user confirmed in Cognito but not yet in internal DB
                 if (dbUsers.isEmpty()) {
-                    log.error("Login: no DB user found for sub: {}", authUser.getSub());
-                    session.setAttribute("error", "Something went wrong please try again");
-                    resp.sendRedirect(req.getContextPath() + "/index.jsp");
-                    return;
+                    log.info("Login: first login for sub {}, inserting DB record", authUser.getSub());
+                    userDao.insert(new User(authUser.getSub()));
+                    dbUsers = userDao.findBy("sub", authUser.getSub());
                 }
+
                 User dbUser = dbUsers.get(0);
 
                 // Cognito user for token/claims e.g., email, name, sub, etc.

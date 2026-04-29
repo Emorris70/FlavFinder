@@ -92,7 +92,6 @@ public class HomeServlet extends HttpServlet {
                 session.getAttribute("savedLocation") != null ? "present" : "null");
 
         // Only call the API if we have coords
-        // TODO Note: commented out this section to reduce API calls uncomment when needed.
         if (lat != null && lon != null) {
             try {
                 log.info("HomeServlet — calling API with lat={}, lon={}", lat, lon);

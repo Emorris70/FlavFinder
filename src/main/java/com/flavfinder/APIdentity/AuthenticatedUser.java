@@ -1,14 +1,18 @@
 package com.flavfinder.APIdentity;
 
+import lombok.Data;
+
 /**
  * Represents an authenticated user extracted
  * from the Cognito JWT token claims.
  */
+@Data
 public class AuthenticatedUser {
     // Cognito's unique user ID
     private final String sub;
     private final String email;
     private final String firstName;
+    private String accessToken;
 
     /**
      * Instantiates a new AuthenticatedUser.
@@ -22,8 +26,4 @@ public class AuthenticatedUser {
         this.email = email;
         this.firstName = firstName;
     }
-
-    public String getSub() { return sub; }
-    public String getEmail() { return email; }
-    public String getFirstName() { return firstName; }
 }

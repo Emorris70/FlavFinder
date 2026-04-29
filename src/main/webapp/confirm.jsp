@@ -14,6 +14,7 @@
         <c:remove var="error" scope="session"/>
     </c:if>
     <form method="POST" action="${pageContext.request.contextPath}/auth" id="auth-exists">
+        <input type="hidden" name="e" value="${param.e}">
         <div class="con-wrapper">
             <label for="v-code">Verification code</label>
             <div class="input-wrapper">
