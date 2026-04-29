@@ -28,9 +28,20 @@ public class SessionFactoryProvider {
         MetadataSources sources;
 
         if (System.getenv("MYSQL_URL") != null) {
+            // Force the MySQL driver to register before C3P0 spawns its pool threads
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException("MySQL JDBC driver not found", e);
+            }
+
+            // Railway sets MYSQL_URL as mysql://... — JDBC requires the jdbc: prefix
+            String rawUrl = System.getenv("MYSQL_URL");
+            String jdbcUrl = rawUrl.startsWith("jdbc:") ? rawUrl : "jdbc:" + rawUrl;
+
             registry = new StandardServiceRegistryBuilder()
                     .applySetting("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver")
-                    .applySetting("hibernate.connection.url",      System.getenv("MYSQL_URL"))
+                    .applySetting("hibernate.connection.url",      jdbcUrl)
                     .applySetting("hibernate.connection.username", System.getenv("MYSQLUSER"))
                     .applySetting("hibernate.connection.password", System.getenv("MYSQLPASSWORD"))
                     .applySetting("hibernate.dialect", "org.hibernate.dialect.MySQLDialect")
