@@ -1,7 +1,7 @@
 package com.flavfinder.persistence;
 
 import software.amazon.awssdk.regions.Region;
-import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.AnonymousCredentialsProvider;
 import software.amazon.awssdk.services.cognitoidentityprovider.CognitoIdentityProviderClient;
 
 import java.util.Properties;
@@ -44,7 +44,7 @@ public class CognitoClientUtil implements PropertiesLoader {
 
             cognitoClient = CognitoIdentityProviderClient.builder()
                     .region(Region.of(region))
-                    .credentialsProvider(DefaultCredentialsProvider.create())
+                    .credentialsProvider(AnonymousCredentialsProvider.create())
                     .build();
         }
         return cognitoClient;

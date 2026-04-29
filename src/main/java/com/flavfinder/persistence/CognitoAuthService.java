@@ -191,17 +191,17 @@ public class CognitoAuthService {
     }
 
     /**
-     * Permanently deletes a user from the Cognito User Pool using the admin API.
+     * Permanently deletes the authenticated user from the Cognito User Pool
+     * using their access token — no IAM credentials required.
      *
-     * @param email the user's email address (used as the Cognito username).
+     * @param accessToken the user's Cognito access token from their active session.
      * @throws Exception if the AWS SDK call fails.
      */
-    public void deleteUser(String email) throws Exception {
-        AdminDeleteUserRequest request = AdminDeleteUserRequest.builder()
-                .userPoolId(userPoolId)
-                .username(email)
+    public void deleteUser(String accessToken) throws Exception {
+        DeleteUserRequest request = DeleteUserRequest.builder()
+                .accessToken(accessToken)
                 .build();
-        cognitoClient.adminDeleteUser(request);
+        cognitoClient.deleteUser(request);
     }
 
     /**

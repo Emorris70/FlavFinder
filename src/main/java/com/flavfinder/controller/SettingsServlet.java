@@ -93,7 +93,7 @@ public class SettingsServlet extends HttpServlet {
             User dbUser = (User) session.getAttribute("dbUser");
 
             try {
-                cognitoAuth.deleteUser(authUser.getEmail());
+                cognitoAuth.deleteUser(authUser.getAccessToken());
                 log.info("SettingsServlet — Cognito user deleted for sub={}", authUser.getSub());
             } catch (Exception e) {
                 log.error("SettingsServlet — failed to delete Cognito user for sub={}", authUser.getSub(), e);

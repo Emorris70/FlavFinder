@@ -84,7 +84,9 @@ public class AuthServlet extends HttpServlet {
                 return;
             }
             CognitoAuthService cognitoAuth = (CognitoAuthService) getServletContext().getAttribute("cognitoAuth");
-            HttpSession session = req.getSession();
+
+            session = req.getSession();
+
             try {
                 cognitoAuth.resendCode(email);
                 session.setAttribute("successMsg", "A new code has been sent to your email");
@@ -144,7 +146,6 @@ public class AuthServlet extends HttpServlet {
             }
 
             try {
-//                String sub = cognitoAuth.register(firstName, email, password);
                 cognitoAuth.register(firstName, email, password);
 
                 resp.sendRedirect(req.getContextPath() + "/confirm.jsp?e=" + URLEncoder.encode(email, StandardCharsets.UTF_8));
@@ -233,7 +234,11 @@ public class AuthServlet extends HttpServlet {
                 // First login: user confirmed in Cognito but not yet in internal DB
                 if (dbUsers.isEmpty()) {
                     log.info("Login: first login for sub {}, inserting DB record", authUser.getSub());
-                    userDao.insert(new User(authUser.getSub()));
+                    try {
+                        userDao.insert(new User(authUser.getSub()));
+                    } catch (Exception insertEx) {
+                        log.warn("Login: concurrent insert for sub {}, re-fetching", authUser.getSub());
+                    }
                     dbUsers = userDao.findBy("sub", authUser.getSub());
                 }
 
