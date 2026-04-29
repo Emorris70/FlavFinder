@@ -39,10 +39,10 @@ public interface PropertiesLoader {
     private Properties loadFromEnvironment(String filePath) {
         Properties p = new Properties();
         if (filePath.contains("cognito")) {
-            p.setProperty("aws.cognito.userPoolId",   env("COGNITO_USER_POOL_ID"));
-            p.setProperty("aws.cognito.clientId",     env("COGNITO_CLIENT_ID"));
-            p.setProperty("aws.cognito.clientSecret", env("COGNITO_CLIENT_SECRET"));
-            p.setProperty("aws.cognito.region",       env("COGNITO_REGION"));
+            p.setProperty("aws.cognito.userPoolId",   System.getenv("COGNITO_USER_POOL_ID"));
+            p.setProperty("aws.cognito.clientId",     System.getenv("COGNITO_CLIENT_ID"));
+            p.setProperty("aws.cognito.clientSecret", System.getenv("COGNITO_CLIENT_SECRET"));
+            p.setProperty("aws.cognito.region",       System.getenv("COGNITO_REGION"));
         } else if (filePath.contains("config")) {
             p.setProperty("tomtom_key",          env("TOMTOM_KEY"));
             p.setProperty("tomtom_geo_url",      "https://api.tomtom.com/search/2/geocode/");

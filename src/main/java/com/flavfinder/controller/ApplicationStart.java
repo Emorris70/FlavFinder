@@ -56,6 +56,10 @@ public class ApplicationStart extends HttpServlet implements PropertiesLoader {
             TokenVerifier tokenVerifier = new TokenVerifier(cognitoProperties);
             context.setAttribute("tokenVerifier", tokenVerifier);
 
+            // Force Hibernate to initialize at startup so hbm2ddl.auto creates tables immediately
+            SessionFactoryProvider.getSessionFactory();
+            log.info("Hibernate SessionFactory initialized successfully");
+
         } catch (IOException e) {
             log.error("Issue reading properties file:" + e.getMessage(), e);
             throw new ServletException("Failed to load application properties", e);
