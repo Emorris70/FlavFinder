@@ -161,19 +161,28 @@ const handleCurrentLocation = () => {
 
     if (!currentLocation) return;
 
-    currentLocation.addEventListener('click', () => {
+    currentLocation.addEventListener('click', (e) => {
+        e.preventDefault();
 
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(position => {
+        const popup = document.getElementById('pop-up');
+        if (popup) popup.classList.remove('show');
+
+        if (!navigator.geolocation) {
+            window.location.href = `${contextPath}/location`;
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+            position => {
                 const lat = position.coords.latitude;
                 const lon = position.coords.longitude;
-
-                // Send to LocationServlet via GET
                 window.location.href = `${contextPath}/location?lat=${lat}&lon=${lon}`;
-            }, error => {
-                console.error('Geolocation error:', error);
-            });
-        }
+            },
+            () => {
+                window.location.href = `${contextPath}/location`;
+            },
+            { timeout: 10000, enableHighAccuracy: false }
+        );
     });
 }
 
