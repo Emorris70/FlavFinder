@@ -13,6 +13,12 @@
         </div>
         <c:remove var="error" scope="session"/>
     </c:if>
+    <c:if test="${not empty successMsg}">
+        <div class="successMsg">
+            <p class="success-msg">${successMsg}</p>
+        </div>
+        <c:remove var="successMsg" scope="session"/>
+    </c:if>
     <form method="POST" action="${pageContext.request.contextPath}/auth" id="auth-exists">
         <input type="hidden" name="e" value="${param.e}">
         <div class="con-wrapper">
@@ -28,6 +34,7 @@
                     class="btn-submit">Continue</button>
             <a href="auth?action=sign-up" class="btn-submit back-btn">Back</a>
         </div>
+        <a href="${pageContext.request.contextPath}/auth?action=resend-code&e=${param.e}" class="resend-link">Didn't get a code? Resend</a>
     </form>
 </main>
 </body>

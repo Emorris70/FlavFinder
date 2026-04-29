@@ -216,6 +216,21 @@ public class CognitoAuthService {
      * @throws InvalidPasswordException If the new password doesn't meet policy requirements.
      * @throws TooManyRequestsException If too many requests are made.
      */
+    /**
+     * Resends the confirmation code to the user's email.
+     *
+     * @param email the user's email address.
+     * @throws TooManyRequestsException If too many requests are made.
+     */
+    public void resendCode(String email) throws TooManyRequestsException, Exception {
+        ResendConfirmationCodeRequest request = ResendConfirmationCodeRequest.builder()
+                .clientId(clientId)
+                .username(email)
+                .secretHash(computeSecretHash(email))
+                .build();
+        cognitoClient.resendConfirmationCode(request);
+    }
+
     public void confirmForgotPassword(String email, String code, String newPassword)
             throws CodeMismatchException, ExpiredCodeException,
             InvalidPasswordException, TooManyRequestsException, Exception

@@ -77,6 +77,26 @@ public class AuthServlet extends HttpServlet {
             url = "/resetPasswordConfirm.jsp";
             req.setAttribute("page", "Reset Password - FlavFinder");
 
+        } else if ("resend-code".equals(req.getParameter("action"))) {
+            String email = req.getParameter("e");
+            if (email == null || email.isBlank()) {
+                resp.sendRedirect(req.getContextPath() + "/signup.jsp");
+                return;
+            }
+            CognitoAuthService cognitoAuth = (CognitoAuthService) getServletContext().getAttribute("cognitoAuth");
+            HttpSession session = req.getSession();
+            try {
+                cognitoAuth.resendCode(email);
+                session.setAttribute("successMsg", "A new code has been sent to your email");
+            } catch (TooManyRequestsException e) {
+                session.setAttribute("error", "Too many attempts, please try again later");
+            } catch (Exception e) {
+                session.setAttribute("error", "Something went wrong, please try again");
+                log.error("Failed to resend confirmation code: {}", e.getMessage());
+            }
+            resp.sendRedirect(req.getContextPath() + "/confirm.jsp?e=" + URLEncoder.encode(email, StandardCharsets.UTF_8));
+            return;
+
         } else {
             resp.sendRedirect(req.getContextPath() + "/index.jsp");
             return;
@@ -172,12 +192,6 @@ public class AuthServlet extends HttpServlet {
             try {
                 cognitoAuth.confirmSignUp(email, code);
 
-//                String sub = (String) session.getAttribute("pendingConfirmSub");
-//                GenericDao<User> userDao = new GenericDao<>(User.class);
-//                userDao.insert(new User(sub));
-
-//                session.removeAttribute("pendingConfirmEmail");
-//                session.removeAttribute("pendingConfirmSub");
                 session.setAttribute("successMsg", "Account confirmed! Please log in.");
                 resp.sendRedirect(req.getContextPath() + "/index.jsp");
 

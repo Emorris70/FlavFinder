@@ -191,6 +191,18 @@ label {
     margin-top: 5px;
 }
 /*-----*/
+/* success message */
+.successMsg {
+    max-width: 100%;
+    padding: 0.313rem;
+    font-size: 0.875rem;
+    color: rgba(22, 163, 74, 0.9);
+    border-radius: 5px;
+    border: 1px solid #16a34a;
+    background: rgba(220, 252, 231, 0.5);
+    text-align: center;
+}
+/*-----*/
 /* confirm page */
 #v-code {
     padding-left: 10px !important;
@@ -230,6 +242,16 @@ label {
 }
 .sw-dir {
     flex-direction: column;
+}
+.resend-link {
+    display: block;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--mute-contrast);
+    margin-top: 4px;
+}
+.resend-link:hover {
+    color: var(--flav-blue);
 }
 .back-btn {
     background: #FFFFFF;
