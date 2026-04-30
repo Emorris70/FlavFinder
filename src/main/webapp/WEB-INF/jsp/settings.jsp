@@ -4,9 +4,9 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>${sessionScope.page}</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home-mini.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main-mini.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/settings-mini.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/homePage.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/settings.css">
 </head>
 <body>
 <jsp:include page="includes/header-home.jsp"/>
@@ -100,7 +100,7 @@
     const userLon = null;
     const savedPlaceIds = new Set();
 </script>
-<script src="${pageContext.request.contextPath}/js/home-mini.js"></script>
-<script src="${pageContext.request.contextPath}/js/settings-mini.js"></script>
+<script src="${pageContext.request.contextPath}/js/home.js"></script>
+<script src="${pageContext.request.contextPath}/js/settings.js"></script>
 </body>
 </html>

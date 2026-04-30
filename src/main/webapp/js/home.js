@@ -253,8 +253,9 @@ const handleCategoryPills = () => {
     if (!pills.length || !nearbySection) return;
 
     // Snapshot the server-rendered content so "All" can restore it exactly
-    const _snapEl = nearbySection.querySelector('.cards-grid, .no-results');
-    const originalContent = _snapEl ? _snapEl.cloneNode(true) : null;
+    const originalContent = nearbySection
+        .querySelector('.cards-grid, .no-results')
+        ?.cloneNode(true);
 
     pills.forEach(pill => {
         pill.addEventListener('click', async () => {
@@ -372,12 +373,12 @@ const buildCard = (r) => {
         .replace(/>/g,'&gt;')
         .replace(/"/g,'&quot;') : '';
 
-    const isOpen   = r.opening_status ? r.opening_status.toLowerCase().includes('open') : false;
-    const isClosed = r.opening_status ? r.opening_status.toLowerCase().includes('close') : false;
+    const isOpen   = r.opening_status?.toLowerCase().includes('open');
+    const isClosed = r.opening_status?.toLowerCase().includes('close');
     const statusClass = isOpen ? 'status-open' : isClosed ? 'status-closed' : '';
     const statusText  = isOpen ? 'Open' : isClosed ? 'Closed' : '--';
 
-    const photoUrl = r.photos_sample && r.photos_sample.length
+    const photoUrl = r.photos_sample?.length
         ? r.photos_sample[0].photo_url
         : `${contextPath}/images/near-me.png`;
 
@@ -452,14 +453,13 @@ const handleSidebar = () => {
     const closeSidebar = () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); };
 
     hamburger.addEventListener('click', openSidebar);
-    if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+    closeBtn?.addEventListener('click', closeSidebar);
     overlay.addEventListener('click', closeSidebar);
 
     // Mirror the header location button, close the sidebar first, then open the popup
-    if (sidebarLocBtn) sidebarLocBtn.addEventListener('click', () => {
+    sidebarLocBtn?.addEventListener('click', () => {
         closeSidebar();
-        const locToggle = document.getElementById('location-toggle-btn');
-        if (locToggle) locToggle.click();
+        document.getElementById('location-toggle-btn')?.click();
     });
 }
 
@@ -478,9 +478,9 @@ const calcDistance = (lat1, lon1, lat2, lon2) => {
     const toRad = deg => deg * Math.PI / 180;
     const dLat = toRad(lat2 - lat1);
     const dLon = toRad(lon2 - lon1);
-    const a = Math.pow(Math.sin(dLat / 2), 2) +
+    const a = Math.sin(dLat / 2) ** 2 +
               Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
-              Math.pow(Math.sin(dLon / 2), 2);
+              Math.sin(dLon / 2) ** 2;
     return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 

@@ -48,7 +48,7 @@ const highlightToday = () => {
     const today = days[new Date().getDay()].toLowerCase();
 
     document.querySelectorAll('.cv-hours-entry').forEach(row => {
-        if (row.dataset.day && row.dataset.day.toLowerCase() === today) {
+        if (row.dataset.day?.toLowerCase() === today) {
             row.classList.add('cv-today');
         }
     });
