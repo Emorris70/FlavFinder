@@ -125,7 +125,7 @@ public class Resources extends GenericRequest implements PropertiesLoader {
         params.put("query", query);
         params.put("lat", lat);
         params.put("lng", lon);
-        params.put("limit", 1);
+        params.put("limit", 5);
         params.put("language", "en");
         params.put("region", "us");
         params.put("subtypes", properties.getProperty("rapidapi_subtypes"));

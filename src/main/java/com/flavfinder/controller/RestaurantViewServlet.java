@@ -29,7 +29,7 @@ import java.util.Map;
  * the list search.
  *
  * <p>On a successful lookup the restaurant is pushed to the front of the
- * {@code recentlyViewed} session list (capped at 10 entries) and the request
+ * {@code recentlyViewed} session list (capped at 6 entries) and the request
  * is forwarded to {@code cardView.jsp}.
  *
  * <p>Response behaviour:
@@ -46,7 +46,7 @@ import java.util.Map;
 public class RestaurantViewServlet extends HttpServlet {
 
     private static final Logger log = LogManager.getLogger(RestaurantViewServlet.class);
-    private static final int MAX_RECENTLY_VIEWED = 10;
+    private static final int MAX_RECENTLY_VIEWED = 6;
     private Resources resources;
     private GenericDao<Restaurant> restaurantDao;
 
