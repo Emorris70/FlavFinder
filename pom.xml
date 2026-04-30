@@ -187,6 +187,9 @@
         <groupId>com.samaxes.maven</groupId>
         <artifactId>minify-maven-plugin</artifactId>
         <version>${minify-maven-plugin-version}</version>
+        <configuration>
+          <jsEngine>CLOSURE</jsEngine>
+        </configuration>
         <executions>
           <execution>
             <id>minify-home-js</id>
