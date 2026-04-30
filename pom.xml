@@ -9,6 +9,7 @@
   <url>http://maven.apache.org</url>
   <properties>
     <maven.compiler.release>11</maven.compiler.release>
+    <minify-maven-plugin-version>1.7.6</minify-maven-plugin-version>
     <jakarta.version>10.0.0</jakarta.version>
     <mysql-version>8.4.0</mysql-version>
     <jstl-version>3.0.1</jstl-version>
@@ -181,6 +182,139 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>com.samaxes.maven</groupId>
+        <artifactId>minify-maven-plugin</artifactId>
+        <version>${minify-maven-plugin-version}</version>
+        <executions>
+          <execution>
+            <id>minify-home-js</id>
+            <phase>process-resources</phase>
+            <goals><goal>minify</goal></goals>
+            <configuration>
+              <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
+              <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+              <jsSourceDir>js</jsSourceDir>
+              <jsTargetDir>js</jsTargetDir>
+              <jsSourceFiles><jsSourceFile>home.js</jsSourceFile></jsSourceFiles>
+              <jsFinalFile>home-mini</jsFinalFile>
+              <nosuffix>true</nosuffix>
+            </configuration>
+          </execution>
+          <execution>
+            <id>minify-cardview-js</id>
+            <phase>process-resources</phase>
+            <goals><goal>minify</goal></goals>
+            <configuration>
+              <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
+              <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+              <jsSourceDir>js</jsSourceDir>
+              <jsTargetDir>js</jsTargetDir>
+              <jsSourceFiles><jsSourceFile>cardView.js</jsSourceFile></jsSourceFiles>
+              <jsFinalFile>cardView-mini</jsFinalFile>
+              <nosuffix>true</nosuffix>
+            </configuration>
+          </execution>
+          <execution>
+            <id>minify-settings-js</id>
+            <phase>process-resources</phase>
+            <goals><goal>minify</goal></goals>
+            <configuration>
+              <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
+              <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+              <jsSourceDir>js</jsSourceDir>
+              <jsTargetDir>js</jsTargetDir>
+              <jsSourceFiles><jsSourceFile>settings.js</jsSourceFile></jsSourceFiles>
+              <jsFinalFile>settings-mini</jsFinalFile>
+              <nosuffix>true</nosuffix>
+            </configuration>
+          </execution>
+          <execution>
+            <id>minify-signup-js</id>
+            <phase>process-resources</phase>
+            <goals><goal>minify</goal></goals>
+            <configuration>
+              <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
+              <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+              <jsSourceDir>js</jsSourceDir>
+              <jsTargetDir>js</jsTargetDir>
+              <jsSourceFiles><jsSourceFile>signup.js</jsSourceFile></jsSourceFiles>
+              <jsFinalFile>signup-mini</jsFinalFile>
+              <nosuffix>true</nosuffix>
+            </configuration>
+          </execution>
+          <execution>
+            <id>minify-home-css</id>
+            <phase>process-resources</phase>
+            <goals><goal>minify</goal></goals>
+            <configuration>
+              <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
+              <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+              <cssSourceDir>css</cssSourceDir>
+              <cssTargetDir>css</cssTargetDir>
+              <cssSourceFiles><cssSourceFile>homePage.css</cssSourceFile></cssSourceFiles>
+              <cssFinalFile>home-mini</cssFinalFile>
+              <nosuffix>true</nosuffix>
+            </configuration>
+          </execution>
+          <execution>
+            <id>minify-main-css</id>
+            <phase>process-resources</phase>
+            <goals><goal>minify</goal></goals>
+            <configuration>
+              <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
+              <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+              <cssSourceDir>css</cssSourceDir>
+              <cssTargetDir>css</cssTargetDir>
+              <cssSourceFiles><cssSourceFile>main.css</cssSourceFile></cssSourceFiles>
+              <cssFinalFile>main-mini</cssFinalFile>
+              <nosuffix>true</nosuffix>
+            </configuration>
+          </execution>
+          <execution>
+            <id>minify-cardview-css</id>
+            <phase>process-resources</phase>
+            <goals><goal>minify</goal></goals>
+            <configuration>
+              <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
+              <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+              <cssSourceDir>css</cssSourceDir>
+              <cssTargetDir>css</cssTargetDir>
+              <cssSourceFiles><cssSourceFile>cardView.css</cssSourceFile></cssSourceFiles>
+              <cssFinalFile>cardView-mini</cssFinalFile>
+              <nosuffix>true</nosuffix>
+            </configuration>
+          </execution>
+          <execution>
+            <id>minify-settings-css</id>
+            <phase>process-resources</phase>
+            <goals><goal>minify</goal></goals>
+            <configuration>
+              <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
+              <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+              <cssSourceDir>css</cssSourceDir>
+              <cssTargetDir>css</cssTargetDir>
+              <cssSourceFiles><cssSourceFile>settings.css</cssSourceFile></cssSourceFiles>
+              <cssFinalFile>settings-mini</cssFinalFile>
+              <nosuffix>true</nosuffix>
+            </configuration>
+          </execution>
+          <execution>
+            <id>minify-auth-css</id>
+            <phase>process-resources</phase>
+            <goals><goal>minify</goal></goals>
+            <configuration>
+              <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
+              <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+              <cssSourceDir>css</cssSourceDir>
+              <cssTargetDir>css</cssTargetDir>
+              <cssSourceFiles><cssSourceFile>auth.css</cssSourceFile></cssSourceFiles>
+              <cssFinalFile>auth-mini</cssFinalFile>
+              <nosuffix>true</nosuffix>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
