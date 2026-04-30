@@ -33,6 +33,10 @@
 
 # Maven
 /target/
+
+# Generated minified assets (produced by minify-maven-plugin at build time)
+src/main/webapp/css/*-mini.css
+src/main/webapp/js/*-mini.js
 /log/
 /lib/
 

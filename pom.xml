@@ -198,7 +198,7 @@
             <goals><goal>minify</goal></goals>
             <configuration>
               <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
-              <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+              <webappTargetDir>${basedir}/src/main/webapp</webappTargetDir>
               <jsSourceDir>js</jsSourceDir>
               <jsTargetDir>js</jsTargetDir>
               <jsSourceFiles><jsSourceFile>home.js</jsSourceFile></jsSourceFiles>
@@ -212,7 +212,7 @@
             <goals><goal>minify</goal></goals>
             <configuration>
               <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
-              <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+              <webappTargetDir>${basedir}/src/main/webapp</webappTargetDir>
               <jsSourceDir>js</jsSourceDir>
               <jsTargetDir>js</jsTargetDir>
               <jsSourceFiles><jsSourceFile>cardView.js</jsSourceFile></jsSourceFiles>
@@ -226,7 +226,7 @@
             <goals><goal>minify</goal></goals>
             <configuration>
               <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
-              <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+              <webappTargetDir>${basedir}/src/main/webapp</webappTargetDir>
               <jsSourceDir>js</jsSourceDir>
               <jsTargetDir>js</jsTargetDir>
               <jsSourceFiles><jsSourceFile>settings.js</jsSourceFile></jsSourceFiles>
@@ -240,7 +240,7 @@
             <goals><goal>minify</goal></goals>
             <configuration>
               <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
-              <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+              <webappTargetDir>${basedir}/src/main/webapp</webappTargetDir>
               <jsSourceDir>js</jsSourceDir>
               <jsTargetDir>js</jsTargetDir>
               <jsSourceFiles><jsSourceFile>signup.js</jsSourceFile></jsSourceFiles>
@@ -254,7 +254,7 @@
             <goals><goal>minify</goal></goals>
             <configuration>
               <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
-              <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+              <webappTargetDir>${basedir}/src/main/webapp</webappTargetDir>
               <cssSourceDir>css</cssSourceDir>
               <cssTargetDir>css</cssTargetDir>
               <cssSourceFiles><cssSourceFile>homePage.css</cssSourceFile></cssSourceFiles>
@@ -268,7 +268,7 @@
             <goals><goal>minify</goal></goals>
             <configuration>
               <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
-              <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+              <webappTargetDir>${basedir}/src/main/webapp</webappTargetDir>
               <cssSourceDir>css</cssSourceDir>
               <cssTargetDir>css</cssTargetDir>
               <cssSourceFiles><cssSourceFile>main.css</cssSourceFile></cssSourceFiles>
@@ -282,7 +282,7 @@
             <goals><goal>minify</goal></goals>
             <configuration>
               <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
-              <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+              <webappTargetDir>${basedir}/src/main/webapp</webappTargetDir>
               <cssSourceDir>css</cssSourceDir>
               <cssTargetDir>css</cssTargetDir>
               <cssSourceFiles><cssSourceFile>cardView.css</cssSourceFile></cssSourceFiles>
@@ -296,7 +296,7 @@
             <goals><goal>minify</goal></goals>
             <configuration>
               <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
-              <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+              <webappTargetDir>${basedir}/src/main/webapp</webappTargetDir>
               <cssSourceDir>css</cssSourceDir>
               <cssTargetDir>css</cssTargetDir>
               <cssSourceFiles><cssSourceFile>settings.css</cssSourceFile></cssSourceFiles>
@@ -310,7 +310,7 @@
             <goals><goal>minify</goal></goals>
             <configuration>
               <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
-              <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+              <webappTargetDir>${basedir}/src/main/webapp</webappTargetDir>
               <cssSourceDir>css</cssSourceDir>
               <cssTargetDir>css</cssTargetDir>
               <cssSourceFiles><cssSourceFile>auth.css</cssSourceFile></cssSourceFiles>
