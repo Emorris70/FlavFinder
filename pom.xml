@@ -183,24 +183,13 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <configuration>
-          <webResources>
-            <resource>
-              <directory>${project.build.directory}/minified</directory>
-            </resource>
-          </webResources>
-        </configuration>
-      </plugin>
+
       <plugin>
         <groupId>com.samaxes.maven</groupId>
         <artifactId>minify-maven-plugin</artifactId>
         <version>${minify-maven-plugin-version}</version>
         <configuration>
           <jsEngine>CLOSURE</jsEngine>
-          <webappTargetDir>${project.build.directory}/minified</webappTargetDir>
         </configuration>
         <executions>
           <execution>
