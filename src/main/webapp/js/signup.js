@@ -41,7 +41,8 @@ const handlePasswordValidation = () => {
     passwordInput.addEventListener('input', () => {
         const val = passwordInput.value;
         rules.forEach(({ id, test }) => {
-            document.getElementById(id)?.classList.toggle('req-met', test(val));
+            const el = document.getElementById(id);
+            if (el) el.classList.toggle('req-met', test(val));
         });
     });
 }
