@@ -100,6 +100,6 @@
     </c:choose>
     const savedPlaceIds = new Set([<c:forEach var="pid" items="${sessionScope.savedPlaceIds}" varStatus="s">'${pid}'<c:if test="${!s.last}">,</c:if></c:forEach>]);
 </script>
-<script src="${pageContext.request.contextPath}/js/home.js"></script>
+<script src="${pageContext.request.contextPath}/js/home-mini.js"></script>
 </body>
 </html>

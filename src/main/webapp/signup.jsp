@@ -89,6 +89,6 @@
         </div>
     </form>
 </main>
-<script src="${pageContext.request.contextPath}/js/signup.js" defer></script>
+<script src="${pageContext.request.contextPath}/js/signup-mini.js" defer></script>
 </body>
 </html>
