@@ -253,9 +253,8 @@ const handleCategoryPills = () => {
     if (!pills.length || !nearbySection) return;
 
     // Snapshot the server-rendered content so "All" can restore it exactly
-    const originalContent = nearbySection
-        .querySelector('.cards-grid, .no-results')
-        ?.cloneNode(true);
+    const _snapEl = nearbySection.querySelector('.cards-grid, .no-results');
+    const originalContent = _snapEl ? _snapEl.cloneNode(true) : null;
 
     pills.forEach(pill => {
         pill.addEventListener('click', async () => {
@@ -373,12 +372,12 @@ const buildCard = (r) => {
         .replace(/>/g,'&gt;')
         .replace(/"/g,'&quot;') : '';
 
-    const isOpen   = r.opening_status?.toLowerCase().includes('open');
-    const isClosed = r.opening_status?.toLowerCase().includes('close');
+    const isOpen   = r.opening_status ? r.opening_status.toLowerCase().includes('open') : false;
+    const isClosed = r.opening_status ? r.opening_status.toLowerCase().includes('close') : false;
     const statusClass = isOpen ? 'status-open' : isClosed ? 'status-closed' : '';
     const statusText  = isOpen ? 'Open' : isClosed ? 'Closed' : '--';
 
-    const photoUrl = r.photos_sample?.length
+    const photoUrl = r.photos_sample && r.photos_sample.length
         ? r.photos_sample[0].photo_url
         : `${contextPath}/images/near-me.png`;
 
@@ -453,13 +452,14 @@ const handleSidebar = () => {
     const closeSidebar = () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); };
 
     hamburger.addEventListener('click', openSidebar);
-    closeBtn?.addEventListener('click', closeSidebar);
+    if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
     overlay.addEventListener('click', closeSidebar);
 
     // Mirror the header location button, close the sidebar first, then open the popup
-    sidebarLocBtn?.addEventListener('click', () => {
+    if (sidebarLocBtn) sidebarLocBtn.addEventListener('click', () => {
         closeSidebar();
-        document.getElementById('location-toggle-btn')?.click();
+        const locToggle = document.getElementById('location-toggle-btn');
+        if (locToggle) locToggle.click();
     });
 }
 
