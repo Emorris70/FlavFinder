@@ -120,4 +120,17 @@ class LocationDaoTest {
         SavedLocation location = locationDao.getById(3);
         assertNull(location);
     }
+
+    /**
+     * Test location constraint - If a location is deleted, the user doesn't get affected.
+     */
+    @Test
+    void deleteLocation_UserConstraintTest() {
+        SavedLocation location = locationDao.getById(3);
+        locationDao.delete(location);
+
+        User user = userDao.getById(1);
+        assertNotNull(user);
+        assertNull(locationDao.getById(3));
+    }
 }
