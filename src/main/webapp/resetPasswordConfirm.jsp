@@ -26,6 +26,30 @@
                 <img src="${pageContext.request.contextPath}/images/lock-p.png" alt="lock icon" />
                 <input type="password" name="password" id="password" placeholder="New password" required/>
             </div>
+            <div class="pass-requirements">
+                <ul class="req-list">
+                    <li class="req-item" id="req-length">
+                        <span class="req-dot"></span>
+                        <span class="req-text">At least 8 characters</span>
+                    </li>
+                    <li class="req-item" id="req-uppercase">
+                        <span class="req-dot"></span>
+                        <span class="req-text">At least 1 uppercase letter</span>
+                    </li>
+                    <li class="req-item" id="req-lowercase">
+                        <span class="req-dot"></span>
+                        <span class="req-text">At least 1 lowercase letter</span>
+                    </li>
+                    <li class="req-item" id="req-number">
+                        <span class="req-dot"></span>
+                        <span class="req-text">At least 1 number</span>
+                    </li>
+                    <li class="req-item" id="req-special">
+                        <span class="req-dot"></span>
+                        <span class="req-text">At least 1 special character</span>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="btn-container sw-dir">
             <button type="submit" name="action" value="confirmForgotPassword" class="btn-submit">
@@ -35,5 +59,6 @@
         </div>
     </form>
 </main>
+<script src="${pageContext.request.contextPath}/js/signup.js" defer></script>
 </body>
 </html>
