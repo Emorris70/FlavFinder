@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * CRUD tests for the saved_restaurants join table.
+ * CRUD tests for the saved_restaurants join the table.
  */
 class SavedRestaurantDaoTest {
 

@@ -14,7 +14,7 @@ import java.util.Properties;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Class represents HTTP request to TomTom
+ * Class represents an HTTP request to TomTom
  * URL end point.
  *
  * @author EmileM
