@@ -35,7 +35,7 @@ import java.util.Map;
  * <p>Response behaviour:
  * <ul>
  *   <li>Redirect → {@code /index.jsp} – unauthenticated request</li>
- *   <li>Redirect → {@code /home}       – missing {@code placeId} param, or
+ *   <li>Redirect → {@code /home}  – missing {@code placeId} param, or
  *       placeId not found in session cache (stale/direct link)</li>
  *   <li>Forward  → {@code cardView.jsp} – happy path</li>
  * </ul>
@@ -59,10 +59,10 @@ public class RestaurantViewServlet extends HttpServlet {
     /**
      * Resolves and renders the restaurant detail page.
      *
-     * @param req  Incoming request; must contain a {@code placeId} query parameter.
+     * @param req Incoming request; must contain a {@code placeId} query parameter.
      * @param resp Outgoing response.
      * @throws ServletException If a servlet-level error occurs.
-     * @throws IOException      If writing the response or forwarding fails.
+     * @throws IOException If writing the response or forwarding fails.
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -144,7 +144,7 @@ public class RestaurantViewServlet extends HttpServlet {
      * session list, creating the list if absent, and trims it to
      * {@value #MAX_RECENTLY_VIEWED} entries.
      *
-     * @param session    The current HTTP session.
+     * @param session The current HTTP session.
      * @param restaurant The restaurant to record.
      */
     @SuppressWarnings("unchecked")

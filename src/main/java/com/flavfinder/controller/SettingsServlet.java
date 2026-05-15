@@ -47,10 +47,10 @@ public class SettingsServlet extends HttpServlet {
     /**
      * Forwards the authenticated user to the settings page.
      *
-     * @param req  Incoming request.
+     * @param req Incoming request.
      * @param resp Outgoing response; forwards to settings.jsp.
      * @throws ServletException If a servlet-level error occurs.
-     * @throws IOException      If writing the response fails.
+     * @throws IOException If writing the response fails.
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -73,10 +73,10 @@ public class SettingsServlet extends HttpServlet {
      * database (cascade removes all saved locations and restaurants), invalidates
      * the session, and redirects to the login page.
      *
-     * @param req  Incoming request; expects an {@code action} parameter.
+     * @param req Incoming request; expects an {@code action} parameter.
      * @param resp Outgoing response.
      * @throws ServletException If a servlet-level error occurs.
-     * @throws IOException      If writing the response fails.
+     * @throws IOException If writing the response fails.
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)

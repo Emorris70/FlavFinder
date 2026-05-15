@@ -65,10 +65,10 @@ public class RestaurantApiServlet extends HttpServlet {
      * with {@code "<category> restaurants"} as the query, and writes the resulting
      * list as a JSON array to the response body.
      *
-     * @param req  Incoming request; must include a {@code category} query param.
+     * @param req Incoming request; must include a {@code category} query param.
      * @param resp Outgoing response; content-type is {@code application/json} on 200.
      * @throws ServletException If a servlet-level error occurs.
-     * @throws IOException      If writing the response body fails.
+     * @throws IOException If writing the response body fails.
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

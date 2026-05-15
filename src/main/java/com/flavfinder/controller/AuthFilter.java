@@ -31,9 +31,9 @@ public class AuthFilter implements Filter {
      * Public routes are whitelisted and always accessible.
      * All other routes require a valid session.
      *
-     * @param request  Client's request.
+     * @param request Client's request.
      * @param response Server's response.
-     * @param chain    The filter chain.
+     * @param chain The filter chain.
      * @throws ServletException If a servlet exception occurs.
      * @throws IOException If an Input/Output exception occurs.
      */

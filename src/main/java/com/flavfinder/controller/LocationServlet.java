@@ -179,12 +179,12 @@ public class LocationServlet extends HttpServlet {
     /**
      * Helper method to upsert a saved location for a given user.
      *
-     * @param user   The database user
+     * @param user The database user
      * @param status Whether the location is the default
-     * @param city   The city name
-     * @param zip    The zip code
-     * @param lat    Latitude of the location
-     * @param lon    Longitude of the location
+     * @param city The city name
+     * @param zip The zip code
+     * @param lat Latitude of the location
+     * @param lon Longitude of the location
      */
     public void getExistingLocation(User user, boolean status,
                                     String city, String zip,

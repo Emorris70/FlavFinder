@@ -59,10 +59,10 @@ public class SearchServlet extends HttpServlet {
     /**
      * Handles the GET request from the header search form.
      *
-     * @param req  Incoming request; expects a {@code search-term} query parameter.
+     * @param req Incoming request; expects a {@code search-term} query parameter.
      * @param resp Outgoing response; forwards to home.jsp with search results.
      * @throws ServletException If a servlet-level error occurs.
-     * @throws IOException      If writing the response fails.
+     * @throws IOException If writing the response fails.
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
