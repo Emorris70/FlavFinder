@@ -25,7 +25,7 @@ import java.util.Set;
 /**
  * Handles saving and unsaving restaurants for the authenticated user.
  *
- * POST /save?placeId=X  — saves the restaurant (find-or-create in restaurants table,
+ * POST /save?placeId=X — saves the restaurant (find-or-create in restaurants table,
  *                          insert into saved_restaurants, cache the BusinessItem)
  * DELETE /save?placeId=X — removes the saved_restaurants row
  *
@@ -152,7 +152,7 @@ public class SaveServlet extends HttpServlet {
     }
 
     /**
-     * Finds an existing Restaurant row by api_restaurant_id, or inserts a new one.
+     * Finds an existing Restaurant row by api_restaurant_id or inserts a new one.
      * @param item The BusinessItem to save.
      */
     private Restaurant findOrCreateRestaurant(BusinessItem item) {

@@ -85,6 +85,7 @@ public class SavedRestaurantsServlet extends HttpServlet {
     /**
      * Builds a minimal BusinessItem from the DB snapshot for cache misses.
      * Provides enough data to render the card (name, image, lat/lon, category).
+     * @param snapshot The DB snapshot.
      */
     private BusinessItem buildFromSnapshot(Restaurant snapshot) {
         BusinessItem item = new BusinessItem();

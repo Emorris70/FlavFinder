@@ -149,7 +149,7 @@ public class Resources extends GenericRequest implements PropertiesLoader {
 
     /**
      * Fetches full details for a single business by its place ID directly from the API.
-     * Result is stored in the item cache on success.
+     * The result is stored in the item cache on success.
      *
      * @param placeId The API place ID to look up.
      * @return The full BusinessItem, or {@code null} if the API returns nothing.

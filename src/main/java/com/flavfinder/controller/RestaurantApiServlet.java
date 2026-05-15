@@ -60,7 +60,7 @@ public class RestaurantApiServlet extends HttpServlet {
 
     /**
      * Handles GET requests for category-filtered restaurant results.
-     *
+     * <p>
      * Resolves the user's coordinates from session, calls the Local Business API
      * with {@code "<category> restaurants"} as the query, and writes the resulting
      * list as a JSON array to the response body.

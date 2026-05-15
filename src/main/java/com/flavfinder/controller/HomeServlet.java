@@ -52,7 +52,7 @@ public class HomeServlet extends HttpServlet {
      * @param req  Client's Request.
      * @param resp Server's Response.
      * @throws ServletException If a ServletException occurs.
-     * @throws IOException If an Input/Output exception occurs.
+     * @throws IOException  If an Input/Output exception occurs.
      */
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {

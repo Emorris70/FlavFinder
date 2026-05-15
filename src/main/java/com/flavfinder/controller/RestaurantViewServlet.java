@@ -120,6 +120,7 @@ public class RestaurantViewServlet extends HttpServlet {
      * Prepends the reliable DB thumbnail as index-0 of photosSample so the hero
      * image always loads, regardless of whether the API returned its own photos.
      * Any API photos are kept after index-0 for the photo strip.
+     *
      */
     private void injectSnapshotPhotoIfNeeded(BusinessItem item, String placeId) {
         List<Restaurant> matches = restaurantDao.findBy("apiRestaurantId", placeId);

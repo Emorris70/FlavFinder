@@ -119,8 +119,8 @@ public class LocationServlet extends HttpServlet {
      * Handles GET requests for the current location.
      * Passed in as a parameter from the JS file.
      *
-     * @param req Client's request
-     * @param resp Server's response
+     * @param req Client's request.
+     * @param resp Server's response.
      * @throws ServletException If a ServletException occurs.
      * @throws IOException If an Input/Output exception occurs.
      */
@@ -179,12 +179,12 @@ public class LocationServlet extends HttpServlet {
     /**
      * Helper method to upsert a saved location for a given user.
      *
-     * @param user The database user
-     * @param status Whether the location is the default
-     * @param city The city name
-     * @param zip The zip code
-     * @param lat Latitude of the location
-     * @param lon Longitude of the location
+     * @param user The database user.
+     * @param status Whether the location is the default.
+     * @param city The city name.
+     * @param zip The zip code.
+     * @param lat Latitude of the location.
+     * @param lon Longitude of the location.
      */
     public void getExistingLocation(User user, boolean status,
                                     String city, String zip,

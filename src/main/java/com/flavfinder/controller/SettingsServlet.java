@@ -22,7 +22,7 @@ import java.io.IOException;
  * <ul>
  *   <li>{@code deleteAccount} — permanently removes the user from both
  *       the Cognito User Pool and the application database, then
- *       invalidates the session and redirects to the login page.</li>
+ *       invalidates the session, and redirects to the login page.</li>
  * </ul>
  *
  * @author EmileM
@@ -35,9 +35,9 @@ public class SettingsServlet extends HttpServlet {
     private CognitoAuthService cognitoAuth;
 
     /**
-     * Initialises servlet-scoped dependencies from the application context.
+     * Initializes servlet-scoped dependencies from the application context.
      *
-     * @throws ServletException If a servlet-level error occurs during initialisation.
+     * @throws ServletException If a servlet-level error occurs during initialization.
      */
     @Override
     public void init() throws ServletException {

@@ -46,9 +46,9 @@ public class SearchServlet extends HttpServlet {
     private SavedRestaurantDao savedRestaurantDao;
 
     /**
-     * Initialises servlet-scoped dependencies from the application context.
+     * Initializes servlet-scoped dependencies from the application context.
      *
-     * @throws ServletException If a servlet-level error occurs during initialisation.
+     * @throws ServletException If a servlet-level error occurs during initialization.
      */
     @Override
     public void init() throws ServletException {
